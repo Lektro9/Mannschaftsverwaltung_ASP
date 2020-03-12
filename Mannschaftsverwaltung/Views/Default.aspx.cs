@@ -13,5 +13,10 @@ namespace Mannschaftsverwaltung
         {
 
         }
+
+        void sendChosenItem(Object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

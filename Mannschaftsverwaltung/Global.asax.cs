@@ -16,6 +16,16 @@ namespace Mannschaftsverwaltung
             // Code, der beim Anwendungsstart ausgeführt wird
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            RegisterCustomRoutes(RouteTable.Routes);
+            Controller Verwalter = new Controller();
+        }
+        void RegisterCustomRoutes(RouteCollection routes)
+        {
+            routes.MapPageRoute(
+                "Home",
+                "",
+                "~/Views/Default.aspx"
+            );
         }
     }
 }
