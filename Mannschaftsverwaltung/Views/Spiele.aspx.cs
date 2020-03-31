@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Mannschaftsverwaltung
 {
-    public partial class _Default : Page
+    public partial class Spiele : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -15,6 +15,11 @@ namespace Mannschaftsverwaltung
         }
 
         void sendChosenItem(Object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }

@@ -22,9 +22,24 @@ namespace Mannschaftsverwaltung
         void RegisterCustomRoutes(RouteCollection routes)
         {
             routes.MapPageRoute(
-                "Home",
+                "Personenverwaltung",
                 "",
-                "~/Views/Default.aspx"
+                "~/Views/Personenverwaltung.aspx"
+            );
+            routes.MapPageRoute(
+                "Mannschaftsverwaltung",
+                "Mannschaftsverwaltung",
+                "~/Views/Mannschaftsverwaltung.aspx"
+            );
+            routes.MapPageRoute(
+                "Tabellen",
+                "Tabellen",
+                "~/Views/Tabellen.aspx"
+            );
+            routes.MapPageRoute(
+                "Spiele",
+                "Spiele",
+                "~/Views/Spiele.aspx"
             );
         }
     }

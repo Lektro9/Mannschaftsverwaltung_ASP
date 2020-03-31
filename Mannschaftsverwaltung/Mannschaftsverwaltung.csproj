@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -100,11 +103,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -112,7 +110,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Views\Default.aspx" />
+    <Content Include="Views\Tabellen.aspx" />
+    <Content Include="Views\Spiele.aspx" />
+    <Content Include="Views\Mannschaftsverwaltung.aspx" />
+    <Content Include="Views\Personenverwaltung.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -177,12 +178,33 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\Controller.cs" />
-    <Compile Include="Views\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Views\Tabellen.aspx.cs">
+      <DependentUpon>Tabellen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Views\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Views\Tabellen.aspx.designer.cs">
+      <DependentUpon>Tabellen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Spiele.aspx.cs">
+      <DependentUpon>Spiele.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Spiele.aspx.designer.cs">
+      <DependentUpon>Spiele.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Mannschaftsverwaltung.aspx.cs">
+      <DependentUpon>Mannschaftsverwaltung.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Mannschaftsverwaltung.aspx.designer.cs">
+      <DependentUpon>Mannschaftsverwaltung.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Personenverwaltung.aspx.cs">
+      <DependentUpon>Personenverwaltung.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Personenverwaltung.aspx.designer.cs">
+      <DependentUpon>Personenverwaltung.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

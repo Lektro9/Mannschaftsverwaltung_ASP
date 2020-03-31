@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Personen" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Mannschaftsverwaltung._Default" %>
+﻿<%@ Page Title="Personenverwaltung" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Personenverwaltung.aspx.cs" Inherits="Mannschaftsverwaltung._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -10,7 +10,7 @@
             <asp:ListItem>Handballspieler</asp:ListItem>
             <asp:ListItem>Tennisspieler</asp:ListItem>
         </asp:RadioButtonList>
-        <asp:Button ID="Button1" runat="server" Text="Button" class="btn-info" OnClick="sendChosenItem"/>
+        
     </div>
-
+    <asp:Button ID="Button2" runat="server" Text="Button" OnClick="Button2_Click" />
 </asp:Content>
