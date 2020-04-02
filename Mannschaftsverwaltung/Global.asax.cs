@@ -11,13 +11,18 @@ namespace Mannschaftsverwaltung
 {
     public class Global : HttpApplication
     {
+        static private Controller _Verwalter;
+
+        public static Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
+
         void Application_Start(object sender, EventArgs e)
         {
             // Code, der beim Anwendungsstart ausgeführt wird
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RegisterCustomRoutes(RouteTable.Routes);
-            Controller Verwalter = new Controller();
+            Verwalter = new Controller();
+            start(Verwalter.Sportarten);
         }
         void RegisterCustomRoutes(RouteCollection routes)
         {
@@ -41,6 +46,13 @@ namespace Mannschaftsverwaltung
                 "Spiele",
                 "~/Views/Spiele.aspx"
             );
+        }
+        public void start(List<string> Sportarten)
+        {
+            for (int i = 0; i < Sportarten.Count; i++)
+            {
+                
+            }
         }
     }
 }

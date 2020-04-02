@@ -9,19 +9,34 @@ namespace Mannschaftsverwaltung
 {
     public partial class _Default : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        private Controller _Verwalter;
 
+        public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            this.Verwalter = Global.Verwalter;
         }
 
-        void sendChosenItem(Object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (string Sportart in this.Verwalter.Sportarten)
+            {
+                TableRow neueZeile = new TableRow();
+                TableCell neueZelle = new TableCell();
+
+                neueZelle.Text = Sportart;
+
+                neueZeile.Cells.Add(neueZelle);
+
+                this.Table1.Rows.Add(neueZeile);
+            }
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string selectedType = RadioButtonList1.SelectedValue;
+            Response.Write(selectedType);
         }
     }
 }
