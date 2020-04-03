@@ -22,7 +22,20 @@ namespace Mannschaftsverwaltung
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RegisterCustomRoutes(RouteTable.Routes);
             Verwalter = new Controller();
-            start(Verwalter.Sportarten);
+
+            FussballSpieler p1 = new FussballSpieler("Klaus", 15, "Stürmer", 23);
+            FussballSpieler p2 = new FussballSpieler("Dennis", 15, "Stürmer", 25);
+            FussballSpieler p4 = new FussballSpieler("Vergil", 15, "Stürmer", 857);
+            FussballSpieler p5 = new FussballSpieler("Dante", 15, "Stürmer", 900);
+            FussballSpieler p6 = new FussballSpieler("Goku", 15, "Stürmer", 1010);
+            Trainer t1 = new Trainer("TrainerTom", 84);
+
+            HandballSpieler h1 = new HandballSpieler("Bernd", 12, "Verteidiger", 3);
+            HandballSpieler h3 = new HandballSpieler("Harry", 15, "Stürmer", 25);
+            HandballSpieler h2 = new HandballSpieler("Henry", 15, "Stürmer", 16);
+            HandballSpieler h4 = new HandballSpieler("Holly", 15, "Mittelfeld", 17);
+
+            Verwalter.Personen = new List<Person>() { p1, p2, p4, p5, p6, t1, h1, h2, h3, h4, };
         }
         void RegisterCustomRoutes(RouteCollection routes)
         {
@@ -46,13 +59,6 @@ namespace Mannschaftsverwaltung
                 "Spiele",
                 "~/Views/Spiele.aspx"
             );
-        }
-        public void start(List<string> Sportarten)
-        {
-            for (int i = 0; i < Sportarten.Count; i++)
-            {
-                
-            }
         }
     }
 }

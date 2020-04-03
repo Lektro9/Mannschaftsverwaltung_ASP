@@ -20,23 +20,29 @@ namespace Mannschaftsverwaltung
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            foreach (string Sportart in this.Verwalter.Sportarten)
-            {
-                TableRow neueZeile = new TableRow();
-                TableCell neueZelle = new TableCell();
+            //foreach (string Sportart in this.Verwalter.Sportarten)
+            //{
+            //    TableRow neueZeile = new TableRow();
+            //    TableCell neueZelle = new TableCell();
 
-                neueZelle.Text = Sportart;
+            //    neueZelle.Text = Sportart;
 
-                neueZeile.Cells.Add(neueZelle);
+            //    neueZeile.Cells.Add(neueZelle);
 
-                this.Table1.Rows.Add(neueZeile);
-            }
+            //    this.Table1.Rows.Add(neueZeile);
+            //}
+            //foreach (Person person in this.Verwalter.Personen)
+            //{
+            //    int Tore = ((FussballSpieler)person).GeschosseneTore;
+            //}
+            
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
             string selectedType = RadioButtonList1.SelectedValue;
             Response.Write(selectedType);
+            
         }
     }
 }
