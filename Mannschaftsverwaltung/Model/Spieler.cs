@@ -16,12 +16,18 @@ namespace Mannschaftsverwaltung
     {
         #region Eigenschaften
         string _sportArt;
-
-        
+        int _gewonneneSpiele;
+        int _anzahlJahre;
+        int _anzahlSpiele;
+        int _anzahlVereine;        
         #endregion
 
         #region Accessoren/Modifier
         public string SportArt { get => _sportArt; set => _sportArt = value; }
+        public int GewonneneSpiele { get => _gewonneneSpiele; set => _gewonneneSpiele = value; }
+        public int AnzahlJahre { get => _anzahlJahre; set => _anzahlJahre = value; }
+        public int AnzahlSpiele { get => _anzahlSpiele; set => _anzahlSpiele = value; }
+        public int AnzahlVereine { get => _anzahlVereine; set => _anzahlVereine = value; }
         #endregion
 
         #region Konstruktoren
@@ -45,7 +51,7 @@ namespace Mannschaftsverwaltung
             }
         }
         //Spezialkonstruktor
-        public Spieler(string name, int alter) : base(name, alter)
+        public Spieler(string name, int alter, int gewonneneSpiele = -1, int anzahlJahre = 0, int anzahlSpiele = 0, int anzahlVereine = 0) : base(name, alter)
         {
             if (this is FussballSpieler)
             {
@@ -63,25 +69,10 @@ namespace Mannschaftsverwaltung
             {
                 SportArt = null;
             }
-        }
-        public Spieler(int alter, string name) : base(alter, name)
-        {
-            if (this is FussballSpieler)
-            {
-                SportArt = "FusballSpieler";
-            }
-            else if (this is HandballSpieler)
-            {
-                SportArt = "HandballSpieler";
-            }
-            else if (this is TennisSpieler)
-            {
-                SportArt = "TennisSpieler";
-            }
-            else
-            {
-                SportArt = null;
-            }
+            this.GewonneneSpiele = gewonneneSpiele;
+            this.AnzahlJahre = anzahlJahre;
+            this.AnzahlSpiele = anzahlSpiele;
+            this.AnzahlVereine = anzahlVereine;
         }
         //Kopierkonstruktor
         public Spieler(Spieler s) : base(s)

@@ -32,13 +32,9 @@ namespace Mannschaftsverwaltung
         {
             Erfahrung = erfahrung;
         }
-        public Trainer(string name, int alter) : base(name, alter)
+        public Trainer(string name, int alter, int erfahrung) : base(name, alter)
         {
-            Erfahrung = -1;
-        }
-        public Trainer(int alter, string name) : base(alter, name)
-        {
-            Erfahrung = -1;
+            Erfahrung = erfahrung;
         }
         //Kopierkonstruktor
         public Trainer(Trainer t) : base(t)

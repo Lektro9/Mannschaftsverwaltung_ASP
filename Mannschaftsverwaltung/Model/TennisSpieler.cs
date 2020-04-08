@@ -18,7 +18,6 @@ namespace Mannschaftsverwaltung
         #region Eigenschaften
         string _schlaeger; //welcher Schläger nutzt der Tennisspieler?
         int _aufschlaggeschwindigkeit; //Durchschnittl. Aufschlaggeschw. in km/h
-        int _gewonneneSpiele;
 
 
         #endregion
@@ -26,7 +25,6 @@ namespace Mannschaftsverwaltung
         #region Accessoren/Modifier
         public string Schlaeger { get => _schlaeger; set => _schlaeger = value; }
         public int Aufschlaggeschwindigkeit { get => _aufschlaggeschwindigkeit; set => _aufschlaggeschwindigkeit = value; }
-        public int GewonneneSpiele { get => _gewonneneSpiele; set => _gewonneneSpiele = value; }
         #endregion
 
         #region Konstruktoren
@@ -37,11 +35,10 @@ namespace Mannschaftsverwaltung
             GewonneneSpiele = -1;
         }
         //Spezialkonstruktor
-        public TennisSpieler(string name, int alter, string schlaeger, int aufschlaggeschwindigkeit, int gewonneneSpiele) : base(name, alter)
+        public TennisSpieler(string name, int alter, int aufschlaggeschwindigkeit, int gewonneneSpiele, string schlaeger = "Wilson 9000", int anzahlJahre = 0) : base(name, alter, gewonneneSpiele, anzahlJahre)
         {
             Schlaeger = schlaeger;
             Aufschlaggeschwindigkeit = aufschlaggeschwindigkeit;
-            GewonneneSpiele = gewonneneSpiele;
         }
         #endregion
 
@@ -58,9 +55,8 @@ namespace Mannschaftsverwaltung
             return retVal;
         }
 
-        public override int compareByErfolg(Spieler s)
+        public override int compareByErfolg(Spieler t)
         {
-            TennisSpieler t = (TennisSpieler)s;
             int retVal;
             if (GewonneneSpiele > t.GewonneneSpiele)
             {

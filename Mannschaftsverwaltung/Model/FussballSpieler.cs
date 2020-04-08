@@ -38,7 +38,7 @@ namespace Mannschaftsverwaltung
             GeschosseneTore = geschosseneTore;
         }
 
-        public FussballSpieler(string name, int alter, string position, int geschosseneTore) : base(name, alter)
+        public FussballSpieler(string name, int alter, string position, int geschosseneTore, int anzahlJahre = 0) : base(name, alter, anzahlJahre: anzahlJahre)
         {
             Position = position;
             GeschosseneTore = geschosseneTore;

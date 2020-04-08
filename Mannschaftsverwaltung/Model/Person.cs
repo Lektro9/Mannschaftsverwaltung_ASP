@@ -42,12 +42,6 @@ namespace Mannschaftsverwaltung
             this.Alter = Alter;
             this.Rolle = null;
         }
-        public Person(int Alter, string Name)
-        {
-            this.Name = Name;
-            this.Alter = Alter;
-            this.Rolle = null;
-        }
         public Person(string Name, int Alter, string Rolle)
         {
             this.Name = Name;

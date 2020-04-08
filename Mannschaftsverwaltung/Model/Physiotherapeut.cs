@@ -37,11 +37,6 @@ namespace Mannschaftsverwaltung
         {
             Anerkennungen = null;
         }
-
-        public Physiotherapeut(int alter, string name) : base(alter, name)
-        {
-            Anerkennungen = null;
-        }
         //Kopierkonstruktor
         public Physiotherapeut(Physiotherapeut p) : base(p)
         {

@@ -13,8 +13,23 @@
             <asp:ListItem>Physiotherapeut</asp:ListItem>
         </asp:RadioButtonList>
 
+        <asp:Button ID="Button2" runat="server" Text="auswählen" OnClick="Button2_Click" />
+            
+        <label for="vorname">Vorname:</label> 
+            <input id="vorname" type="text" name="vorname" value="" runat="server" disabled/>
+        <label for="alter">Alter:</label> 
+            <input id="alter" type="number" name="alter" value="" runat="server" disabled/>
+        <label for="position">Position:</label> 
+            <input id="position" type="text" name="alter" value="" runat="server" disabled/>
+        <label for="geschosseneTore">Tore:</label> 
+            <input id="geschosseneTore" type="number" name="alter" value="" runat="server" disabled/>
+        <label for="anzahlJahre">Erfahrung in Jahren:</label> 
+            <input id="anzahlJahre" type="number" name="alter" value="" runat="server" disabled/>
+
+
+        <asp:Button ID="Button1" runat="server" Text="hinzufügen" OnClick="Button3_Click" />
     </div>
-    <asp:Button ID="Button2" runat="server" Text="Button" OnClick="Button2_Click" />
+    
 
     <table class="table">
         <tr>
@@ -35,19 +50,23 @@
         <% foreach (var person in this.Verwalter.Personen)
             { %>
         <tr>
-            <td>-1</td>
-            <td><%= person.Name %></td>
-            <td>Vorname</td>
-            <td><%= person.Alter %></td>
-            <td></td>
-            <td><%= person.GetType() %></td>
-            <td><%= person is Mannschaftsverwaltung.FussballSpieler ? ((Mannschaftsverwaltung.FussballSpieler)person).GeschosseneTore : 0 %></td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
+            <td>-1</td> <%--ID--%>
+            <td></td> <%--Name--%>
+            <td><%= person.Name %></td> <%--Vorname--%>
+            <td><%= person.Alter %></td> <%--Geburtsdatum--%>
+            <td><%= this.getSportart(person) %></td> <%--Sportart--%>
+            <td><%= this.getAnzahlSpiele(person) %></td> <%--Anzahl Spiele--%>
+            <td><%= this.getErzielteTore(person) %></td> <%--Erzielte Tore--%>
+            <td><%= this.getGewonneneSpiele(person) %></td> <%--Gewonnene Spiele--%>
+            <td><%= this.getAnzahlJahre(person) %></td> <%--Anzahl Jahre--%>
+            <td><%= this.getAnzahlVereine(person) %></td> <%--Anzahl Vereine--%>
+            <td><%= this.getRolle(person) %></td> <%--Einsatzbereich--%>
+            <td>
+                <button class="btn-info">edit</button>
+            </td> <%--Edit--%>
+            <td>
+                <button class="btn-danger">del</button>
+            </td> <%--Del--%>
         </tr>
         <% } %>
     </table>
