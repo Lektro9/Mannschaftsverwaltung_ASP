@@ -38,16 +38,10 @@ namespace Mannschaftsverwaltung
             GeschosseneTore = geschosseneTore;
         }
 
-        public FussballSpieler(string name, int alter, string position, int geschosseneTore, int anzahlJahre = 0) : base(name, alter, anzahlJahre: anzahlJahre)
+        public FussballSpieler(string name, string vorname, int alter, string position, int geschosseneTore, int anzahlJahre = 0, int gewonneneSpiele = 0, int anzahlVereine = 0, int anzahlSpiele = 0) : base(name, vorname, alter, anzahlJahre: anzahlJahre, gewonneneSpiele: gewonneneSpiele, anzahlVereine: anzahlVereine, anzahlSpiele: anzahlSpiele)
         {
             Position = position;
             GeschosseneTore = geschosseneTore;
-        }
-
-        public FussballSpieler (int alter, string name) : base(name, alter)
-        {
-            Position = null;
-            geschosseneTore = -1;
         }
         //Kopierkonstruktor
         public FussballSpieler(FussballSpieler f) : base(f)

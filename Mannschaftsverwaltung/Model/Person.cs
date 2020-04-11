@@ -17,6 +17,7 @@ namespace Mannschaftsverwaltung
     {
         #region Eigenschaften
         string _name;
+        string _vorname;
         int _alter;
         string _rolle;
         #endregion
@@ -25,6 +26,7 @@ namespace Mannschaftsverwaltung
         public string Name { get => _name; set => _name = value; }
         public int Alter { get => _alter; set => _alter = value; }
         public string Rolle { get => _rolle; set => _rolle = value; }
+        public string Vorname { get => _vorname; set => _vorname = value; }
         #endregion
 
         #region Konstruktoren
@@ -36,8 +38,9 @@ namespace Mannschaftsverwaltung
         }
 
         //Spezialkonstruktor
-        public Person(string Name, int Alter)
+        public Person(string Name, string Vorname, int Alter)
         {
+            this.Vorname = Vorname;
             this.Name = Name;
             this.Alter = Alter;
             this.Rolle = null;

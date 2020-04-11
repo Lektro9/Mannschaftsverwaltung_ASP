@@ -37,7 +37,7 @@ namespace Mannschaftsverwaltung
             GeworfeneTore = -1;
         }
 
-        public HandballSpieler(string name, int alter, string position, int geworfeneTore, int anzahlJahre = 0) : base(name, alter, anzahlJahre: anzahlJahre)
+        public HandballSpieler(string name, string vorname, int alter, string position, int geworfeneTore, int anzahlJahre = 0, int gewonneneSpiele = 0, int anzahlVereine = 0, int anzahlSpiele = 0) : base(name, vorname, alter, anzahlJahre: anzahlJahre, gewonneneSpiele: gewonneneSpiele, anzahlVereine: anzahlVereine, anzahlSpiele: anzahlSpiele)
         {
             Position = position;
             GeworfeneTore = geworfeneTore;

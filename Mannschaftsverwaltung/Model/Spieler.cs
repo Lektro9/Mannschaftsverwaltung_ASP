@@ -35,15 +35,15 @@ namespace Mannschaftsverwaltung
         {
             if (this is FussballSpieler)
             {
-                SportArt = "FusballSpieler";
+                SportArt = "Fusball";
             }
             else if (this is HandballSpieler)
             {
-                SportArt = "HandballSpieler";
+                SportArt = "Handball";
             }
             else if (this is TennisSpieler)
             {
-                SportArt = "TennisSpieler";
+                SportArt = "Tennis";
             }
             else
             {
@@ -51,7 +51,7 @@ namespace Mannschaftsverwaltung
             }
         }
         //Spezialkonstruktor
-        public Spieler(string name, int alter, int gewonneneSpiele = -1, int anzahlJahre = 0, int anzahlSpiele = 0, int anzahlVereine = 0) : base(name, alter)
+        public Spieler(string name, string vorname, int alter, int gewonneneSpiele = -1, int anzahlJahre = 0, int anzahlSpiele = 0, int anzahlVereine = 0) : base(name, vorname, alter)
         {
             if (this is FussballSpieler)
             {

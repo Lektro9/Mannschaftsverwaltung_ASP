@@ -32,7 +32,7 @@ namespace Mannschaftsverwaltung
         {
             Erfahrung = erfahrung;
         }
-        public Trainer(string name, int alter, int erfahrung) : base(name, alter)
+        public Trainer(string name, string vorname, int alter, int erfahrung) : base(name, vorname, alter)
         {
             Erfahrung = erfahrung;
         }

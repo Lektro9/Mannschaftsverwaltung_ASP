@@ -32,12 +32,66 @@ namespace Mannschaftsverwaltung
             if (Auswahl == "Fussballspieler")
             {
                 RadioButtonList1.SelectedIndex = index;
+                name.Disabled = false;
                 vorname.Disabled = false;
                 alter.Disabled = false;
                 position.Disabled = false;
                 geschosseneTore.Disabled = false;
                 anzahlJahre.Disabled = false;
+                gewonneneSpiele.Disabled = false;
+                anzahlVereine.Disabled = false;
+                anzahlSpiele.Disabled = false;
                 disableAllRadioButtons();
+                this.Button3.Visible = true;
+            }
+            else if (Auswahl == "Handballspieler")
+            {
+                RadioButtonList1.SelectedIndex = index;
+                name.Disabled = false;
+                vorname.Disabled = false;
+                alter.Disabled = false;
+                position.Disabled = false;
+                geschosseneTore.Disabled = false;
+                anzahlJahre.Disabled = false;
+                gewonneneSpiele.Disabled = false;
+                anzahlVereine.Disabled = false;
+                anzahlSpiele.Disabled = false;
+                disableAllRadioButtons();
+                this.Button3.Visible = true;
+            }
+            else if (Auswahl == "Tennisspieler")
+            {
+                RadioButtonList1.SelectedIndex = index;
+                name.Disabled = false;
+                vorname.Disabled = false;
+                alter.Disabled = false;
+                anzahlJahre.Disabled = false;
+                gewonneneSpiele.Disabled = false;
+                anzahlVereine.Disabled = false;
+                anzahlSpiele.Disabled = false;
+                schlaeger.Disabled = false;
+                aufschlagGeschw.Disabled = false;
+                disableAllRadioButtons();
+                this.Button3.Visible = true;
+            }
+            else if (Auswahl == "Trainer")
+            {
+                RadioButtonList1.SelectedIndex = index;
+                name.Disabled = false;
+                vorname.Disabled = false;
+                alter.Disabled = false;
+                anzahlJahre.Disabled = false;
+                disableAllRadioButtons();
+                this.Button3.Visible = true;
+            }
+            else if (Auswahl == "Physiotherapeut")
+            {
+                RadioButtonList1.SelectedIndex = index;
+                name.Disabled = false;
+                vorname.Disabled = false;
+                alter.Disabled = false;
+                disableAllRadioButtons();
+                this.Button3.Visible = true;
             }
             else
             {
@@ -51,8 +105,36 @@ namespace Mannschaftsverwaltung
             this.Auswahl = RadioButtonList1.SelectedValue;
             if (this.Auswahl == "Fussballspieler")
             {
-                FussballSpieler f = new FussballSpieler(vorname.Value, Int32.Parse(alter.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value));
+                FussballSpieler f = new FussballSpieler(name.Value, vorname.Value, Int32.Parse(alter.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
                 this.Verwalter.Personen.Add(f);
+                enableAllRadioButtons();
+                disableAndClearInputs();
+            }
+            else if (this.Auswahl == "Handballspieler")
+            {
+                HandballSpieler h = new HandballSpieler(name.Value, vorname.Value, Int32.Parse(alter.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
+                this.Verwalter.Personen.Add(h);
+                enableAllRadioButtons();
+                disableAndClearInputs();
+            }
+            else if (this.Auswahl == "Tennisspieler")
+            {
+                TennisSpieler t = new TennisSpieler(name.Value, vorname.Value, Int32.Parse(alter.Value), Int32.Parse(aufschlagGeschw.Value), schlaeger.Value, Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
+                this.Verwalter.Personen.Add(t);
+                enableAllRadioButtons();
+                disableAndClearInputs();
+            }
+            else if (this.Auswahl == "Trainer")
+            {
+                Trainer t = new Trainer(name.Value, vorname.Value, Int32.Parse(alter.Value), Int32.Parse(anzahlJahre.Value));
+                this.Verwalter.Personen.Add(t);
+                enableAllRadioButtons();
+                disableAndClearInputs();
+            }
+            else
+            {
+                Physiotherapeut p = new Physiotherapeut(name.Value, vorname.Value, Int32.Parse(alter.Value));
+                this.Verwalter.Personen.Add(p);
                 enableAllRadioButtons();
                 disableAndClearInputs();
             }
@@ -61,6 +143,8 @@ namespace Mannschaftsverwaltung
         #region Worker
         public void disableAndClearInputs()
         {
+            name.Disabled = true;
+            name.Value = "";
             vorname.Disabled = true;
             vorname.Value = "";
             alter.Disabled = true;
@@ -71,6 +155,16 @@ namespace Mannschaftsverwaltung
             geschosseneTore.Value = "";
             anzahlJahre.Disabled = true;
             anzahlJahre.Value = "";
+            gewonneneSpiele.Disabled = true;
+            gewonneneSpiele.Value = "";
+            anzahlVereine.Disabled = true;
+            anzahlVereine.Value = "";
+            anzahlSpiele.Disabled = true;
+            anzahlSpiele.Value = "";
+            schlaeger.Disabled = true;
+            schlaeger.Value = "";
+            aufschlagGeschw.Disabled = true;
+            aufschlagGeschw.Value = "";
         }
         public void disableAllRadioButtons()
         {
@@ -139,6 +233,10 @@ namespace Mannschaftsverwaltung
             else if (p is HandballSpieler)
             {
                 return ((HandballSpieler)p).Position;
+            }
+            else if (p is TennisSpieler)
+            {
+                return ((TennisSpieler)p).Schlaeger + " " + ((TennisSpieler)p).Aufschlaggeschwindigkeit + "km/h";
             }
             else
             {
