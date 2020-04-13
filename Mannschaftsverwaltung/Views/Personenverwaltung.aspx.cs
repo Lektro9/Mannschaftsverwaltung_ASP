@@ -12,6 +12,7 @@ namespace Mannschaftsverwaltung
     {
         private Controller _Verwalter;
         private string _auswahl;
+        TextBox nameInput;
 
         public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
         public string Auswahl { get => _auswahl; set => _auswahl = value; }
@@ -19,6 +20,8 @@ namespace Mannschaftsverwaltung
         protected void Page_Init(object sender, EventArgs e)
         {
             this.Verwalter = Global.Verwalter;
+            nameInput = new TextBox();
+            nameInput.ID = "nameEdit";
             LoadPersonen();
         }
 
@@ -158,6 +161,20 @@ namespace Mannschaftsverwaltung
             Response.Redirect(Request.RawUrl);
         }
 
+        protected void accBtn_Click(object sender, EventArgs e)
+        {
+            int index = Int32.Parse(((Button)sender).ID.Substring(3));
+            for (int i = 0; i < this.Verwalter.Personen.Count; i++)
+            {
+                if (i == index)
+                {
+                    this.Verwalter.Personen[i - 1].Name = nameInput.Text;
+                }
+            }
+            this.Verwalter.EditPerson = false;
+            Response.Redirect(Request.RawUrl);
+        }
+
         #region Worker
         private void LoadPersonen()
         {
@@ -182,10 +199,17 @@ namespace Mannschaftsverwaltung
 
                     //Name
                     neueEditZelle = new TableCell();
-                    HtmlGenericControl nameInput = new HtmlGenericControl("input");
                     nameInput.Attributes["value"] = person.Name;
-                    nameInput.ID = "NameEdit";
                     neueEditZelle.Controls.Add(nameInput);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    neueEditZelle = new TableCell();
+                    Button accBtn = new Button();
+                    accBtn.ID = "acc" + index;
+                    accBtn.Text = "accept";
+                    accBtn.Click += accBtn_Click;
+                    accBtn.CssClass = "btn-info";
+                    neueEditZelle.Controls.Add(accBtn);
                     neueZeile.Cells.Add(neueEditZelle);
                 }
                 else
