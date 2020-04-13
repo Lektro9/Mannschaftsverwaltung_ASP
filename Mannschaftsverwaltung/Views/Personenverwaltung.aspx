@@ -75,57 +75,21 @@
 
         <asp:Button ID="Button3" runat="server" Text="hinzufügen" OnClick="Button3_Click" Visible="False" />
 
-
-    <table class="table">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Vorname</th>
-            <th scope="col">Geburtsdatum</th>
-            <th scope="col">Sportart</th>
-            <th scope="col">Anzahl Spiele</th>
-            <th scope="col">Erzielte Tore</th>
-            <th scope="col">Gewonnene Spiele</th>
-            <th scope="col">Anzahl Jahre</th>
-            <th scope="col">Anzahl Vereine</th>
-            <th scope="col">Einsatzbereich</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Del</th>
-        </tr>
-        <% foreach (Mannschaftsverwaltung.Person person in this.Verwalter.Personen)
-            { %>
-        <tr>
-            <td>-1</td>
-            <%--ID--%>
-            <td><%= person.Name %></td>
-            <%--Name--%>
-            <td><%= person.Vorname %></td>
-            <%--Vorname--%>
-            <td><%= person.Alter %></td>
-            <%--Geburtsdatum--%>
-            <td><%= this.getSportart(person) %></td>
-            <%--Sportart--%>
-            <td><%= this.getAnzahlSpiele(person) %></td>
-            <%--Anzahl Spiele--%>
-            <td><%= this.getErzielteTore(person) %></td>
-            <%--Erzielte Tore--%>
-            <td><%= this.getGewonneneSpiele(person) %></td>
-            <%--Gewonnene Spiele--%>
-            <td><%= this.getAnzahlJahre(person) %></td>
-            <%--Anzahl Jahre--%>
-            <td><%= this.getAnzahlVereine(person) %></td>
-            <%--Anzahl Vereine--%>
-            <td><%= this.getRolle(person) %></td>
-            <%--Einsatzbereich--%>
-            <td>
-                <button class="btn-info">edit</button>
-            </td>
-            <%--Edit--%>
-            <td>
-                <button class="btn-danger">del</button>
-            </td>
-            <%--Del--%>
-        </tr>
-        <% } %>
-    </table>
+    <asp:Table ID="Table1" runat="server" class="table">
+        <asp:TableHeaderRow>
+            <asp:TableHeaderCell>ID</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Name</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Vorname</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Geburtsdatum</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Sportart</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Anzahl Spiele</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Erzielte Tore</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Gewonnene Spiele</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Anzahl Jahre</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Anzahl Vereine</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Einsatzbereich</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Edit</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Del</asp:TableHeaderCell>
+        </asp:TableHeaderRow>
+    </asp:Table>
 </asp:Content>

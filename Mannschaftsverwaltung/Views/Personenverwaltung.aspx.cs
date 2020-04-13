@@ -18,6 +18,7 @@ namespace Mannschaftsverwaltung
         protected void Page_Init(object sender, EventArgs e)
         {
             this.Verwalter = Global.Verwalter;
+            LoadPersonen();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -138,9 +139,119 @@ namespace Mannschaftsverwaltung
                 enableAllRadioButtons();
                 disableAndClearInputs();
             }
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void editBtn_Click(object sender, EventArgs e)
+        {
+            int index = Int32.Parse(((Button)sender).ID.Substring(5));
+            Response.Write(index);
+        }
+
+        protected void delBtn_Click(object sender, EventArgs e)
+        {
+            int index = Int32.Parse(((Button)sender).ID.Substring(3));
+            //Response.Write(ID);
+            this.Verwalter.Personen.RemoveAt(index - 1);
+            Response.Redirect(Request.RawUrl);
         }
 
         #region Worker
+        private void LoadPersonen()
+        {
+            int index = 1;
+            int ex_id = 1;
+            foreach (Person person in this.Verwalter.Personen)
+            {
+                TableRow neueZeile = new TableRow();
+                //ID
+                TableCell neueZelle = new TableCell();
+                if (person.ID != -1)
+                {
+                    neueZelle.Text = person.ID.ToString();
+                }
+                else
+                {
+                    neueZelle.Text = ex_id.ToString();
+                    ex_id++;
+                }
+                neueZeile.Cells.Add(neueZelle);
+
+                //Name
+                neueZelle = new TableCell();
+                neueZelle.Text = person.Name;
+                neueZeile.Cells.Add(neueZelle);
+
+                //Vorname
+                neueZelle = new TableCell();
+                neueZelle.Text = person.Vorname;
+                neueZeile.Cells.Add(neueZelle);
+
+                //Geburtsdatum
+                neueZelle = new TableCell();
+                neueZelle.Text = person.Alter.ToString();
+                neueZeile.Cells.Add(neueZelle);
+
+                //SportArt
+                neueZelle = new TableCell();
+                neueZelle.Text = getSportart(person);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Anzahl Spiele
+                neueZelle = new TableCell();
+                neueZelle.Text = getAnzahlSpiele(person);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Erziele Tore
+                neueZelle = new TableCell();
+                neueZelle.Text = getErzielteTore(person);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Gewonnene Spiele
+                neueZelle = new TableCell();
+                neueZelle.Text = getGewonneneSpiele(person);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Anzahl Jahre
+                neueZelle = new TableCell();
+                neueZelle.Text = getAnzahlJahre(person);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Anzahl Vereine
+                neueZelle = new TableCell();
+                neueZelle.Text = getAnzahlVereine(person);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Anzahl Vereine
+                neueZelle = new TableCell();
+                neueZelle.Text = getRolle(person);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Edit
+                neueZelle = new TableCell();
+                Button editBtn = new Button();
+                editBtn.ID = "bearb" + index;
+                editBtn.Text = "edit";
+                editBtn.Click += editBtn_Click;
+                editBtn.CssClass = "btn-info";
+                neueZelle.Controls.Add(editBtn);
+                neueZeile.Cells.Add(neueZelle);
+
+                //Del
+                neueZelle = new TableCell();
+                Button delBtn = new Button();
+                delBtn.ID = "del" + index;
+                delBtn.Text = "Del";
+                delBtn.Click += delBtn_Click;
+                delBtn.CssClass = "btn-danger";
+                neueZelle.Controls.Add(delBtn);
+                neueZeile.Cells.Add(neueZelle);
+
+                index++;
+
+                this.Table1.Rows.Add(neueZeile);
+            }
+        }
         public void disableAndClearInputs()
         {
             name.Disabled = true;

@@ -20,6 +20,7 @@ namespace Mannschaftsverwaltung
         string _vorname;
         int _alter;
         string _rolle;
+        int _iD;
         #endregion
 
         #region Accessoren/Modifier
@@ -27,6 +28,7 @@ namespace Mannschaftsverwaltung
         public int Alter { get => _alter; set => _alter = value; }
         public string Rolle { get => _rolle; set => _rolle = value; }
         public string Vorname { get => _vorname; set => _vorname = value; }
+        public int ID { get => _iD; set => _iD = value; }
         #endregion
 
         #region Konstruktoren
@@ -44,6 +46,7 @@ namespace Mannschaftsverwaltung
             this.Name = Name;
             this.Alter = Alter;
             this.Rolle = null;
+            this.ID = -1;
         }
         public Person(string Name, int Alter, string Rolle)
         {
