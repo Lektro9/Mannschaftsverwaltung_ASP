@@ -12,16 +12,33 @@ namespace Mannschaftsverwaltung
     {
         private Controller _Verwalter;
         private string _auswahl;
-        TextBox nameInput;
+        private TextBox _nameEdit;
+        private TextBox _vornameEdit;
+        private TextBox _geburtsDatEdit;
+        private TextBox _anzahlSpieleEdit;
+        private TextBox _erzielteToreEdit;
+        private TextBox _gewSpieleEdit;
+        private TextBox _anzJahreEdit;
+        private TextBox _anzVereineEdit;
+        private TextBox _einsatzEdit;
+
 
         public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
         public string Auswahl { get => _auswahl; set => _auswahl = value; }
+        public TextBox NameEdit { get => _nameEdit; set => _nameEdit = value; }
+        public TextBox VornameEdit { get => _vornameEdit; set => _vornameEdit = value; }
+        public TextBox GeburtsDatEdit { get => _geburtsDatEdit; set => _geburtsDatEdit = value; }
+        public TextBox AnzahlSpieleEdit { get => _anzahlSpieleEdit; set => _anzahlSpieleEdit = value; }
+        public TextBox ErzielteToreEdit { get => _erzielteToreEdit; set => _erzielteToreEdit = value; }
+        public TextBox GewSpieleEdit { get => _gewSpieleEdit; set => _gewSpieleEdit = value; }
+        public TextBox AnzJahreEdit { get => _anzJahreEdit; set => _anzJahreEdit = value; }
+        public TextBox AnzVereineEdit { get => _anzVereineEdit; set => _anzVereineEdit = value; }
+        public TextBox EinsatzEdit { get => _einsatzEdit; set => _einsatzEdit = value; }
 
         protected void Page_Init(object sender, EventArgs e)
         {
             this.Verwalter = Global.Verwalter;
-            nameInput = new TextBox();
-            nameInput.ID = "nameEdit";
+            LoadAllEditInputFields();
             LoadPersonen();
         }
 
@@ -168,7 +185,42 @@ namespace Mannschaftsverwaltung
             {
                 if (i == index)
                 {
-                    this.Verwalter.Personen[i - 1].Name = nameInput.Text;
+                    this.Verwalter.Personen[i - 1].Name = NameEdit.Text;
+                    this.Verwalter.Personen[i - 1].Vorname = VornameEdit.Text;
+                    this.Verwalter.Personen[i - 1].Alter = Int32.Parse(GeburtsDatEdit.Text);
+                    if (this.Verwalter.Personen[i - 1] is Spieler)
+                    {
+                        ((Spieler)this.Verwalter.Personen[i - 1]).AnzahlSpiele = Int32.Parse(AnzahlSpieleEdit.Text);
+                    }
+                    if (this.Verwalter.Personen[i - 1] is FussballSpieler)
+                    {
+                        ((FussballSpieler)this.Verwalter.Personen[i - 1]).GeschosseneTore = Int32.Parse(ErzielteToreEdit.Text);
+                    }
+                    else if (this.Verwalter.Personen[i - 1] is HandballSpieler)
+                    {
+                        ((HandballSpieler)this.Verwalter.Personen[i - 1]).GeworfeneTore = Int32.Parse(ErzielteToreEdit.Text);
+                    }
+                    if (this.Verwalter.Personen[i - 1] is Spieler)
+                    {
+                        ((Spieler)this.Verwalter.Personen[i - 1]).GewonneneSpiele = Int32.Parse(GewSpieleEdit.Text);
+                        ((Spieler)this.Verwalter.Personen[i - 1]).AnzahlJahre = Int32.Parse(AnzJahreEdit.Text);
+                    }
+                    else if (this.Verwalter.Personen[i - 1] is Trainer)
+                    {
+                        ((Trainer)this.Verwalter.Personen[i - 1]).Erfahrung = Int32.Parse(AnzJahreEdit.Text);
+                    }
+                    if (this.Verwalter.Personen[i - 1] is Spieler)
+                    {
+                        ((Spieler)this.Verwalter.Personen[i - 1]).AnzahlVereine = Int32.Parse(AnzVereineEdit.Text);
+                    }
+                    if (this.Verwalter.Personen[i - 1] is FussballSpieler)
+                    {
+                        ((FussballSpieler)this.Verwalter.Personen[i - 1]).Position = EinsatzEdit.Text;
+                    }
+                    else if (this.Verwalter.Personen[i - 1] is HandballSpieler)
+                    {
+                        ((HandballSpieler)this.Verwalter.Personen[i - 1]).Position = EinsatzEdit.Text;
+                    }
                 }
             }
             this.Verwalter.EditPerson = false;
@@ -176,6 +228,42 @@ namespace Mannschaftsverwaltung
         }
 
         #region Worker
+        private void LoadAllEditInputFields()
+        {
+            NameEdit = new TextBox();
+            NameEdit.ID = "nameEdit";
+
+            VornameEdit = new TextBox();
+            VornameEdit.ID = "vornameEdit";
+
+            GeburtsDatEdit = new TextBox();
+            GeburtsDatEdit.ID = "geburtsDatEdit";
+            GeburtsDatEdit.Attributes["type"] = "number";
+
+            AnzahlSpieleEdit = new TextBox();
+            AnzahlSpieleEdit.ID = "anzSpieleEdit";
+            AnzahlSpieleEdit.Attributes["type"] = "number";
+
+            ErzielteToreEdit = new TextBox();
+            ErzielteToreEdit.ID = "erzToreEdit";
+            ErzielteToreEdit.Attributes["type"] = "number";
+
+            GewSpieleEdit = new TextBox();
+            GewSpieleEdit.ID = "gewSpieleEdit";
+            GewSpieleEdit.Attributes["type"] = "number";
+
+            AnzJahreEdit = new TextBox();
+            AnzJahreEdit.ID = "anzJahreEdit";
+            AnzJahreEdit.Attributes["type"] = "number";
+
+            AnzVereineEdit = new TextBox();
+            AnzVereineEdit.ID = "anzVereineEdit";
+            AnzVereineEdit.Attributes["type"] = "number";
+
+            EinsatzEdit = new TextBox();
+            EinsatzEdit.ID = "einsatzEdit";
+
+        }
         private void LoadPersonen()
         {
             int index = 1;
@@ -199,8 +287,61 @@ namespace Mannschaftsverwaltung
 
                     //Name
                     neueEditZelle = new TableCell();
-                    nameInput.Attributes["value"] = person.Name;
-                    neueEditZelle.Controls.Add(nameInput);
+                    NameEdit.Attributes["value"] = person.Name;
+                    neueEditZelle.Controls.Add(NameEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //Vorname
+                    neueEditZelle = new TableCell();
+                    VornameEdit.Attributes["value"] = person.Vorname;
+                    neueEditZelle.Controls.Add(VornameEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //Geburtsdatum
+                    neueEditZelle = new TableCell();
+                    GeburtsDatEdit.Attributes["value"] = person.Alter.ToString();
+                    neueEditZelle.Controls.Add(GeburtsDatEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //SportArt
+                    neueEditZelle = new TableCell();
+                    neueEditZelle.Text = getSportart(person);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //AnzahlSpiele
+                    neueEditZelle = new TableCell();
+                    AnzahlSpieleEdit.Attributes["value"] = getAnzahlSpiele(person);
+                    neueEditZelle.Controls.Add(AnzahlSpieleEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //Erziele Tore
+                    neueEditZelle = new TableCell();
+                    ErzielteToreEdit.Attributes["value"] = getErzielteTore(person);
+                    neueEditZelle.Controls.Add(ErzielteToreEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //Gewonnene Spiele
+                    neueEditZelle = new TableCell();
+                    GewSpieleEdit.Attributes["value"] = getGewonneneSpiele(person);
+                    neueEditZelle.Controls.Add(GewSpieleEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //Anzahl Jahre
+                    neueEditZelle = new TableCell();
+                    AnzJahreEdit.Attributes["value"] = getAnzahlJahre(person);
+                    neueEditZelle.Controls.Add(AnzJahreEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //Anzahl Vereine
+                    neueEditZelle = new TableCell();
+                    AnzVereineEdit.Attributes["value"] = getAnzahlVereine(person);
+                    neueEditZelle.Controls.Add(AnzVereineEdit);
+                    neueZeile.Cells.Add(neueEditZelle);
+
+                    //Einsatzgebiet
+                    neueEditZelle = new TableCell();
+                    EinsatzEdit.Attributes["value"] = getRolle(person);
+                    neueEditZelle.Controls.Add(EinsatzEdit);
                     neueZeile.Cells.Add(neueEditZelle);
 
                     neueEditZelle = new TableCell();
@@ -283,7 +424,7 @@ namespace Mannschaftsverwaltung
                     editBtn.ID = "bearb" + index;
                     editBtn.Text = "edit";
                     editBtn.Click += editBtn_Click;
-                    editBtn.CssClass = "btn-info";
+                    editBtn.CssClass = "btn btn-info";
                     neueZelle.Controls.Add(editBtn);
                     neueZeile.Cells.Add(neueZelle);
 
@@ -293,7 +434,7 @@ namespace Mannschaftsverwaltung
                     delBtn.ID = "del" + index;
                     delBtn.Text = "Del";
                     delBtn.Click += delBtn_Click;
-                    delBtn.CssClass = "btn-danger";
+                    delBtn.CssClass = "btn btn-danger";
                     neueZelle.Controls.Add(delBtn);
                     neueZeile.Cells.Add(neueZelle);
                 }

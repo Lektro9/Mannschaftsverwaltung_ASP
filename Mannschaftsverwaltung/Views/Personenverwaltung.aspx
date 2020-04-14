@@ -3,7 +3,6 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2><%: Page.Title %></h2>
-
         <asp:RadioButtonList ID="RadioButtonList1" runat="server">
             <asp:ListItem>Fussballspieler</asp:ListItem>
             <asp:ListItem>Handballspieler</asp:ListItem>
@@ -12,7 +11,7 @@
             <asp:ListItem>Physiotherapeut</asp:ListItem>
         </asp:RadioButtonList>
 
-        <asp:Button ID="Button2" runat="server" Text="auswählen" OnClick="Button2_Click" />
+        <asp:Button ID="Button2" runat="server" Text="auswählen" OnClick="Button2_Click" class="btn btn-default" />
 
         <div class="container">
             
@@ -74,7 +73,6 @@
         </div>
 
         <asp:Button ID="Button3" runat="server" Text="hinzufügen" OnClick="Button3_Click" Visible="False" />
-
     <asp:Table ID="Table1" runat="server" class="table">
         <asp:TableHeaderRow>
             <asp:TableHeaderCell>ID</asp:TableHeaderCell>
