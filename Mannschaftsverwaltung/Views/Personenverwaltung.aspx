@@ -25,9 +25,9 @@
                 <input class="col-sm-10 form-group" id="vorname" type="text" name="vorname" value="" runat="server" disabled />
             </div>
 
-            <label class="control-label col-sm-2" for="alter">Alter:</label>
+            <label class="control-label col-sm-2" for="geburtstag">Geburtstag:</label>
             <div class="col-sm-10">
-                <input class="col-sm-10 form-group" id="alter" type="number" name="alter" value="" runat="server" disabled />
+                <input class="col-sm-10 form-group" id="geburtstag" type="date" name="geburtstag" value="" runat="server" disabled />
             </div>
             
             <label class="control-label col-sm-2" for="position">Position:</label>

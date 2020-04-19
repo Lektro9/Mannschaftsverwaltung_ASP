@@ -18,14 +18,14 @@ namespace Mannschaftsverwaltung
         #region Eigenschaften
         string _name;
         string _vorname;
-        int _alter;
+        DateTime _geburtstag;
         string _rolle;
         int _iD;
         #endregion
 
         #region Accessoren/Modifier
         public string Name { get => _name; set => _name = value; }
-        public int Alter { get => _alter; set => _alter = value; }
+        public DateTime Geburtstag { get => _geburtstag; set => _geburtstag = value; }
         public string Rolle { get => _rolle; set => _rolle = value; }
         public string Vorname { get => _vorname; set => _vorname = value; }
         public int ID { get => _iD; set => _iD = value; }
@@ -35,30 +35,30 @@ namespace Mannschaftsverwaltung
         public Person()
         {
             this.Name = "niemand";
-            this.Alter = -1;
+            this.Geburtstag = new DateTime();
             this.Rolle = "nichts";
         }
 
         //Spezialkonstruktor
-        public Person(string Name, string Vorname, int Alter)
+        public Person(string Name, string Vorname, DateTime Geburtstag)
         {
             this.Vorname = Vorname;
             this.Name = Name;
-            this.Alter = Alter;
+            this.Geburtstag = Geburtstag;
             this.Rolle = null;
             this.ID = -1;
         }
-        public Person(string Name, int Alter, string Rolle)
+        public Person(string Name, DateTime Geburtstag, string Rolle)
         {
             this.Name = Name;
-            this.Alter = Alter;
+            this.Geburtstag = Geburtstag;
             this.Rolle = Rolle;
         }
         //Kopierkonstruktor
         public Person(Person p)
         {
             this.Name = p.Name;
-            this.Alter = p.Alter;
+            this.Geburtstag = p.Geburtstag;
             this.Rolle = p.Rolle;
         }
         #endregion

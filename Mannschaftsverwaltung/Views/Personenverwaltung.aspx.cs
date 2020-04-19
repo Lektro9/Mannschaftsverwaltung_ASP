@@ -56,7 +56,7 @@ namespace Mannschaftsverwaltung
                 RadioButtonList1.SelectedIndex = index;
                 name.Disabled = false;
                 vorname.Disabled = false;
-                alter.Disabled = false;
+                geburtstag.Disabled = false;
                 position.Disabled = false;
                 geschosseneTore.Disabled = false;
                 anzahlJahre.Disabled = false;
@@ -71,7 +71,7 @@ namespace Mannschaftsverwaltung
                 RadioButtonList1.SelectedIndex = index;
                 name.Disabled = false;
                 vorname.Disabled = false;
-                alter.Disabled = false;
+                geburtstag.Disabled = false;
                 position.Disabled = false;
                 geschosseneTore.Disabled = false;
                 anzahlJahre.Disabled = false;
@@ -86,7 +86,7 @@ namespace Mannschaftsverwaltung
                 RadioButtonList1.SelectedIndex = index;
                 name.Disabled = false;
                 vorname.Disabled = false;
-                alter.Disabled = false;
+                geburtstag.Disabled = false;
                 anzahlJahre.Disabled = false;
                 gewonneneSpiele.Disabled = false;
                 anzahlVereine.Disabled = false;
@@ -101,7 +101,7 @@ namespace Mannschaftsverwaltung
                 RadioButtonList1.SelectedIndex = index;
                 name.Disabled = false;
                 vorname.Disabled = false;
-                alter.Disabled = false;
+                geburtstag.Disabled = false;
                 anzahlJahre.Disabled = false;
                 disableAllRadioButtons();
                 this.Button3.Visible = true;
@@ -111,7 +111,7 @@ namespace Mannschaftsverwaltung
                 RadioButtonList1.SelectedIndex = index;
                 name.Disabled = false;
                 vorname.Disabled = false;
-                alter.Disabled = false;
+                geburtstag.Disabled = false;
                 disableAllRadioButtons();
                 this.Button3.Visible = true;
             }
@@ -127,35 +127,35 @@ namespace Mannschaftsverwaltung
             this.Auswahl = RadioButtonList1.SelectedValue;
             if (this.Auswahl == "Fussballspieler")
             {
-                FussballSpieler f = new FussballSpieler(name.Value, vorname.Value, Int32.Parse(alter.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
+                FussballSpieler f = new FussballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
                 this.Verwalter.Personen.Add(f);
                 enableAllRadioButtons();
                 disableAndClearInputs();
             }
             else if (this.Auswahl == "Handballspieler")
             {
-                HandballSpieler h = new HandballSpieler(name.Value, vorname.Value, Int32.Parse(alter.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
+                HandballSpieler h = new HandballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
                 this.Verwalter.Personen.Add(h);
                 enableAllRadioButtons();
                 disableAndClearInputs();
             }
             else if (this.Auswahl == "Tennisspieler")
             {
-                TennisSpieler t = new TennisSpieler(name.Value, vorname.Value, Int32.Parse(alter.Value), Int32.Parse(aufschlagGeschw.Value), schlaeger.Value, Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
+                TennisSpieler t = new TennisSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(aufschlagGeschw.Value), schlaeger.Value, Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
                 this.Verwalter.Personen.Add(t);
                 enableAllRadioButtons();
                 disableAndClearInputs();
             }
             else if (this.Auswahl == "Trainer")
             {
-                Trainer t = new Trainer(name.Value, vorname.Value, Int32.Parse(alter.Value), Int32.Parse(anzahlJahre.Value));
+                Trainer t = new Trainer(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(anzahlJahre.Value));
                 this.Verwalter.Personen.Add(t);
                 enableAllRadioButtons();
                 disableAndClearInputs();
             }
             else
             {
-                Physiotherapeut p = new Physiotherapeut(name.Value, vorname.Value, Int32.Parse(alter.Value));
+                Physiotherapeut p = new Physiotherapeut(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value));
                 this.Verwalter.Personen.Add(p);
                 enableAllRadioButtons();
                 disableAndClearInputs();
@@ -181,13 +181,13 @@ namespace Mannschaftsverwaltung
         protected void accBtn_Click(object sender, EventArgs e)
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(3));
-            for (int i = 0; i < this.Verwalter.Personen.Count; i++)
+            for (int i = 0; i <= this.Verwalter.Personen.Count; i++)
             {
                 if (i == index)
                 {
                     this.Verwalter.Personen[i - 1].Name = NameEdit.Text;
                     this.Verwalter.Personen[i - 1].Vorname = VornameEdit.Text;
-                    this.Verwalter.Personen[i - 1].Alter = Int32.Parse(GeburtsDatEdit.Text);
+                    this.Verwalter.Personen[i - 1].Geburtstag = DateTime.Parse(GeburtsDatEdit.Text);
                     if (this.Verwalter.Personen[i - 1] is Spieler)
                     {
                         ((Spieler)this.Verwalter.Personen[i - 1]).AnzahlSpiele = Int32.Parse(AnzahlSpieleEdit.Text);
@@ -238,7 +238,7 @@ namespace Mannschaftsverwaltung
 
             GeburtsDatEdit = new TextBox();
             GeburtsDatEdit.ID = "geburtsDatEdit";
-            GeburtsDatEdit.Attributes["type"] = "number";
+            GeburtsDatEdit.Attributes["type"] = "date";
 
             AnzahlSpieleEdit = new TextBox();
             AnzahlSpieleEdit.ID = "anzSpieleEdit";
@@ -299,7 +299,7 @@ namespace Mannschaftsverwaltung
 
                     //Geburtsdatum
                     neueEditZelle = new TableCell();
-                    GeburtsDatEdit.Attributes["value"] = person.Alter.ToString();
+                    GeburtsDatEdit.Attributes["value"] = person.Geburtstag.ToString("yyyy-MM-dd");
                     neueEditZelle.Controls.Add(GeburtsDatEdit);
                     neueZeile.Cells.Add(neueEditZelle);
 
@@ -380,7 +380,7 @@ namespace Mannschaftsverwaltung
 
                     //Geburtsdatum
                     neueZelle = new TableCell();
-                    neueZelle.Text = person.Alter.ToString();
+                    neueZelle.Text = person.Geburtstag.ToString("dd.MM.yyyy");
                     neueZeile.Cells.Add(neueZelle);
 
                     //SportArt
@@ -450,8 +450,8 @@ namespace Mannschaftsverwaltung
             name.Value = "";
             vorname.Disabled = true;
             vorname.Value = "";
-            alter.Disabled = true;
-            alter.Value = "";
+            geburtstag.Disabled = true;
+            geburtstag.Value = "";
             position.Disabled = true;
             position.Value = "";
             geschosseneTore.Disabled = true;
