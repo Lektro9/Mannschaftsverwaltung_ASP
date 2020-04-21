@@ -37,7 +37,10 @@ namespace Mannschaftsverwaltung
 
             TennisSpieler ts1 = new TennisSpieler(11, "Federer", "Roger", DateTime.Parse("01-01-1993"), 95, anzahlJahre: 18, gewonneneSpiele: 98);
 
+            Mannschaft m = new Mannschaft("Azeroth SV", "Fussball", new List<Person>() { p1, p2 }, 23, 12, 2, 150, 14);
+
             Verwalter.Personen = new List<Person>() { p1, p2, p4, p5, p6, t1, h1, h2, h3, h4, ts1 };
+            Verwalter.Mannschaften.Add(m);
         }
         void RegisterCustomRoutes(RouteCollection routes)
         {

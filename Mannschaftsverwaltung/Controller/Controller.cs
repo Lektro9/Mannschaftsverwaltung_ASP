@@ -41,7 +41,14 @@ namespace Mannschaftsverwaltung
         #region Konstruktoren
         public Controller()
         {
-            this.Sportarten = new List<string>() { "Fussball", "Handball" };
+            Mannschaften = new List<Mannschaft>();
+            Personen = new List<Person>();
+            NeuesMitglied = null;
+            Sportarten = null;
+            EditPerson = false;
+            EditPersonIndex = -1;
+            MannschaftOderGruppe = false;
+            MannschaftsAnzeige = false;
         }
         #endregion
 
@@ -70,6 +77,12 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             TennisSpieler t = new TennisSpieler(id, name, vorname, geburtstag, aufschlagGeschw, schlaeger, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
             this.Personen.Add(t);
+        }
+
+        internal void createMannschaft(string name, string sportart, List<Person> personen, int gewSpiele, int unentschieden, int verlSpiele, int erzielteTore, int gegnerischeTore)
+        {
+            Mannschaft m = new Mannschaft(name, sportart, personen, gewSpiele, unentschieden, verlSpiele, erzielteTore, gegnerischeTore);
+            this.Mannschaften.Add(m);
         }
 
         internal void AddTrainer(string name, string vorname, DateTime geburtstag, int anzahlJahre)

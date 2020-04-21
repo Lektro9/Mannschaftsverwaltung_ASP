@@ -17,6 +17,7 @@ namespace Mannschaftsverwaltung
     {
         #region Eigenschaften
         Verein _verein;
+        string _name;
         string _sportart;
         List<Person> _personen;
         int _anzahlSpieler;
@@ -39,6 +40,7 @@ namespace Mannschaftsverwaltung
         public int VerlSpiele { get => _verlSpiele; set => _verlSpiele = value; }
         public int ErzielteTore { get => _erzielteTore; set => _erzielteTore = value; }
         public int GegnerischeTore { get => _gegnerischeTore; set => _gegnerischeTore = value; }
+        public string Name { get => _name; set => _name = value; }
         #endregion
 
         #region Konstruktoren
@@ -64,8 +66,9 @@ namespace Mannschaftsverwaltung
             pruefeListeAufSpieler();
         }
 
-        public Mannschaft(string sportart, List<Person> personen, int gewSpiele, int unentschieden, int verlSpiele, int erzielteTore, int gegnerischeTore)
+        public Mannschaft(string name, string sportart, List<Person> personen, int gewSpiele, int unentschieden, int verlSpiele, int erzielteTore, int gegnerischeTore)
         {
+            Name = name;
             Sportart = sportart;
             Personen = personen;
             SortBy = -1;
@@ -74,6 +77,7 @@ namespace Mannschaftsverwaltung
             VerlSpiele = verlSpiele;
             ErzielteTore = erzielteTore;
             GegnerischeTore = gegnerischeTore;
+            AnzahlSpieler = personen.Count;
         }
         #endregion
 

@@ -124,7 +124,6 @@ namespace Mannschaftsverwaltung
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            Guid.NewGuid();
             this.Auswahl = RadioButtonList1.SelectedValue;
             if (this.Auswahl == "Fussballspieler")
             {
