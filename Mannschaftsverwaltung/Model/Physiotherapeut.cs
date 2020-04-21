@@ -50,24 +50,6 @@ namespace Mannschaftsverwaltung
             string retVal = "Der Physiotherapeut " + this.Name + " stellt ein Attest aus für den Spieler " + s.Name;
             return retVal;
         }
-
-        public override int compareByName(Person p)
-        {
-            int retVal;
-            if (Name[0] > p.Name[0])
-            {
-                retVal = 1;
-            }
-            else if (Name[0] == p.Name[0])
-            {
-                retVal = 0;
-            }
-            else
-            {
-                retVal = -1;
-            }
-            return retVal;
-        }
         #endregion
 
         #region Schnittstellen

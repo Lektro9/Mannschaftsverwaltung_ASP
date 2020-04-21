@@ -158,40 +158,21 @@ namespace Mannschaftsverwaltung
             }
             return retVal;
         }
-
-        private List<Person> sortiereNachName(List<Person> unsortierteListe)
+        
+        public int compareByName(Mannschaft m)
         {
-            List<Person> retVal = unsortierteListe;
-
-            //Alle nach Namen sortieren
-            bool fertig = false;
-            while (fertig == false)
+            int retVal;
+            if (Name[0] > m.Name[0])
             {
-                fertig = true;
-                for (int i = 0; i < retVal.Count - 1; i++)
-                {
-                    if (retVal[i].compareByName(retVal[i + 1]) < 0)
-                    {
-                        Person temp = retVal[i];
-                        retVal[i] = retVal[i + 1];
-                        retVal[i + 1] = temp;
-                        fertig = false;
-                    }
-                }
+                retVal = 1;
             }
-            return retVal;
-        }
-
-        public List<Person> sortiere()
-        {
-            List<Person> retVal = new List<Person>(Personen);
-            if (SortBy == 1)
+            else if (Name[0] == m.Name[0])
             {
-                sortiereNachErfolg(retVal);
+                retVal = 0;
             }
-            else if (SortBy == 2)
+            else
             {
-                sortiereNachName(retVal);
+                retVal = -1;
             }
             return retVal;
         }

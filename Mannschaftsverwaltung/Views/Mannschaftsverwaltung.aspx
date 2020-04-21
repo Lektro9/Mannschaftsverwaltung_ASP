@@ -11,7 +11,7 @@
         <asp:ListItem>Tennis</asp:ListItem>
     </asp:RadioButtonList>
 
-    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-info" />
+    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-success" />
 
     <h3>Wählen Sie Spieler aus, die der Mannschaft zugehörig sind:</h3>
     <asp:ListBox ID="ListBox1" runat="server" SelectionMode="Multiple" Width="200px" CssClass="form-control" ></asp:ListBox>
@@ -55,13 +55,15 @@
     </div>
 
 
-    <asp:Button ID="Button2" runat="server" Text="Mannschaft hinzufügen" OnClick="createManschaft" class="btn btn-info" SelectionMode="Multiple" disabled />
+    <asp:Button ID="Button2" runat="server" Text="Mannschaft hinzufügen" OnClick="createManschaft" class="btn btn-success" SelectionMode="Multiple" disabled />
 
     <hr>
 
     <asp:Table ID="Table1" runat="server" class="table">
         <asp:TableHeaderRow>
-            <asp:TableHeaderCell>Name</asp:TableHeaderCell>
+            <asp:TableHeaderCell>
+                <asp:Button ID="ButtonSortName" runat="server" OnClick="orderByName" Text="Name" CssClass="btn btn-default" />
+            </asp:TableHeaderCell>
             <asp:TableHeaderCell>Gewonnene Spiele</asp:TableHeaderCell>
             <asp:TableHeaderCell>Unentschieden</asp:TableHeaderCell>
             <asp:TableHeaderCell>Verlorene Spiele</asp:TableHeaderCell>

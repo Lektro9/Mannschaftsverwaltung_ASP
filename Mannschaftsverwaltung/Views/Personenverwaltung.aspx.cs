@@ -1,4 +1,9 @@
-﻿using System;
+﻿//Autor:        Kroll
+//Datum:        21.04.2020
+//Dateiname:    Personenverwaltung.cs
+//Beschreibung: Personen verwalten
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -215,6 +220,24 @@ namespace Mannschaftsverwaltung
         }
 
         #region Worker
+        protected void orderByName(object sender, EventArgs e)
+        {
+            this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
+            this.Verwalter.sortiereNachName();
+            Response.Redirect(Request.RawUrl);
+        }
+        protected void orderByBirthday(object sender, EventArgs e)
+        {
+            this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
+            this.Verwalter.sortiereNachGeburtstag();
+            Response.Redirect(Request.RawUrl);
+        }
+        protected void orderByGoals(object sender, EventArgs e)
+        {
+            this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
+            this.Verwalter.sortiereNachTore();
+            Response.Redirect(Request.RawUrl);
+        }
         private void LoadAllEditInputFields()
         {
             NameEdit = new TextBox();

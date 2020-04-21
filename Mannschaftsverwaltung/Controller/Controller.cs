@@ -24,6 +24,7 @@ namespace Mannschaftsverwaltung
         private int _EditPersonIndex;
         private bool _MannschaftOderGruppe;
         private bool _MannschaftsAnzeige;
+        private bool _reverseSort;
 
         #endregion
 
@@ -36,6 +37,7 @@ namespace Mannschaftsverwaltung
         public int EditPersonIndex { get => _EditPersonIndex; set => _EditPersonIndex = value; }
         public bool MannschaftOderGruppe { get => _MannschaftOderGruppe; set => _MannschaftOderGruppe = value; }
         public bool MannschaftsAnzeige { get => _MannschaftsAnzeige; set => _MannschaftsAnzeige = value; }
+        public bool ReverseSort { get => _reverseSort; set => _reverseSort = value; }
         #endregion
 
         #region Konstruktoren
@@ -49,6 +51,7 @@ namespace Mannschaftsverwaltung
             EditPersonIndex = -1;
             MannschaftOderGruppe = false;
             MannschaftsAnzeige = false;
+            ReverseSort = true;
         }
         #endregion
 
@@ -97,6 +100,244 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             Physiotherapeut p = new Physiotherapeut(id, name, vorname, geburtstag);
             this.Personen.Add(p);
+        }
+
+        public void sortiereNachName()
+        {
+            List<Person> retVal = this.Personen;
+
+            //Alle nach Namen sortieren
+            bool fertig = false;
+            while (fertig == false)
+            {
+                fertig = true;
+                for (int i = 0; i < retVal.Count - 1; i++)
+                {
+                    if (this.ReverseSort)
+                    {
+                        if (retVal[i].compareByName(retVal[i + 1]) < 0)
+                        {
+                            Person temp = retVal[i];
+                            retVal[i] = retVal[i + 1];
+                            retVal[i + 1] = temp;
+                            fertig = false;
+                        }
+                    }
+                    else
+                    {
+                        if (retVal[i].compareByName(retVal[i + 1]) > 0)
+                        {
+                            Person temp = retVal[i];
+                            retVal[i] = retVal[i + 1];
+                            retVal[i + 1] = temp;
+                            fertig = false;
+                        }
+                    }
+
+                }
+            }
+            this.Personen = retVal;
+        }
+
+        internal void sortiereNachMannschaftName()
+        {
+            List<Mannschaft> retVal = this.Mannschaften;
+
+            //Alle nach Namen sortieren
+            bool fertig = false;
+            while (fertig == false)
+            {
+                fertig = true;
+                for (int i = 0; i < retVal.Count - 1; i++)
+                {
+                    if (this.ReverseSort)
+                    {
+                        if (retVal[i].compareByName(retVal[i + 1]) < 0)
+                        {
+                            Mannschaft temp = retVal[i];
+                            retVal[i] = retVal[i + 1];
+                            retVal[i + 1] = temp;
+                            fertig = false;
+                        }
+                    }
+                    else
+                    {
+                        if (retVal[i].compareByName(retVal[i + 1]) > 0)
+                        {
+                            Mannschaft temp = retVal[i];
+                            retVal[i] = retVal[i + 1];
+                            retVal[i + 1] = temp;
+                            fertig = false;
+                        }
+                    }
+
+                }
+            }
+            this.Mannschaften = retVal;
+        }
+
+        public void sortiereNachGeburtstag()
+        {
+            List<Person> retVal = this.Personen;
+
+            //Alle nach Namen sortieren
+            bool fertig = false;
+            while (fertig == false)
+            {
+                fertig = true;
+                for (int i = 0; i < retVal.Count - 1; i++)
+                {
+                    if (this.ReverseSort)
+                    {
+                        if (retVal[i].compareByBirthday(retVal[i + 1]) < 0)
+                        {
+                            Person temp = retVal[i];
+                            retVal[i] = retVal[i + 1];
+                            retVal[i + 1] = temp;
+                            fertig = false;
+                        }
+                    }
+                    else
+                    {
+                        if (retVal[i].compareByBirthday(retVal[i + 1]) > 0)
+                        {
+                            Person temp = retVal[i];
+                            retVal[i] = retVal[i + 1];
+                            retVal[i + 1] = temp;
+                            fertig = false;
+                        }
+                    }
+                }
+            }
+            this.Personen = retVal;
+        }
+
+        public void sortiereNachTore()
+        {
+            List<Person> retVal = this.Personen;
+
+            List<Person> Fussballer = getAllFussballer();
+            List<Person> HandBaller = getAllHandballer();
+            List<Person> TennisLeute = getAllTennisSpieler();
+            List<Person> Trainers = getAllTrainer();
+            List<Person> Physios = getAllPhysios();
+            //Alle nach Namen sortieren
+
+            bool fertig = false;
+            while (fertig == false)
+            {
+                fertig = true;
+                for (int i = 0; i < Fussballer.Count - 1; i++)
+                {
+                    if (((FussballSpieler)Fussballer[i]).compareByErfolg((FussballSpieler)Fussballer[i + 1]) < 0)
+                    {
+                        Person temp = Fussballer[i];
+                        Fussballer[i] = Fussballer[i + 1];
+                        Fussballer[i + 1] = temp;
+                        fertig = false;
+                    }
+                }
+            }
+
+            fertig = false;
+            while (fertig == false)
+            {
+                fertig = true;
+                for (int i = 0; i < HandBaller.Count - 1; i++)
+                {
+                    if (((HandballSpieler)HandBaller[i]).compareByErfolg((HandballSpieler)HandBaller[i + 1]) < 0)
+                    {
+                        Person temp = HandBaller[i];
+                        HandBaller[i] = HandBaller[i + 1];
+                        HandBaller[i + 1] = temp;
+                        fertig = false;
+                    }
+                }
+            }
+
+            fertig = false;
+            while (fertig == false)
+            {
+                fertig = true;
+                for (int i = 0; i < TennisLeute.Count - 1; i++)
+                {
+                    if (((TennisSpieler)TennisLeute[i]).compareByErfolg((TennisSpieler)TennisLeute[i + 1]) < 0)
+                    {
+                        Person temp = TennisLeute[i];
+                        TennisLeute[i] = TennisLeute[i + 1];
+                        TennisLeute[i + 1] = temp;
+                        fertig = false;
+                    }
+                }
+            }
+            List<Person> mergedPersonen = new List<Person>();
+            mergedPersonen.Concat(Fussballer).Concat(HandBaller).Concat(TennisLeute).Concat(Trainers).Concat(Physios);
+            this.Personen = retVal;
+        }
+
+        private List<Person> getAllTrainer()
+        {
+            List<Person> retVal = new List<Person>();
+            foreach (Person p in this.Personen)
+            {
+                if (p is Trainer)
+                {
+                    retVal.Add(p);
+                }
+            }
+            return retVal;
+        }
+
+        private List<Person> getAllPhysios()
+        {
+            List<Person> retVal = new List<Person>();
+            foreach (Person p in this.Personen)
+            {
+                if (p is Physiotherapeut)
+                {
+                    retVal.Add(p);
+                }
+            }
+            return retVal;
+        }
+
+        private List<Person> getAllTennisSpieler()
+        {
+            List<Person> retVal = new List<Person>();
+            foreach (Person p in this.Personen)
+            {
+                if (p is TennisSpieler)
+                {
+                    retVal.Add(p);
+                }
+            }
+            return retVal;
+        }
+
+        private List<Person> getAllHandballer()
+        {
+            List<Person> retVal = new List<Person>();
+            foreach (Person p in this.Personen)
+            {
+                if (p is HandballSpieler)
+                {
+                    retVal.Add(p);
+                }
+            }
+            return retVal;
+        }
+
+        private List<Person> getAllFussballer()
+        {
+            List<Person> retVal = new List<Person>();
+            foreach (Person p in this.Personen)
+            {
+                if (p is FussballSpieler)
+                {
+                    retVal.Add(p);
+                }
+            }
+            return retVal;
         }
         #endregion
 

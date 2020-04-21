@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Autor:        Kroll
+//Datum:        21.04.2020
+//Dateiname:    Spiele.aspx.cs
+//Beschreibung: vergangende Spiele einsehen
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

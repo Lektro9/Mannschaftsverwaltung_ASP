@@ -1,4 +1,10 @@
-﻿using System;
+﻿//Autor:        Kroll
+//Datum:        21.04.2020
+//Dateiname:    Manschaftsverwlatung.aspx.cs
+//Beschreibung: Mannschaften verwalten
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -120,5 +126,13 @@ namespace Mannschaftsverwaltung
             this.Verwalter.createMannschaft(name, sportart, mitglieder, gewSpiele, unentschieden, verlSpiele, erzielteTore, gegnerischeTore);
             Response.Redirect(Request.RawUrl);
         }
+
+        protected void orderByName(object sender, EventArgs e)
+        {
+            this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
+            this.Verwalter.sortiereNachMannschaftName();
+            Response.Redirect(Request.RawUrl);
+        }
+        
     }
 }

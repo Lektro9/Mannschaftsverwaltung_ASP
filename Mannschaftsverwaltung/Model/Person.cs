@@ -5,6 +5,7 @@
 //Änderungen:
 //11.02.2020:   Entwicklungsbeginn
 //Basisklasse
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,42 @@ namespace Mannschaftsverwaltung
             this.Rolle = r;
             return retVal;
         }
-        public abstract int compareByName(Person p);
+
+        public int compareByName(Person p)
+        {
+            int retVal;
+            if (Name[0] > p.Name[0])
+            {
+                retVal = 1;
+            }
+            else if (Name[0] == p.Name[0])
+            {
+                retVal = 0;
+            }
+            else
+            {
+                retVal = -1;
+            }
+            return retVal;
+        }
+
+        public int compareByBirthday(Person p)
+        {
+            int retVal;
+            if (Geburtstag > p.Geburtstag)
+            {
+                retVal = 1;
+            }
+            else if (Geburtstag == p.Geburtstag)
+            {
+                retVal = 0;
+            }
+            else
+            {
+                retVal = -1;
+            }
+            return retVal;
+        }
         #endregion
 
         #region Schnittstellen
