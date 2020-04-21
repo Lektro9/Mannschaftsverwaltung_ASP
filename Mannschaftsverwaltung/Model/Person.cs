@@ -40,13 +40,13 @@ namespace Mannschaftsverwaltung
         }
 
         //Spezialkonstruktor
-        public Person(string Name, string Vorname, DateTime Geburtstag)
+        public Person(int Id, string Name, string Vorname, DateTime Geburtstag)
         {
             this.Vorname = Vorname;
             this.Name = Name;
             this.Geburtstag = Geburtstag;
             this.Rolle = null;
-            this.ID = -1;
+            this.ID = Id;
         }
         public Person(string Name, DateTime Geburtstag, string Rolle)
         {

@@ -46,7 +46,45 @@ namespace Mannschaftsverwaltung
         #endregion
 
         #region Worker
+        public static int generateID()
+        {
+            return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
+        }
 
+        internal void AddFussballSpieler(string name, string vorname, DateTime geburtstag, string position, int geschosseneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
+        {
+            int id = generateID();
+            FussballSpieler f = new FussballSpieler(id, name, vorname, geburtstag, position, geschosseneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
+            this.Personen.Add(f);
+        }
+
+        internal void AddHandballSpieler(string name, string vorname, DateTime geburtstag, string position, int geworfeneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
+        {
+            int id = generateID();
+            HandballSpieler h = new HandballSpieler(id, name, vorname, geburtstag, position, geworfeneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
+            this.Personen.Add(h);
+        }
+
+        internal void AddTennisSpieler(string name, string vorname, DateTime geburtstag, int aufschlagGeschw, string schlaeger, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
+        {
+            int id = generateID();
+            TennisSpieler t = new TennisSpieler(id, name, vorname, geburtstag, aufschlagGeschw, schlaeger, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
+            this.Personen.Add(t);
+        }
+
+        internal void AddTrainer(string name, string vorname, DateTime geburtstag, int anzahlJahre)
+        {
+            int id = generateID();
+            Trainer t = new Trainer(id, name, vorname, geburtstag, anzahlJahre);
+            this.Personen.Add(t);
+        }
+
+        internal void AddPhysio(string name, string vorname, DateTime geburtstag)
+        {
+            int id = generateID();
+            Physiotherapeut p = new Physiotherapeut(id, name, vorname, geburtstag);
+            this.Personen.Add(p);
+        }
         #endregion
 
         #region Schnittstellen

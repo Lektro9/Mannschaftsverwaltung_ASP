@@ -33,7 +33,7 @@ namespace Mannschaftsverwaltung
             Anerkennungen = anerkennungen;
         }
 
-        public Physiotherapeut(string name, string vorname, DateTime geburtstag) : base(name, vorname, geburtstag)
+        public Physiotherapeut(int id, string name, string vorname, DateTime geburtstag) : base(id, name, vorname, geburtstag)
         {
             Anerkennungen = null;
         }

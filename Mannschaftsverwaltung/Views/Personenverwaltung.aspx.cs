@@ -37,14 +37,14 @@ namespace Mannschaftsverwaltung
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            this.Verwalter = Global.Verwalter;
-            LoadAllEditInputFields();
-            LoadPersonen();
+            
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            this.Verwalter = Global.Verwalter;
+            LoadAllEditInputFields();
+            LoadPersonen();
         }
 
         protected void Button2_Click(object sender, EventArgs e)
@@ -124,42 +124,30 @@ namespace Mannschaftsverwaltung
 
         protected void Button3_Click(object sender, EventArgs e)
         {
+            Guid.NewGuid();
             this.Auswahl = RadioButtonList1.SelectedValue;
             if (this.Auswahl == "Fussballspieler")
             {
-                FussballSpieler f = new FussballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
-                this.Verwalter.Personen.Add(f);
-                enableAllRadioButtons();
-                disableAndClearInputs();
+                this.Verwalter.AddFussballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
             }
             else if (this.Auswahl == "Handballspieler")
             {
-                HandballSpieler h = new HandballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
-                this.Verwalter.Personen.Add(h);
-                enableAllRadioButtons();
-                disableAndClearInputs();
+                this.Verwalter.AddHandballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
             }
             else if (this.Auswahl == "Tennisspieler")
             {
-                TennisSpieler t = new TennisSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(aufschlagGeschw.Value), schlaeger.Value, Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
-                this.Verwalter.Personen.Add(t);
-                enableAllRadioButtons();
-                disableAndClearInputs();
+                this.Verwalter.AddTennisSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(aufschlagGeschw.Value), schlaeger.Value, Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
             }
             else if (this.Auswahl == "Trainer")
             {
-                Trainer t = new Trainer(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(anzahlJahre.Value));
-                this.Verwalter.Personen.Add(t);
-                enableAllRadioButtons();
-                disableAndClearInputs();
+                this.Verwalter.AddTrainer(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(anzahlJahre.Value));
             }
             else
             {
-                Physiotherapeut p = new Physiotherapeut(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value));
-                this.Verwalter.Personen.Add(p);
-                enableAllRadioButtons();
-                disableAndClearInputs();
+                this.Verwalter.AddPhysio(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value));
             }
+            enableAllRadioButtons();
+            disableAndClearInputs();
             Response.Redirect(Request.RawUrl);
         }
 

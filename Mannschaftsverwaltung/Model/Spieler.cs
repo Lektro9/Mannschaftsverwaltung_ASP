@@ -51,7 +51,7 @@ namespace Mannschaftsverwaltung
             }
         }
         //Spezialkonstruktor
-        public Spieler(string name, string vorname, DateTime geburtstag, int gewonneneSpiele = -1, int anzahlJahre = 0, int anzahlSpiele = 0, int anzahlVereine = 0) : base(name, vorname, geburtstag)
+        public Spieler(int id, string name, string vorname, DateTime geburtstag, int gewonneneSpiele = -1, int anzahlJahre = 0, int anzahlSpiele = 0, int anzahlVereine = 0) : base(id, name, vorname, geburtstag)
         {
             if (this is FussballSpieler)
             {

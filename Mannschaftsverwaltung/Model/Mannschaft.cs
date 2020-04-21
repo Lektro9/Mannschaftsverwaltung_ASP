@@ -21,6 +21,11 @@ namespace Mannschaftsverwaltung
         List<Person> _personen;
         int _anzahlSpieler;
         int _sortBy; //1 = BubbleSort
+        int _gewSpiele;
+        int _unentschieden;
+        int _verlSpiele;
+        int _erzielteTore;
+        int _gegnerischeTore;
         #endregion
 
         #region Accessoren/Modifier
@@ -29,6 +34,11 @@ namespace Mannschaftsverwaltung
         public List<Person> Personen { get => _personen; set => _personen = value; }
         public int AnzahlSpieler { get => _anzahlSpieler; set => _anzahlSpieler = value; }
         public int SortBy { get => _sortBy; set => _sortBy = value; }
+        public int GewSpiele { get => _gewSpiele; set => _gewSpiele = value; }
+        public int Unentschieden { get => _unentschieden; set => _unentschieden = value; }
+        public int VerlSpiele { get => _verlSpiele; set => _verlSpiele = value; }
+        public int ErzielteTore { get => _erzielteTore; set => _erzielteTore = value; }
+        public int GegnerischeTore { get => _gegnerischeTore; set => _gegnerischeTore = value; }
         #endregion
 
         #region Konstruktoren
@@ -52,6 +62,18 @@ namespace Mannschaftsverwaltung
         {
             Personen = personen;
             pruefeListeAufSpieler();
+        }
+
+        public Mannschaft(string sportart, List<Person> personen, int gewSpiele, int unentschieden, int verlSpiele, int erzielteTore, int gegnerischeTore)
+        {
+            Sportart = sportart;
+            Personen = personen;
+            SortBy = -1;
+            GewSpiele = gewSpiele;
+            Unentschieden = unentschieden;
+            VerlSpiele = verlSpiele;
+            ErzielteTore = erzielteTore;
+            GegnerischeTore = gegnerischeTore;
         }
         #endregion
 
