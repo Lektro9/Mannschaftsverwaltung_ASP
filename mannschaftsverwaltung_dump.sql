@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 24. Mrz 2020 um 08:07
+-- Erstellungszeit: 23. Apr 2020 um 13:01
 -- Server-Version: 10.4.11-MariaDB
 -- PHP-Version: 7.3.15
 
@@ -116,6 +116,7 @@ INSERT INTO `mannschaft` (`id`, `name`) VALUES
 CREATE TABLE `person` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
+  `geburtstag` date NOT NULL DEFAULT current_timestamp(),
   `mannschaft_id` int(11) NOT NULL,
   `turnier_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -124,21 +125,21 @@ CREATE TABLE `person` (
 -- Daten für Tabelle `person`
 --
 
-INSERT INTO `person` (`id`, `name`, `mannschaft_id`, `turnier_id`) VALUES
-(1, 'Vergil', 2, 1),
-(2, 'Dante', 1, 2),
-(12, 'Dennis', 6, 2),
-(13, 'Klaus', 6, 2),
-(14, 'Schmitt', 6, 2),
-(15, 'Lars', 7, 2),
-(16, 'Bern', 7, 2),
-(17, 'Fernando', 7, 2),
-(18, 'James', 8, 2),
-(19, 'George', 8, 2),
-(20, 'Michael', 8, 2),
-(21, 'Chris', 9, 2),
-(22, 'Randy', 9, 2),
-(23, 'Gerry', 9, 2);
+INSERT INTO `person` (`id`, `name`, `geburtstag`, `mannschaft_id`, `turnier_id`) VALUES
+(1, 'Vergil', '2020-03-26', 2, 1),
+(2, 'Dante', '2002-03-26', 1, 2),
+(12, 'Dennis', '1993-03-26', 6, 2),
+(13, 'Klaus', '1990-01-02', 6, 2),
+(14, 'Schmitt', '2000-03-13', 6, 2),
+(15, 'Lars', '2001-04-02', 7, 2),
+(16, 'Bern', '1989-03-02', 7, 2),
+(17, 'Fernando', '1998-03-11', 7, 2),
+(18, 'James', '2003-03-20', 8, 2),
+(19, 'George', '1970-12-26', 8, 2),
+(20, 'Michael', '1999-01-14', 8, 2),
+(21, 'Chris', '1980-03-30', 9, 2),
+(22, 'Randy', '1993-02-21', 9, 2),
+(23, 'Gerry', '1995-07-26', 9, 2);
 
 -- --------------------------------------------------------
 
