@@ -62,6 +62,11 @@ namespace Mannschaftsverwaltung
                 neueZelle.Text = m.GegnerischeTore.ToString();
                 neueZeile.Cells.Add(neueZelle);
 
+                //gegnerische Tore
+                neueZelle = new TableCell();
+                neueZelle.Text = m.AnzahlSpieler.ToString();
+                neueZeile.Cells.Add(neueZelle);
+
                 this.Table1.Rows.Add(neueZeile);
 
             }
@@ -104,7 +109,6 @@ namespace Mannschaftsverwaltung
                 if (item.Selected)
                 {
                     Match m = Regex.Match(item.ToString(), @"^\(([0-9]+)\)");
-                    Response.Write(m.Groups[1]);
                     int personID = Int32.Parse(m.Groups[1].ToString());
                     foreach (Person p in this.Verwalter.Personen)
                     {
@@ -117,13 +121,8 @@ namespace Mannschaftsverwaltung
             }
             string sportart = RadioButtonList1.SelectedValue;
             string name = this.mannschaftsName.Text;
-            int gewSpiele = Int32.Parse(this.gewSpiele.Text);
-            int unentschieden = Int32.Parse(this.unentschieden.Text);
-            int verlSpiele = Int32.Parse(this.verlSpiele.Text);
-            int erzielteTore = Int32.Parse(this.erzielteTore.Text);
-            int gegnerischeTore = Int32.Parse(this.gegnerischeTore.Text);
 
-            this.Verwalter.createMannschaft(name, sportart, mitglieder, gewSpiele, unentschieden, verlSpiele, erzielteTore, gegnerischeTore);
+            this.Verwalter.createMannschaft(name, sportart, mitglieder);
             Response.Redirect(Request.RawUrl);
         }
 

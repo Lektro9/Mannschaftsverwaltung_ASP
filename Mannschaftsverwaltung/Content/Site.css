@@ -33,3 +33,30 @@ textarea {
 .form-group {
     margin-bottom: 15px;
 }
+
+@media (min-width: 768px) {
+    .row.equal {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.center-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.keep-top {
+    align-self: flex-start;
+}
+
+.flexcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mt-2 {
+    margin-top: 15px !important;
+}

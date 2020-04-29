@@ -3,63 +3,33 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <h2><%: Page.Title %></h2>
-
-    <p>Wählen Sie eine Sportart aus:</p>
-    <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-        <asp:ListItem>Fussball</asp:ListItem>
-        <asp:ListItem>Handball</asp:ListItem>
-        <asp:ListItem>Tennis</asp:ListItem>
-    </asp:RadioButtonList>
-
-    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-success" />
-
-    <h3>Wählen Sie Spieler aus, die der Mannschaft zugehörig sind:</h3>
-    <asp:ListBox ID="ListBox1" runat="server" SelectionMode="Multiple" Width="200px" CssClass="form-control" ></asp:ListBox>
-    <br />
-    <h3>Bitte füllen Sie folgende Informationen aus:</h3>
-    <div class="row">
-        <h4 class="col-md-2">Name</h4>
-        <div class="input-group col-md-10">
-            <asp:TextBox ID="mannschaftsName" runat="server" CssClass="form-control"></asp:TextBox>
+    <div class="row equal">
+        <div class="col-md-4">
+            <h3>Sportart:</h3>
+            <asp:RadioButtonList ID="RadioButtonList1" runat="server">
+                <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Fussball</asp:ListItem>
+                <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Handball</asp:ListItem>
+                <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Tennis</asp:ListItem>
+            </asp:RadioButtonList>
         </div>
-    </div>
-    <div class="row">
-        <h4 class="col-md-2">Gewonnene Spiele</h4>
-        <div class="input-group col-md-10">
-            <asp:TextBox ID="gewSpiele" runat="server" CssClass="form-control" type="number"></asp:TextBox>
+        <div class="col-md-4">
+            <h3>Mögliche Spieler:</h3>
+            <asp:ListBox ID="ListBox1" runat="server" SelectionMode="Multiple" Width="400px" Height="200px" CssClass="form-control"></asp:ListBox>
         </div>
-    </div>
-    <div class="row">
-        <h4 class="col-md-2">Unentschieden gespielte Spiele</h4>
-        <div class="input-group col-md-10">
-            <asp:TextBox ID="unentschieden" runat="server" CssClass="form-control" type="number"></asp:TextBox>
-        </div>
-    </div>
-    <div class="row">
-        <h4 class="col-md-2">Verlorene Spiele</h4>
-        <div class="input-group col-md-10">
-            <asp:TextBox ID="verlSpiele" runat="server" CssClass="form-control" type="number"></asp:TextBox>
-        </div>
-    </div>
-    <div class="row">
-        <h4 class="col-md-2">Erzielte Tore</h4>
-        <div class="input-group col-md-10">
-            <asp:TextBox ID="erzielteTore" runat="server" CssClass="form-control" type="number"></asp:TextBox>
-        </div>
-    </div>
-    <div class="row">
-        <h4 class="col-md-2">Gegnerische Tore</h4>
-        <div class="input-group col-md-10">
-            <asp:TextBox ID="gegnerischeTore" runat="server" CssClass="form-control" type="number"></asp:TextBox>
+        <div class="col-md-4 center-align flexcontainer">
+            <h3>Name:</h3>
+                <div>
+                    <asp:TextBox ID="mannschaftsName" runat="server" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div>
+                    <asp:Button ID="Button2" runat="server" Text="Mannschaft erstellen" OnClick="createManschaft" class="btn btn-success" SelectionMode="Multiple" disabled />
+                </div>
         </div>
     </div>
 
+    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-success center-block mt-2 hidden" />
 
-    <asp:Button ID="Button2" runat="server" Text="Mannschaft hinzufügen" OnClick="createManschaft" class="btn btn-success" SelectionMode="Multiple" disabled />
-
-    <hr>
-
-    <asp:Table ID="Table1" runat="server" class="table">
+    <asp:Table ID="Table1" runat="server" class="table mt-2">
         <asp:TableHeaderRow>
             <asp:TableHeaderCell>
                 <asp:Button ID="ButtonSortName" runat="server" OnClick="orderByName" Text="Name" CssClass="btn btn-default" />
@@ -69,6 +39,25 @@
             <asp:TableHeaderCell>Verlorene Spiele</asp:TableHeaderCell>
             <asp:TableHeaderCell>Erzielte Tore</asp:TableHeaderCell>
             <asp:TableHeaderCell>Gegnerische Tore</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Anzahl Spieler</asp:TableHeaderCell>
         </asp:TableHeaderRow>
     </asp:Table>
+    <script type="text/javascript">
+        function SimulateClick(buttonId) {
+            var button = document.getElementById(buttonId);
+            if (button) {
+                if (button.click) {
+                    button.click();
+                }
+                else if (button.onclick) {
+                    button.onclick();
+                }
+                else {
+                    alert("DEBUG: button '" + buttonId + "' is not clickable");
+                }
+            } else {
+                alert("DEBUG: button with ID '" + buttonId + "' does not exist");
+            }
+        }
+    </script>
 </asp:Content>

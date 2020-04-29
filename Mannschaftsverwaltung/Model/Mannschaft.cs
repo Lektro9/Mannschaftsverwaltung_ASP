@@ -66,17 +66,17 @@ namespace Mannschaftsverwaltung
             pruefeListeAufSpieler();
         }
 
-        public Mannschaft(string name, string sportart, List<Person> personen, int gewSpiele, int unentschieden, int verlSpiele, int erzielteTore, int gegnerischeTore)
+        public Mannschaft(string name, string sportart, List<Person> personen)
         {
             Name = name;
             Sportart = sportart;
             Personen = personen;
             SortBy = -1;
-            GewSpiele = gewSpiele;
-            Unentschieden = unentschieden;
-            VerlSpiele = verlSpiele;
-            ErzielteTore = erzielteTore;
-            GegnerischeTore = gegnerischeTore;
+            GewSpiele = 0;
+            Unentschieden = 0;
+            VerlSpiele = 0;
+            ErzielteTore = 0;
+            GegnerischeTore = 0;
             AnzahlSpieler = personen.Count;
         }
         #endregion

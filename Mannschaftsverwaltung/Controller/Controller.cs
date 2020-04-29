@@ -82,9 +82,9 @@ namespace Mannschaftsverwaltung
             this.Personen.Add(t);
         }
 
-        internal void createMannschaft(string name, string sportart, List<Person> personen, int gewSpiele, int unentschieden, int verlSpiele, int erzielteTore, int gegnerischeTore)
+        internal void createMannschaft(string name, string sportart, List<Person> personen)
         {
-            Mannschaft m = new Mannschaft(name, sportart, personen, gewSpiele, unentschieden, verlSpiele, erzielteTore, gegnerischeTore);
+            Mannschaft m = new Mannschaft(name, sportart, personen);
             this.Mannschaften.Add(m);
         }
 
