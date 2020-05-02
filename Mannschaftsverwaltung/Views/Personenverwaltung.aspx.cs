@@ -56,9 +56,15 @@ namespace Mannschaftsverwaltung
         {
             this.Auswahl = RadioButtonList1.SelectedValue;
             int index = RadioButtonList1.SelectedIndex;
+            disableAndClearInputs();
+            foreach (ListItem item in RadioButtonList1.Items)
+            {
+                item.Attributes.Add("class", "list-group-item list-group-item-action disabled");
+            }
             if (Auswahl == "Fussballspieler")
             {
                 RadioButtonList1.SelectedIndex = index;
+                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
                 vorname.Disabled = false;
                 geburtstag.Disabled = false;
@@ -68,12 +74,12 @@ namespace Mannschaftsverwaltung
                 gewonneneSpiele.Disabled = false;
                 anzahlVereine.Disabled = false;
                 anzahlSpiele.Disabled = false;
-                disableAllRadioButtons();
                 this.Button3.Visible = true;
             }
             else if (Auswahl == "Handballspieler")
             {
                 RadioButtonList1.SelectedIndex = index;
+                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
                 vorname.Disabled = false;
                 geburtstag.Disabled = false;
@@ -83,12 +89,12 @@ namespace Mannschaftsverwaltung
                 gewonneneSpiele.Disabled = false;
                 anzahlVereine.Disabled = false;
                 anzahlSpiele.Disabled = false;
-                disableAllRadioButtons();
                 this.Button3.Visible = true;
             }
             else if (Auswahl == "Tennisspieler")
             {
                 RadioButtonList1.SelectedIndex = index;
+                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
                 vorname.Disabled = false;
                 geburtstag.Disabled = false;
@@ -98,26 +104,25 @@ namespace Mannschaftsverwaltung
                 anzahlSpiele.Disabled = false;
                 schlaeger.Disabled = false;
                 aufschlagGeschw.Disabled = false;
-                disableAllRadioButtons();
                 this.Button3.Visible = true;
             }
             else if (Auswahl == "Trainer")
             {
                 RadioButtonList1.SelectedIndex = index;
+                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
                 vorname.Disabled = false;
                 geburtstag.Disabled = false;
                 anzahlJahre.Disabled = false;
-                disableAllRadioButtons();
                 this.Button3.Visible = true;
             }
             else if (Auswahl == "Physiotherapeut")
             {
                 RadioButtonList1.SelectedIndex = index;
+                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
                 vorname.Disabled = false;
                 geburtstag.Disabled = false;
-                disableAllRadioButtons();
                 this.Button3.Visible = true;
             }
             else

@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-success center-block mt-2 hidden" />
+    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-success center-block mt-2 d-none" />
 
     <asp:Table ID="Table1" runat="server" class="table mt-2">
         <asp:TableHeaderRow>
