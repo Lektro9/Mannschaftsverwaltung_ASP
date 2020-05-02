@@ -4,7 +4,7 @@
 
 <html lang="en">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %></title>
@@ -13,7 +13,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -39,26 +39,28 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" runat="server" href="~/">Anwendungsname</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Personenverwaltung</a></li>
-                        <li><a runat="server" href="~/Mannschaftsverwaltung">Mannschaftsverwaltung</a></li>
-                        <li><a runat="server" href="~/Spiele">Spiele</a></li>
-                        <li><a runat="server" href="~/Tabellen">Tabellen</a></li>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="/">Application name</a>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="nav-item"><a runat="server" href="~/" class="nav-link">Personenverwaltung</a></li>
+                        <li class="nav-item"><a runat="server" href="~/Mannschaftsverwaltung" class="nav-link">Mannschaftsverwaltung</a></li>
+                        <li class="nav-item"><a runat="server" href="~/Spiele" class="nav-link">Spiele</a></li>
+                        <li class="nav-item"><a runat="server" href="~/Tabellen" class="nav-link">Tabellen</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right mr-auto">
+                        <li class="nav-item"><a href="/Account/Register" id="registerLink" class="nav-link">Register</a></li>
+                        <li class="nav-item"><a href="/Account/Login" id="loginLink" class="nav-link">Log in</a></li>
                     </ul>
                 </div>
             </div>
-        </div>
+        </nav>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
