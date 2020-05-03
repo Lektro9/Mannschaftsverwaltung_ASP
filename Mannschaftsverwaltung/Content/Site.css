@@ -68,22 +68,12 @@ input[type="radio"] {
     transition: 0.15s;
 }
 
-.list-group-item.list-group-item-action.active {
-    width: 150%;
-    transition: 0.15s;
-}
-
-.active #Layer-1 {
-    fill: white;
-    animation: slide 0.15s ease-out forwards;
-}
+    .list-group-item.list-group-item-action.active {
+        width: 150%;
+        transition: 0.15s;
+        border-color: black;
+    }
 
 span > label {
     margin-bottom: 0em;
-}
-
-@keyframes slide {
-    100% {
-        transform: translateX(800px);
-    }
 }
