@@ -45,7 +45,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="/">Application name</a>
+                <a class="navbar-brand" href="/">Turnier- und Mannschaftsverwaltung</a>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-nav mr-auto">
                         <li class="nav-item"><a runat="server" href="~/" class="nav-link">Personenverwaltung</a></li>

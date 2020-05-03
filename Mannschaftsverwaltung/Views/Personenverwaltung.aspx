@@ -42,105 +42,118 @@
         </defs>
     </svg>
 
-    <h2 class="mt-2"><%: Page.Title %></h2>
-    <asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="list-group">
-        <asp:ListItem class="list-group-item list-group-item-action" Value="Fussballspieler">Fussballspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#gregor" /></svg></asp:ListItem>
-        <asp:ListItem class="list-group-item list-group-item-action" Value="Handballspieler">Handballspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#hinata" /></svg></asp:ListItem>
-        <asp:ListItem class="list-group-item list-group-item-action" Value="Tennisspieler">Tennisspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#maruo" /></asp:ListItem>
-        <asp:ListItem class="list-group-item list-group-item-action" Value="Trainer">Trainer<svg width="120" height="30" viewBox="0 0 100 400"><use href="#ippocoach" /></asp:ListItem>
-        <asp:ListItem class="list-group-item list-group-item-action" Value="Physiotherapeut">Physiotherapeut<svg width="120" height="30" viewBox="0 0 100 400"><use href="#okabe" /></asp:ListItem>
-    </asp:RadioButtonList>
+    <h1 class="mt-2"><%: Page.Title %></h1>
+
+    <div class="row align-items-center">
+        <div class="col-lg-5">
+
+
+            <asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="list-group">
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Fussballspieler">Fussballspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#gregor" /></svg></asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Handballspieler">Handballspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#hinata" /></svg></asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Tennisspieler">Tennisspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#maruo" /></asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Trainer">Trainer<svg width="120" height="30" viewBox="0 0 100 400"><use href="#ippocoach" /></asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Physiotherapeut">Physiotherapeut<svg width="120" height="30" viewBox="0 0 100 400"><use href="#okabe" /></asp:ListItem>
+            </asp:RadioButtonList>
 
 
 
-    <asp:Button ID="Button2" runat="server" Text="auswählen" OnClick="Button2_Click" class="btn btn-success" />
+            <asp:Button ID="Button2" runat="server" Text="auswählen" OnClick="Button2_Click" class="btn btn-success mt-2" />
 
+        </div>
+        <div class="col-lg-7">
 
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <span class="anchor" id="formUserEdit"></span>
-            <hr class="my-5">
-            <!-- form user info -->
-            <div class="card card-outline-secondary">
-                <div class="card-header">
-                    <h3 class="mb-0">Personenbezogene Daten</h3>
-                </div>
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Name</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="name" type="text" name="name" value="" runat="server" disabled />
+            <div>
+                <div>
+                    <span class="anchor" id="formUserEdit"></span>
+                    <!-- form user info -->
+                    <div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h4 class="mb-0">Personenbezogene Daten</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="name" type="text" name="name" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Vorname</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="vorname" type="text" name="vorname" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Geburtstag</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="geburtstag" type="date" name="geburtstag" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Position</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="position" type="text" name="position" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">erzielte Tore</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="geschosseneTore" type="number" name="geschosseneTore" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Erfahrung in Jahren</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="anzahlJahre" type="number" name="anzahlJahre" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Spiele gewonnen</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="gewonneneSpiele" type="number" name="gewonneneSpiele" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Anzahl der Vereine</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="anzahlVereine" type="number" name="anzahlVereine" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Anzahl der Spiele</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="anzahlSpiele" type="number" name="anzahlSpiele" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Schläger</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="schlaeger" type="text" name="schlaeger" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Aufschlaggeschwindigkeit:</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="aufschlagGeschw" type="number" name="aufschlagGeschw" value="" runat="server" disabled />
+                                </div>
+                            </div>
+                            <div class="col-lg-12 d-flex justify-content-center">
+                                <asp:Button ID="Button3" runat="server" Text="hinzufügen" OnClick="Button3_Click" Visible="False" CssClass="btn btn-success" />
+                            </div>
+
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Vorname</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="vorname" type="text" name="vorname" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Geburtstag</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="geburtstag" type="date" name="geburtstag" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Position</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="position" type="text" name="position" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">erzielte Tore</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="geschosseneTore" type="number" name="geschosseneTore" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Erfahrung in Jahren</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="anzahlJahre" type="number" name="anzahlJahre" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Spiele gewonnen</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="gewonneneSpiele" type="number" name="gewonneneSpiele" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Anzahl der Vereine</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="anzahlVereine" type="number" name="anzahlVereine" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Anzahl der Spiele</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="anzahlSpiele" type="number" name="anzahlSpiele" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Schläger</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="schlaeger" type="text" name="schlaeger" value="" runat="server" disabled />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Aufschlaggeschwindigkeit:</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" id="aufschlagGeschw" type="number" name="aufschlagGeschw" value="" runat="server" disabled />
-                        </div>
-                    </div>
+                    <!-- /form user info -->
                 </div>
             </div>
-            <!-- /form user info -->
+
         </div>
+        <%--second half--%>
     </div>
+    <%--row--%>
 
-
-    <asp:Button ID="Button3" runat="server" Text="hinzufügen" OnClick="Button3_Click" Visible="False" CssClass="btn btn-success" />
-    <asp:Table ID="Table1" runat="server" class="table">
+    <asp:Table ID="Table1" runat="server" class="table mt-5">
         <asp:TableHeaderRow>
             <asp:TableHeaderCell>ID</asp:TableHeaderCell>
             <asp:TableHeaderCell>
@@ -173,7 +186,8 @@
         //        $(this).children('input').prop("checked", true);
         //    });
         //});
-        var svg = $("span.active#gregorsvg");
+        var svg = $(".active svg");
+        gsap.to('.active svg', 0.2, { delay: 0, attr: { viewBox: "100 150 100 100" } });
         $('span').each(function () {
             //this.tl = new TimelineMax({ paused: true });
             // gsap.to('svg', 0.15, { delay: 0, attr: { viewBox: "0 0 100 400" } });
@@ -191,7 +205,6 @@
                 $(this).children('input').prop("checked", true);
 
             });
-
         });
     </script>
 </asp:Content>

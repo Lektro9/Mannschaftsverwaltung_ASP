@@ -57,7 +57,7 @@ textarea {
     justify-content: space-between;
 }
 
-input[type="radio"] {
+.list-group-item input[type="radio"] {
     visibility: hidden;
     height: 0;
     width: 0;
@@ -68,11 +68,15 @@ input[type="radio"] {
     transition: 0.15s;
 }
 
-    .list-group-item.list-group-item-action.active {
-        width: 150%;
-        transition: 0.15s;
-        border-color: black;
-    }
+.disabled {
+    background-color: lightgrey !important;
+}
+
+.list-group-item.list-group-item-action.active {
+    width: 150%;
+    transition: 0.15s;
+    border-color: black;
+}
 
 span > label {
     margin-bottom: 0em;

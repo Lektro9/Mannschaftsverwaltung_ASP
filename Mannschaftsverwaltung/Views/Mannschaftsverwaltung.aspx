@@ -18,12 +18,12 @@
         </div>
         <div class="col-md-4 center-align flexcontainer">
             <h3>Name:</h3>
-                <div>
-                    <asp:TextBox ID="mannschaftsName" runat="server" CssClass="form-control"></asp:TextBox>
-                </div>
-                <div>
-                    <asp:Button ID="Button2" runat="server" Text="Mannschaft erstellen" OnClick="createManschaft" class="btn btn-success" SelectionMode="Multiple" disabled />
-                </div>
+            <div>
+                <asp:TextBox ID="mannschaftsName" runat="server" CssClass="form-control"></asp:TextBox>
+            </div>
+            <div>
+                <asp:Button ID="Button2" runat="server" Text="Mannschaft erstellen" OnClick="createManschaft" class="btn btn-success" SelectionMode="Multiple" disabled />
+            </div>
         </div>
     </div>
 
