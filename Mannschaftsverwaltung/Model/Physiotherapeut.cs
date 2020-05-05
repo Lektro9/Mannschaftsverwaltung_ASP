@@ -15,11 +15,11 @@ namespace Mannschaftsverwaltung
     public class Physiotherapeut : Person
     {
         #region Eigenschaften
-        List<string> _anerkennungen; //Ärztliche Annerkennungen, Erfolge, etc.
+        string _anerkennungen; //Ärztliche Annerkennungen, Erfolge, etc.
         #endregion
 
         #region Accessoren/Modifier
-        public List<string> Anerkennungen { get => _anerkennungen; set => _anerkennungen = value; }
+        public string Anerkennungen { get => _anerkennungen; set => _anerkennungen = value; }
         #endregion
 
         #region Konstruktoren
@@ -28,14 +28,14 @@ namespace Mannschaftsverwaltung
             Anerkennungen = null;
         }
         //Spezialkonstruktor
-        public Physiotherapeut(List<string> anerkennungen) : base()
+        public Physiotherapeut(string anerkennungen) : base()
         {
             Anerkennungen = anerkennungen;
         }
 
-        public Physiotherapeut(int id, string name, string vorname, DateTime geburtstag) : base(id, name, vorname, geburtstag)
+        public Physiotherapeut(int id, string name, string vorname, DateTime geburtstag, string anerkennungen = "nothing") : base(id, name, vorname, geburtstag)
         {
-            Anerkennungen = null;
+            Anerkennungen = anerkennungen;
         }
         //Kopierkonstruktor
         public Physiotherapeut(Physiotherapeut p) : base(p)

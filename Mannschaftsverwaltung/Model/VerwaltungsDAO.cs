@@ -6,7 +6,6 @@ using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 using System.Data;
-using Newtonsoft.Json;
 
 namespace Mannschaftsverwaltung
 {
@@ -56,7 +55,6 @@ namespace Mannschaftsverwaltung
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "person");
                 string JSONString = string.Empty;
-                JSONString = JsonConvert.SerializeObject(ds.Tables[0]);
                 DataRow[] dr = ds.Tables[0].Select();
 
                 List<string> DataBasePersons = new List<string>();
@@ -77,6 +75,38 @@ namespace Mannschaftsverwaltung
                 Connection.Dispose();
                 Connection.Close();
             }
+        }
+
+        public List<Person> getAllPerson()
+        {
+            List<Person> retVal = new List<Person>();
+            try
+            {
+                string FetchAllFussbQuery = "SELECT person.id, person.vorname, person.name, person.geburtstag, fussballspieler.position, fussballspieler.tore, fussballspieler.anzahlJahre, fussballspieler.gewonneneSpiele, fussballspieler.anzahlVereine, fussballspieler.anzahlSpiele FROM `fussballspieler`  JOIN person ON fussballspieler.person_id = person.id";
+                Connection.Open();
+                //MySqlCommand command = Connection.CreateCommand();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(FetchAllFussbQuery, Connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "person");
+                DataRow[] dr = ds.Tables[0].Select();
+
+                foreach (DataRow person in dr)
+                {
+                    Person p = new FussballSpieler(person.Field<int>("id"), person.Field<string>("name"), person.Field<string>("vorname"), person.Field<DateTime>("geburtstag"), person.Field<string>("position"), person.Field<int>("tore"), person.Field<int>("anzahlJahre"), person.Field<int>("gewonneneSpiele"), person.Field<int>("anzahlVereine"), person.Field<int>("anzahlSpiele"));
+                    retVal.Add(p);
+                    //Person p = new Person(person.Field<int>("id"), person.Field<string>("name"), "none", person.Field<DateTime>("geburtstag"));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Connection.Dispose();
+                Connection.Close();
+            }
+            return retVal;
         }
     }
 }

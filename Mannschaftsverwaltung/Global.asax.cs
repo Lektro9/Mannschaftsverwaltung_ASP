@@ -46,7 +46,7 @@ namespace Mannschaftsverwaltung
             Mannschaft m = new Mannschaft("Azeroth SV", "Fussball", new List<Person>() { p1, p2 });
 
             VerwaltungsDAO newCon = new VerwaltungsDAO();
-            newCon.ExecuteNonQuery("select * from person");
+            List<Person> allDBPersons = newCon.getAllPerson();
 
             Verwalter.Personen = new List<Person>() { p1, p2, p4, p5, p6, t1, h1, h2, h3, h4, ts1 };
             Verwalter.Mannschaften.Add(m);

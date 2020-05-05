@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 23. Apr 2020 um 13:01
+-- Erstellungszeit: 05. Mai 2020 um 15:35
 -- Server-Version: 10.4.11-MariaDB
 -- PHP-Version: 7.3.15
 
@@ -32,24 +32,28 @@ CREATE TABLE `fussballspieler` (
   `id` int(11) NOT NULL,
   `person_id` int(11) NOT NULL,
   `position` text NOT NULL,
-  `tore` int(11) NOT NULL
+  `tore` int(11) NOT NULL,
+  `anzahlJahre` int(11) NOT NULL DEFAULT 0,
+  `gewonneneSpiele` int(11) NOT NULL DEFAULT 0,
+  `anzahlVereine` int(11) NOT NULL DEFAULT 0,
+  `anzahlSpiele` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `fussballspieler`
 --
 
-INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`) VALUES
-(1, 12, 'Stürmer', 34),
-(2, 17, 'Torwart', 0),
-(3, 19, 'Mittelfeld', 23),
-(11, 15, 'Stürmer', 10),
-(12, 16, 'Außenmittelfeldspieler (Flügelspieler)', 15),
-(13, 21, 'offensiver Mittelfeldspieler', 14),
-(14, 2, 'defensiver Mittelfeldspieler', 28),
-(15, 20, 'Außenverteidiger', 5),
-(16, 22, 'Innenverteidiger', 2),
-(17, 13, 'Stürmer', 45);
+INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
+(1, 12, 'Stürmer', 34, 0, 0, 0, 0),
+(2, 17, 'Torwart', 0, 0, 0, 0, 0),
+(3, 19, 'Mittelfeld', 23, 0, 0, 0, 0),
+(11, 15, 'Stürmer', 10, 0, 0, 0, 0),
+(12, 16, 'Außenmittelfeldspieler (Flügelspieler)', 15, 0, 0, 0, 0),
+(13, 21, 'offensiver Mittelfeldspieler', 14, 0, 0, 0, 0),
+(14, 2, 'defensiver Mittelfeldspieler', 28, 0, 0, 0, 0),
+(15, 20, 'Außenverteidiger', 5, 0, 0, 0, 0),
+(16, 22, 'Innenverteidiger', 2, 0, 0, 0, 0),
+(17, 13, 'Stürmer', 45, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -61,24 +65,28 @@ CREATE TABLE `handballspieler` (
   `id` int(11) NOT NULL,
   `person_id` int(11) NOT NULL,
   `position` text NOT NULL,
-  `tore` int(11) NOT NULL
+  `tore` int(11) NOT NULL,
+  `anzahlJahre` int(11) NOT NULL DEFAULT 0,
+  `gewonneneSpiele` int(11) NOT NULL DEFAULT 0,
+  `anzahlVereine` int(11) NOT NULL DEFAULT 0,
+  `anzahlSpiele` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `handballspieler`
 --
 
-INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`) VALUES
-(1, 16, 'Mittelfeld', 12),
-(2, 21, 'Angriff', 25),
-(3, 2, 'Verteidiger', 3),
-(4, 12, 'Linksaußen', 4),
-(5, 17, 'Rückraumlinks', 12),
-(6, 19, 'Rückraummitte', 4),
-(7, 23, 'Rückraumrechts', 23),
-(8, 18, 'Rechtsaußen', 65),
-(9, 13, 'Kreisläufer', 45),
-(10, 15, 'Torwart', 0);
+INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
+(1, 16, 'Mittelfeld', 12, 0, 0, 0, 0),
+(2, 21, 'Angriff', 25, 0, 0, 0, 0),
+(3, 2, 'Verteidiger', 3, 0, 0, 0, 0),
+(4, 12, 'Linksaußen', 4, 0, 0, 0, 0),
+(5, 17, 'Rückraumlinks', 12, 0, 0, 0, 0),
+(6, 19, 'Rückraummitte', 4, 0, 0, 0, 0),
+(7, 23, 'Rückraumrechts', 23, 0, 0, 0, 0),
+(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0),
+(9, 13, 'Kreisläufer', 45, 0, 0, 0, 0),
+(10, 15, 'Torwart', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -115,7 +123,8 @@ INSERT INTO `mannschaft` (`id`, `name`) VALUES
 
 CREATE TABLE `person` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
+  `vorname` text NOT NULL,
+  `name` text NOT NULL DEFAULT '"noname"',
   `geburtstag` date NOT NULL DEFAULT current_timestamp(),
   `mannschaft_id` int(11) NOT NULL,
   `turnier_id` int(11) NOT NULL
@@ -125,21 +134,22 @@ CREATE TABLE `person` (
 -- Daten für Tabelle `person`
 --
 
-INSERT INTO `person` (`id`, `name`, `geburtstag`, `mannschaft_id`, `turnier_id`) VALUES
-(1, 'Vergil', '2020-03-26', 2, 1),
-(2, 'Dante', '2002-03-26', 1, 2),
-(12, 'Dennis', '1993-03-26', 6, 2),
-(13, 'Klaus', '1990-01-02', 6, 2),
-(14, 'Schmitt', '2000-03-13', 6, 2),
-(15, 'Lars', '2001-04-02', 7, 2),
-(16, 'Bern', '1989-03-02', 7, 2),
-(17, 'Fernando', '1998-03-11', 7, 2),
-(18, 'James', '2003-03-20', 8, 2),
-(19, 'George', '1970-12-26', 8, 2),
-(20, 'Michael', '1999-01-14', 8, 2),
-(21, 'Chris', '1980-03-30', 9, 2),
-(22, 'Randy', '1993-02-21', 9, 2),
-(23, 'Gerry', '1995-07-26', 9, 2);
+INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `turnier_id`) VALUES
+(1, 'Vergil', 'Redgrave', '2020-03-26', 2, 1),
+(2, 'Dante', 'Regdrave', '2002-03-26', 1, 2),
+(12, 'Dennis', 'grandle', '1993-03-26', 6, 2),
+(13, 'Klaus', 'Shidokiv', '1990-01-02', 6, 2),
+(14, 'Peter', 'Schmitt', '2000-03-13', 6, 2),
+(15, 'Lars', 'Banane', '2001-04-02', 7, 2),
+(16, 'Bern', 'Wunder', '1989-03-02', 7, 2),
+(17, 'Fernando', 'Brandez', '1998-03-11', 7, 2),
+(18, 'James', 'Peterson', '2003-03-20', 8, 2),
+(19, 'George', 'doubleyuu', '1970-12-26', 8, 2),
+(20, 'Michael', 'Stiefelmacher', '1999-01-14', 8, 2),
+(21, 'Chris', 'Redfield', '1980-03-30', 9, 2),
+(22, 'Randy', 'Shmot', '1993-02-21', 9, 2),
+(23, 'Gerry', 'sMod', '1995-07-26', 9, 2),
+(24, 'ExampleGuy', 'ExampleName', '2001-03-11', 8, 7);
 
 -- --------------------------------------------------------
 
@@ -179,24 +189,28 @@ CREATE TABLE `tennisspieler` (
   `id` int(11) NOT NULL,
   `person_id` int(11) NOT NULL,
   `aufschlaggeschwindigkeit` int(11) NOT NULL,
-  `gewonnenespiele` int(11) NOT NULL
+  `gewonnenespiele` int(11) NOT NULL,
+  `schlaeger` text NOT NULL DEFAULT 'Wilson 9000',
+  `anzahlJahre` int(11) NOT NULL,
+  `anzahlVereine` int(11) NOT NULL,
+  `anzahlSpiele` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `tennisspieler`
 --
 
-INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`) VALUES
-(1, 23, 86, 14),
-(2, 18, 88, 44),
-(3, 13, 98, 12),
-(4, 16, 123, 2),
-(5, 21, 23, 0),
-(6, 2, 125, 25),
-(7, 19, 90, 2),
-(8, 15, 45, 24),
-(9, 20, 119, 25),
-(10, 1, 250, 67);
+INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`, `schlaeger`, `anzahlJahre`, `anzahlVereine`, `anzahlSpiele`) VALUES
+(1, 23, 86, 14, 'Wilson 9000', 0, 0, 0),
+(2, 18, 88, 44, 'Wilson 9000', 0, 0, 0),
+(3, 13, 98, 12, 'Wilson 9000', 0, 0, 0),
+(4, 16, 123, 2, 'Wilson 9000', 0, 0, 0),
+(5, 21, 23, 0, 'Wilson 9000', 0, 0, 0),
+(6, 2, 125, 25, 'Wilson 9000', 0, 0, 0),
+(7, 19, 90, 2, 'Wilson 9000', 0, 0, 0),
+(8, 15, 45, 24, 'Wilson 9000', 0, 0, 0),
+(9, 20, 119, 25, 'Wilson 9000', 0, 0, 0),
+(10, 1, 250, 67, 'Wilson 9000', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -338,7 +352,7 @@ ALTER TABLE `mannschaft`
 -- AUTO_INCREMENT für Tabelle `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT für Tabelle `physiotherapeut`
@@ -350,7 +364,7 @@ ALTER TABLE `physiotherapeut`
 -- AUTO_INCREMENT für Tabelle `tennisspieler`
 --
 ALTER TABLE `tennisspieler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT für Tabelle `trainer`
