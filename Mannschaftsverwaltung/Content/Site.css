@@ -81,3 +81,13 @@ textarea {
 span > label {
     margin-bottom: 0em;
 }
+
+.rowcustom {
+    background: #f8f9fa;
+    margin-top: 10px;
+}
+
+.col-5 {
+    border: solid 1px #6c757d;
+    padding: 10px;
+}
