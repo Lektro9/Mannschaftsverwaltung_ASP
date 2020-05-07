@@ -1,0 +1,46 @@
+SELECT person.id, person.vorname, person.name, person.geburtstag,
+fussballspieler.position, fussballspieler.tore,
+fussballspieler.anzahlJahre, fussballspieler.gewonneneSpiele, fussballspieler.anzahlVereine,
+fussballspieler.anzahlSpiele
+FROM `fussballspieler` 
+JOIN person 
+ON fussballspieler.person_id=person.id
+
+SELECT person.id, person.vorname, person.name, person.geburtstag,
+handballspieler.position, handballspieler.tore, handballspieler.anzahlJahre, handballspieler.gewonneneSpiele,
+handballspieler.anzahlVereine, handballspieler.anzahlSpiele
+FROM `handballspieler` 
+JOIN person 
+ON handballspieler.person_id=person.id
+
+SELECT person.id, person.vorname, person.name, person.geburtstag,
+tennisspieler.aufschlaggeschwindigkeit , tennisspieler.gewonnenespiele, 
+tennisspieler.gewonneneSpiele , tennisspieler.schlaeger,
+tennisspieler.anzahlJahre , tennisspieler.anzahlVereine, tennisspieler.anzahlSpiele
+FROM `tennisspieler` 
+JOIN person 
+ON tennisspieler.person_id=person.id
+
+SELECT person.id, person.vorname, person.name, person.geburtstag,
+trainer.erfahrung 
+FROM `trainer` 
+JOIN person 
+ON trainer.person_id=person.id
+
+SELECT person.id, person.vorname, person.name, person.geburtstag,
+physiotherapeut.annerkennungen 
+FROM `physiotherapeut` 
+JOIN person 
+ON physiotherapeut.person_id=person.id
+
+
+0 = id
+1 = vorname
+2 = name
+3 = geburtstag
+4 = position
+5 = tore
+6 = anzJahre
+7 = gewSpiele
+8 = anzVer
+9 = anzSpiele
