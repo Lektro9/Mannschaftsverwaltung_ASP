@@ -83,6 +83,8 @@ namespace Mannschaftsverwaltung
             return retVal;
         }
         #endregion
+        #region Database
+        #endregion
 
         #region Schnittstellen
         #endregion

@@ -25,6 +25,7 @@ namespace Mannschaftsverwaltung
         private bool _MannschaftOderGruppe;
         private bool _MannschaftsAnzeige;
         private bool _reverseSort;
+        VerwaltungsDAO _anbindung;
 
         #endregion
 
@@ -38,6 +39,7 @@ namespace Mannschaftsverwaltung
         public bool MannschaftOderGruppe { get => _MannschaftOderGruppe; set => _MannschaftOderGruppe = value; }
         public bool MannschaftsAnzeige { get => _MannschaftsAnzeige; set => _MannschaftsAnzeige = value; }
         public bool ReverseSort { get => _reverseSort; set => _reverseSort = value; }
+        public VerwaltungsDAO Anbindung { get => _anbindung; set => _anbindung = value; }
         #endregion
 
         #region Konstruktoren
@@ -52,6 +54,7 @@ namespace Mannschaftsverwaltung
             MannschaftOderGruppe = false;
             MannschaftsAnzeige = false;
             ReverseSort = true;
+            Anbindung = new VerwaltungsDAO();
         }
         #endregion
 
@@ -337,6 +340,20 @@ namespace Mannschaftsverwaltung
                     retVal.Add(p);
                 }
             }
+            return retVal;
+        }
+        #endregion
+
+        #region Database
+        public void getAllPersonsFromDatabase()
+        {
+            Personen = Anbindung.getAllPerson();
+        }
+
+
+        public bool DeleteFromDB(int personID)
+        {
+            bool retVal = Anbindung.DeletePersonFromDB(personID);
             return retVal;
         }
         #endregion

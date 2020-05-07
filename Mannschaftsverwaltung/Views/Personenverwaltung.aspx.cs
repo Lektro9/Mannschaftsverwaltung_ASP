@@ -172,6 +172,7 @@ namespace Mannschaftsverwaltung
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(3));
             this.Verwalter.Personen.RemoveAt(index - 1);
+            this.Verwalter.DeleteFromDB(this.Verwalter.Personen[index].ID);
             Response.Redirect(Request.RawUrl);
         }
 

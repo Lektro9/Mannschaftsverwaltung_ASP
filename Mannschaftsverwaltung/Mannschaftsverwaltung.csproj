@@ -307,7 +307,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\Controller.cs" />
-    <Compile Include="Model\VerwaltungsDAO.cs" />
+    <Compile Include="Model\PersonDAO.cs" />
     <Compile Include="Views\Tabellen.aspx.cs">
       <DependentUpon>Tabellen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
