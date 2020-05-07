@@ -55,29 +55,46 @@ namespace Mannschaftsverwaltung
                     "JOIN person " +
                     "ON fussballspieler.person_id = person.id";
 
-                
-                MySqlDataAdapter adapter = new MySqlDataAdapter(FetchAllFussbQuery, Connection);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds);
-                DataRow[] dr = ds.Tables[0].Select();
+                MySqlCommand command = new MySqlCommand(FetchAllFussbQuery, Connection);
+                MySqlDataReader rdr = command.ExecuteReader();
 
-                foreach (DataRow person in dr)
+                while (rdr.Read())
                 {
                     Person p = new FussballSpieler
                         (
-                            person.Field<int>("id"),
-                            person.Field<string>("name"),
-                            person.Field<string>("vorname"),
-                            person.Field<DateTime>("geburtstag"),
-                            person.Field<string>("position"),
-                            person.Field<int>("tore"),
-                            person.Field<int>("anzahlJahre"),
-                            person.Field<int>("gewonneneSpiele"),
-                            person.Field<int>("anzahlVereine"),
-                            person.Field<int>("anzahlSpiele")
+                            Convert.ToInt32(rdr.GetValue(0)),
+                            rdr.GetValue(2).ToString(),
+                            rdr.GetValue(1).ToString(),
+                            Convert.ToDateTime(rdr.GetValue(3)),
+                            rdr.GetValue(4).ToString(),
+                            Convert.ToInt32(rdr.GetValue(5)),
+                            Convert.ToInt32(rdr.GetValue(6)),
+                            Convert.ToInt32(rdr.GetValue(7)),
+                            Convert.ToInt32(rdr.GetValue(8)),
+                            Convert.ToInt32(rdr.GetValue(9))
                         );
                     retVal.Add(p);
                 }
+
+                rdr.Close();
+
+                //foreach (DataRow person in dr)
+                //{
+                //    Person p = new FussballSpieler
+                //        (
+                //            person.Field<int>("id"),
+                //            person.Field<string>("name"),
+                //            person.Field<string>("vorname"),
+                //            person.Field<DateTime>("geburtstag"),
+                //            person.Field<string>("position"),
+                //            person.Field<int>("tore"),
+                //            person.Field<int>("anzahlJahre"),
+                //            person.Field<int>("gewonneneSpiele"),
+                //            person.Field<int>("anzahlVereine"),
+                //            person.Field<int>("anzahlSpiele")
+                //        );
+                //    retVal.Add(p);
+                //}
             }
             catch (Exception)
             {
@@ -98,7 +115,20 @@ namespace Mannschaftsverwaltung
 
             string DeleteFussballSpieler =
                     "DELETE FROM `fussballspieler` " +
-                    "WHERE `fussballspieler`.`id` = " + personID + "; " +
+                    "WHERE `fussballspieler`.`person_id` = " + personID + "; " +
+
+                    "DELETE FROM `handballspieler` " +
+                    "WHERE `handballspieler`.`person_id` = " + personID + "; " +
+
+                    "DELETE FROM `tennisspieler` " +
+                    "WHERE `tennisspieler`.`person_id` = " + personID + "; " +
+
+                    "DELETE FROM `trainer` " +
+                    "WHERE `trainer`.`person_id` = " + personID + "; " +
+
+                    "DELETE FROM `physiotherapeut` " +
+                    "WHERE `physiotherapeut`.`person_id` = " + personID + "; " +
+
                     "DELETE FROM `person` " +
                     "WHERE `person`.`id` = " + personID + "; ";
             try

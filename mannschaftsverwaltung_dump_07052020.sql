@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 05. Mai 2020 um 15:35
+-- Erstellungszeit: 07. Mai 2020 um 21:02
 -- Server-Version: 10.4.11-MariaDB
 -- PHP-Version: 7.3.15
 
@@ -45,14 +45,9 @@ CREATE TABLE `fussballspieler` (
 
 INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
 (1, 12, 'Stürmer', 34, 0, 0, 0, 0),
-(2, 17, 'Torwart', 0, 0, 0, 0, 0),
-(3, 19, 'Mittelfeld', 23, 0, 0, 0, 0),
 (11, 15, 'Stürmer', 10, 0, 0, 0, 0),
 (12, 16, 'Außenmittelfeldspieler (Flügelspieler)', 15, 0, 0, 0, 0),
-(13, 21, 'offensiver Mittelfeldspieler', 14, 0, 0, 0, 0),
 (14, 2, 'defensiver Mittelfeldspieler', 28, 0, 0, 0, 0),
-(15, 20, 'Außenverteidiger', 5, 0, 0, 0, 0),
-(16, 22, 'Innenverteidiger', 2, 0, 0, 0, 0),
 (17, 13, 'Stürmer', 45, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -77,16 +72,10 @@ CREATE TABLE `handballspieler` (
 --
 
 INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
-(1, 16, 'Mittelfeld', 12, 0, 0, 0, 0),
 (2, 21, 'Angriff', 25, 0, 0, 0, 0),
-(3, 2, 'Verteidiger', 3, 0, 0, 0, 0),
-(4, 12, 'Linksaußen', 4, 0, 0, 0, 0),
 (5, 17, 'Rückraumlinks', 12, 0, 0, 0, 0),
 (6, 19, 'Rückraummitte', 4, 0, 0, 0, 0),
-(7, 23, 'Rückraumrechts', 23, 0, 0, 0, 0),
-(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0),
-(9, 13, 'Kreisläufer', 45, 0, 0, 0, 0),
-(10, 15, 'Torwart', 0, 0, 0, 0, 0);
+(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +138,9 @@ INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `t
 (21, 'Chris', 'Redfield', '1980-03-30', 9, 2),
 (22, 'Randy', 'Shmot', '1993-02-21', 9, 2),
 (23, 'Gerry', 'sMod', '1995-07-26', 9, 2),
-(24, 'ExampleGuy', 'ExampleName', '2001-03-11', 8, 7);
+(24, 'ExampleGuy', 'ExampleName', '2001-03-11', 8, 7),
+(34234, 'Trainer', 'Tom', '2020-05-05', 8, 2),
+(34235, 'Klemens', 'Bondie', '2020-05-02', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -168,16 +159,7 @@ CREATE TABLE `physiotherapeut` (
 --
 
 INSERT INTO `physiotherapeut` (`id`, `person_id`, `annerkennungen`) VALUES
-(1, 22, 'Medizin-Studium abgeschlossen'),
-(2, 14, 'Medizin-Studium, 10 Jahre Erfahrung'),
-(3, 1, 'Medizin-Studium abgeschlossen,\r\n15 Jahre Erfahrung'),
-(4, 16, 'Medizin-Studium abgeschlossen'),
-(5, 21, 'Medizin-Studium abgeschlossen'),
-(6, 2, 'Medizin-Studium abgeschlossen'),
-(7, 17, 'Medizin-Studium abgeschlossen'),
-(8, 19, 'Medizin-Studium abgeschlossen'),
-(9, 23, 'Medizin-Studium abgeschlossen'),
-(10, 13, 'Medizin-Studium abgeschlossen');
+(11, 34235, 'Medizinstudium abgeschlossen');
 
 -- --------------------------------------------------------
 
@@ -202,14 +184,6 @@ CREATE TABLE `tennisspieler` (
 
 INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`, `schlaeger`, `anzahlJahre`, `anzahlVereine`, `anzahlSpiele`) VALUES
 (1, 23, 86, 14, 'Wilson 9000', 0, 0, 0),
-(2, 18, 88, 44, 'Wilson 9000', 0, 0, 0),
-(3, 13, 98, 12, 'Wilson 9000', 0, 0, 0),
-(4, 16, 123, 2, 'Wilson 9000', 0, 0, 0),
-(5, 21, 23, 0, 'Wilson 9000', 0, 0, 0),
-(6, 2, 125, 25, 'Wilson 9000', 0, 0, 0),
-(7, 19, 90, 2, 'Wilson 9000', 0, 0, 0),
-(8, 15, 45, 24, 'Wilson 9000', 0, 0, 0),
-(9, 20, 119, 25, 'Wilson 9000', 0, 0, 0),
 (10, 1, 250, 67, 'Wilson 9000', 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -229,16 +203,8 @@ CREATE TABLE `trainer` (
 --
 
 INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`) VALUES
-(1, 15, 13),
-(2, 20, 10),
-(3, 16, 1),
-(4, 21, 2),
-(5, 2, 3),
-(6, 12, 4),
-(7, 17, 5),
-(8, 19, 6),
-(9, 23, 7),
-(10, 18, 8);
+(11, 34234, 35),
+(12, 24, 33);
 
 -- --------------------------------------------------------
 
@@ -352,13 +318,13 @@ ALTER TABLE `mannschaft`
 -- AUTO_INCREMENT für Tabelle `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34237;
 
 --
 -- AUTO_INCREMENT für Tabelle `physiotherapeut`
 --
 ALTER TABLE `physiotherapeut`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT für Tabelle `tennisspieler`
@@ -370,7 +336,7 @@ ALTER TABLE `tennisspieler`
 -- AUTO_INCREMENT für Tabelle `trainer`
 --
 ALTER TABLE `trainer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT für Tabelle `turnier`

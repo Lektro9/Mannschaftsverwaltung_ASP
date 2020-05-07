@@ -171,8 +171,8 @@ namespace Mannschaftsverwaltung
         protected void delBtn_Click(object sender, EventArgs e)
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(3));
+            this.Verwalter.DeleteFromDB(this.Verwalter.Personen[index - 1].ID);
             this.Verwalter.Personen.RemoveAt(index - 1);
-            this.Verwalter.DeleteFromDB(this.Verwalter.Personen[index].ID);
             Response.Redirect(Request.RawUrl);
         }
 
