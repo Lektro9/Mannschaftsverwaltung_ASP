@@ -22,6 +22,8 @@ namespace Mannschaftsverwaltung
         private List<String> _Sportarten;
         private bool _EditPerson;
         private int _EditPersonIndex;
+        private bool _EditMannschaft;
+        private int _EditMannIndex;
         private bool _MannschaftOderGruppe;
         private bool _MannschaftsAnzeige;
         private bool _reverseSort;
@@ -41,6 +43,8 @@ namespace Mannschaftsverwaltung
         public bool MannschaftsAnzeige { get => _MannschaftsAnzeige; set => _MannschaftsAnzeige = value; }
         public bool ReverseSort { get => _reverseSort; set => _reverseSort = value; }
         public VerwaltungsDAO Anbindung { get => _anbindung; set => _anbindung = value; }
+        public bool EditMannschaft { get => _EditMannschaft; set => _EditMannschaft = value; }
+        public int EditMannIndex { get => _EditMannIndex; set => _EditMannIndex = value; }
         #endregion
 
         #region Konstruktoren
@@ -52,6 +56,8 @@ namespace Mannschaftsverwaltung
             Sportarten = null;
             EditPerson = false;
             EditPersonIndex = -1;
+            EditMannschaft = false;
+            EditMannIndex = -1;
             MannschaftOderGruppe = false;
             MannschaftsAnzeige = false;
             ReverseSort = true;

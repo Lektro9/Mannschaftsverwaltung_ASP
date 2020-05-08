@@ -180,19 +180,9 @@
     </asp:Table>
 
     <script type="text/javascript"> 
-        //$(document).ready(function () {
-        //    $('span').click(function () {
-        //        $('span.list-group-item.active').removeClass("active");
-        //        $(this).addClass("active");
-        //        tl.play();
-        //        $(this).children('input').prop("checked", true);
-        //    });
-        //});
         var svg = $(".active svg");
         gsap.to('.active svg', 0.2, { delay: 0, attr: { viewBox: "100 150 100 100" } });
         $('span').each(function () {
-            //this.tl = new TimelineMax({ paused: true });
-            // gsap.to('svg', 0.15, { delay: 0, attr: { viewBox: "0 0 100 400" } });
 
             $(this).click(function () {
 

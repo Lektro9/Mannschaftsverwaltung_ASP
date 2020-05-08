@@ -34,12 +34,11 @@
             <asp:TableHeaderCell>
                 <asp:Button ID="ButtonSortName" runat="server" OnClick="orderByName" Text="Name" CssClass="btn btn-default" />
             </asp:TableHeaderCell>
-            <asp:TableHeaderCell>Gewonnene Spiele</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Unentschieden</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Verlorene Spiele</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Erzielte Tore</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Gegnerische Tore</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Anzahl Spieler</asp:TableHeaderCell>
+            <asp:TableHeaderCell CssClass="text-center">Anzahl Spieler</asp:TableHeaderCell>
+            <asp:TableHeaderCell CssClass="text-center">Spieler</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Bearbeiten</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Personen entf.</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Löschen</asp:TableHeaderCell>
         </asp:TableHeaderRow>
     </asp:Table>
     <script type="text/javascript">

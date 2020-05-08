@@ -88,6 +88,23 @@ namespace Mannschaftsverwaltung
             pruefeListeAufSpieler();
         }
 
+        public void RemovePerson(int id)
+        {
+            List<Person> DeleteList = new List<Person>();
+            foreach (Person p in this.Personen)
+            {
+                if (p.ID == id)
+                {
+                    DeleteList.Add(p);
+                }
+            }
+            //take them out
+            foreach (Person p in DeleteList)
+            {
+                this.Personen.Remove(p);
+            }
+        }
+
         private void pruefeListeAufSpieler()
         {
             AnzahlSpieler = 0;
