@@ -26,6 +26,7 @@ namespace Mannschaftsverwaltung
         private bool _MannschaftsAnzeige;
         private bool _reverseSort;
         VerwaltungsDAO _anbindung;
+        
 
         #endregion
 
@@ -348,6 +349,10 @@ namespace Mannschaftsverwaltung
         public void getAllPersonsFromDatabase()
         {
             Personen = Anbindung.getAllPerson();
+            if (true)
+            {
+
+            }
         }
 
 
