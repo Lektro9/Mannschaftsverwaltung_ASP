@@ -210,8 +210,9 @@ namespace Mannschaftsverwaltung
                 HandballSpieler h4 = new HandballSpieler(10, "Hamper", "Holly", DateTime.Parse("05-01-1995"), "Mittelfeld", 17, anzahlJahre: 10, anzahlSpiele: 33, anzahlVereine: 3, gewonneneSpiele: 98);
 
                 TennisSpieler ts1 = new TennisSpieler(11, "Federer", "Roger", DateTime.Parse("01-12-2001"), 95, anzahlJahre: 12, anzahlSpiele: 2, anzahlVereine: 1, gewonneneSpiele: 23);
-
-                retVal = new List<Person>() { p1, p2, p4, p5, p6, t1, h1, h2, h3, h4, ts1 };
+                
+                Physiotherapeut ph1 = new Physiotherapeut(12, "Denrasen", "Dr. med", DateTime.Parse("01-01-1993"), "Auszeichnung blabla");
+                retVal = new List<Person>() { p1, p2, p4, p5, p6, t1, h1, h2, h3, h4, ts1, ph1 };
             }
             finally
             {

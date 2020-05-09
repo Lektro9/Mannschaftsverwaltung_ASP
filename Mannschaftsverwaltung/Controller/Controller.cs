@@ -23,6 +23,7 @@ namespace Mannschaftsverwaltung
         private bool _EditPerson;
         private int _EditPersonIndex;
         private bool _EditMannschaft;
+        private int _EditMannID;
         private int _EditMannIndex;
         private bool _MannschaftOderGruppe;
         private bool _MannschaftsAnzeige;
@@ -44,6 +45,7 @@ namespace Mannschaftsverwaltung
         public bool ReverseSort { get => _reverseSort; set => _reverseSort = value; }
         public VerwaltungsDAO Anbindung { get => _anbindung; set => _anbindung = value; }
         public bool EditMannschaft { get => _EditMannschaft; set => _EditMannschaft = value; }
+        public int EditMannID { get => _EditMannID; set => _EditMannID = value; }
         public int EditMannIndex { get => _EditMannIndex; set => _EditMannIndex = value; }
         #endregion
 
@@ -57,6 +59,7 @@ namespace Mannschaftsverwaltung
             EditPerson = false;
             EditPersonIndex = -1;
             EditMannschaft = false;
+            EditMannID = -1;
             EditMannIndex = -1;
             MannschaftOderGruppe = false;
             MannschaftsAnzeige = false;
@@ -94,7 +97,8 @@ namespace Mannschaftsverwaltung
 
         internal void createMannschaft(string name, string sportart, List<Person> personen)
         {
-            Mannschaft m = new Mannschaft(name, sportart, personen);
+            int id = generateID();
+            Mannschaft m = new Mannschaft(id, name, sportart, personen);
             this.Mannschaften.Add(m);
         }
 

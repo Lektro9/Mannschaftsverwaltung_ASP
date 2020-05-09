@@ -17,13 +17,20 @@ namespace Mannschaftsverwaltung
     public partial class Mannschaftsverwaltung : Page
     {
         private Controller _Verwalter;
+        int _editMannIndex;
 
         public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
+        public int EditMannIndex { get => _editMannIndex; set => _editMannIndex = value; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Verwalter = Global.Verwalter;
             LoadMannschaften();
+            if (this.Verwalter.EditMannschaft)
+            {
+                LoadEditMannschaft();
+                this.accept.Attributes.Remove("disabled");
+            }
         }
 
         private void LoadMannschaften()
@@ -35,17 +42,11 @@ namespace Mannschaftsverwaltung
                 if (this.Verwalter.EditMannschaft && index == this.Verwalter.EditMannIndex)
                 {
                     TableCell neueZelle = new TableCell();
-                    //Name
-                    //neueZelle = new TableCell();
-                    //neueZelle.Text = m.Name;
-                    //neueZeile.Cells.Add(neueZelle);
 
-                    TableCell neueEditZelle = new TableCell();
-                    TextBox NameEdit = new TextBox();
-                    NameEdit.Attributes["value"] = m.Name;
-                    NameEdit.CssClass = "form-control w-50";
-                    neueEditZelle.Controls.Add(NameEdit);
-                    neueZeile.Cells.Add(neueEditZelle);
+                    //Name
+                    neueZelle = new TableCell();
+                    neueZelle.Text = m.Name;
+                    neueZeile.Cells.Add(neueZelle);
 
                     //Spieleranzahl
                     neueZelle = new TableCell();
@@ -66,13 +67,14 @@ namespace Mannschaftsverwaltung
                     neueZelle.Controls.Add(Mannschaft);
                     neueZeile.Cells.Add(neueZelle);
 
-                    //accept
+                    //edit
                     neueZelle = new TableCell();
                     Button editBtn = new Button();
-                    editBtn.ID = "acc" + index;
-                    editBtn.Text = "accept";
+                    editBtn.ID = "edit" + index;
+                    editBtn.Text = "edit";
                     editBtn.Click += acc_Click;
-                    editBtn.CssClass = "btn btn-success";
+                    editBtn.CssClass = "btn btn-info disabled";
+                    editBtn.Enabled = false;
                     neueZelle.Controls.Add(editBtn);
                     neueZeile.Cells.Add(neueZelle);
 
@@ -164,32 +166,140 @@ namespace Mannschaftsverwaltung
 
         }
 
+        protected void LoadEditMannschaft()
+        {
+            string sportart = RadioButtonList1.SelectedValue;
+
+            this.ListBox1.Items.Clear();
+            int ID = this.Verwalter.EditMannID;
+            Mannschaft EditMann = findEditMann(ID);
+
+            foreach (ListItem item in this.RadioButtonList1.Items)
+            {
+                if (item.Text != EditMann.Sportart && item.Text != "Trainer" && item.Text != "Physiotherapeut")
+                {
+                    item.Enabled = false;
+                }
+            }
+
+            this.mannschaftsName.Text = EditMann.Name;
+        }
+
+        private Mannschaft findEditMann(int ID)
+        {
+            Mannschaft EditMann = null;
+            foreach (Mannschaft m in this.Verwalter.Mannschaften)
+            {
+                if (m.ID == ID)
+                {
+                    EditMann = m;
+                }
+            }
+            return EditMann;
+        }
+
         protected void loadPersons(Object sender, EventArgs e)
         {
             string sportart = RadioButtonList1.SelectedValue;
             this.ListBox1.Items.Clear();
+            if (this.Verwalter.EditMannschaft)
+            {
+                loadEditPers(sportart, this.Verwalter.EditMannID);
+            }
+            else
+            {
+                foreach (Person p in this.Verwalter.Personen)
+                {
+                    if (p is FussballSpieler && sportart == "Fussball")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is HandballSpieler && sportart == "Handball")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is TennisSpieler && sportart == "Tennis")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is Trainer && sportart == "Trainer")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is Physiotherapeut && sportart == "Physiotherapeut")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                }
+                Button2.Attributes.Remove("disabled");
+            }
+        }
+
+        private void loadEditPers(string sportart, int mannID)
+        {
+            Mannschaft editMann = findEditMann(mannID);
+
             foreach (Person p in this.Verwalter.Personen)
             {
-                if (p is FussballSpieler && sportart == "Fussball")
+                if (!isDuplicate(p, editMann))
                 {
-                    ListItem item = new ListItem();
-                    item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
-                    this.ListBox1.Items.Add(item);
-                }
-                else if (p is HandballSpieler && sportart == "Handball")
-                {
-                    ListItem item = new ListItem();
-                    item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
-                    this.ListBox1.Items.Add(item);
-                }
-                else if (p is TennisSpieler && sportart == "Tennis")
-                {
-                    ListItem item = new ListItem();
-                    item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
-                    this.ListBox1.Items.Add(item);
+                    if (p is FussballSpieler && sportart == "Fussball")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is HandballSpieler && sportart == "Handball")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is TennisSpieler && sportart == "Tennis")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is Trainer && sportart == "Trainer")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
+                    else if (p is Physiotherapeut && sportart == "Physiotherapeut")
+                    {
+                        ListItem item = new ListItem();
+                        item.Text = "(" + p.ID + ") " + p.Name + " " + p.Vorname;
+                        this.ListBox1.Items.Add(item);
+                    }
                 }
             }
-            Button2.Attributes.Remove("disabled");
+        }
+
+        private bool isDuplicate(Person p, Mannschaft editMann)
+        {
+            bool retVal = false;
+
+            foreach (Person mp in editMann.Personen)
+            {
+                if (mp.ID == p.ID)
+                {
+                    retVal = true;
+                }
+            }
+
+            return retVal;
         }
 
         protected void createManschaft(object sender, EventArgs e)
@@ -227,16 +337,22 @@ namespace Mannschaftsverwaltung
         protected void edit_Click(object sender, EventArgs e)
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(5));
-            this.Verwalter.EditMannschaft = true;
             this.Verwalter.EditMannIndex = index;
+            this.Verwalter.EditMannschaft = true;
+            for (int i = 0; i < this.Verwalter.Mannschaften.Count; i++)
+            {
+                if (i == index - 1)
+                {
+                    this.Verwalter.EditMannID = this.Verwalter.Mannschaften[i].ID;
+                }
+            }
             Response.Redirect(Request.RawUrl);
         }
 
         protected void PersEntf_Click(object sender, EventArgs e)
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(10));
-            string[] Spieler = this.Request.Form[String.Format("ctl00$MainContent$Liste{0}", index )].Split(',');
-            System.Collections.Specialized.NameValueCollection test = this.Request.Form;
+            string[] Spieler = this.Request.Form[String.Format("ctl00$MainContent$Liste{0}", index)].Split(',');
             List<int> SpielderIDs = new List<int>();
             foreach (string item in Spieler)
             {
@@ -244,7 +360,7 @@ namespace Mannschaftsverwaltung
                 int personID = Int32.Parse(m.Groups[1].ToString());
                 SpielderIDs.Add(personID);
             }
-                
+
             for (int i = 0; i < this.Verwalter.Mannschaften.Count; i++)
             {
                 if (i == index - 1)
@@ -260,20 +376,38 @@ namespace Mannschaftsverwaltung
 
         protected void MannEntf_Click(object sender, EventArgs e)
         {
-            int index = Int32.Parse(((Button)sender).ID.Substring(5));
-            this.Verwalter.EditMannschaft = true;
-            this.Verwalter.EditMannIndex = index;
+            int index = Int32.Parse(((Button)sender).ID.Substring(10));
+            //this.Verwalter.DeleteFromDB(this.Verwalter.Mannschaften[index - 1].ID);
+            this.Verwalter.Mannschaften.RemoveAt(index - 1);
             Response.Redirect(Request.RawUrl);
         }
 
         protected void acc_Click(object sender, EventArgs e)
         {
-            int index = Int32.Parse(((Button)sender).ID.Substring(3));
-            for (int i = 0; i <= this.Verwalter.Mannschaften.Count; i++)
+            int index = -1;
+            for (int i = 0; i < this.Verwalter.Mannschaften.Count; i++)
             {
-                if (i == index)
+                if (this.Verwalter.Mannschaften[i].ID == this.Verwalter.EditMannID)
                 {
-                    this.Verwalter.Mannschaften[i - 1].Name = this.Request.Form["ctl00$MainContent$ctl00"];
+                    index = i;
+                }
+            }
+            this.Verwalter.Mannschaften[index].Name = this.Request.Form["ctl00$MainContent$mannschaftsName"];
+            if (this.Request.Form["ctl00$MainContent$ListBox1"] != null)
+            {
+                string[] Spieler = this.Request.Form["ctl00$MainContent$ListBox1"].Split(',');
+                foreach (string s in Spieler)
+                {
+                    Match m = Regex.Match(s, @"^\(([0-9]+)\)");
+                    int personID = Int32.Parse(m.Groups[1].ToString());
+                    foreach (Person p in this.Verwalter.Personen)
+                    {
+                        if (p.ID == personID)
+                        {
+                            this.Verwalter.Mannschaften[index].Personen.Add(p);
+                        }
+                    }
+
                 }
             }
 

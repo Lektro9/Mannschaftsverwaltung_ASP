@@ -16,6 +16,7 @@ namespace Mannschaftsverwaltung
     public class Mannschaft
     {
         #region Eigenschaften
+        int _iD;
         Verein _verein;
         string _name;
         string _sportart;
@@ -41,6 +42,7 @@ namespace Mannschaftsverwaltung
         public int ErzielteTore { get => _erzielteTore; set => _erzielteTore = value; }
         public int GegnerischeTore { get => _gegnerischeTore; set => _gegnerischeTore = value; }
         public string Name { get => _name; set => _name = value; }
+        public int ID { get => _iD; set => _iD = value; }
         #endregion
 
         #region Konstruktoren
@@ -53,12 +55,13 @@ namespace Mannschaftsverwaltung
             SortBy = 1;
         }
         //Spezialkonstruktor
-        public Mannschaft(string sportart, Verein verein, List<Person> personen)
+        public Mannschaft(int id, string sportart, Verein verein, List<Person> personen)
         {
             Sportart = sportart;
             Verein = verein;
             Personen = personen;
             pruefeListeAufSpieler();
+            ID = id;
         }
         public Mannschaft(List<Person> personen) : this()
         {
@@ -66,7 +69,7 @@ namespace Mannschaftsverwaltung
             pruefeListeAufSpieler();
         }
 
-        public Mannschaft(string name, string sportart, List<Person> personen)
+        public Mannschaft(int id, string name, string sportart, List<Person> personen)
         {
             Name = name;
             Sportart = sportart;
@@ -78,6 +81,7 @@ namespace Mannschaftsverwaltung
             ErzielteTore = 0;
             GegnerischeTore = 0;
             AnzahlSpieler = personen.Count;
+            ID = id;
         }
         #endregion
 

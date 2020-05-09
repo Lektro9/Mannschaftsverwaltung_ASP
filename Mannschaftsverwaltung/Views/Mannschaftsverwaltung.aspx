@@ -10,6 +10,8 @@
                 <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Fussball</asp:ListItem>
                 <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Handball</asp:ListItem>
                 <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Tennis</asp:ListItem>
+                <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Trainer</asp:ListItem>
+                <asp:ListItem onclick="SimulateClick('MainContent_Button1');">Physiotherapeut</asp:ListItem>
             </asp:RadioButtonList>
         </div>
         <div class="col-md-4">
@@ -23,6 +25,7 @@
             </div>
             <div>
                 <asp:Button ID="Button2" runat="server" Text="Mannschaft erstellen" OnClick="createManschaft" class="btn btn-success" SelectionMode="Multiple" disabled />
+                <asp:Button ID="accept" runat="server" Text="accept" OnClick="acc_Click" class="btn btn-success" SelectionMode="Multiple" disabled />
             </div>
         </div>
     </div>
