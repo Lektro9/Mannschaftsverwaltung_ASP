@@ -29,6 +29,7 @@ namespace Mannschaftsverwaltung
         private bool _MannschaftsAnzeige;
         private bool _reverseSort;
         VerwaltungsDAO _anbindung;
+        List<Turnier> _turniere;
         
 
         #endregion
@@ -47,6 +48,7 @@ namespace Mannschaftsverwaltung
         public bool EditMannschaft { get => _EditMannschaft; set => _EditMannschaft = value; }
         public int EditMannID { get => _EditMannID; set => _EditMannID = value; }
         public int EditMannIndex { get => _EditMannIndex; set => _EditMannIndex = value; }
+        public List<Turnier> Turniere { get => _turniere; set => _turniere = value; }
         #endregion
 
         #region Konstruktoren
@@ -65,6 +67,7 @@ namespace Mannschaftsverwaltung
             MannschaftsAnzeige = false;
             ReverseSort = true;
             Anbindung = new VerwaltungsDAO();
+            Turniere = new List<Turnier>();
         }
         #endregion
 
@@ -72,6 +75,12 @@ namespace Mannschaftsverwaltung
         public static int generateID()
         {
             return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
+        }
+
+        internal void TurnierHinzuf(string turnierName)
+        {
+            Turnier t = new Turnier(generateID(), turnierName);
+            this.Turniere.Add(t);
         }
 
         internal void AddFussballSpieler(string name, string vorname, DateTime geburtstag, string position, int geschosseneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)

@@ -19,11 +19,15 @@ namespace Mannschaftsverwaltung
         #region Eigenschaften
         private int _ID;
         private Turnierstatus _status;
+        private List<Spiel> _spiele;
+        private string _name;
         #endregion
 
         #region Accessoren/Modifier
         public int ID { get => _ID; set => _ID = value; }
         public Turnierstatus Status { get => _status; set => _status = value; }
+        public List<Spiel> Spiele { get => _spiele; set => _spiele = value; }
+        public string Name { get => _name; set => _name = value; }
         #endregion
 
         #region Konstruktoren
@@ -31,17 +35,22 @@ namespace Mannschaftsverwaltung
         {
             ID = -1;
             Status = Turnierstatus.Vorbereitung;
+            Spiele = null;
         }
         //Spezialkonstruktor
-        public Turnier(int id)
+        public Turnier(int id, string name, List<Spiel> spiele)
         {
             this.ID = id;
+            this.Name = name;
             Status = Turnierstatus.Vorbereitung;
+            this.Spiele = spiele;
         }
-        public Turnier(int id, Turnierstatus status)
+        public Turnier(int id, string name)
         {
             this.ID = id;
-            Status = status;
+            this.Name = name;
+            Status = Turnierstatus.Vorbereitung;
+            this.Spiele = new List<Spiel>();
         }
         //Kopierkonstruktor
         public Turnier(Turnier t)

@@ -15,19 +15,35 @@ namespace Mannschaftsverwaltung
 {
     public partial class Spiele : Page
     {
+        private Controller _Verwalter;
+
+        public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.Verwalter = Global.Verwalter;
+            Repeater1.DataSource = this.Verwalter.Turniere;
+            Repeater1.DataBind();
+            Response.Write(Repeater1);
         }
 
-        void sendChosenItem(Object sender, EventArgs e)
+        protected void TurnierErst_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string TurnierName = this.Request.Form["ctl00$MainContent$TurnierNameEing"];
+            this.Verwalter.TurnierHinzuf(TurnierName);
+            this.TurnierNameEing.Value = "";
+            Response.Redirect(Request.RawUrl);
+        }
+        protected void SpielErst_Click(object sender, EventArgs e)
+        {
+            // string TurnierName = this.Request.Form["ctl00$MainContent$TurnierNameEing"];
+            this.Verwalter.Turniere[0].Spiele.Add(new Spiel(-1, -1, -1, -1, -1));
+            //this.TurnierNameEing.Value = "";
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
