@@ -30,6 +30,7 @@
             <div class="card mt-4">
                 <div class="card-header text-center">
                     <%# Eval("Name") %>
+                    <asp:Button runat="server" type="button" Text="X" class="ml-2 mb-1 close" OnClick="TurEntf_Click" aria-label="Close" name="del_<%# Container.ItemIndex + 1 %>" />
                 </div>
                 <div class="card-body">
                     <div class="container">

@@ -77,6 +77,16 @@ namespace Mannschaftsverwaltung
             return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
         }
 
+
+        internal void removeTurnier(int turnierIndex)
+        {
+            foreach (Spiel s in this.Turniere[turnierIndex].Spiele)
+            {
+                removeMannschaftsStats(s);
+            }
+            this.Turniere.RemoveAt(turnierIndex);
+        }
+
         internal void createGame(int TurnierIndex, int team1id, int team2id, int team1Punkte, int team2Punkte)
         {
             Spiel s = new Spiel(generateID(), team1id, team2id, team1Punkte, team2Punkte);
