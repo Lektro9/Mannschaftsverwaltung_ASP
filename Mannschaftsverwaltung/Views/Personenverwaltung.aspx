@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-
+    <h1 class="mt-2"><%: Page.Title %></h1>
 
     <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" viewBox="0, 0, 400,400">
         <defs>
@@ -44,7 +44,7 @@
         </defs>
     </svg>
 
-    <h1 class="mt-2"><%: Page.Title %></h1>
+    
 
     <div class="row align-items-center">
         <div class="col-lg-5">

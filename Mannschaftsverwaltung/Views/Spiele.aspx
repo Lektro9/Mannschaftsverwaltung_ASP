@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <%--<h2><%: Page.Title %></h2>--%>
+    <h1 class="mt-2"><%: Page.Title %></h1>
 
     <%--erstellen eines Turnieres--%>
 

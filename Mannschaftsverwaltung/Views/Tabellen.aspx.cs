@@ -15,9 +15,15 @@ namespace Mannschaftsverwaltung
 {
     public partial class Tabellen : Page
     {
+        private Controller _Verwalter;
+
+        public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.Verwalter = Global.Verwalter;
+            Repeater1.DataSource = this.Verwalter.Mannschaften;
+            Repeater1.DataBind();
         }
 
         void sendChosenItem(Object sender, EventArgs e)
