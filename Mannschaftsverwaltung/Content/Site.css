@@ -91,3 +91,7 @@ span > label {
     border: solid 1px #6c757d;
     padding: 10px;
 }
+
+.rightalign {
+    text-align: right;
+}

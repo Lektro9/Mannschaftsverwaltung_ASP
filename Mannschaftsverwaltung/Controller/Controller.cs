@@ -40,6 +40,13 @@ namespace Mannschaftsverwaltung
         public Person NeuesMitglied { get => _NeuesMitglied; set => _NeuesMitglied = value; }
         public List<string> Sportarten { get => _Sportarten; set => _Sportarten = value; }
         public bool EditPerson { get => _EditPerson; set => _EditPerson = value; }
+
+        internal void createGame(int TurnierIndex, int team1id, int team2id, int team1Punkte, int team2Punkte)
+        {
+            Spiel s = new Spiel(generateID(), team1id, team2id, team1Punkte, team2Punkte);
+            this.Turniere[TurnierIndex].Spiele.Add(s);
+        }
+
         public int EditPersonIndex { get => _EditPersonIndex; set => _EditPersonIndex = value; }
         public bool MannschaftOderGruppe { get => _MannschaftOderGruppe; set => _MannschaftOderGruppe = value; }
         public bool MannschaftsAnzeige { get => _MannschaftsAnzeige; set => _MannschaftsAnzeige = value; }

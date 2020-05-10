@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Spiele" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Spiele.aspx.cs" Inherits="Mannschaftsverwaltung.Spiele" %>
+﻿<%@ Page Title="Spiele" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Spiele.aspx.cs" Inherits="Mannschaftsverwaltung.Spiele" EnableEventValidation="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -24,32 +24,36 @@
 
 
     <!-- Mannschaften auswählen -->
-    <asp:Repeater ID="Repeater1" runat="server">
+    <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="ItemBound">
         <ItemTemplate>
 
             <div class="card mt-4">
-                <div class="card-header">
+                <div class="card-header text-center">
                     <%# Eval("Name") %>
                 </div>
                 <div class="card-body">
                     <div class="container">
                         <div class="row rowcustom">
 
-                            <div class="col-5">
-                                <div class="input-group-prepend d-flex justify-content-between">
-                                    <span class="input-group-text">Aobajohsai High</span>
-                                    <span class="input-group-text">2</span>
-                                </div>
-                            </div>
+                            <asp:Repeater ID="Repeater2" runat="server">
+                                <ItemTemplate>
+                                    <div class="col-5">
+                                        <div class="input-group-prepend d-flex justify-content-between">
+                                            <span class="input-group-text"><%# getTeamName(Eval("Team1ID").ToString()) %></span>
+                                            <span class="input-group-text"><%# Eval("Team1Punkte") %></span>
+                                        </div>
+                                    </div>
 
-                            <div class="col-5">
-                                <div class="input-group-prepend d-flex justify-content-between">
-                                    <span class="input-group-text">1</span>
-                                    <span class="input-group-text">Shiratorizawa Academy</span>
-                                </div>
-                            </div>
+                                    <div class="col-5">
+                                        <div class="input-group-prepend d-flex justify-content-between">
+                                            <span class="input-group-text"><%# Eval("Team2Punkte") %></span>
+                                            <span class="input-group-text"><%# getTeamName(Eval("Team2ID").ToString()) %></span>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
                         </div>
-
                         <div class="row rowcustom">
 
                             <div class="col-5">
@@ -57,22 +61,26 @@
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="inputGroupSelect01">Team 1</label>
                                     </div>
-                                    <select class="custom-select" id="Select1" runat="server">
-                                        <option selected>Choose...</option>
-                                        <option value="1">Karasuno High</option>
-                                        <option value="2">Nekoma High</option>
-                                        <option value="3">Aobajohsai High</option>
+                                    <select class="custom-select" data-width="200px" name="Select1_<%# Container.ItemIndex + 1 %>" id="Select1_<%# Container.ItemIndex + 1 %>">
+                                        <asp:Repeater ID="Repeater3" runat="server">
+                                            <ItemTemplate>
+                                                <option value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                     </select>
+                                    <input type="number" class="form-control rightalign" name="team1goals_<%# Container.ItemIndex + 1 %>" id="example1">
                                 </div>
                             </div>
 
                             <div class="col-5 justify-content-end">
                                 <div class="input-group">
-                                    <select class="custom-select" id="Select2" runat="server">
-                                        <option selected>Choose...</option>
-                                        <option value="1">Karasuno High</option>
-                                        <option value="2">Nekoma High</option>
-                                        <option value="3">Aobajohsai High</option>
+                                    <input type="number" class="form-control" name="team2goals_<%# Container.ItemIndex + 1 %>" id="example1">
+                                    <select class="custom-select" name="Select2_<%# Container.ItemIndex + 1 %>" id="Select2_<%# Container.ItemIndex + 1 %>">
+                                        <asp:Repeater ID="Repeater4" runat="server">
+                                            <ItemTemplate>
+                                                <option value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                     </select>
                                     <div class="input-group-append">
                                         <label class="input-group-text" for="inputGroupSelect02">Team 2</label>
