@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.Script.Serialization;
 
 namespace Mannschaftsverwaltung
 {
@@ -226,6 +227,25 @@ namespace Mannschaftsverwaltung
         }
 
         #region Worker
+
+        protected void download_click(object sender, EventArgs e)
+        {
+            string jsontext = new JavaScriptSerializer().Serialize(this.Verwalter);
+
+            Response.AddHeader("Content-disposition", String.Format("attachment; filename={0}.json", "MannschaftsverwaltungSave"));
+            Response.ContentType = "application/json";
+            Response.Write(jsontext);
+
+            Response.End();
+        }
+
+        protected void upload_click(object sender, EventArgs e)
+        {
+            this.Fileupload1.SaveAs(Server.MapPath("~/Uploads/" + Fileupload1.FileName));
+            Response.Write(this.Fileupload1);
+            Response.Write("uploaded");
+        }
+
         protected void orderByName(object sender, EventArgs e)
         {
             this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;

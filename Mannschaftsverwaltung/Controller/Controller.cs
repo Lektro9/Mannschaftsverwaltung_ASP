@@ -5,18 +5,20 @@
 //Änderungen:
 //02.04.2020:   Entwicklungsbeginn 
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace Mannschaftsverwaltung
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class Controller
     {
         #region Eigenschaften
         private List<Mannschaft> _Mannschaften;
-        // private List<Gruppe> _Gruppen;
         private List<Person> _Personen;
         private Person _NeuesMitglied;
         private List<String> _Sportarten;
@@ -30,12 +32,13 @@ namespace Mannschaftsverwaltung
         private bool _reverseSort;
         VerwaltungsDAO _anbindung;
         List<Turnier> _turniere;
-        
+
 
         #endregion
 
         #region Accessoren/Modifier
         public List<Mannschaft> Mannschaften { get => _Mannschaften; set => _Mannschaften = value; }
+        [JsonProperty]
         public List<Person> Personen { get => _Personen; set => _Personen = value; }
         public Person NeuesMitglied { get => _NeuesMitglied; set => _NeuesMitglied = value; }
         public List<string> Sportarten { get => _Sportarten; set => _Sportarten = value; }
@@ -77,6 +80,11 @@ namespace Mannschaftsverwaltung
             return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
         }
 
+        internal string createCurrentStateAsJSON()
+        {
+            Controller saveCont = this;
+            return new JavaScriptSerializer().Serialize(saveCont);
+        }
 
         internal void removeTurnier(int turnierIndex)
         {

@@ -4,6 +4,11 @@
 
     <h1 class="mt-2"><%: Page.Title %></h1>
 
+    <asp:Button Text="download" runat="server" OnClick="download_click"/>
+
+    <asp:FileUpload ID="Fileupload1" runat="server"/>
+    <asp:Button Text="upload" runat="server"  OnClick="upload_click"/>
+
     <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" viewBox="0, 0, 400,400">
         <defs>
             <g id="hinata">
@@ -51,11 +56,11 @@
 
 
             <asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="list-group">
-                <asp:ListItem class="list-group-item list-group-item-action" Value="Fussballspieler">Fussballspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#gregor" /></svg></asp:ListItem>
-                <asp:ListItem class="list-group-item list-group-item-action" Value="Handballspieler">Handballspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#hinata" /></svg></asp:ListItem>
-                <asp:ListItem class="list-group-item list-group-item-action" Value="Tennisspieler">Tennisspieler<svg width="120" height="30" viewBox="0 0 100 400"><use href="#maruo" /></asp:ListItem>
-                <asp:ListItem class="list-group-item list-group-item-action" Value="Trainer">Trainer<svg width="120" height="30" viewBox="0 0 100 400"><use href="#ippocoach" /></asp:ListItem>
-                <asp:ListItem class="list-group-item list-group-item-action" Value="Physiotherapeut">Physiotherapeut<svg width="120" height="30" viewBox="0 0 100 400"><use href="#okabe" /></asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Fussballspieler"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#gregor" /></svg> Fussballspieler</asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Handballspieler"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#hinata" /></svg> Handballspieler</asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Tennisspieler"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#maruo" /></svg> Tennisspieler</asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Trainer"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#ippocoach" /></svg> Trainer</asp:ListItem>
+                <asp:ListItem class="list-group-item list-group-item-action" Value="Physiotherapeut"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#okabe" /></svg> Physiotherapeut</asp:ListItem>
             </asp:RadioButtonList>
 
 
