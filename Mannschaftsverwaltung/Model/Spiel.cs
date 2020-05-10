@@ -81,6 +81,25 @@ namespace Mannschaftsverwaltung
 
             return retVal;
         }
+
+        public int showLoser()
+        {
+            int retVal;
+            if (this.Team1Punkte > this.Team2Punkte)
+            {
+                retVal = Team2ID;
+            }
+            else if (this.Team1Punkte < this.Team2Punkte)
+            {
+                retVal = Team1ID;
+            }
+            else
+            {
+                retVal = -1; //unentschieden
+            }
+
+            return retVal;
+        }
         #endregion
 
         #region Schnittstellen

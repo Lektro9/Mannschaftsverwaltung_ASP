@@ -50,6 +50,7 @@
                                             <span class="input-group-text"><%# getTeamName(Eval("Team2ID").ToString()) %></span>
                                         </div>
                                     </div>
+                                    <asp:Button runat="server" Text="Löschen" OnClick="SpielEntf_Click" class="btn btn-danger" name="del_<%# Container.ItemIndex + 1 %>" />
                                 </ItemTemplate>
                             </asp:Repeater>
 

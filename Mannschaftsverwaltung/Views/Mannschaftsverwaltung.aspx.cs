@@ -172,7 +172,7 @@ namespace Mannschaftsverwaltung
 
             this.ListBox1.Items.Clear();
             int ID = this.Verwalter.EditMannID;
-            Mannschaft EditMann = findEditMann(ID);
+            Mannschaft EditMann = this.Verwalter.findMann(ID);
 
             foreach (ListItem item in this.RadioButtonList1.Items)
             {
@@ -185,18 +185,6 @@ namespace Mannschaftsverwaltung
             this.mannschaftsName.Text = EditMann.Name;
         }
 
-        private Mannschaft findEditMann(int ID)
-        {
-            Mannschaft EditMann = null;
-            foreach (Mannschaft m in this.Verwalter.Mannschaften)
-            {
-                if (m.ID == ID)
-                {
-                    EditMann = m;
-                }
-            }
-            return EditMann;
-        }
 
         protected void loadPersons(Object sender, EventArgs e)
         {
@@ -247,7 +235,7 @@ namespace Mannschaftsverwaltung
 
         private void loadEditPers(string sportart, int mannID)
         {
-            Mannschaft editMann = findEditMann(mannID);
+            Mannschaft editMann = this.Verwalter.findMann(mannID);
 
             foreach (Person p in this.Verwalter.Personen)
             {

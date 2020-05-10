@@ -40,13 +40,6 @@ namespace Mannschaftsverwaltung
         public Person NeuesMitglied { get => _NeuesMitglied; set => _NeuesMitglied = value; }
         public List<string> Sportarten { get => _Sportarten; set => _Sportarten = value; }
         public bool EditPerson { get => _EditPerson; set => _EditPerson = value; }
-
-        internal void createGame(int TurnierIndex, int team1id, int team2id, int team1Punkte, int team2Punkte)
-        {
-            Spiel s = new Spiel(generateID(), team1id, team2id, team1Punkte, team2Punkte);
-            this.Turniere[TurnierIndex].Spiele.Add(s);
-        }
-
         public int EditPersonIndex { get => _EditPersonIndex; set => _EditPersonIndex = value; }
         public bool MannschaftOderGruppe { get => _MannschaftOderGruppe; set => _MannschaftOderGruppe = value; }
         public bool MannschaftsAnzeige { get => _MannschaftsAnzeige; set => _MannschaftsAnzeige = value; }
@@ -82,6 +75,110 @@ namespace Mannschaftsverwaltung
         public static int generateID()
         {
             return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
+        }
+
+        internal void createGame(int TurnierIndex, int team1id, int team2id, int team1Punkte, int team2Punkte)
+        {
+            Spiel s = new Spiel(generateID(), team1id, team2id, team1Punkte, team2Punkte);
+            this.Turniere[TurnierIndex].Spiele.Add(s);
+            addMannschaftsStats(s);
+        }
+
+        internal void deleteGame(int TurnierIndex, Spiel s)
+        {
+            this.Turniere[TurnierIndex].Spiele.Remove(s);
+            removeMannschaftsStats(s);
+        }
+
+        private void removeMannschaftsStats(Spiel s)
+        {
+            int winner = s.showWinner();
+            int loser = s.showLoser();
+            if (winner == -1 && loser == -1)
+            {
+                Mannschaft team1 = findMann(s.Team1ID);
+                Mannschaft team2 = findMann(s.Team2ID);
+                team1.Unentschieden -= 1;
+                team2.Unentschieden -= 1;
+                // Bei Unentschieden ist egal welche Punkte von welchem Team hinzugefügt werden
+                team1.ErzielteTore -= s.Team1Punkte;
+                team1.GegnerischeTore -= s.Team1Punkte;
+                team2.ErzielteTore -= s.Team1Punkte;
+                team2.GegnerischeTore -= s.Team1Punkte;
+            }
+            else
+            {
+                Mannschaft mWin = findMann(winner);
+                Mannschaft mLos = findMann(loser);
+                if (mWin.ID == s.Team1ID)
+                {
+                    mWin.ErzielteTore -= s.Team1Punkte;
+                    mLos.ErzielteTore -= s.Team2Punkte;
+                    mWin.GegnerischeTore -= s.Team2Punkte;
+                    mLos.GegnerischeTore -= s.Team1Punkte;
+                }
+                else
+                {
+                    mWin.ErzielteTore -= s.Team2Punkte;
+                    mLos.ErzielteTore -= s.Team1Punkte;
+                    mWin.GegnerischeTore -= s.Team1Punkte;
+                    mLos.GegnerischeTore -= s.Team2Punkte;
+                }
+                mWin.GewSpiele -= 1;
+                mLos.VerlSpiele -= 1;
+            }
+        }
+
+        private void addMannschaftsStats(Spiel s)
+        {
+            int winner = s.showWinner();
+            int loser = s.showLoser();
+            if (winner == -1 && loser == -1)
+            {
+                Mannschaft team1 = findMann(s.Team1ID);
+                Mannschaft team2 = findMann(s.Team2ID);
+                team1.Unentschieden += 1;
+                team2.Unentschieden += 1;
+                // Bei Unentschieden ist egal welche Punkte von welchem Team hinzugefügt werden
+                team1.ErzielteTore += s.Team1Punkte;
+                team1.GegnerischeTore += s.Team1Punkte;
+                team2.ErzielteTore += s.Team1Punkte;
+                team2.GegnerischeTore += s.Team1Punkte;
+            }
+            else
+            {
+                Mannschaft mWin = findMann(winner);
+                Mannschaft mLos = findMann(loser);
+                if (mWin.ID == s.Team1ID)
+                {
+                    mWin.ErzielteTore += s.Team1Punkte;
+                    mLos.ErzielteTore += s.Team2Punkte;
+                    mWin.GegnerischeTore += s.Team2Punkte;
+                    mLos.GegnerischeTore += s.Team1Punkte;
+                }
+                else
+                {
+                    mWin.ErzielteTore += s.Team2Punkte;
+                    mLos.ErzielteTore += s.Team1Punkte;
+                    mWin.GegnerischeTore += s.Team1Punkte;
+                    mLos.GegnerischeTore += s.Team2Punkte;
+                }
+                mWin.GewSpiele += 1;
+                mLos.VerlSpiele += 1;
+            }
+        }
+
+        public Mannschaft findMann(int ID)
+        {
+            Mannschaft EditMann = null;
+            foreach (Mannschaft m in this.Mannschaften)
+            {
+                if (m.ID == ID)
+                {
+                    EditMann = m;
+                }
+            }
+            return EditMann;
         }
 
         internal void TurnierHinzuf(string turnierName)

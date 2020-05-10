@@ -46,6 +46,15 @@ namespace Mannschaftsverwaltung
             Response.Redirect(Request.RawUrl);
         }
 
+        protected void SpielEntf_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int TurnierIndex = int.Parse(button.ClientID.Split('_')[1]);
+            int SpielIndex = int.Parse(button.ClientID.Split('_').Last());
+            this.Verwalter.deleteGame(TurnierIndex, this.Verwalter.Turniere[TurnierIndex].Spiele[SpielIndex]);
+            Response.Redirect(Request.RawUrl);
+        }
+
         protected void ItemBound(object sender, RepeaterItemEventArgs args)
         {
             if (args.Item.DataItem != null)
