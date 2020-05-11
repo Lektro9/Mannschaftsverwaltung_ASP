@@ -25,15 +25,5 @@ namespace Mannschaftsverwaltung
             Repeater1.DataSource = this.Verwalter.Mannschaften;
             Repeater1.DataBind();
         }
-
-        void sendChosenItem(Object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
