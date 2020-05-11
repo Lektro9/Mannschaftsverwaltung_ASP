@@ -70,13 +70,13 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </select>
-                                    <input type="number" class="form-control rightalign" name="team1goals_<%# Container.ItemIndex + 1 %>" id="example1">
+                                    <input type="number" class="form-control rightalign" name="team1goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte">
                                 </div>
                             </div>
 
                             <div class="col-5 justify-content-end">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="team2goals_<%# Container.ItemIndex + 1 %>" id="example1">
+                                    <input type="number" class="form-control" name="team2goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte">
                                     <select class="custom-select" name="Select2_<%# Container.ItemIndex + 1 %>" id="Select2_<%# Container.ItemIndex + 1 %>">
                                         <asp:Repeater ID="Repeater4" runat="server">
                                             <ItemTemplate>

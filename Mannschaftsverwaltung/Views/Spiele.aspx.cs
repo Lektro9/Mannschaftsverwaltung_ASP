@@ -42,8 +42,11 @@ namespace Mannschaftsverwaltung
             string team2id = this.Request.Form["Select2_" + (index + 1)];
             string team1punkte = this.Request.Form["team1goals_" + (index + 1)];
             string team2punkte = this.Request.Form["team2goals_" + (index + 1)];
-            this.Verwalter.createGame(index, int.Parse(team1id), int.Parse(team2id), int.Parse(team1punkte), int.Parse(team2punkte));
-            Response.Redirect(Request.RawUrl);
+            if (team1id != null && team2id != null && team1punkte != null && team2punkte != null)
+            {
+                this.Verwalter.createGame(index, int.Parse(team1id), int.Parse(team2id), int.Parse(team1punkte), int.Parse(team2punkte));
+                Response.Redirect(Request.RawUrl);
+            }
         }
 
         protected void SpielEntf_Click(object sender, EventArgs e)
