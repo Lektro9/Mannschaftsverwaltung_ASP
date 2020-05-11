@@ -4,10 +4,37 @@
 
     <h1 class="mt-2"><%: Page.Title %></h1>
 
-    <asp:Button Text="download" runat="server" OnClick="download_click"/>
+    <p>
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Speichern und Laden</button>
+    </p>
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="card card-body align-items-center d-flex justify-content-center">
+                    <p class="card-text">
+                        Aktuelle Mannschaftsverwaltung als JSON speichern.
+                    </p>
+                    <asp:Button Text="Download JSON" runat="server" OnClick="download_click" CssClass="btn btn-dark mt-2" />
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                <div class="card card-body align-items-center d-flex justify-content-center">
+                    <div class="custom-file">
 
-    <asp:FileUpload ID="Fileupload1" runat="server"/>
-    <asp:Button Text="upload" runat="server"  OnClick="upload_click"/>
+                        <asp:FileUpload ID="Fileupload1" runat="server" CssClass="custom-file-input" />
+                        <label class="custom-file-label" for="MainContent_Fileupload1">JSON auswählen</label>
+                    </div>
+                    <asp:Button Text="Upload JSON" runat="server" OnClick="upload_click" CssClass="btn btn-dark mt-3" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
     <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" viewBox="0, 0, 400,400">
         <defs>
@@ -49,9 +76,9 @@
         </defs>
     </svg>
 
-    
 
-    <div class="row align-items-center">
+
+    <div class="row align-items-center mt-2">
         <div class="col-lg-5">
 
 
@@ -202,6 +229,11 @@
                 $(this).children('input').prop("checked", true);
 
             });
+        });
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
 </asp:Content>

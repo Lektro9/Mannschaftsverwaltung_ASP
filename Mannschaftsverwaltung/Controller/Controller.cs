@@ -14,7 +14,6 @@ using System.Web.Script.Serialization;
 
 namespace Mannschaftsverwaltung
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class Controller
     {
         #region Eigenschaften
@@ -38,18 +37,27 @@ namespace Mannschaftsverwaltung
 
         #region Accessoren/Modifier
         public List<Mannschaft> Mannschaften { get => _Mannschaften; set => _Mannschaften = value; }
-        [JsonProperty]
         public List<Person> Personen { get => _Personen; set => _Personen = value; }
+        [JsonIgnore]
         public Person NeuesMitglied { get => _NeuesMitglied; set => _NeuesMitglied = value; }
         public List<string> Sportarten { get => _Sportarten; set => _Sportarten = value; }
+        [JsonIgnore]
         public bool EditPerson { get => _EditPerson; set => _EditPerson = value; }
+        [JsonIgnore]
         public int EditPersonIndex { get => _EditPersonIndex; set => _EditPersonIndex = value; }
+        [JsonIgnore]
         public bool MannschaftOderGruppe { get => _MannschaftOderGruppe; set => _MannschaftOderGruppe = value; }
+        [JsonIgnore]
         public bool MannschaftsAnzeige { get => _MannschaftsAnzeige; set => _MannschaftsAnzeige = value; }
+        [JsonIgnore]
         public bool ReverseSort { get => _reverseSort; set => _reverseSort = value; }
+        [JsonIgnore]
         public VerwaltungsDAO Anbindung { get => _anbindung; set => _anbindung = value; }
+        [JsonIgnore]
         public bool EditMannschaft { get => _EditMannschaft; set => _EditMannschaft = value; }
+        [JsonIgnore]
         public int EditMannID { get => _EditMannID; set => _EditMannID = value; }
+        [JsonIgnore]
         public int EditMannIndex { get => _EditMannIndex; set => _EditMannIndex = value; }
         public List<Turnier> Turniere { get => _turniere; set => _turniere = value; }
         #endregion

@@ -60,7 +60,7 @@
         <% if (!global_asax.Verwalter.Anbindung.DBstatus)
             { %>
         <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 0px;">
-            <div class="toast position-absolute" style="position: absolute; top: 30px; right: 10%; z-index: 1;" data-autohide="false">
+            <div class="toast position-absolute" style="position: absolute; top: 25px; right: 10%; z-index: 1;" data-autohide="false">
                 <div class="toast-header">
                     <strong class="mr-auto text-danger">Datenbank Status</strong>
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -68,7 +68,7 @@
                 </button>
                 </div>
                 <div class="toast-body">
-                    Verbindung zur Datenbank nicht gegeben. Veränderungen werden nicht übernommen.
+                    Verbindung zur Datenbank nicht hergestellt.
                 </div>
             </div>
         </div>
