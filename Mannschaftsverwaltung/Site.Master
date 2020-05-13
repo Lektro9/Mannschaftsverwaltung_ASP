@@ -57,7 +57,7 @@
             </div>
         </nav>
 
-        <% if (!global_asax.Verwalter.Anbindung.DBstatus)
+        <% if (!global_asax.Verwalter.DBStatus)
             { %>
         <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 0px;">
             <div class="toast position-absolute" style="position: absolute; top: 25px; right: 10%; z-index: 1;" data-autohide="false">
