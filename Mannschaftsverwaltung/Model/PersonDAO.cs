@@ -251,6 +251,7 @@ namespace Mannschaftsverwaltung
             }
             catch (Exception)
             {
+                this.DBstatus = false;
                 throw;
                 //TODO: Definieren was passieren soll wenn Datenbank nicht erreichbar oder fehlerhaft
             }
@@ -275,5 +276,25 @@ namespace Mannschaftsverwaltung
 
             return retVal;
         }
+
+        //public bool EditFussballSpieler(int personID)
+        //{
+        //    bool retVal = true;
+
+        //    string EditFussballSpieler =
+        //           "DELETE FROM `fussballspieler` " +
+        //           "WHERE `fussballspieler`.`person_id` = " + personID + ";";
+        //    try
+        //    {
+        //        Connection = new MySqlConnection(connectionString);
+        //        Connection.Open();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        this.DBstatus = false;
+        //        throw;
+        //    }
+        //    return retVal;
+        //}
     }
 }

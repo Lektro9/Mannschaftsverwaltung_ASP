@@ -13,6 +13,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.Script.Serialization;
 using System.IO;
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Mannschaftsverwaltung
 {
@@ -239,6 +240,28 @@ namespace Mannschaftsverwaltung
             Response.ContentType = "application/json";
             Response.Write(jsontext);
 
+            Response.End();
+        }
+
+        protected void download_XML_click(object sender, EventArgs e)
+        {
+            Type[] types = new Type[] {
+                typeof(Person),
+                typeof(Spieler),
+                typeof(FussballSpieler),
+                typeof(HandballSpieler),
+                typeof(TennisSpieler),
+                typeof(Trainer),
+                typeof(Physiotherapeut)
+            };
+            XmlSerializer x = new XmlSerializer(this.Verwalter.Personen.GetType(), types);
+            StringWriter textWriter = new StringWriter();
+            x.Serialize(textWriter, this.Verwalter.Personen);
+            string allPers = textWriter.ToString();
+
+            Response.AddHeader("Content-disposition", String.Format("attachment; filename={0}.xml", "MannschaftsverwaltungSave"));
+            Response.ContentType = "application/xml";
+            Response.Write(allPers);
             Response.End();
         }
 

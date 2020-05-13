@@ -15,6 +15,7 @@
                         Aktuelle Mannschaftsverwaltung als JSON speichern.
                     </p>
                     <asp:Button Text="Download JSON" runat="server" OnClick="download_click" CssClass="btn btn-dark mt-2" />
+                    <asp:Button Text="Download XML" runat="server" OnClick="download_XML_click" CssClass="btn btn-dark mt-2" />
                 </div>
             </div>
         </div>
