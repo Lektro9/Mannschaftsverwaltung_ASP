@@ -195,7 +195,7 @@ namespace Mannschaftsverwaltung
             catch (Exception)
             {
                 this.DBstatus = false;
-                //throw;
+                throw;
                 //TODO: Personen wiedergeben, welche nicht in einer Datenbank liegen
                 FussballSpieler p1 = new FussballSpieler(1, "Shidoski", "Klaus", DateTime.Parse("01-01-1993"), "Stürmer", 23, anzahlJahre: 1, anzahlSpiele: 32, anzahlVereine: 2, gewonneneSpiele: 2);
                 FussballSpieler p2 = new FussballSpieler(2, "Johnsons", "Dennis", DateTime.Parse("02-01-1993"), "Stürmer", 25, anzahlJahre: 6, anzahlSpiele: 567, anzahlVereine: 2, gewonneneSpiele: 234);

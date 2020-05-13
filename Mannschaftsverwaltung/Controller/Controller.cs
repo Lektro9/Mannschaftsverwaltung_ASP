@@ -218,6 +218,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             FussballSpieler f = new FussballSpieler(id, name, vorname, geburtstag, position, geschosseneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
             this.Personen.Add(f);
+            CreatePersonInDB(f.ID);
         }
 
         internal void AddHandballSpieler(string name, string vorname, DateTime geburtstag, string position, int geworfeneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
@@ -225,6 +226,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             HandballSpieler h = new HandballSpieler(id, name, vorname, geburtstag, position, geworfeneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
             this.Personen.Add(h);
+            CreatePersonInDB(h.ID);
         }
 
         internal void AddTennisSpieler(string name, string vorname, DateTime geburtstag, int aufschlagGeschw, string schlaeger, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
@@ -232,6 +234,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             TennisSpieler t = new TennisSpieler(id, name, vorname, geburtstag, aufschlagGeschw, schlaeger, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
             this.Personen.Add(t);
+            CreatePersonInDB(t.ID);
         }
 
         internal void createMannschaft(string name, string sportart, List<Person> personen)
@@ -246,6 +249,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             Trainer t = new Trainer(id, name, vorname, geburtstag, anzahlJahre);
             this.Personen.Add(t);
+            CreatePersonInDB(t.ID);
         }
 
         internal void AddPhysio(string name, string vorname, DateTime geburtstag)
@@ -253,6 +257,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             Physiotherapeut p = new Physiotherapeut(id, name, vorname, geburtstag);
             this.Personen.Add(p);
+            CreatePersonInDB(p.ID);
         }
 
         public void sortiereNachName()
@@ -507,8 +512,16 @@ namespace Mannschaftsverwaltung
 
         public bool DeleteFromDB(int personID)
         {
-            bool retVal = Anbindung.DeletePersonFromDB(personID);
+            Person deletePerson = this.Personen.Find(p => p.ID == personID);
+            bool retVal = deletePerson.deletePerson();
+            this.Personen.Remove(deletePerson);
             return retVal;
+        }
+
+        public void CreatePersonInDB(int personID)
+        {
+            Person createPerson = this.Personen.Find(p => p.ID == personID);
+            bool retVal = createPerson.createPerson();
         }
         #endregion
 

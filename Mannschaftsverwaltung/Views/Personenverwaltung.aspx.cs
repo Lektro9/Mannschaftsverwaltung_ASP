@@ -175,7 +175,7 @@ namespace Mannschaftsverwaltung
         protected void delBtn_Click(object sender, EventArgs e)
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(3));
-            this.Verwalter.DeleteFromDB(this.Verwalter.Personen[index - 1].ID);
+            this.Verwalter.Personen[index - 1].deletePerson();
             this.Verwalter.Personen.RemoveAt(index - 1);
             Response.Redirect(Request.RawUrl);
         }
@@ -223,6 +223,9 @@ namespace Mannschaftsverwaltung
                     {
                         ((HandballSpieler)this.Verwalter.Personen[i - 1]).Position = EinsatzEdit.Text;
                     }
+
+                    this.Verwalter.Personen[i - 1].editPerson();
+
                 }
             }
             this.Verwalter.EditPerson = false;

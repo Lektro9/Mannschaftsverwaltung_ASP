@@ -109,7 +109,10 @@ namespace Mannschaftsverwaltung
         }
         #endregion
 
-        #region Schnittstellen
+        #region Datenbank
+        public abstract bool createPerson();
+        public abstract bool editPerson();
+        public abstract bool deletePerson();
         #endregion
     }
 }
