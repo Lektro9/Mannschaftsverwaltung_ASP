@@ -307,7 +307,6 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controller\Controller.cs" />
-    <Compile Include="Model\PersonDAO.cs" />
     <Compile Include="Model\Spiel.cs" />
     <Compile Include="Utility\PersonConverter.cs" />
     <Compile Include="Views\Tabellen.aspx.cs">

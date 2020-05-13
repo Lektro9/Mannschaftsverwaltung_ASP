@@ -30,7 +30,6 @@ namespace Mannschaftsverwaltung
         private bool _MannschaftOderGruppe;
         private bool _MannschaftsAnzeige;
         private bool _reverseSort;
-        VerwaltungsDAO _anbindung;
         List<Turnier> _turniere;
         bool _dBStatus;
 
@@ -53,8 +52,6 @@ namespace Mannschaftsverwaltung
         public bool MannschaftsAnzeige { get => _MannschaftsAnzeige; set => _MannschaftsAnzeige = value; }
         [JsonIgnore]
         public bool ReverseSort { get => _reverseSort; set => _reverseSort = value; }
-        [JsonIgnore]
-        public VerwaltungsDAO Anbindung { get => _anbindung; set => _anbindung = value; }
         [JsonIgnore]
         public bool EditMannschaft { get => _EditMannschaft; set => _EditMannschaft = value; }
         [JsonIgnore]
@@ -81,7 +78,6 @@ namespace Mannschaftsverwaltung
             MannschaftOderGruppe = false;
             MannschaftsAnzeige = false;
             ReverseSort = true;
-            Anbindung = new VerwaltungsDAO();
             Turniere = new List<Turnier>();
             DBStatus = false;
         }
