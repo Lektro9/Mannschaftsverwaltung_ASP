@@ -21,7 +21,14 @@ namespace Mannschaftsverwaltung
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.Verwalter = Global.Verwalter;
+            if (this.Session["Verwalter"] != null)
+            {
+                Verwalter = (Controller)this.Session["Verwalter"];
+            }
+            else
+            {
+                this.Response.Redirect(@"~\Views\Personenverwaltung.aspx");
+            }
             Repeater1.DataSource = this.Verwalter.Turniere;
             Repeater1.DataBind();
         }

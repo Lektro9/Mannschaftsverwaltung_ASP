@@ -51,9 +51,18 @@ namespace Mannschaftsverwaltung
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.Verwalter = Global.Verwalter;
+            if (this.Session["Verwalter"] != null)
+            {
+                Verwalter = (Controller)this.Session["Verwalter"];
+            }
+            else
+            {
+                this.Session["Verwalter"] = new Controller();
+                Verwalter = (Controller)this.Session["Verwalter"];
+            }
             LoadAllEditInputFields();
             LoadPersonen();
+            
         }
 
         protected void Button2_Click(object sender, EventArgs e)

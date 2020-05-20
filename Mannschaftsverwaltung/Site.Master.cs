@@ -9,8 +9,18 @@ namespace Mannschaftsverwaltung
 {
     public partial class SiteMaster : MasterPage
     {
+        private Controller _Verwalter;
+
+        public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (this.Session["Verwalter"] != null)
+            {
+                Verwalter = (Controller)this.Session["Verwalter"];
+            }
+            else
+            {
+            }
         }
     }
 }

@@ -17,9 +17,9 @@ namespace Mannschaftsverwaltung
 {
     public class Global : HttpApplication
     {
-        static private Controller _Verwalter;
+        private Controller _Verwalter;
 
-        public static Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
+        public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
 
         void Application_Start(object sender, EventArgs e)
         {
@@ -27,9 +27,9 @@ namespace Mannschaftsverwaltung
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RegisterCustomRoutes(RouteTable.Routes);
-            Verwalter = new Controller();
+            //Verwalter = new Controller();
 
-            Verwalter.Personen = Verwalter.getAllPerson();
+            //Verwalter.Personen = Verwalter.getAllPerson();
             
         }
         void RegisterCustomRoutes(RouteCollection routes)
