@@ -1,7 +1,7 @@
 ﻿//Autor:        Kroll
-//Datum:        02.11.2019
+//Datum:        02.04.2020
 //Dateiname:    Controller.cs
-//Beschreibung: Businesslogik für die Packstation
+//Beschreibung: Businesslogik für die Mannschaftsverwaltung
 //Änderungen:
 //02.04.2020:   Entwicklungsbeginn 
 
@@ -386,16 +386,14 @@ namespace Mannschaftsverwaltung
             this.Personen = retVal;
         }
 
-        public void sortiereNachTore()
+        public void sortiereNachSpezEigenschaft()
         {
-            List<Person> retVal = this.Personen;
-
             List<Person> Fussballer = getAllFussballer();
             List<Person> HandBaller = getAllHandballer();
             List<Person> TennisLeute = getAllTennisSpieler();
             List<Person> Trainers = getAllTrainer();
             List<Person> Physios = getAllPhysios();
-            //Alle nach Namen sortieren
+            //Alle nach ihren speziellen Eigenschaften sortieren
 
             bool fertig = false;
             while (fertig == false)
@@ -445,8 +443,8 @@ namespace Mannschaftsverwaltung
                 }
             }
             List<Person> mergedPersonen = new List<Person>();
-            mergedPersonen.Concat(Fussballer).Concat(HandBaller).Concat(TennisLeute).Concat(Trainers).Concat(Physios);
-            this.Personen = retVal;
+            mergedPersonen = Fussballer.Concat(HandBaller).Concat(TennisLeute).Concat(Trainers).Concat(Physios).ToList();
+            this.Personen = mergedPersonen;
         }
 
         private List<Person> getAllTrainer()
