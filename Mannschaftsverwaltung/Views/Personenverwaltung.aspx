@@ -15,7 +15,7 @@
                         Aktuelle Mannschaftsverwaltung als JSON speichern.
                     </p>
                     <asp:Button Text="Download JSON" runat="server" OnClick="download_click" CssClass="btn btn-dark mt-2" />
-                    <asp:Button Text="Download XML" runat="server" OnClick="download_XML_click" CssClass="btn btn-dark mt-2" />
+                    <p>Um nur die Personen als XML zu Exportieren, bitte den Button unter der Liste wählen.</p>
                 </div>
             </div>
         </div>
@@ -211,6 +211,7 @@
             <asp:TableHeaderCell>Del</asp:TableHeaderCell>
         </asp:TableHeaderRow>
     </asp:Table>
+    <asp:Button Text="Download Personen als XML" runat="server" OnClick="download_XML_click" CssClass="btn btn-dark mt-2" />
 
     <script type="text/javascript"> 
         var svg = $(".active svg");

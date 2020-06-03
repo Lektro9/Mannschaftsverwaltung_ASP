@@ -35,7 +35,7 @@
     <asp:Table ID="Table1" runat="server" class="table mt-2">
         <asp:TableHeaderRow>
             <asp:TableHeaderCell>
-                <asp:Button ID="ButtonSortName" runat="server" OnClick="orderByName" Text="Name" CssClass="btn btn-default" />
+                <asp:Button ID="ButtonSortName" runat="server" OnClick="orderByName" Text="Name" CssClass="btn btn-primary" />
             </asp:TableHeaderCell>
             <asp:TableHeaderCell CssClass="text-center">Anzahl Spieler</asp:TableHeaderCell>
             <asp:TableHeaderCell CssClass="text-center">Spieler</asp:TableHeaderCell>
@@ -44,6 +44,7 @@
             <asp:TableHeaderCell>Löschen</asp:TableHeaderCell>
         </asp:TableHeaderRow>
     </asp:Table>
+    <asp:Button Text="Download Mannschaften als XML" runat="server" OnClick="download_XML_click" CssClass="btn btn-dark mt-2" />
     <script type="text/javascript">
         function SimulateClick(buttonId) {
             var button = document.getElementById(buttonId);

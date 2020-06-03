@@ -6,11 +6,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Serialization;
 
 namespace Mannschaftsverwaltung
 {
@@ -238,6 +240,28 @@ namespace Mannschaftsverwaltung
                 }
                 Button2.Attributes.Remove("disabled");
             }
+        }
+
+        protected void download_XML_click(object sender, EventArgs e)
+        {
+            Type[] types = new Type[] {
+                typeof(Person),
+                typeof(Spieler),
+                typeof(FussballSpieler),
+                typeof(HandballSpieler),
+                typeof(TennisSpieler),
+                typeof(Trainer),
+                typeof(Physiotherapeut)
+            };
+            XmlSerializer x = new XmlSerializer(this.Verwalter.Mannschaften.GetType(), types);
+            StringWriter textWriter = new StringWriter();
+            x.Serialize(textWriter, this.Verwalter.Mannschaften);
+            string allPers = textWriter.ToString();
+
+            Response.AddHeader("Content-disposition", String.Format("attachment; filename={0}.xml", "MannschaftsverwaltungSave"));
+            Response.ContentType = "application/xml";
+            Response.Write(allPers);
+            Response.End();
         }
 
         private void loadEditPers(string sportart, int mannID)
