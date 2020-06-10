@@ -27,7 +27,7 @@ namespace Mannschaftsverwaltung
             }
             else
             {
-                this.Response.Redirect(@"~\Views\Personenverwaltung.aspx");
+                this.Response.Redirect(@"~\Views\Login.aspx");
             }
             Repeater1.DataSource = this.Verwalter.Turniere;
             Repeater1.DataBind();

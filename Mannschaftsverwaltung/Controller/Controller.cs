@@ -32,7 +32,7 @@ namespace Mannschaftsverwaltung
         private bool _reverseSort;
         List<Turnier> _turniere;
         bool _dBStatus;
-
+        List<User> _Nutzer;
 
         #endregion
 
@@ -61,6 +61,7 @@ namespace Mannschaftsverwaltung
         public List<Turnier> Turniere { get => _turniere; set => _turniere = value; }
         [JsonIgnore]
         public bool DBStatus { get => _dBStatus; set => _dBStatus = value; }
+        public List<User> Nutzer { get => _Nutzer; set => _Nutzer = value; }
         #endregion
 
         #region Konstruktoren
@@ -80,6 +81,7 @@ namespace Mannschaftsverwaltung
             ReverseSort = true;
             Turniere = new List<Turnier>();
             DBStatus = false;
+            Nutzer = new List<User>() { new User("admin", "admin") };
         }
         #endregion
 

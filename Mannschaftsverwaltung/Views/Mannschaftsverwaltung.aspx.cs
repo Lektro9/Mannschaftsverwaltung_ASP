@@ -32,7 +32,7 @@ namespace Mannschaftsverwaltung
             }
             else
             {
-                this.Response.Redirect(@"~\Views\Personenverwaltung.aspx");
+                this.Response.Redirect(@"~\Views\Login.aspx");
             }
             LoadMannschaften();
             if (this.Verwalter.EditMannschaft)

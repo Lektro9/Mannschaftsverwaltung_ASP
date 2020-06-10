@@ -235,6 +235,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Login.aspx" />
     <Content Include="Views\Tabellen.aspx" />
     <Content Include="Views\Spiele.aspx" />
     <Content Include="Views\Mannschaftsverwaltung.aspx" />
@@ -308,7 +309,15 @@
     </Compile>
     <Compile Include="Controller\Controller.cs" />
     <Compile Include="Model\Spiel.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Utility\PersonConverter.cs" />
+    <Compile Include="Views\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tabellen.aspx.cs">
       <DependentUpon>Tabellen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

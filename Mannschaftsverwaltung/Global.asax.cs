@@ -54,6 +54,11 @@ namespace Mannschaftsverwaltung
                 "Spiele",
                 "~/Views/Spiele.aspx"
             );
+            routes.MapPageRoute(
+                "Login",
+                "Login",
+                "~/Views/Login.aspx"
+            );
         }
     }
 }
