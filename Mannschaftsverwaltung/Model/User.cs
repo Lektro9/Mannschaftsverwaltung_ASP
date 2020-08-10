@@ -8,6 +8,7 @@ namespace Mannschaftsverwaltung
     public class User
     {
         #region Eigenschaften
+        private int _iD;
         private string _Login;
         private string _Password;
         #endregion
@@ -15,11 +16,13 @@ namespace Mannschaftsverwaltung
         #region Accessoren/Modifier
         public string Login { get => _Login; set => _Login = value; }
         public string Password { get => _Password; set => _Password = value; }
+        public int ID { get => _iD; set => _iD = value; }
         #endregion
 
         #region Konstruktoren
-        public User(string login, string password)
+        public User(int id, string login, string password)
         {
+            ID = id;
             Login = login;
             Password = password;
         }
@@ -38,6 +41,7 @@ namespace Mannschaftsverwaltung
             }
         }
         #endregion
+
         #region Database
 
         #endregion

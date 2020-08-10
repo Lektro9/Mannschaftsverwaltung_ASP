@@ -5,29 +5,21 @@
     <!-- form card login -->
     <div class="card rounded shadow shadow-sm">
         <div class="card-header">
-            <h3 class="mb-0">Login</h3>
+            <h3 class="mb-0">Bitte Anmeldedaten eingeben</h3>
         </div>
         <div class="card-body">
-            <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
-                <div class="form-group">
-                    <label for="uname1">Username</label>
-                    <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="uname1" required="">
-                    <div class="invalid-feedback">Oops, you missed this one.</div>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required="" autocomplete="new-password">
-                    <div class="invalid-feedback">Enter your password too!</div>
-                </div>
-                <div>
-                    <label class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description small text-dark">Remember me on this computer</span>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
-            </form>
+            <div class="form-group">
+                <label for="uname1">Username</label>
+                <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="uname1" required="">
+                <div class="invalid-feedback">Oops, you missed this one.</div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required="" autocomplete="new-password" name="password">
+                <div class="invalid-feedback">Enter your password too!</div>
+            </div>
+
+            <asp:Button ID="LoginButton" runat="server" Text="Login" OnClick="login_Click" class="btn btn-success mt-2" />
         </div>
         <!--/card-block-->
     </div>

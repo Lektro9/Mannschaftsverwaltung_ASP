@@ -33,6 +33,8 @@ namespace Mannschaftsverwaltung
         List<Turnier> _turniere;
         bool _dBStatus;
         List<User> _Nutzer;
+        bool _authenticated;
+        User _activeUser;
 
         #endregion
 
@@ -62,6 +64,8 @@ namespace Mannschaftsverwaltung
         [JsonIgnore]
         public bool DBStatus { get => _dBStatus; set => _dBStatus = value; }
         public List<User> Nutzer { get => _Nutzer; set => _Nutzer = value; }
+        public bool Authenticated { get => _authenticated; set => _authenticated = value; }
+        public User ActiveUser { get => _activeUser; set => _activeUser = value; }
         #endregion
 
         #region Konstruktoren
@@ -81,11 +85,21 @@ namespace Mannschaftsverwaltung
             ReverseSort = true;
             Turniere = new List<Turnier>();
             DBStatus = false;
-            Nutzer = new List<User>() { new User("admin", "admin") };
+            Nutzer = new List<User>() { new User(1, "admin", "admin") };
+            Authenticated = false;
+            ActiveUser = null;
         }
         #endregion
 
         #region Worker
+        public void login(string username, string password)
+        {
+            foreach (User user in Nutzer)
+            {
+                this.Authenticated = user.auth(username, password);
+                this.ActiveUser = this.Authenticated ? user : null;
+            }
+        }
         public static int generateID()
         {
             return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
