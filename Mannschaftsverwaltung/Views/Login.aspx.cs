@@ -21,7 +21,10 @@ namespace Mannschaftsverwaltung
                 if (this.Verwalter.Authenticated)
                 {
                     this.Session[this.Verwalter.ActiveUser.ID.ToString()] = new Controller();
+                    User currentUser = this.Verwalter.ActiveUser;
                     Verwalter = (Controller)this.Session[this.Verwalter.ActiveUser.ID];
+                    Verwalter.Authenticated = true;
+                    Verwalter.ActiveUser = currentUser;
                     FussballSpieler p1 = new FussballSpieler(1, "Shidoski", "Klaus", DateTime.Parse("01-01-1993"), "Stürmer", 23, anzahlJahre: 1, anzahlSpiele: 32, anzahlVereine: 2, gewonneneSpiele: 2);
                     FussballSpieler p2 = new FussballSpieler(2, "Johnsons", "Dennis", DateTime.Parse("02-01-1993"), "Stürmer", 25, anzahlJahre: 6, anzahlSpiele: 567, anzahlVereine: 2, gewonneneSpiele: 234);
                     FussballSpieler p4 = new FussballSpieler(3, "Redgrave", "Vergil", DateTime.Parse("03-01-1993"), "Stürmer", 857, anzahlJahre: 2, anzahlSpiele: 234, anzahlVereine: 5, gewonneneSpiele: 65);
@@ -52,6 +55,13 @@ namespace Mannschaftsverwaltung
             string username = this.Request.Form["uname1"];
             string password = this.Request.Form["password"];
             this.Verwalter.login(username, password);
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void logout_Click(object sender, EventArgs e)
+        {
+            this.Session["Verwalter"] = new Controller();
+            Verwalter = (Controller)this.Session["Verwalter"];
             Response.Redirect(Request.RawUrl);
         }
     }

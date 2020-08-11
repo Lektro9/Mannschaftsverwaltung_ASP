@@ -8,6 +8,8 @@
             <h3 class="mb-0">Bitte Anmeldedaten eingeben</h3>
         </div>
         <div class="card-body">
+            <% if (this.Verwalter.ActiveUser == null)
+                { %>
             <div class="form-group">
                 <label for="uname1">Username</label>
                 <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="uname1" required="">
@@ -18,8 +20,14 @@
                 <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" required="" autocomplete="new-password" name="password">
                 <div class="invalid-feedback">Enter your password too!</div>
             </div>
-
             <asp:Button ID="LoginButton" runat="server" Text="Login" OnClick="login_Click" class="btn btn-success mt-2" />
+            <% } %>
+            <% else
+                { %>
+                <asp:Button ID="ButtonLogOut" runat="server" Text="Logout" OnClick="logout_Click" class="btn btn-warning mt-2" />
+            <% } %>
+
+            
         </div>
         <!--/card-block-->
     </div>
