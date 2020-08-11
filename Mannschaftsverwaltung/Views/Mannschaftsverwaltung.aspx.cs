@@ -29,6 +29,14 @@ namespace Mannschaftsverwaltung
             if (this.Session["Verwalter"] != null)
             {
                 Verwalter = (Controller)this.Session["Verwalter"];
+                if (this.Verwalter.ActiveUser != null)
+                {
+                    Verwalter = (Controller)this.Session[this.Verwalter.ActiveUser.ID.ToString()];
+                }
+                else
+                {
+                    this.Response.Redirect(@"~\Views\Login.aspx");
+                }
             }
             else
             {
