@@ -113,8 +113,8 @@ INSERT INTO `mannschaft` (`id`, `name`) VALUES
 CREATE TABLE `person` (
   `id` int(11) NOT NULL,
   `vorname` text NOT NULL,
-  `name` text NOT NULL DEFAULT '"noname"',
-  `geburtstag` date NOT NULL DEFAULT current_timestamp(),
+  `name` text NOT NULL,
+  `geburtstag` date NOT NULL,
   `mannschaft_id` int(11) NOT NULL,
   `turnier_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -172,7 +172,7 @@ CREATE TABLE `tennisspieler` (
   `person_id` int(11) NOT NULL,
   `aufschlaggeschwindigkeit` int(11) NOT NULL,
   `gewonnenespiele` int(11) NOT NULL,
-  `schlaeger` text NOT NULL DEFAULT 'Wilson 9000',
+  `schlaeger` text NOT NULL,
   `anzahlJahre` int(11) NOT NULL,
   `anzahlVereine` int(11) NOT NULL,
   `anzahlSpiele` int(11) NOT NULL
