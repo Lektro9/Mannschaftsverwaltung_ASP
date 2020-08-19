@@ -85,7 +85,7 @@ namespace Mannschaftsverwaltung
             ReverseSort = true;
             Turniere = new List<Turnier>();
             DBStatus = false;
-            Nutzer = new List<User>() { new User(1, "admin", "admin") };
+            Nutzer = new List<User>() { new User(1, "admin", "admin"), new User(2, "user", "user") };
             Authenticated = false;
             ActiveUser = null;
         }
@@ -97,7 +97,11 @@ namespace Mannschaftsverwaltung
             foreach (User user in Nutzer)
             {
                 this.Authenticated = user.auth(username, password);
-                this.ActiveUser = this.Authenticated ? user : null;
+                if (this.Authenticated)
+                {
+                    this.ActiveUser = this.Authenticated ? user : null;
+                    break;
+                }
             }
         }
         public static int generateID()
@@ -530,7 +534,7 @@ namespace Mannschaftsverwaltung
         #endregion
 
         #region Database
-        public List<Person> getAllPerson()
+        public List<Person> getAllPerson(User activeUser)
         {
             List<Person> retVal = new List<Person>();
             string connectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", "localhost", "3306", "root", "", "mannschaftsverwaltung", "none");
@@ -539,11 +543,13 @@ namespace Mannschaftsverwaltung
             try
             {
                 Connection.Open();
-                string FetchAllFussbQuery =
-                    "SELECT person.id, person.vorname, person.name, person.geburtstag, fussballspieler.position, fussballspieler.tore, fussballspieler.anzahlJahre, fussballspieler.gewonneneSpiele, fussballspieler.anzahlVereine, fussballspieler.anzahlSpiele " +
-                    "FROM `fussballspieler`  " +
-                    "JOIN person " +
-                    "ON fussballspieler.person_id = person.id;";
+                string FetchAllFussbQuery = String.Format(
+                    @"SELECT person.id, person.vorname, person.name, person.geburtstag, fussballspieler.position, fussballspieler.tore, fussballspieler.anzahlJahre, fussballspieler.gewonneneSpiele, fussballspieler.anzahlVereine, fussballspieler.anzahlSpiele, person.session_id, user.session
+                    FROM `fussballspieler` 
+                    JOIN person 
+                    ON fussballspieler.person_id = person.id
+                    JOIN user
+                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
 
                 MySqlCommand command = new MySqlCommand(FetchAllFussbQuery, Connection);
                 MySqlDataReader rdr = command.ExecuteReader();
@@ -567,13 +573,15 @@ namespace Mannschaftsverwaltung
                 }
                 rdr.Close();
 
-                string FetchAllHandQuery =
+                string FetchAllHandQuery = String.Format(
                     @"SELECT person.id, person.vorname, person.name, person.geburtstag,
                     handballspieler.position, handballspieler.tore, handballspieler.anzahlJahre, handballspieler.gewonneneSpiele,
-                    handballspieler.anzahlVereine, handballspieler.anzahlSpiele
+                    handballspieler.anzahlVereine, handballspieler.anzahlSpiele, person.session_id, user.session
                     FROM `handballspieler` 
                     JOIN person 
-                    ON handballspieler.person_id=person.id;";
+                    ON handballspieler.person_id=person.id
+                    JOIN user
+                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
 
                 command = new MySqlCommand(FetchAllHandQuery, Connection);
                 rdr = command.ExecuteReader();
@@ -597,14 +605,17 @@ namespace Mannschaftsverwaltung
                 }
                 rdr.Close();
 
-                string FetchAllTennisQuery =
+                string FetchAllTennisQuery = String.Format(
                     @"SELECT person.id, person.vorname, person.name, person.geburtstag,
                     tennisspieler.aufschlaggeschwindigkeit , tennisspieler.gewonnenespiele, 
                     tennisspieler.gewonneneSpiele , tennisspieler.schlaeger,
-                    tennisspieler.anzahlJahre , tennisspieler.anzahlVereine, tennisspieler.anzahlSpiele
+                    tennisspieler.anzahlJahre , tennisspieler.anzahlVereine, tennisspieler.anzahlSpiele,
+                    person.session_id, user.session
                     FROM `tennisspieler` 
                     JOIN person 
-                    ON tennisspieler.person_id=person.id;";
+                    ON tennisspieler.person_id=person.id
+                    JOIN user
+                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
 
                 command = new MySqlCommand(FetchAllTennisQuery, Connection);
                 rdr = command.ExecuteReader();
@@ -628,12 +639,15 @@ namespace Mannschaftsverwaltung
                 }
                 rdr.Close();
 
-                string FetchAllTrainQuery =
+                string FetchAllTrainQuery = String.Format(
                     @"SELECT person.id, person.vorname, person.name, person.geburtstag,
-                    trainer.erfahrung 
+                    trainer.erfahrung, 
+                    person.session_id, user.session
                     FROM `trainer` 
                     JOIN person 
-                    ON trainer.person_id=person.id;";
+                    ON trainer.person_id=person.id
+                    JOIN user
+                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
 
                 command = new MySqlCommand(FetchAllTrainQuery, Connection);
                 rdr = command.ExecuteReader();
@@ -652,12 +666,15 @@ namespace Mannschaftsverwaltung
                 }
                 rdr.Close();
 
-                string FetchAllPhysioQuery =
+                string FetchAllPhysioQuery = String.Format(
                     @"SELECT person.id, person.vorname, person.name, person.geburtstag,
-                    physiotherapeut.annerkennungen 
+                    physiotherapeut.annerkennungen, 
+                    person.session_id, user.session
                     FROM `physiotherapeut` 
                     JOIN person 
-                    ON physiotherapeut.person_id=person.id;";
+                    ON physiotherapeut.person_id=person.id
+                    JOIN user
+                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
 
                 command = new MySqlCommand(FetchAllPhysioQuery, Connection);
                 rdr = command.ExecuteReader();
@@ -679,27 +696,28 @@ namespace Mannschaftsverwaltung
 
                 this.DBStatus = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 this.DBStatus = false;
-                //throw;
-                //TODO: Personen wiedergeben, welche nicht in einer Datenbank liegen
-                FussballSpieler p1 = new FussballSpieler(1, "Shidoski", "Klaus", DateTime.Parse("01-01-1993"), "Stürmer", 23, anzahlJahre: 1, anzahlSpiele: 32, anzahlVereine: 2, gewonneneSpiele: 2);
-                FussballSpieler p2 = new FussballSpieler(2, "Johnsons", "Dennis", DateTime.Parse("02-01-1993"), "Stürmer", 25, anzahlJahre: 6, anzahlSpiele: 567, anzahlVereine: 2, gewonneneSpiele: 234);
-                FussballSpieler p4 = new FussballSpieler(3, "Redgrave", "Vergil", DateTime.Parse("03-01-1993"), "Stürmer", 857, anzahlJahre: 2, anzahlSpiele: 234, anzahlVereine: 5, gewonneneSpiele: 65);
-                FussballSpieler p5 = new FussballSpieler(4, "Redgrave", "Dante", DateTime.Parse("04-01-1993"), "Stürmer", 900, anzahlJahre: 8, anzahlSpiele: 199, anzahlVereine: 6, gewonneneSpiele: 4);
-                FussballSpieler p6 = new FussballSpieler(5, "Son", "Goku", DateTime.Parse("05-02-1993"), "Stürmer", 1010, anzahlJahre: 9, anzahlSpiele: 23, anzahlVereine: 1, gewonneneSpiele: 16);
-                Trainer t1 = new Trainer(6, "Taylor", "Tom", DateTime.Parse("01-01-1993"), 23);
+                Console.WriteLine(e);
+                throw;
+                ////TODO: Personen wiedergeben, welche nicht in einer Datenbank liegen
+                //FussballSpieler p1 = new FussballSpieler(1, "Shidoski", "Klaus", DateTime.Parse("01-01-1993"), "Stürmer", 23, anzahlJahre: 1, anzahlSpiele: 32, anzahlVereine: 2, gewonneneSpiele: 2);
+                //FussballSpieler p2 = new FussballSpieler(2, "Johnsons", "Dennis", DateTime.Parse("02-01-1993"), "Stürmer", 25, anzahlJahre: 6, anzahlSpiele: 567, anzahlVereine: 2, gewonneneSpiele: 234);
+                //FussballSpieler p4 = new FussballSpieler(3, "Redgrave", "Vergil", DateTime.Parse("03-01-1993"), "Stürmer", 857, anzahlJahre: 2, anzahlSpiele: 234, anzahlVereine: 5, gewonneneSpiele: 65);
+                //FussballSpieler p5 = new FussballSpieler(4, "Redgrave", "Dante", DateTime.Parse("04-01-1993"), "Stürmer", 900, anzahlJahre: 8, anzahlSpiele: 199, anzahlVereine: 6, gewonneneSpiele: 4);
+                //FussballSpieler p6 = new FussballSpieler(5, "Son", "Goku", DateTime.Parse("05-02-1993"), "Stürmer", 1010, anzahlJahre: 9, anzahlSpiele: 23, anzahlVereine: 1, gewonneneSpiele: 16);
+                //Trainer t1 = new Trainer(6, "Taylor", "Tom", DateTime.Parse("01-01-1993"), 23);
 
-                HandballSpieler h1 = new HandballSpieler(7, "Ball", "Bernd", DateTime.Parse("01-03-1995"), "Verteidiger", 3, anzahlJahre: 2, anzahlSpiele: 77, anzahlVereine: 8, gewonneneSpiele: 56);
-                HandballSpieler h3 = new HandballSpieler(8, "Potter", "Harry", DateTime.Parse("16-07-1999"), "Stürmer", 25, anzahlJahre: 4, anzahlSpiele: 182, anzahlVereine: 1, gewonneneSpiele: 245);
-                HandballSpieler h2 = new HandballSpieler(9, "Dohnson", "Henry", DateTime.Parse("12-06-1963"), "Stürmer", 16, anzahlJahre: 6, anzahlSpiele: 90, anzahlVereine: 2, gewonneneSpiele: 78);
-                HandballSpieler h4 = new HandballSpieler(10, "Hamper", "Holly", DateTime.Parse("05-01-1995"), "Mittelfeld", 17, anzahlJahre: 10, anzahlSpiele: 33, anzahlVereine: 3, gewonneneSpiele: 98);
+                //HandballSpieler h1 = new HandballSpieler(7, "Ball", "Bernd", DateTime.Parse("01-03-1995"), "Verteidiger", 3, anzahlJahre: 2, anzahlSpiele: 77, anzahlVereine: 8, gewonneneSpiele: 56);
+                //HandballSpieler h3 = new HandballSpieler(8, "Potter", "Harry", DateTime.Parse("16-07-1999"), "Stürmer", 25, anzahlJahre: 4, anzahlSpiele: 182, anzahlVereine: 1, gewonneneSpiele: 245);
+                //HandballSpieler h2 = new HandballSpieler(9, "Dohnson", "Henry", DateTime.Parse("12-06-1963"), "Stürmer", 16, anzahlJahre: 6, anzahlSpiele: 90, anzahlVereine: 2, gewonneneSpiele: 78);
+                //HandballSpieler h4 = new HandballSpieler(10, "Hamper", "Holly", DateTime.Parse("05-01-1995"), "Mittelfeld", 17, anzahlJahre: 10, anzahlSpiele: 33, anzahlVereine: 3, gewonneneSpiele: 98);
 
-                TennisSpieler ts1 = new TennisSpieler(11, "Federer", "Roger", DateTime.Parse("01-12-2001"), 95, anzahlJahre: 12, anzahlSpiele: 2, anzahlVereine: 1, gewonneneSpiele: 23);
+                //TennisSpieler ts1 = new TennisSpieler(11, "Federer", "Roger", DateTime.Parse("01-12-2001"), 95, anzahlJahre: 12, anzahlSpiele: 2, anzahlVereine: 1, gewonneneSpiele: 23);
 
-                Physiotherapeut ph1 = new Physiotherapeut(12, "Denrasen", "Dr. med", DateTime.Parse("01-01-1993"), "Auszeichnung blabla");
-                retVal = new List<Person>() { p1, p2, p4, p5, p6, t1, h1, h2, h3, h4, ts1, ph1 };
+                //Physiotherapeut ph1 = new Physiotherapeut(12, "Denrasen", "Dr. med", DateTime.Parse("01-01-1993"), "Auszeichnung blabla");
+                //retVal = new List<Person>() { p1, p2, p4, p5, p6, t1, h1, h2, h3, h4, ts1, ph1 };
             }
             finally
             {

@@ -1,16 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 19. Aug 2020 um 16:11
--- Server-Version: 10.4.13-MariaDB
--- PHP-Version: 7.2.32
+-- Erstellungszeit: 19. Aug 2020 um 22:07
+-- Server-Version: 10.4.11-MariaDB
+-- PHP-Version: 7.3.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+CREATE DATABASE `mannschaftsverwaltung`;
+
+USE `mannschaftsverwaltung`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -47,7 +51,9 @@ INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJah
 (11, 15, 'Stürmer', 10, 0, 0, 0, 0),
 (12, 16, 'Außenmittelfeldspieler (Flügelspieler)', 15, 0, 0, 0, 0),
 (14, 2, 'defensiver Mittelfeldspieler', 28, 0, 0, 0, 0),
-(17, 13, 'Stürmer', 45, 0, 0, 0, 0);
+(17, 13, 'Stürmer', 45, 0, 0, 0, 0),
+(18, 110440, '23', 23, 44, 25, 23, 323),
+(19, 110441, 'berserker', 34, 4, 1, 3, 23);
 
 -- --------------------------------------------------------
 
@@ -74,7 +80,8 @@ INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJah
 (2, 21, 'Angriff', 25, 0, 0, 0, 0),
 (5, 17, 'Rückraumlinks', 12, 0, 0, 0, 0),
 (6, 19, 'Rückraummitte', 4, 0, 0, 0, 0),
-(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0);
+(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0),
+(11, 110442, 'da hinten', 32, 4, 5, 6, 7);
 
 -- --------------------------------------------------------
 
@@ -127,7 +134,7 @@ CREATE TABLE `person` (
 INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) VALUES
 (1, 'Vergil', 'Redgrave', '2020-03-26', 2, 1, 1),
 (2, 'Dante', 'Regdrave', '2002-03-26', 1, 2, 1),
-(12, 'Dennis', 'grandle', '1993-03-26', 6, 2, 1),
+(12, 'Dennis', 'grandle2', '1993-03-25', 6, 2, 1),
 (13, 'Klaus', 'Shidokiv', '1990-01-02', 6, 2, 1),
 (14, 'Peter', 'Schmitt', '2000-03-13', 6, 2, 1),
 (15, 'Lars', 'Banane', '2001-04-02', 7, 2, 1),
@@ -141,7 +148,10 @@ INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `t
 (23, 'Gerry', 'sMod', '1995-07-26', 9, 2, 1),
 (24, 'ExampleGuy', 'ExampleName', '2001-03-11', 8, 7, 1),
 (34234, 'Trainer', 'Tom', '2020-05-05', 8, 2, 1),
-(34235, 'Klemens', 'Bondie', '2020-05-02', 12, 1, 1);
+(34235, 'Klemens', 'Bondie', '2020-05-02', 12, 1, 1),
+(110440, '32', '23', '2020-08-06', 1, 1, 1),
+(110441, 'Kratschi', 'Matschi', '2020-08-12', 11, 2, 2),
+(110442, 'dasd', 'dddd', '2020-08-11', 11, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -254,7 +264,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `login`, `password`, `role`, `session`) VALUES
-(1, 'admin', 'admin', 'ADMIN', 'admin');
+(1, 'admin', 'admin', 'ADMIN', 'admin'),
+(2, 'user', 'user', 'USER', 'user');
 
 --
 -- Indizes der exportierten Tabellen
@@ -332,13 +343,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT für Tabelle `fussballspieler`
 --
 ALTER TABLE `fussballspieler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT für Tabelle `handballspieler`
 --
 ALTER TABLE `handballspieler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT für Tabelle `mannschaft`
@@ -350,7 +361,7 @@ ALTER TABLE `mannschaft`
 -- AUTO_INCREMENT für Tabelle `person`
 --
 ALTER TABLE `person`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34237;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110443;
 
 --
 -- AUTO_INCREMENT für Tabelle `physiotherapeut`
@@ -380,7 +391,7 @@ ALTER TABLE `turnier`
 -- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints der exportierten Tabellen
