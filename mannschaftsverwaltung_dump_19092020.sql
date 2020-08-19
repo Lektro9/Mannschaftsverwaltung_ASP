@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 19. Aug 2020 um 15:14
+-- Erstellungszeit: 19. Aug 2020 um 16:11
 -- Server-Version: 10.4.13-MariaDB
 -- PHP-Version: 7.2.32
 
@@ -11,9 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-CREATE DATABASE `mannschaftsverwaltung`;
-
-USE `mannschaftsverwaltung`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,20 +35,19 @@ CREATE TABLE `fussballspieler` (
   `anzahlJahre` int(11) NOT NULL DEFAULT 0,
   `gewonneneSpiele` int(11) NOT NULL DEFAULT 0,
   `anzahlVereine` int(11) NOT NULL DEFAULT 0,
-  `anzahlSpiele` int(11) NOT NULL DEFAULT 0,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `anzahlSpiele` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `fussballspieler`
 --
 
-INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`, `session_id`) VALUES
-(1, 12, 'Stürmer', 34, 0, 0, 0, 0, 1),
-(11, 15, 'Stürmer', 10, 0, 0, 0, 0, 1),
-(12, 16, 'Außenmittelfeldspieler (Flügelspieler)', 15, 0, 0, 0, 0, 1),
-(14, 2, 'defensiver Mittelfeldspieler', 28, 0, 0, 0, 0, 1),
-(17, 13, 'Stürmer', 45, 0, 0, 0, 0, 1);
+INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
+(1, 12, 'Stürmer', 34, 0, 0, 0, 0),
+(11, 15, 'Stürmer', 10, 0, 0, 0, 0),
+(12, 16, 'Außenmittelfeldspieler (Flügelspieler)', 15, 0, 0, 0, 0),
+(14, 2, 'defensiver Mittelfeldspieler', 28, 0, 0, 0, 0),
+(17, 13, 'Stürmer', 45, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -67,19 +63,18 @@ CREATE TABLE `handballspieler` (
   `anzahlJahre` int(11) NOT NULL DEFAULT 0,
   `gewonneneSpiele` int(11) NOT NULL DEFAULT 0,
   `anzahlVereine` int(11) NOT NULL DEFAULT 0,
-  `anzahlSpiele` int(11) NOT NULL DEFAULT 0,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `anzahlSpiele` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `handballspieler`
 --
 
-INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`, `session_id`) VALUES
-(2, 21, 'Angriff', 25, 0, 0, 0, 0, 1),
-(5, 17, 'Rückraumlinks', 12, 0, 0, 0, 0, 1),
-(6, 19, 'Rückraummitte', 4, 0, 0, 0, 0, 1),
-(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0, 1);
+INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
+(2, 21, 'Angriff', 25, 0, 0, 0, 0),
+(5, 17, 'Rückraumlinks', 12, 0, 0, 0, 0),
+(6, 19, 'Rückraummitte', 4, 0, 0, 0, 0),
+(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -157,16 +152,15 @@ INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `t
 CREATE TABLE `physiotherapeut` (
   `id` int(11) NOT NULL,
   `person_id` int(11) NOT NULL,
-  `annerkennungen` text NOT NULL,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `annerkennungen` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `physiotherapeut`
 --
 
-INSERT INTO `physiotherapeut` (`id`, `person_id`, `annerkennungen`, `session_id`) VALUES
-(11, 34235, 'Medizinstudium abgeschlossen', 1);
+INSERT INTO `physiotherapeut` (`id`, `person_id`, `annerkennungen`) VALUES
+(11, 34235, 'Medizinstudium abgeschlossen');
 
 -- --------------------------------------------------------
 
@@ -182,17 +176,16 @@ CREATE TABLE `tennisspieler` (
   `schlaeger` text NOT NULL,
   `anzahlJahre` int(11) NOT NULL,
   `anzahlVereine` int(11) NOT NULL,
-  `anzahlSpiele` int(11) NOT NULL,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `anzahlSpiele` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `tennisspieler`
 --
 
-INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`, `schlaeger`, `anzahlJahre`, `anzahlVereine`, `anzahlSpiele`, `session_id`) VALUES
-(1, 23, 86, 14, 'Wilson 9000', 0, 0, 0, 1),
-(10, 1, 250, 67, 'Wilson 9000', 0, 0, 0, 1);
+INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`, `schlaeger`, `anzahlJahre`, `anzahlVereine`, `anzahlSpiele`) VALUES
+(1, 23, 86, 14, 'Wilson 9000', 0, 0, 0),
+(10, 1, 250, 67, 'Wilson 9000', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -203,17 +196,16 @@ INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gew
 CREATE TABLE `trainer` (
   `id` int(11) NOT NULL,
   `person_id` int(11) NOT NULL,
-  `erfahrung` int(11) NOT NULL,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `erfahrung` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `trainer`
 --
 
-INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`, `session_id`) VALUES
-(11, 34234, 35, 1),
-(12, 24, 33, 1);
+INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`) VALUES
+(11, 34234, 35),
+(12, 24, 33);
 
 -- --------------------------------------------------------
 
@@ -273,16 +265,14 @@ INSERT INTO `user` (`id`, `login`, `password`, `role`, `session`) VALUES
 --
 ALTER TABLE `fussballspieler`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `person_id` (`person_id`),
-  ADD KEY `fussball_session` (`session_id`);
+  ADD KEY `person_id` (`person_id`);
 
 --
 -- Indizes für die Tabelle `handballspieler`
 --
 ALTER TABLE `handballspieler`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `person_id` (`person_id`),
-  ADD KEY `handball_session` (`session_id`);
+  ADD KEY `person_id` (`person_id`);
 
 --
 -- Indizes für die Tabelle `mannschaft`
@@ -305,24 +295,21 @@ ALTER TABLE `person`
 --
 ALTER TABLE `physiotherapeut`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `person_id` (`person_id`),
-  ADD KEY `physio_session` (`session_id`);
+  ADD KEY `person_id` (`person_id`);
 
 --
 -- Indizes für die Tabelle `tennisspieler`
 --
 ALTER TABLE `tennisspieler`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `person_id` (`person_id`),
-  ADD KEY `tennis_session` (`session_id`);
+  ADD KEY `person_id` (`person_id`);
 
 --
 -- Indizes für die Tabelle `trainer`
 --
 ALTER TABLE `trainer`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `person_id` (`person_id`),
-  ADD KEY `trainer_session` (`session_id`);
+  ADD KEY `person_id` (`person_id`);
 
 --
 -- Indizes für die Tabelle `turnier`
@@ -403,14 +390,12 @@ ALTER TABLE `user`
 -- Constraints der Tabelle `fussballspieler`
 --
 ALTER TABLE `fussballspieler`
-  ADD CONSTRAINT `fussball_session` FOREIGN KEY (`session_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `fussballspieler_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
 
 --
 -- Constraints der Tabelle `handballspieler`
 --
 ALTER TABLE `handballspieler`
-  ADD CONSTRAINT `handball_session` FOREIGN KEY (`session_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `handballspieler_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
 
 --
@@ -431,22 +416,19 @@ ALTER TABLE `person`
 -- Constraints der Tabelle `physiotherapeut`
 --
 ALTER TABLE `physiotherapeut`
-  ADD CONSTRAINT `physio_session` FOREIGN KEY (`session_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `physiotherapeut_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
 
 --
 -- Constraints der Tabelle `tennisspieler`
 --
 ALTER TABLE `tennisspieler`
-  ADD CONSTRAINT `tennis_session` FOREIGN KEY (`session_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `tennisspieler_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
 
 --
 -- Constraints der Tabelle `trainer`
 --
 ALTER TABLE `trainer`
-  ADD CONSTRAINT `trainer_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`),
-  ADD CONSTRAINT `trainer_session` FOREIGN KEY (`session_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `trainer_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
 
 --
 -- Constraints der Tabelle `turnier`
