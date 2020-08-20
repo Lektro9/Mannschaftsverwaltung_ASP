@@ -254,6 +254,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="DataBaseConfig.conf" />
     <None Include="Properties\PublishProfiles\mv80330 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mv80330 - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\mv80330 - Web Deploy.pubxml" />
@@ -307,7 +308,10 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controller\ConfReader.cs" />
     <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\DataManager.cs" />
+    <Compile Include="Controller\DBConfig.cs" />
     <Compile Include="Model\Spiel.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Utility\PersonConverter.cs" />
