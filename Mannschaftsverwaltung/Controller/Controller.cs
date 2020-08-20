@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Script.Serialization;
 
 namespace Mannschaftsverwaltung
 {
@@ -85,7 +84,7 @@ namespace Mannschaftsverwaltung
             ReverseSort = true;
             Turniere = new List<Turnier>();
             DBStatus = false;
-            Nutzer = new List<User>() { new User(1, "admin", "admin"), new User(2, "user", "user") };
+            Nutzer = new List<User>() { new User(1, "admin", "admin", Role.ADMIN), new User(2, "user", "user", Role.USER) };
             Authenticated = false;
             ActiveUser = null;
         }
@@ -109,11 +108,11 @@ namespace Mannschaftsverwaltung
             return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
         }
 
-        internal string createCurrentStateAsJSON()
-        {
-            Controller saveCont = this;
-            return new JavaScriptSerializer().Serialize(saveCont);
-        }
+        //internal string createCurrentStateAsJSON()
+        //{
+        //    Controller saveCont = this;
+        //    return new JavaScriptSerializer().Serialize(saveCont);
+        //}
 
         internal void removeTurnier(int turnierIndex)
         {

@@ -10,7 +10,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Web.Script.Serialization;
 using System.IO;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
@@ -537,25 +536,29 @@ namespace Mannschaftsverwaltung
                     neueZelle.Text = getRolle(person);
                     neueZeile.Cells.Add(neueZelle);
 
-                    //Edit
-                    neueZelle = new TableCell();
-                    Button editBtn = new Button();
-                    editBtn.ID = "bearb" + index;
-                    editBtn.Text = "edit";
-                    editBtn.Click += editBtn_Click;
-                    editBtn.CssClass = "btn btn-info";
-                    neueZelle.Controls.Add(editBtn);
-                    neueZeile.Cells.Add(neueZelle);
+                    if (this.Verwalter.ActiveUser.Rolle == Role.ADMIN)
+                    {
+                        //Edit
+                        neueZelle = new TableCell();
+                        Button editBtn = new Button();
+                        editBtn.ID = "bearb" + index;
+                        editBtn.Text = "edit";
+                        editBtn.Click += editBtn_Click;
+                        editBtn.CssClass = "btn btn-info";
+                        neueZelle.Controls.Add(editBtn);
+                        neueZeile.Cells.Add(neueZelle);
 
-                    //Del
-                    neueZelle = new TableCell();
-                    Button delBtn = new Button();
-                    delBtn.ID = "del" + index;
-                    delBtn.Text = "Del";
-                    delBtn.Click += delBtn_Click;
-                    delBtn.CssClass = "btn btn-danger";
-                    neueZelle.Controls.Add(delBtn);
-                    neueZeile.Cells.Add(neueZelle);
+                        //Del
+                        neueZelle = new TableCell();
+                        Button delBtn = new Button();
+                        delBtn.ID = "del" + index;
+                        delBtn.Text = "Del";
+                        delBtn.Click += delBtn_Click;
+                        delBtn.CssClass = "btn btn-danger";
+                        neueZelle.Controls.Add(delBtn);
+                        neueZeile.Cells.Add(neueZelle);
+                    }
+                    
                 }
 
                 index++;
