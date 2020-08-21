@@ -141,43 +141,12 @@ namespace Mannschaftsverwaltung
 
         public override bool deletePerson()
         {
-            bool retVal = true;
-            MySqlConnection Connection;
-            string connectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}", "localhost", "3306", "root", "", "mannschaftsverwaltung", "none");
 
-            string SQLString = String.Format(
-                @"DELETE FROM `physiotherapeut` 
-                WHERE `physiotherapeut`.`person_id` = {0};
+            DataManager DBManager = new DataManager();
 
-                DELETE FROM `person` 
-                WHERE `person`.`id` = {0};", this.ID);
-
-            try
-            {
-                Connection = new MySqlConnection(connectionString);
-                Connection.Open();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            MySqlCommand command = new MySqlCommand(SQLString, Connection);
-            int anzahl = -1;
-            try
-            {
-                anzahl = command.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                Connection.Close();
-                throw;
-            }
-            finally
-            {
-                Connection.Dispose();
-                Connection.Close();
-            }
+            DBManager.openDBConection();
+            bool retVal = DBManager.removePerson(this);
+            DBManager.closeConnection();
 
             return retVal;
         }

@@ -228,7 +228,65 @@ namespace Mannschaftsverwaltung
 
         public bool removePerson(Person deletePerson)
         {
-            throw new NotImplementedException();
+            bool retVal = false;
+            string SQLString = "";
+            if (deletePerson is FussballSpieler)
+            {
+                SQLString = String.Format(
+                @"DELETE FROM `fussballspieler` 
+                WHERE `fussballspieler`.`person_id` = {0};
+
+                DELETE FROM `person` 
+                WHERE `person`.`id` = {0};", deletePerson.ID);
+            }
+            else if (deletePerson is HandballSpieler)
+            {
+                SQLString = String.Format(
+                @"DELETE FROM `handballspieler` 
+                WHERE `handballspieler`.`person_id` = {0};
+
+                DELETE FROM `person` 
+                WHERE `person`.`id` = {0};", deletePerson.ID);
+            }
+            else if (deletePerson is TennisSpieler)
+            {
+                SQLString = String.Format(
+                @"DELETE FROM `tennisspieler` 
+                WHERE `tennisspieler`.`person_id` = {0};
+
+                DELETE FROM `person` 
+                WHERE `person`.`id` = {0};", deletePerson.ID);
+            }
+            else if (deletePerson is Trainer)
+            {
+                SQLString = "DELETE FROM `trainer` " +
+                    "WHERE `trainer`.`person_id` = " + deletePerson.ID + "; " +
+                    "DELETE FROM `person` " +
+                    "WHERE `person`.`id` = " + deletePerson.ID + "; ";
+            }
+            else if (deletePerson is Physiotherapeut)
+            {
+                SQLString = String.Format(
+                @"DELETE FROM `physiotherapeut` 
+                WHERE `physiotherapeut`.`person_id` = {0};
+
+                DELETE FROM `person` 
+                WHERE `person`.`id` = {0};", deletePerson.ID);
+            }
+
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            int anzahl = -1; // why?
+            try
+            {
+                anzahl = command.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                MySqlConnection.Close();
+                throw;
+            }
+
+            return retVal;
         }
         #endregion
     }

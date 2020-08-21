@@ -545,17 +545,6 @@ namespace Mannschaftsverwaltung
             return retVal;
         }
 
-        public bool DeleteFromDB(int personID)
-        {
-            Person deletePerson = this.Personen.Find(p => p.ID == personID);
-            bool retVal = deletePerson.deletePerson();
-            //DBManager.openDBConection();
-            //DBManager.removePerson(deletePerson);
-            //DBManager.closeConnection();
-            this.Personen.Remove(deletePerson);
-            return retVal;
-        }
-
         public void CreatePersonInDB(int personID)
         {
             Person createPerson = this.Personen.Find(p => p.ID == personID);
