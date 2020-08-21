@@ -548,7 +548,7 @@ namespace Mannschaftsverwaltung
         public void CreatePersonInDB(int personID)
         {
             Person createPerson = this.Personen.Find(p => p.ID == personID);
-            bool retVal = createPerson.createPerson();
+            bool retVal = createPerson.createPersonInDB(this.ActiveUser);
         }
         #endregion
 

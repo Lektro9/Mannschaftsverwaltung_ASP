@@ -274,18 +274,157 @@ namespace Mannschaftsverwaltung
                 WHERE `person`.`id` = {0};", deletePerson.ID);
             }
 
-            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            retVal = executeSQLState(SQLString);
+
+            return retVal;
+        }
+        public bool createPerson(Person person, User activeUser)
+        {
+            bool retVal = false;
+            string SQLString = "";
+            if (person is FussballSpieler)
+            {
+                FussballSpieler fussballer = (FussballSpieler)person;
+                SQLString = String.Format(
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {13});
+
+                INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele` , `anzahlVereine` , `anzahlSpiele`) 
+                VALUES (NULL, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}');",
+                fussballer.ID, fussballer.Name, fussballer.Vorname, fussballer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), 1, 1, fussballer.ID, fussballer.Position, fussballer.GeschosseneTore, fussballer.AnzahlJahre, fussballer.GewonneneSpiele, fussballer.AnzahlVereine, fussballer.AnzahlSpiele, activeUser.ID);
+                retVal = true;
+            }
+            else if (person is HandballSpieler)
+            {
+                HandballSpieler handballer = (HandballSpieler)person;
+                SQLString = String.Format(
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {13});
+
+                INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele` , `anzahlVereine` , `anzahlSpiele`) 
+                VALUES (NULL, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}');",
+                handballer.ID, handballer.Name, handballer.Vorname, handballer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), 1, 1, handballer.ID, handballer.Position, handballer.GeworfeneTore, handballer.AnzahlJahre, handballer.GewonneneSpiele, handballer.AnzahlVereine, handballer.AnzahlSpiele, activeUser.ID);
+                retVal = true;
+            }
+            else if (person is TennisSpieler)
+            {
+                TennisSpieler ts = (TennisSpieler)person;
+                SQLString = String.Format(
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {13});
+
+                INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`, `schlaeger`, `anzahlJahre` , `anzahlVereine` , `anzahlSpiele`) 
+                VALUES (NULL, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}');", ts.ID, ts.Name, ts.Vorname, ts.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), 1, 1, ts.ID, ts.Aufschlaggeschwindigkeit, ts.GewonneneSpiele, ts.Schlaeger, ts.AnzahlJahre, ts.AnzahlVereine, ts.AnzahlSpiele, activeUser.ID);
+                retVal = true;
+            }
+            else if (person is Trainer)
+            {
+                Trainer trainer = (Trainer)person;
+                SQLString = String.Format(
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {8});
+
+                INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`) 
+                VALUES (NULL, '{6}', '{7}');", trainer.ID, trainer.Name, trainer.Vorname, trainer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), 1, 1, trainer.ID, trainer.Erfahrung, activeUser.ID);
+                retVal = true;
+            }
+            else if (person is Physiotherapeut)
+            {
+                Physiotherapeut physio = (Physiotherapeut)person;
+                SQLString = String.Format(
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {8});
+
+                INSERT INTO `physiotherapeut` (`id`, `person_id`, `annerkennungen`) 
+                VALUES (NULL, '{6}', '{7}');", physio.ID, physio.Name, physio.Vorname, physio.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), 1, 1, physio.ID, physio.Anerkennungen, activeUser.ID);
+                retVal = true;
+            }
+
+            retVal = executeSQLState(SQLString);
+            return retVal;
+        }
+        public bool editPerson(Person person)
+        {
+            bool retVal = false;
+            string SQLString = "";
+            if (person is FussballSpieler)
+            {
+                FussballSpieler fussballer = (FussballSpieler)person;
+                SQLString = String.Format(
+                @"UPDATE `person` SET `vorname` = '{0}', `name` = '{1}', `geburtstag` = '{2}' 
+                WHERE `person`.`id` = {3};
+                UPDATE `fussballspieler` SET `position` = '{4}', `tore` = '{5}', `anzahlJahre` = '{6}', `gewonneneSpiele` = '{7}', `anzahlVereine` = '{8}', `anzahlSpiele` = '{9}' 
+                WHERE `fussballspieler`.`person_id` = {3}",
+                fussballer.Vorname, fussballer.Name, fussballer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), fussballer.ID, fussballer.Position, fussballer.GeschosseneTore, fussballer.AnzahlJahre, fussballer.GewonneneSpiele, fussballer.AnzahlVereine, fussballer.AnzahlSpiele);
+                retVal = true;
+            }
+            else if (person is HandballSpieler)
+            {
+                HandballSpieler handballer = (HandballSpieler)person;
+                SQLString = String.Format(
+                @"UPDATE `person` SET `vorname` = '{0}', `name` = '{1}', `geburtstag` = '{2}' 
+                WHERE `person`.`id` = {3};
+                UPDATE `handballspieler` SET `position` = '{4}', `tore` = '{5}', `anzahlJahre` = '{6}', `gewonneneSpiele` = '{7}', `anzahlVereine` = '{8}', `anzahlSpiele` = '{9}' 
+                WHERE `handballspieler`.`person_id` = {3}",
+                handballer.Vorname, handballer.Name, handballer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), handballer.ID, handballer.Position, handballer.GeworfeneTore, handballer.AnzahlJahre, handballer.GewonneneSpiele, handballer.AnzahlVereine, handballer.AnzahlSpiele);
+                retVal = true;
+            }
+            else if (person is TennisSpieler)
+            {
+                TennisSpieler ts = (TennisSpieler)person;
+                SQLString = String.Format(
+                @"UPDATE `person` SET `vorname` = '{0}', `name` = '{1}', `geburtstag` = '{2}' 
+                WHERE `person`.`id` = {3};
+                UPDATE `tennisspieler` SET `aufschlaggeschwindigkeit` = '{4}', `gewonnenespiele` = '{5}', `schlaeger` = '{6}', `anzahlJahre` = '{7}', `anzahlVereine` = '{8}', `anzahlSpiele` = '{9}' 
+                WHERE `tennisspieler`.`person_id` = {3}",
+                ts.Vorname, ts.Name, ts.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), ts.ID, ts.Aufschlaggeschwindigkeit, ts.GewonneneSpiele, ts.Schlaeger, ts.AnzahlJahre, ts.AnzahlVereine, ts.AnzahlSpiele);
+                retVal = true;
+            }
+            else if (person is Trainer)
+            {
+                Trainer trainer = (Trainer)person;
+                SQLString = String.Format(
+                @"UPDATE `trainer` SET `erfahrung` = '{0}' WHERE `trainer`.`person_id` = {1};
+
+                UPDATE `person` SET `vorname` = '{2}', `name` = '{3}', `geburtstag` = '{4}'
+                WHERE `person`.`id` = {1}",
+                trainer.Erfahrung, trainer.ID, trainer.Vorname, trainer.Name, trainer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                retVal = true;
+            }
+            else if (person is Physiotherapeut)
+            {
+                Physiotherapeut physio = (Physiotherapeut)person;
+                SQLString = String.Format(
+                @"UPDATE `physiotherapeut` SET `annerkennungen` = '{0}' 
+                WHERE `physiotherapeut`.`person_id` = {1};
+
+                UPDATE `person` SET `vorname` = '{2}', `name` = '{3}', `geburtstag` = '{4}'
+                WHERE `person`.`id` = {1}",
+                physio.Anerkennungen, physio.ID, physio.Vorname, physio.Name, physio.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+
+            }
+
+            retVal = executeSQLState(SQLString);
+
+            return retVal;
+        }
+
+        private bool executeSQLState(string sQLString)
+        {
+            bool retVal = false;
+            MySqlCommand command = new MySqlCommand(sQLString, MySqlConnection);
             int anzahl = -1; // why?
             try
             {
                 anzahl = command.ExecuteNonQuery();
+                retVal = true;
             }
             catch (Exception)
             {
                 MySqlConnection.Close();
+                retVal = false;
                 throw;
             }
-
             return retVal;
         }
         #endregion

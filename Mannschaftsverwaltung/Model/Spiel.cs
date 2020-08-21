@@ -22,6 +22,7 @@ namespace Mannschaftsverwaltung
         int _team2ID;
         int _team1Punkte;
         int _team2Punkte;
+        //TODO: int _turnierID;
         #endregion
 
         #region Accessoren/Modifier
