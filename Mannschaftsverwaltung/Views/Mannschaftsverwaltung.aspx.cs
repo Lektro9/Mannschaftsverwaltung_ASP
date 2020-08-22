@@ -42,6 +42,8 @@ namespace Mannschaftsverwaltung
             {
                 this.Response.Redirect(@"~\Views\Login.aspx");
             }
+            // this.Verwalter.Personen = this.Verwalter.getAllPerson(Verwalter.ActiveUser);
+            this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
             LoadMannschaften();
             if (this.Verwalter.EditMannschaft)
             {

@@ -43,6 +43,7 @@ namespace Mannschaftsverwaltung
         public List<Person> Personen { get => _Personen; set => _Personen = value; }
         [JsonIgnore]
         public Person NeuesMitglied { get => _NeuesMitglied; set => _NeuesMitglied = value; }
+
         public List<string> Sportarten { get => _Sportarten; set => _Sportarten = value; }
         [JsonIgnore]
         public bool EditPerson { get => _EditPerson; set => _EditPerson = value; }
@@ -267,13 +268,6 @@ namespace Mannschaftsverwaltung
             {
                 CreatePersonInDB(t.ID);
             }
-        }
-
-        internal void createMannschaft(string name, string sportart, List<Person> personen)
-        {
-            int id = generateID();
-            Mannschaft m = new Mannschaft(id, name, sportart, personen);
-            this.Mannschaften.Add(m);
         }
 
         internal void AddTrainer(string name, string vorname, DateTime geburtstag, int anzahlJahre)
@@ -549,6 +543,25 @@ namespace Mannschaftsverwaltung
         {
             Person createPerson = this.Personen.Find(p => p.ID == personID);
             bool retVal = createPerson.createPersonInDB(this.ActiveUser);
+        }
+
+        public List<Mannschaft> getAllMannschaften()
+        {
+            List<Mannschaft> allMann = new List<Mannschaft>();
+            DBManager.openDBConection();
+            allMann = DBManager.getAllMannschaften(this.Personen, this.ActiveUser);
+            DBManager.closeConnection();
+            return allMann;
+        }
+
+        public void createMannschaft(string name, string sportart, List<Person> personen)
+        {
+            int id = generateID();
+            Mannschaft m = new Mannschaft(id, name, sportart, personen);
+            this.DBManager.openDBConection();
+            this.DBManager.createMannschaft(m, this.ActiveUser);
+            this.DBManager.closeConnection();
+            this.Mannschaften.Add(m);
         }
         #endregion
 

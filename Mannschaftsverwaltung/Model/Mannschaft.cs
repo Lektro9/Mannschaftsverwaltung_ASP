@@ -62,6 +62,11 @@ namespace Mannschaftsverwaltung
             Personen = personen;
             pruefeListeAufSpieler();
             ID = id;
+            GewSpiele = 0;
+            Unentschieden = 0;
+            VerlSpiele = 0;
+            ErzielteTore = 0;
+            GegnerischeTore = 0;
         }
         public Mannschaft(List<Person> personen) : this()
         {
@@ -73,6 +78,36 @@ namespace Mannschaftsverwaltung
         {
             Name = name;
             Sportart = sportart;
+            Personen = personen;
+            SortBy = -1;
+            GewSpiele = 0;
+            Unentschieden = 0;
+            VerlSpiele = 0;
+            ErzielteTore = 0;
+            GegnerischeTore = 0;
+            AnzahlSpieler = personen.Count;
+            ID = id;
+        }
+
+        public Mannschaft(int id, string name, string sportart)
+        {
+            Name = name;
+            Sportart = sportart;
+            Personen = new List<Person>();
+            SortBy = -1;
+            GewSpiele = 0;
+            Unentschieden = 0;
+            VerlSpiele = 0;
+            ErzielteTore = 0;
+            GegnerischeTore = 0;
+            AnzahlSpieler = Personen.Count;
+            ID = id;
+        }
+
+        public Mannschaft(int id, string name, List<Person> personen)
+        {
+            Name = name;
+            Sportart = "";
             Personen = personen;
             SortBy = -1;
             GewSpiele = 0;

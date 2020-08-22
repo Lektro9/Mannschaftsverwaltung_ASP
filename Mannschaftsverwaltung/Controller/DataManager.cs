@@ -8,6 +8,8 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -46,7 +48,7 @@ namespace Mannschaftsverwaltung
         }
         #endregion
 
-        #region Worker
+        #region Worker (Generell)
         public bool openDBConection()
         {
             try
@@ -64,6 +66,51 @@ namespace Mannschaftsverwaltung
             }
         }
 
+        private bool executeSQLState(string sQLString)
+        {
+            bool retVal = false;
+            MySqlCommand command = new MySqlCommand(sQLString, MySqlConnection);
+            int anzahl = -1; // why?
+            try
+            {
+                anzahl = command.ExecuteNonQuery();
+                retVal = true;
+            }
+            catch (Exception)
+            {
+                MySqlConnection.Close();
+                retVal = false;
+                throw;
+            }
+            return retVal;
+        }
+
+        private bool executeSQLCommand(MySqlCommand command)
+        {
+            bool retVal = false;
+            int anzahl = -1; // why?
+            try
+            {
+                anzahl = command.ExecuteNonQuery();
+                retVal = true;
+            }
+            catch (Exception)
+            {
+                MySqlConnection.Close();
+                retVal = false;
+                throw;
+            }
+            return retVal;
+        }
+
+        public void closeConnection()
+        {
+            MySqlConnection.Dispose();
+            MySqlConnection.Close();
+        }
+        #endregion
+
+        #region Worker (Personenverwaltung)
         public List<Person> getAllPerson(User activeUser)
         {
             List<Person> retVal = new List<Person>();
@@ -220,11 +267,7 @@ namespace Mannschaftsverwaltung
             return retVal;
         }
 
-        public void closeConnection()
-        {
-            MySqlConnection.Dispose();
-            MySqlConnection.Close();
-        }
+        
 
         public bool removePerson(Person deletePerson)
         {
@@ -278,6 +321,7 @@ namespace Mannschaftsverwaltung
 
             return retVal;
         }
+
         public bool createPerson(Person person, User activeUser)
         {
             bool retVal = false;
@@ -408,23 +452,69 @@ namespace Mannschaftsverwaltung
 
             return retVal;
         }
+        #endregion
 
-        private bool executeSQLState(string sQLString)
+        #region Worker (Mannschaftsverwaltung)
+        public void createMannschaft(Mannschaft m, User activeUser)
         {
-            bool retVal = false;
-            MySqlCommand command = new MySqlCommand(sQLString, MySqlConnection);
-            int anzahl = -1; // why?
-            try
+            string SQLString = String.Format("INSERT INTO `mannschaft` (`id`, `name`, `session_id`) VALUES (@id, @name, @session);");
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@name", m.Name);
+            command.Parameters.AddWithValue("@session", activeUser.ID);
+            command.Parameters.AddWithValue("@id", m.ID);
+            executeSQLCommand(command);
+        }
+
+        public List<Mannschaft> getAllMannschaften(List<Person> allPers, User activeUser)
+        {
+            List<int> mannIds = new List<int>();
+            string mannName = "";
+            string sportart = "";
+            List<Mannschaft> allMann = new List<Mannschaft>();
+
+            string SQLStringMann = "SELECT * FROM `mannschaft` WHERE `session_id` = @session";
+            MySqlCommand command = new MySqlCommand(SQLStringMann, MySqlConnection);
+            command.Parameters.AddWithValue("@session", activeUser.ID);
+            executeSQLCommand(command);
+            MySqlDataReader rdr = command.ExecuteReader();
+            while (rdr.Read())
             {
-                anzahl = command.ExecuteNonQuery();
-                retVal = true;
+                mannIds.Add(Convert.ToInt32(rdr.GetValue(0)));
+                mannName = rdr.GetValue(1).ToString();
+                sportart = rdr.GetValue(2).ToString();
+                Mannschaft m = new Mannschaft(Convert.ToInt32(rdr.GetValue(0)), mannName, sportart);
+                allMann.Add(m);
             }
-            catch (Exception)
+            rdr.Close();
+
+            foreach (var id in mannIds)
             {
-                MySqlConnection.Close();
-                retVal = false;
-                throw;
+                allMann.Find(m => m.ID == id).Personen = getAllMannPers(allPers, id);
             }
+
+            return allMann;
+        }
+
+        private List<Person> getAllMannPers(List<Person> allPers, int mannId)
+        {
+            List<Person> retVal = new List<Person>();
+
+            string SQLStringPerson = "SELECT * FROM `person` WHERE `mannschaft_id` = @mannId";
+            MySqlCommand command = new MySqlCommand(SQLStringPerson, MySqlConnection);
+            command.Parameters.AddWithValue("@mannId", mannId);
+            executeSQLCommand(command);
+            MySqlDataReader rdr = command.ExecuteReader();
+            while (rdr.Read())
+            {
+                int persId = Convert.ToInt32(rdr.GetValue(0));
+                Person mannPers = allPers.Find(p => p.ID == persId);
+                if (mannPers != null)
+                {
+                    retVal.Add(mannPers);
+                }
+            }
+            rdr.Close();
+
             return retVal;
         }
         #endregion
