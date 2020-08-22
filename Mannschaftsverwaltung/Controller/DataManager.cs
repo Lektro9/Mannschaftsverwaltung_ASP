@@ -457,9 +457,10 @@ namespace Mannschaftsverwaltung
         #region Worker (Mannschaftsverwaltung)
         public void createMannschaft(Mannschaft m, User activeUser)
         {
-            string SQLString = String.Format("INSERT INTO `mannschaft` (`id`, `name`, `session_id`) VALUES (@id, @name, @session);");
+            string SQLString = String.Format("INSERT INTO `mannschaft` (`id`, `name`, `sportart`, `session_id`) VALUES (@id, @name, @sportart, @session);");
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
             command.Parameters.AddWithValue("@name", m.Name);
+            command.Parameters.AddWithValue("@sportart", m.Sportart);
             command.Parameters.AddWithValue("@session", activeUser.ID);
             command.Parameters.AddWithValue("@id", m.ID);
             executeSQLCommand(command);
