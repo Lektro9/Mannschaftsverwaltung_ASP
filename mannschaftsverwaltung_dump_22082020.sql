@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Aug 2020 um 09:34
+-- Erstellungszeit: 22. Aug 2020 um 12:25
 -- Server-Version: 10.4.11-MariaDB
 -- PHP-Version: 7.3.15
 
@@ -89,24 +89,34 @@ INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJah
 CREATE TABLE `mannschaft` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `sportart` text NOT NULL DEFAULT 'Fussball',
+  `session_id` int(11) NOT NULL DEFAULT 1,
+  `Unentschieden` int(11) NOT NULL DEFAULT 0,
+  `GewSpiele` int(11) NOT NULL DEFAULT 0,
+  `VerlSpiele` int(11) NOT NULL DEFAULT 0,
+  `ErzielteTore` int(11) NOT NULL DEFAULT 0,
+  `GegnerischeTore` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `mannschaft`
 --
 
-INSERT INTO `mannschaft` (`id`, `name`, `session_id`) VALUES
-(1, 'FrankfurtSV', 1),
-(2, 'TestMannschaft', 1),
-(6, 'Stuttgart', 1),
-(7, 'Dortmund', 1),
-(8, 'Berlin', 1),
-(9, 'Köln', 1),
-(10, 'Manchester City', 1),
-(11, 'FC Liverpool', 1),
-(12, 'Real Madrid', 1),
-(13, 'FC Barcelona', 1);
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`, `session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`) VALUES
+(1, 'FrankfurtSV', 'Fussball', 1, 0, 0, 0, 0, 0),
+(2, 'TestMannschaft', 'Fussball', 1, 0, 0, 0, 0, 0),
+(6, 'Stuttgart', 'Fussball', 1, 0, 0, 0, 0, 0),
+(7, 'Dortmund', 'Fussball', 1, 0, 0, 0, 0, 0),
+(8, 'Berlin', 'Fussball', 1, 0, 0, 0, 0, 0),
+(9, 'Köln', 'Fussball', 1, 0, 0, 0, 0, 0),
+(10, 'Manchester City', 'Fussball', 1, 0, 0, 0, 0, 0),
+(11, 'FC Liverpool', 'Fussball', 1, 0, 0, 0, 0, 0),
+(12, 'Real Madrid', 'Fussball', 1, 0, 0, 0, 0, 0),
+(13, 'FC Barcelona', 'Fussball', 1, 0, 0, 0, 0, 0),
+(14, 'newMann', 'Fussball', 1, 0, 0, 0, 0, 0),
+(15, 'newMann2', 'Fussball', 1, 0, 0, 0, 0, 0),
+(16, 'testmanni', 'Fussball', 1, 0, 0, 0, 0, 0),
+(104551, 'dasgtfgd', 'Fussball', 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -357,7 +367,7 @@ ALTER TABLE `handballspieler`
 -- AUTO_INCREMENT für Tabelle `mannschaft`
 --
 ALTER TABLE `mannschaft`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104552;
 
 --
 -- AUTO_INCREMENT für Tabelle `person`
