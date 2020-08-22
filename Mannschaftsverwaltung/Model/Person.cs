@@ -110,7 +110,7 @@ namespace Mannschaftsverwaltung
         #endregion
 
         #region Datenbank
-        public abstract bool createPerson();
+        public abstract bool createPersonInDB(User activeUser);
         public abstract bool editPerson();
         public abstract bool deletePerson();
         #endregion
