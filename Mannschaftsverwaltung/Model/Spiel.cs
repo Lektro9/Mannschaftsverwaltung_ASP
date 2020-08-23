@@ -64,7 +64,7 @@ namespace Mannschaftsverwaltung
         #endregion
 
         #region Worker
-        public int showWinner()
+        public int getWinnerID()
         {
             int retVal;
             if (this.Team1Punkte > this.Team2Punkte)
@@ -83,7 +83,7 @@ namespace Mannschaftsverwaltung
             return retVal;
         }
 
-        public int showLoser()
+        public int getLoserID()
         {
             int retVal;
             if (this.Team1Punkte > this.Team2Punkte)

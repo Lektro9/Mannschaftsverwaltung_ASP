@@ -120,6 +120,9 @@ namespace Mannschaftsverwaltung
 
         public void removeTurnier(int turnierIndex)
         {
+            DBManager.openDBConection();
+            DBManager.deleteTurnier(this.Turniere[turnierIndex].ID, this.Turniere[turnierIndex].Spiele);
+            DBManager.closeConnection();
             foreach (Spiel s in this.Turniere[turnierIndex].Spiele)
             {
                 removeMannschaftsStats(s);
@@ -140,19 +143,27 @@ namespace Mannschaftsverwaltung
         {
             Spiel s = new Spiel(generateID(), team1id, team2id, team1Punkte, team2Punkte);
             this.Turniere[TurnierIndex].Spiele.Add(s);
+
             addMannschaftsStats(s);
+
+            DBManager.openDBConection();
+            DBManager.createSpiel(this.Turniere[TurnierIndex].ID, s);
+            DBManager.closeConnection();
         }
 
         public void deleteGame(int TurnierIndex, Spiel s)
         {
             this.Turniere[TurnierIndex].Spiele.Remove(s);
+            DBManager.openDBConection();
+            DBManager.deleteSpiel(s);
+            DBManager.closeConnection();
             removeMannschaftsStats(s);
         }
 
         private void removeMannschaftsStats(Spiel s)
         {
-            int winner = s.showWinner();
-            int loser = s.showLoser();
+            int winner = s.getWinnerID();
+            int loser = s.getLoserID();
             if (winner == -1 && loser == -1)
             {
                 Mannschaft team1 = findMann(s.Team1ID);
@@ -164,6 +175,11 @@ namespace Mannschaftsverwaltung
                 team1.GegnerischeTore -= s.Team1Punkte;
                 team2.ErzielteTore -= s.Team1Punkte;
                 team2.GegnerischeTore -= s.Team1Punkte;
+
+                DBManager.openDBConection();
+                DBManager.updateMannStats(team1);
+                DBManager.updateMannStats(team2);
+                DBManager.closeConnection();
             }
             else
             {
@@ -185,13 +201,18 @@ namespace Mannschaftsverwaltung
                 }
                 mWin.GewSpiele -= 1;
                 mLos.VerlSpiele -= 1;
+
+                DBManager.openDBConection();
+                DBManager.updateMannStats(mWin);
+                DBManager.updateMannStats(mLos);
+                DBManager.closeConnection();
             }
         }
 
         private void addMannschaftsStats(Spiel s)
         {
-            int winner = s.showWinner();
-            int loser = s.showLoser();
+            int winner = s.getWinnerID();
+            int loser = s.getLoserID();
             if (winner == -1 && loser == -1)
             {
                 Mannschaft team1 = findMann(s.Team1ID);
@@ -203,6 +224,12 @@ namespace Mannschaftsverwaltung
                 team1.GegnerischeTore += s.Team1Punkte;
                 team2.ErzielteTore += s.Team1Punkte;
                 team2.GegnerischeTore += s.Team1Punkte;
+
+                DBManager.openDBConection();
+                DBManager.updateMannStats(team1);
+                DBManager.updateMannStats(team2);
+                DBManager.closeConnection();
+
             }
             else
             {
@@ -224,6 +251,11 @@ namespace Mannschaftsverwaltung
                 }
                 mWin.GewSpiele += 1;
                 mLos.VerlSpiele += 1;
+
+                DBManager.openDBConection();
+                DBManager.updateMannStats(mWin);
+                DBManager.updateMannStats(mLos);
+                DBManager.closeConnection();
             }
         }
 
@@ -240,13 +272,16 @@ namespace Mannschaftsverwaltung
             return EditMann;
         }
 
-        internal void TurnierHinzuf(string turnierName)
+        public void TurnierHinzuf(string turnierName)
         {
             Turnier t = new Turnier(generateID(), turnierName);
+            DBManager.openDBConection();
+            DBManager.createTurnier(t, ActiveUser);
+            DBManager.closeConnection();
             this.Turniere.Add(t);
         }
 
-        internal void AddFussballSpieler(string name, string vorname, DateTime geburtstag, string position, int geschosseneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
+        public void AddFussballSpieler(string name, string vorname, DateTime geburtstag, string position, int geschosseneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
         {
             int id = generateID();
             FussballSpieler f = new FussballSpieler(id, name, vorname, geburtstag, position, geschosseneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
@@ -257,7 +292,7 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        internal void AddHandballSpieler(string name, string vorname, DateTime geburtstag, string position, int geworfeneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
+        public void AddHandballSpieler(string name, string vorname, DateTime geburtstag, string position, int geworfeneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
         {
             int id = generateID();
             HandballSpieler h = new HandballSpieler(id, name, vorname, geburtstag, position, geworfeneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
@@ -268,7 +303,7 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        internal void AddTennisSpieler(string name, string vorname, DateTime geburtstag, int aufschlagGeschw, string schlaeger, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
+        public void AddTennisSpieler(string name, string vorname, DateTime geburtstag, int aufschlagGeschw, string schlaeger, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)
         {
             int id = generateID();
             TennisSpieler t = new TennisSpieler(id, name, vorname, geburtstag, aufschlagGeschw, schlaeger, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
@@ -279,7 +314,7 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        internal void AddTrainer(string name, string vorname, DateTime geburtstag, int anzahlJahre)
+        public void AddTrainer(string name, string vorname, DateTime geburtstag, int anzahlJahre)
         {
             int id = generateID();
             Trainer t = new Trainer(id, name, vorname, geburtstag, anzahlJahre);
@@ -290,7 +325,7 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        internal void AddPhysio(string name, string vorname, DateTime geburtstag)
+        public void AddPhysio(string name, string vorname, DateTime geburtstag)
         {
             int id = generateID();
             Physiotherapeut p = new Physiotherapeut(id, name, vorname, geburtstag);
@@ -582,6 +617,7 @@ namespace Mannschaftsverwaltung
         public List<Mannschaft> getAllMannschaften()
         {
             List<Mannschaft> allMann = new List<Mannschaft>();
+            this.Personen = getAllPerson(ActiveUser);
             DBManager.openDBConection();
             allMann = DBManager.getAllMannschaften(this.Personen, this.ActiveUser);
             DBManager.closeConnection();
@@ -596,6 +632,13 @@ namespace Mannschaftsverwaltung
             this.DBManager.createMannschaft(m, this.ActiveUser);
             this.DBManager.closeConnection();
             this.Mannschaften.Add(m);
+        }
+
+        public void getAllTurniereFromDB()
+        {
+            DBManager.openDBConection();
+            Turniere = DBManager.getAllTurniere(this.ActiveUser);
+            DBManager.closeConnection();
         }
         #endregion
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Aug 2020 um 12:25
+-- Erstellungszeit: 23. Aug 2020 um 22:45
 -- Server-Version: 10.4.11-MariaDB
 -- PHP-Version: 7.3.15
 
@@ -44,13 +44,8 @@ CREATE TABLE `fussballspieler` (
 --
 
 INSERT INTO `fussballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
-(1, 12, 'Stürmer', 34, 0, 0, 0, 0),
-(11, 15, 'Stürmer', 10, 0, 0, 0, 0),
-(12, 16, 'Außenmittelfeldspieler (Flügelspieler)', 15, 0, 0, 0, 0),
-(14, 2, 'defensiver Mittelfeldspieler', 28, 0, 0, 0, 0),
-(17, 13, 'Stürmer', 45, 0, 0, 0, 0),
-(18, 110440, '23', 23, 44, 25, 23, 323),
-(19, 110441, 'berserker', 34, 4, 1, 3, 23);
+(20, 109282, '1', 1, 1, 1, 1, 1),
+(21, 44195, '6', 6, 6, 6, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -74,11 +69,7 @@ CREATE TABLE `handballspieler` (
 --
 
 INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele`, `anzahlVereine`, `anzahlSpiele`) VALUES
-(2, 21, 'Angriff', 25, 0, 0, 0, 0),
-(5, 17, 'Rückraumlinks', 12, 0, 0, 0, 0),
-(6, 19, 'Rückraummitte', 4, 0, 0, 0, 0),
-(8, 18, 'Rechtsaußen', 65, 0, 0, 0, 0),
-(11, 110442, 'da hinten', 32, 4, 5, 6, 7);
+(12, 11411, '2', 2, 2, 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -103,20 +94,9 @@ CREATE TABLE `mannschaft` (
 --
 
 INSERT INTO `mannschaft` (`id`, `name`, `sportart`, `session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`) VALUES
-(1, 'FrankfurtSV', 'Fussball', 1, 0, 0, 0, 0, 0),
-(2, 'TestMannschaft', 'Fussball', 1, 0, 0, 0, 0, 0),
-(6, 'Stuttgart', 'Fussball', 1, 0, 0, 0, 0, 0),
-(7, 'Dortmund', 'Fussball', 1, 0, 0, 0, 0, 0),
-(8, 'Berlin', 'Fussball', 1, 0, 0, 0, 0, 0),
-(9, 'Köln', 'Fussball', 1, 0, 0, 0, 0, 0),
-(10, 'Manchester City', 'Fussball', 1, 0, 0, 0, 0, 0),
-(11, 'FC Liverpool', 'Fussball', 1, 0, 0, 0, 0, 0),
-(12, 'Real Madrid', 'Fussball', 1, 0, 0, 0, 0, 0),
-(13, 'FC Barcelona', 'Fussball', 1, 0, 0, 0, 0, 0),
-(14, 'newMann', 'Fussball', 1, 0, 0, 0, 0, 0),
-(15, 'newMann2', 'Fussball', 1, 0, 0, 0, 0, 0),
-(16, 'testmanni', 'Fussball', 1, 0, 0, 0, 0, 0),
-(104551, 'dasgtfgd', 'Fussball', 1, 0, 0, 0, 0, 0);
+(79428, 'h1', 'Handball', 1, 0, 1, 0, 5, 4),
+(156102, 't1', 'Tennis', 1, 0, 0, 1, 4, 5),
+(214516, 'f1', 'Fussball', 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -139,29 +119,12 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) VALUES
-(1, 'Vergil', 'Redgrave', '2020-03-26', 2, 1, 1),
-(2, 'Dante', 'Regdrave', '2002-03-26', 1, 2, 1),
-(12, 'Dennis', 'grandle2', '1993-03-25', 6, 2, 1),
-(13, 'Klaus', 'Shidokiv', '1990-01-02', 6, 2, 1),
-(14, 'Peter', 'Schmitt', '2000-03-13', 6, 2, 1),
-(15, 'Lars', 'Banane', '2001-04-02', 7, 2, 1),
-(16, 'Bern', 'Wunder', '1989-03-02', 7, 2, 1),
-(17, 'Fernando', 'Brandez', '1998-03-11', 7, 2, 1),
-(18, 'James', 'Peterson', '2003-03-20', 8, 2, 1),
-(19, 'George', 'doubleyuu', '1970-12-26', 8, 2, 1),
-(20, 'Michael', 'Stiefelmacher', '1999-01-14', 8, 2, 1),
-(21, 'Chris', 'Redfield', '1980-03-30', 9, 2, 1),
-(22, 'Randy', 'Shmot', '1993-02-21', 9, 2, 1),
-(23, 'Gerry', 'sMod', '1995-07-26', 9, 2, 1),
-(24, 'ExampleGuy', 'ExampleName', '2001-03-11', 8, 7, 1),
-(34234, 'Trainer', 'Tom', '2020-05-05', 8, 2, 1),
-(34235, 'Klemens', 'Bondie', '2020-05-02', 12, 1, 1),
-(110440, '32', '23', '2020-08-06', 1, 1, 1),
-(110441, 'Kratschi', 'Matschi', '2020-08-12', 11, 2, 2),
-(110442, 'dasd', 'dddd', '2020-08-11', 11, 2, 2),
-(123646, '3', '3', '2020-08-03', 1, 1, 2),
-(201047, '44', '44', '2020-08-05', 1, 1, 1),
-(201049, 'dwads', 'dwas', '2020-08-13', NULL, NULL, 1);
+(11411, '2', '2', '2020-08-02', 79428, 1, 1),
+(39599, '4', '4', '2020-08-04', NULL, 1, 1),
+(44195, '6', '6', '2020-08-06', NULL, NULL, 1),
+(109282, '1', '1', '2020-08-01', 214516, 1, 1),
+(116778, '5', '5', '2020-08-05', NULL, 1, 1),
+(117397, '3', '3', '2020-03-03', 156102, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -180,9 +143,29 @@ CREATE TABLE `physiotherapeut` (
 --
 
 INSERT INTO `physiotherapeut` (`id`, `person_id`, `annerkennungen`) VALUES
-(11, 34235, 'Medizinstudium abgeschlossen'),
-(12, 123646, 'nothing'),
-(13, 201047, 'nothing');
+(14, 116778, 'nothing');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `spiel`
+--
+
+CREATE TABLE `spiel` (
+  `id` int(11) NOT NULL,
+  `team1ID` int(11) DEFAULT NULL,
+  `team2ID` int(11) DEFAULT NULL,
+  `team1Punkte` int(11) DEFAULT NULL,
+  `team2Punkte` int(11) DEFAULT NULL,
+  `turnierID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Daten für Tabelle `spiel`
+--
+
+INSERT INTO `spiel` (`id`, `team1ID`, `team2ID`, `team1Punkte`, `team2Punkte`, `turnierID`) VALUES
+(9, 79428, 156102, 5, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -206,8 +189,7 @@ CREATE TABLE `tennisspieler` (
 --
 
 INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`, `schlaeger`, `anzahlJahre`, `anzahlVereine`, `anzahlSpiele`) VALUES
-(1, 23, 86, 14, 'Wilson 9000', 0, 0, 0),
-(10, 1, 250, 67, 'Wilson 9000', 0, 0, 0);
+(13, 117397, 3, 3, '3', 3, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -226,8 +208,7 @@ CREATE TABLE `trainer` (
 --
 
 INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`) VALUES
-(11, 34234, 35),
-(12, 24, 33);
+(13, 39599, 4);
 
 -- --------------------------------------------------------
 
@@ -238,6 +219,7 @@ INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`) VALUES
 CREATE TABLE `turnier` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
+  `turnierstatus` int(11) NOT NULL DEFAULT 1,
   `session_id` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -245,17 +227,17 @@ CREATE TABLE `turnier` (
 -- Daten für Tabelle `turnier`
 --
 
-INSERT INTO `turnier` (`id`, `name`, `session_id`) VALUES
-(1, 'TestTurnier', 1),
-(2, 'Bundesliga', 1),
-(3, 'Stb. Open', 1),
-(4, 'Madness Competition', 1),
-(5, 'Spring Cup\r\n', 1),
-(6, 'Speedy Cup\r\n', 1),
-(7, 'Royal Cup\r\n', 1),
-(8, 'Easter, Winter Trophy\r\n', 1),
-(9, 'Summerslam', 1),
-(10, 'Spring Slam Series', 1);
+INSERT INTO `turnier` (`id`, `name`, `turnierstatus`, `session_id`) VALUES
+(1, 'TestTurnier', 1, 1),
+(2, 'Bundesliga', 1, 1),
+(3, 'Stb. Open', 1, 1),
+(5, 'Spring Cup\r\n', 1, 1),
+(6, 'Speedy Cup\r\n', 1, 1),
+(7, 'Royal Cup\r\n', 1, 1),
+(9, 'Summerslam', 1, 1),
+(10, 'Spring Slam Series', 1, 1),
+(11, 'NeuesTurnier123', 1, 1),
+(13, 'testTurnierw121212', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -321,6 +303,15 @@ ALTER TABLE `physiotherapeut`
   ADD KEY `person_id` (`person_id`);
 
 --
+-- Indizes für die Tabelle `spiel`
+--
+ALTER TABLE `spiel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `team1ID_mann` (`team1ID`),
+  ADD KEY `team2ID_mann` (`team2ID`),
+  ADD KEY `spiel_turnier` (`turnierID`);
+
+--
 -- Indizes für die Tabelle `tennisspieler`
 --
 ALTER TABLE `tennisspieler`
@@ -355,19 +346,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT für Tabelle `fussballspieler`
 --
 ALTER TABLE `fussballspieler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT für Tabelle `handballspieler`
 --
 ALTER TABLE `handballspieler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT für Tabelle `mannschaft`
 --
 ALTER TABLE `mannschaft`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104552;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214517;
 
 --
 -- AUTO_INCREMENT für Tabelle `person`
@@ -379,25 +370,31 @@ ALTER TABLE `person`
 -- AUTO_INCREMENT für Tabelle `physiotherapeut`
 --
 ALTER TABLE `physiotherapeut`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT für Tabelle `spiel`
+--
+ALTER TABLE `spiel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT für Tabelle `tennisspieler`
 --
 ALTER TABLE `tennisspieler`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT für Tabelle `trainer`
 --
 ALTER TABLE `trainer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT für Tabelle `turnier`
 --
 ALTER TABLE `turnier`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT für Tabelle `user`
@@ -440,6 +437,14 @@ ALTER TABLE `person`
 --
 ALTER TABLE `physiotherapeut`
   ADD CONSTRAINT `physiotherapeut_ibfk_1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`);
+
+--
+-- Constraints der Tabelle `spiel`
+--
+ALTER TABLE `spiel`
+  ADD CONSTRAINT `spiel_turnier` FOREIGN KEY (`turnierID`) REFERENCES `turnier` (`id`),
+  ADD CONSTRAINT `team1ID_mann` FOREIGN KEY (`team1ID`) REFERENCES `mannschaft` (`id`),
+  ADD CONSTRAINT `team2ID_mann` FOREIGN KEY (`team2ID`) REFERENCES `mannschaft` (`id`);
 
 --
 -- Constraints der Tabelle `tennisspieler`

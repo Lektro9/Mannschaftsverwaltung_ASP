@@ -34,7 +34,7 @@ namespace Mannschaftsverwaltung
         public Turnier()
         {
             ID = -1;
-            Status = Turnierstatus.Vorbereitung;
+            Status = Turnierstatus.Gestartet;
             Spiele = null;
         }
         //Spezialkonstruktor
@@ -42,14 +42,21 @@ namespace Mannschaftsverwaltung
         {
             this.ID = id;
             this.Name = name;
-            Status = Turnierstatus.Vorbereitung;
+            Status = Turnierstatus.Gestartet;
             this.Spiele = spiele;
         }
         public Turnier(int id, string name)
         {
             this.ID = id;
             this.Name = name;
-            Status = Turnierstatus.Vorbereitung;
+            Status = Turnierstatus.Gestartet;
+            this.Spiele = new List<Spiel>();
+        }
+        public Turnier(int id, string name, int turnierstatus)
+        {
+            this.ID = id;
+            this.Name = name;
+            Status = (Turnierstatus)turnierstatus;
             this.Spiele = new List<Spiel>();
         }
         //Kopierkonstruktor

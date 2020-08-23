@@ -15,10 +15,8 @@ namespace Mannschaftsverwaltung
 {
     public enum Turnierstatus
     {
-        Vorbereitung = 0,
-        Gestartet = 1,
-        Unterbrochen = 2,
-        Beendet = 3,
+        Gestartet = 0,
+        Beendet = 1,
     }
 
     public enum Role

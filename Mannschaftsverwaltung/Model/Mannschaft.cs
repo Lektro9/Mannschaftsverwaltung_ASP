@@ -99,6 +99,22 @@ namespace Mannschaftsverwaltung
             AnzahlSpieler = Personen.Count;
             ID = id;
         }
+
+        public Mannschaft(int iD, string name, string sportart, List<Person> personen, int unentschieden,  int gewSpiele, int verlSpiele, int erzielteTore, int gegnerischeTore)
+        {
+            ID = iD;
+            Sportart = sportart;
+            Personen = personen;
+            AnzahlSpieler = 0;
+            SortBy = -1;
+            GewSpiele = gewSpiele;
+            Unentschieden = unentschieden;
+            VerlSpiele = verlSpiele;
+            ErzielteTore = erzielteTore;
+            GegnerischeTore = gegnerischeTore;
+            Name = name;
+        }
+
         #endregion
 
         #region Worker

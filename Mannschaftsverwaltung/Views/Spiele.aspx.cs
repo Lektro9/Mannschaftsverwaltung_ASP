@@ -27,6 +27,9 @@ namespace Mannschaftsverwaltung
                 if (this.Verwalter.ActiveUser != null)
                 {
                     Verwalter = (Controller)this.Session[this.Verwalter.ActiveUser.ID.ToString()];
+                    this.Verwalter.Personen = this.Verwalter.getAllPerson(Verwalter.ActiveUser);
+                    this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
+                    Verwalter.getAllTurniereFromDB();
                 }
                 else
                 {
