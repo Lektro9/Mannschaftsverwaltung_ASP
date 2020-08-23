@@ -464,6 +464,22 @@ namespace Mannschaftsverwaltung
             command.Parameters.AddWithValue("@session", activeUser.ID);
             command.Parameters.AddWithValue("@id", m.ID);
             executeSQLCommand(command);
+            foreach (Person p in m.Personen)
+            {
+                editPersonMannschaft(m, p);
+            }
+        }
+
+        private bool editPersonMannschaft(Mannschaft m, Person person)
+        {
+            bool retVal = false;
+            string SQLString = "UPDATE `person` SET `mannschaft_id` = @mannID WHERE `person`.`id` = @personID; ";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@mannID", m.ID);
+            command.Parameters.AddWithValue("@personID", person.ID);
+            executeSQLCommand(command);
+
+            return retVal;
         }
 
         public List<Mannschaft> getAllMannschaften(List<Person> allPers, User activeUser)

@@ -42,7 +42,7 @@ namespace Mannschaftsverwaltung
             {
                 this.Response.Redirect(@"~\Views\Login.aspx");
             }
-            // this.Verwalter.Personen = this.Verwalter.getAllPerson(Verwalter.ActiveUser);
+            this.Verwalter.Personen = this.Verwalter.getAllPerson(Verwalter.ActiveUser);
             this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
             LoadMannschaften();
             if (this.Verwalter.EditMannschaft)
@@ -381,22 +381,25 @@ namespace Mannschaftsverwaltung
         protected void PersEntf_Click(object sender, EventArgs e)
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(10));
-            string[] Spieler = this.Request.Form[String.Format("ctl00$MainContent$Liste{0}", index)].Split(',');
-            List<int> SpielderIDs = new List<int>();
-            foreach (string item in Spieler)
+            if (this.Request.Form[String.Format("ctl00$MainContent$Liste{0}", index)] != null)
             {
-                Match m = Regex.Match(item.ToString(), @"^\(([0-9]+)\)");
-                int personID = Int32.Parse(m.Groups[1].ToString());
-                SpielderIDs.Add(personID);
-            }
-
-            for (int i = 0; i < this.Verwalter.Mannschaften.Count; i++)
-            {
-                if (i == index - 1)
+                string[] Spieler = this.Request.Form[String.Format("ctl00$MainContent$Liste{0}", index)].Split(',');
+                List<int> SpielderIDs = new List<int>();
+                foreach (string item in Spieler)
                 {
-                    foreach (int id in SpielderIDs)
+                    Match m = Regex.Match(item.ToString(), @"^\(([0-9]+)\)");
+                    int personID = Int32.Parse(m.Groups[1].ToString());
+                    SpielderIDs.Add(personID);
+                }
+
+                for (int i = 0; i < this.Verwalter.Mannschaften.Count; i++)
+                {
+                    if (i == index - 1)
                     {
-                        this.Verwalter.Mannschaften[i].RemovePerson(id);
+                        foreach (int id in SpielderIDs)
+                        {
+                            this.Verwalter.Mannschaften[i].RemovePerson(id);
+                        }
                     }
                 }
             }
