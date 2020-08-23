@@ -118,7 +118,7 @@ namespace Mannschaftsverwaltung
         //    return new JavaScriptSerializer().Serialize(saveCont);
         //}
 
-        internal void removeTurnier(int turnierIndex)
+        public void removeTurnier(int turnierIndex)
         {
             foreach (Spiel s in this.Turniere[turnierIndex].Spiele)
             {
@@ -127,14 +127,23 @@ namespace Mannschaftsverwaltung
             this.Turniere.RemoveAt(turnierIndex);
         }
 
-        internal void createGame(int TurnierIndex, int team1id, int team2id, int team1Punkte, int team2Punkte)
+        public void removePersonFromMannschaft(Mannschaft m, int personID)
+        {
+            m.RemovePerson(personID); //only really needed when there is no DB
+            DBManager.openDBConection();
+            DBManager.editPersonMannschaft(null, this.Personen.Find(p => p.ID == personID));
+            DBManager.closeConnection();
+
+        }
+
+        public void createGame(int TurnierIndex, int team1id, int team2id, int team1Punkte, int team2Punkte)
         {
             Spiel s = new Spiel(generateID(), team1id, team2id, team1Punkte, team2Punkte);
             this.Turniere[TurnierIndex].Spiele.Add(s);
             addMannschaftsStats(s);
         }
 
-        internal void deleteGame(int TurnierIndex, Spiel s)
+        public void deleteGame(int TurnierIndex, Spiel s)
         {
             this.Turniere[TurnierIndex].Spiele.Remove(s);
             removeMannschaftsStats(s);
@@ -463,6 +472,24 @@ namespace Mannschaftsverwaltung
             this.Personen = mergedPersonen;
         }
 
+        public void deleteMannFromDB(Mannschaft m)
+        {
+            DBManager.openDBConection();
+            foreach (Person p in m.Personen)
+            {
+                DBManager.editPersonMannschaft(null, p);
+            }
+            DBManager.deleteMann(m);
+            DBManager.closeConnection();
+        }
+
+        public void renameMannInDB(Mannschaft mannschaft)
+        {
+            DBManager.openDBConection();
+            DBManager.renameMann(mannschaft);
+            DBManager.closeConnection();
+        }
+
         private List<Person> getAllTrainer()
         {
             List<Person> retVal = new List<Person>();
@@ -474,6 +501,13 @@ namespace Mannschaftsverwaltung
                 }
             }
             return retVal;
+        }
+
+        public void addPersonToMannInDB(Mannschaft m, Person p)
+        {
+            DBManager.openDBConection();
+            DBManager.editPersonMannschaft(m, p);
+            DBManager.closeConnection();
         }
 
         private List<Person> getAllPhysios()

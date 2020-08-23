@@ -267,7 +267,7 @@ namespace Mannschaftsverwaltung
             return retVal;
         }
 
-        
+
 
         public bool removePerson(Person deletePerson)
         {
@@ -470,12 +470,36 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        private bool editPersonMannschaft(Mannschaft m, Person person)
+        public void renameMann(Mannschaft m)
+        {
+            string SQLString = "UPDATE `mannschaft` SET `name` = @name WHERE `mannschaft`.`id` = @id; ";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@name", m.Name);
+            command.Parameters.AddWithValue("@id", m.ID);
+            executeSQLCommand(command);
+        }
+
+        internal void deleteMann(Mannschaft m)
+        {
+            string SQLString = "DELETE FROM `mannschaft` WHERE `mannschaft`.`id` = @id;";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@id", m.ID);
+            executeSQLCommand(command);
+        }
+
+        public bool editPersonMannschaft(Mannschaft m, Person person)
         {
             bool retVal = false;
             string SQLString = "UPDATE `person` SET `mannschaft_id` = @mannID WHERE `person`.`id` = @personID; ";
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
-            command.Parameters.AddWithValue("@mannID", m.ID);
+            if (m != null)
+            {
+                command.Parameters.AddWithValue("@mannID", m.ID);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@mannID", null);
+            }
             command.Parameters.AddWithValue("@personID", person.ID);
             executeSQLCommand(command);
 

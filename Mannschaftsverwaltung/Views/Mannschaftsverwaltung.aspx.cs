@@ -398,7 +398,7 @@ namespace Mannschaftsverwaltung
                     {
                         foreach (int id in SpielderIDs)
                         {
-                            this.Verwalter.Mannschaften[i].RemovePerson(id);
+                            this.Verwalter.removePersonFromMannschaft(this.Verwalter.Mannschaften[i], id);
                         }
                     }
                 }
@@ -410,6 +410,7 @@ namespace Mannschaftsverwaltung
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(10));
             //this.Verwalter.DeleteFromDB(this.Verwalter.Mannschaften[index - 1].ID);
+            this.Verwalter.deleteMannFromDB(this.Verwalter.Mannschaften[index - 1]);
             this.Verwalter.Mannschaften.RemoveAt(index - 1);
             Response.Redirect(Request.RawUrl);
         }
@@ -424,7 +425,11 @@ namespace Mannschaftsverwaltung
                     index = i;
                 }
             }
+            //change name of Mannschaft
             this.Verwalter.Mannschaften[index].Name = this.Request.Form["ctl00$MainContent$mannschaftsName"];
+            this.Verwalter.renameMannInDB(this.Verwalter.Mannschaften[index]);
+
+            //add Person to Mannschaft
             if (this.Request.Form["ctl00$MainContent$ListBox1"] != null)
             {
                 string[] Spieler = this.Request.Form["ctl00$MainContent$ListBox1"].Split(',');
@@ -437,12 +442,12 @@ namespace Mannschaftsverwaltung
                         if (p.ID == personID)
                         {
                             this.Verwalter.Mannschaften[index].Personen.Add(p);
+                            this.Verwalter.addPersonToMannInDB(this.Verwalter.Mannschaften[index], p);
                         }
                     }
 
                 }
             }
-
             this.Verwalter.EditMannschaft = false;
             Response.Redirect(Request.RawUrl);
         }
