@@ -593,9 +593,9 @@ namespace Mannschaftsverwaltung
             while (rdr.Read())
             {
                 Turnier t = new Turnier(
-                        Convert.ToInt32(rdr.GetValue(0)),
-                        rdr.GetValue(1).ToString(),
-                        Convert.ToInt32(rdr.GetValue(2))
+                        Convert.ToInt32(rdr["ID"]),
+                        rdr["name"].ToString(),
+                        Convert.ToInt32(rdr["turnierstatus"])
                     );
                 retVal.Add(t);
             }
