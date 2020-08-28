@@ -87,10 +87,15 @@ namespace Mannschaftsverwaltung
             ReverseSort = true;
             Turniere = new List<Turnier>();
             DBStatus = false;
-            Nutzer = new List<User>() { new User(1, "admin", "admin", Role.ADMIN), new User(2, "user", "user", Role.USER) };
             Authenticated = false;
             ActiveUser = null;
             DBManager = new DataManager();
+            Nutzer = new List<User>();
+
+            //get User from DB
+            DBManager.openDBConection();
+            Nutzer = DBManager.getAllUser();
+            DBManager.closeConnection();
         }
         #endregion
 
@@ -111,12 +116,6 @@ namespace Mannschaftsverwaltung
         {
             return Math.Abs(Guid.NewGuid().GetHashCode() / 10000);
         }
-
-        //internal string createCurrentStateAsJSON()
-        //{
-        //    Controller saveCont = this;
-        //    return new JavaScriptSerializer().Serialize(saveCont);
-        //}
 
         public void removeTurnier(int turnierIndex)
         {

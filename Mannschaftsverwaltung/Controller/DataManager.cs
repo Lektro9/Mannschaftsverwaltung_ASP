@@ -677,5 +677,45 @@ namespace Mannschaftsverwaltung
             executeSQLCommand(command);
         }
         #endregion
+
+        #region Worker (Userverwaltung)
+        public List<User> getAllUser()
+        {
+            List<User> retVal = new List<User>();
+
+            string SQLString = "SELECT * FROM `user`;";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            executeSQLCommand(command);
+            MySqlDataReader rdr = command.ExecuteReader();
+            while (rdr.Read())
+            {
+                User u = new User(
+                        Convert.ToInt32(rdr["id"]),
+                        rdr["login"].ToString(),
+                        rdr["password"].ToString(),
+                        (Role)Enum.Parse(typeof(Role), rdr["role"].ToString())
+                        );
+                retVal.Add(u);
+            }
+            rdr.Close();
+
+            return retVal;
+        }
+
+        public void removeUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateUser()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

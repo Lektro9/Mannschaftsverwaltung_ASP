@@ -1,20 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Erstellungszeit: 23. Aug 2020 um 22:45
--- Server-Version: 10.4.11-MariaDB
--- PHP-Version: 7.3.15
+-- Host: localhost:3306
+-- Erstellungszeit: 28. Aug 2020 um 08:13
+-- Server-Version: 10.1.37-MariaDB
+-- PHP-Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-CREATE DATABASE `mannschaftsverwaltung`;
-
-USE `mannschaftsverwaltung`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,10 +33,10 @@ CREATE TABLE `fussballspieler` (
   `person_id` int(11) NOT NULL,
   `position` text NOT NULL,
   `tore` int(11) NOT NULL,
-  `anzahlJahre` int(11) NOT NULL DEFAULT 0,
-  `gewonneneSpiele` int(11) NOT NULL DEFAULT 0,
-  `anzahlVereine` int(11) NOT NULL DEFAULT 0,
-  `anzahlSpiele` int(11) NOT NULL DEFAULT 0
+  `anzahlJahre` int(11) NOT NULL DEFAULT '0',
+  `gewonneneSpiele` int(11) NOT NULL DEFAULT '0',
+  `anzahlVereine` int(11) NOT NULL DEFAULT '0',
+  `anzahlSpiele` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -61,10 +58,10 @@ CREATE TABLE `handballspieler` (
   `person_id` int(11) NOT NULL,
   `position` text NOT NULL,
   `tore` int(11) NOT NULL,
-  `anzahlJahre` int(11) NOT NULL DEFAULT 0,
-  `gewonneneSpiele` int(11) NOT NULL DEFAULT 0,
-  `anzahlVereine` int(11) NOT NULL DEFAULT 0,
-  `anzahlSpiele` int(11) NOT NULL DEFAULT 0
+  `anzahlJahre` int(11) NOT NULL DEFAULT '0',
+  `gewonneneSpiele` int(11) NOT NULL DEFAULT '0',
+  `anzahlVereine` int(11) NOT NULL DEFAULT '0',
+  `anzahlSpiele` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -84,12 +81,12 @@ CREATE TABLE `mannschaft` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
   `sportart` text NOT NULL,
-  `session_id` int(11) NOT NULL DEFAULT 1,
-  `Unentschieden` int(11) NOT NULL DEFAULT 0,
-  `GewSpiele` int(11) NOT NULL DEFAULT 0,
-  `VerlSpiele` int(11) NOT NULL DEFAULT 0,
-  `ErzielteTore` int(11) NOT NULL DEFAULT 0,
-  `GegnerischeTore` int(11) NOT NULL DEFAULT 0
+  `session_id` int(11) NOT NULL DEFAULT '1',
+  `Unentschieden` int(11) NOT NULL DEFAULT '0',
+  `GewSpiele` int(11) NOT NULL DEFAULT '0',
+  `VerlSpiele` int(11) NOT NULL DEFAULT '0',
+  `ErzielteTore` int(11) NOT NULL DEFAULT '0',
+  `GegnerischeTore` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -97,8 +94,8 @@ CREATE TABLE `mannschaft` (
 --
 
 INSERT INTO `mannschaft` (`id`, `name`, `sportart`, `session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`) VALUES
-(79428, 'h1', 'Handball', 1, 0, 1, 0, 5, 4),
-(156102, 't1', 'Tennis', 1, 0, 0, 1, 4, 5),
+(79428, 'h1', 'Handball', 1, 0, 0, 0, 0, 0),
+(156102, 't1', 'Tennis', 1, 0, 0, 0, 0, 0),
 (214516, 'f1', 'Fussball', 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -113,21 +110,20 @@ CREATE TABLE `person` (
   `name` text NOT NULL,
   `geburtstag` date NOT NULL,
   `mannschaft_id` int(11) DEFAULT NULL,
-  `turnier_id` int(11) DEFAULT NULL,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `session_id` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Daten für Tabelle `person`
 --
 
-INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) VALUES
-(11411, '2', '2', '2020-08-02', 79428, 1, 1),
-(39599, '4', '4', '2020-08-04', NULL, 1, 1),
-(44195, '6', '6', '2020-08-06', NULL, NULL, 1),
-(109282, '1', '1', '2020-08-01', 214516, 1, 1),
-(116778, '5', '5', '2020-08-05', NULL, 1, 1),
-(117397, '3', '3', '2020-03-03', 156102, 1, 1);
+INSERT INTO `person` (`id`, `vorname`, `name`, `geburtstag`, `mannschaft_id`, `session_id`) VALUES
+(11411, '2', '2', '2020-08-02', 79428, 1),
+(39599, '4', '4', '2020-08-04', NULL, 1),
+(44195, '6', '6', '2020-08-06', NULL, 1),
+(109282, '1', '1', '2020-08-01', 214516, 1),
+(116778, '5', '5', '2020-08-05', NULL, 1),
+(117397, '3', '3', '2020-03-03', 156102, 1);
 
 -- --------------------------------------------------------
 
@@ -162,13 +158,6 @@ CREATE TABLE `spiel` (
   `team2Punkte` int(11) DEFAULT NULL,
   `turnierID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Daten für Tabelle `spiel`
---
-
-INSERT INTO `spiel` (`id`, `team1ID`, `team2ID`, `team1Punkte`, `team2Punkte`, `turnierID`) VALUES
-(9, 79428, 156102, 5, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -222,8 +211,8 @@ INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`) VALUES
 CREATE TABLE `turnier` (
   `id` int(11) NOT NULL,
   `name` text NOT NULL,
-  `turnierstatus` int(11) NOT NULL DEFAULT 1,
-  `session_id` int(11) NOT NULL DEFAULT 1
+  `turnierstatus` int(11) NOT NULL DEFAULT '1',
+  `session_id` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -231,16 +220,9 @@ CREATE TABLE `turnier` (
 --
 
 INSERT INTO `turnier` (`id`, `name`, `turnierstatus`, `session_id`) VALUES
-(1, 'TestTurnier', 1, 1),
-(2, 'Bundesliga', 1, 1),
-(3, 'Stb. Open', 1, 1),
-(5, 'Spring Cup\r\n', 1, 1),
-(6, 'Speedy Cup\r\n', 1, 1),
 (7, 'Royal Cup\r\n', 1, 1),
 (9, 'Summerslam', 1, 1),
-(10, 'Spring Slam Series', 1, 1),
-(11, 'NeuesTurnier123', 1, 1),
-(13, 'testTurnierw121212', 0, 1);
+(10, 'Spring Slam Series', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -295,7 +277,6 @@ ALTER TABLE `mannschaft`
 ALTER TABLE `person`
   ADD PRIMARY KEY (`id`),
   ADD KEY `mannschaft_id` (`mannschaft_id`),
-  ADD KEY `turnier_id` (`turnier_id`),
   ADD KEY `person_session` (`session_id`);
 
 --
@@ -432,7 +413,6 @@ ALTER TABLE `mannschaft`
 --
 ALTER TABLE `person`
   ADD CONSTRAINT `person_ibfk_1` FOREIGN KEY (`mannschaft_id`) REFERENCES `mannschaft` (`id`),
-  ADD CONSTRAINT `person_ibfk_2` FOREIGN KEY (`turnier_id`) REFERENCES `turnier` (`id`),
   ADD CONSTRAINT `person_session` FOREIGN KEY (`session_id`) REFERENCES `user` (`id`);
 
 --
