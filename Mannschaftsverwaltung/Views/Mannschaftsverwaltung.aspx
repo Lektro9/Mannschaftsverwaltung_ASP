@@ -3,6 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <h1 class="mt-2"><%: Page.Title %></h1>
+    <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
+        {%>
     <div class="row equal">
         <div class="col-md-4">
             <h3>Sportart:</h3>
@@ -30,8 +32,11 @@
         </div>
     </div>
 
-    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-success center-block mt-2 d-none" />
+    <%}%>
 
+    <asp:Button ID="Button1" runat="server" Text="Spieler laden" OnClick="loadPersons" class="btn btn-success center-block mt-2 d-none" />
+    <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
+        {%>
     <asp:Table ID="Table1" runat="server" class="table mt-2">
         <asp:TableHeaderRow>
             <asp:TableHeaderCell>
@@ -44,6 +49,36 @@
             <asp:TableHeaderCell>Löschen</asp:TableHeaderCell>
         </asp:TableHeaderRow>
     </asp:Table>
+    <%}%>
+
+   
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Spieler</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="ItemBound">
+                <ItemTemplate>
+                    <tr>
+                        <th scope="row"><%# Eval("Name") %></th>
+                        <td>
+                            <asp:Repeater ID="Repeater2" runat="server">
+                                <ItemTemplate>
+                                    <%# Eval("Name") %>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+
+        </tbody>
+    </table>
+
     <asp:Button Text="Download Mannschaften als XML" runat="server" OnClick="download_XML_click" CssClass="btn btn-dark mt-2" />
     <script type="text/javascript">
         function SimulateClick(buttonId) {

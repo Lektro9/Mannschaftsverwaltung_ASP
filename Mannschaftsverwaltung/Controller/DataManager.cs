@@ -151,12 +151,12 @@ namespace Mannschaftsverwaltung
             string FetchAllHandQuery = String.Format(
                 @"SELECT person.id, person.vorname, person.name, person.geburtstag,
                     handballspieler.position, handballspieler.tore, handballspieler.anzahlJahre, handballspieler.gewonneneSpiele,
-                    handballspieler.anzahlVereine, handballspieler.anzahlSpiele, person.session_id, user.session
+                    handballspieler.anzahlVereine, handballspieler.anzahlSpiele, person.session_id, user.canreadsession
                     FROM `handballspieler` 
                     JOIN person 
                     ON handballspieler.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
+                    ON person.session_id={0};", activeUser.CanReadSession);
 
             command = new MySqlCommand(FetchAllHandQuery, MySqlConnection);
             rdr = command.ExecuteReader();
@@ -185,12 +185,12 @@ namespace Mannschaftsverwaltung
                     tennisspieler.aufschlaggeschwindigkeit , tennisspieler.gewonnenespiele, 
                     tennisspieler.gewonneneSpiele , tennisspieler.schlaeger,
                     tennisspieler.anzahlJahre , tennisspieler.anzahlVereine, tennisspieler.anzahlSpiele,
-                    person.session_id, user.session
+                    person.session_id, user.canreadsession
                     FROM `tennisspieler` 
                     JOIN person 
                     ON tennisspieler.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
+                    ON person.session_id={0};", activeUser.CanReadSession);
 
             command = new MySqlCommand(FetchAllTennisQuery, MySqlConnection);
             rdr = command.ExecuteReader();
@@ -217,12 +217,12 @@ namespace Mannschaftsverwaltung
             string FetchAllTrainQuery = String.Format(
                 @"SELECT person.id, person.vorname, person.name, person.geburtstag,
                     trainer.erfahrung, 
-                    person.session_id, user.session
+                    person.session_id, user.canreadsession
                     FROM `trainer` 
                     JOIN person 
                     ON trainer.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
+                    ON person.session_id={0};", activeUser.CanReadSession);
 
             command = new MySqlCommand(FetchAllTrainQuery, MySqlConnection);
             rdr = command.ExecuteReader();
@@ -244,12 +244,12 @@ namespace Mannschaftsverwaltung
             string FetchAllPhysioQuery = String.Format(
                 @"SELECT person.id, person.vorname, person.name, person.geburtstag,
                     physiotherapeut.annerkennungen, 
-                    person.session_id, user.session
+                    person.session_id, user.canreadsession
                     FROM `physiotherapeut` 
                     JOIN person 
                     ON physiotherapeut.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
+                    ON person.session_id={0};", activeUser.CanReadSession);
 
             command = new MySqlCommand(FetchAllPhysioQuery, MySqlConnection);
             rdr = command.ExecuteReader();

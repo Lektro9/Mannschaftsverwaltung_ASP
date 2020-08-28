@@ -4,39 +4,6 @@
 
     <h1 class="mt-2"><%: Page.Title %></h1>
 
-    <p>
-        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Speichern und Laden</button>
-    </p>
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                <div class="card card-body align-items-center d-flex justify-content-center">
-                    <p class="card-text">
-                        Aktuelle Mannschaftsverwaltung als JSON speichern.
-                    </p>
-                    <asp:Button Text="Download JSON" runat="server" OnClick="download_click" CssClass="btn btn-dark mt-2" />
-                    <p>Um nur die Personen als XML zu Exportieren, bitte den Button unter der Liste wählen.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample2">
-                <div class="card card-body align-items-center d-flex justify-content-center">
-                    <div class="custom-file">
-
-                        <asp:FileUpload ID="Fileupload1" runat="server" CssClass="custom-file-input" />
-                        <label class="custom-file-label" for="MainContent_Fileupload1">JSON auswählen</label>
-                    </div>
-                    <asp:Button Text="Upload JSON" runat="server" OnClick="upload_click" CssClass="btn btn-dark mt-3" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
     <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" viewBox="0, 0, 400,400">
         <defs>
             <g id="hinata">
@@ -92,9 +59,9 @@
             </asp:RadioButtonList>
 
 
-
+            <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN) {%>
             <asp:Button ID="Button2" runat="server" Text="auswählen" OnClick="Button2_Click" class="btn btn-success mt-2" />
-
+            <%}%>
         </div>
         <div class="col-lg-7">
 

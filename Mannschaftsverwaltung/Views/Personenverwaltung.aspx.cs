@@ -273,18 +273,6 @@ namespace Mannschaftsverwaltung
 
         #region Worker
 
-        protected void download_click(object sender, EventArgs e)
-        {
-            //string jsontext = new JavaScriptSerializer().Serialize(this.Verwalter.Personen);
-            string jsontext = JsonConvert.SerializeObject(this.Verwalter);
-
-            Response.AddHeader("Content-disposition", String.Format("attachment; filename={0}.json", "MannschaftsverwaltungSave"));
-            Response.ContentType = "application/json";
-            Response.Write(jsontext);
-
-            Response.End();
-        }
-
         protected void download_XML_click(object sender, EventArgs e)
         {
             Type[] types = new Type[] {
@@ -305,26 +293,6 @@ namespace Mannschaftsverwaltung
             Response.ContentType = "application/xml";
             Response.Write(allPers);
             Response.End();
-        }
-
-        protected void upload_click(object sender, EventArgs e)
-        {
-            //Delete all Files in Uploads folder
-            DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Uploads/"));
-            foreach (FileInfo file in di.GetFiles())
-            {
-                if (file.Name != Fileupload1.FileName)
-                {
-                    file.Delete();
-                }
-            }
-            this.Fileupload1.SaveAs(Server.MapPath("~/Uploads/" + Fileupload1.FileName));
-            Response.Write(this.Fileupload1);
-            JsonConverter[] converters = { new PersonConverter() };
-            Controller results = JsonConvert.DeserializeObject<Controller>(File.ReadAllText(Server.MapPath("~/Uploads/" + Fileupload1.FileName)), new JsonSerializerSettings() { Converters = converters });
-            this.Verwalter.Personen = results.Personen;
-            this.Verwalter.Mannschaften = results.Mannschaften;
-            this.Verwalter.Turniere = results.Turniere;
         }
 
         protected void orderByName(object sender, EventArgs e)

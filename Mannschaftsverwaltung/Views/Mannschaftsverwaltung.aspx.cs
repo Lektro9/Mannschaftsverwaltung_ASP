@@ -50,6 +50,20 @@ namespace Mannschaftsverwaltung
                 LoadEditMannschaft();
                 this.accept.Attributes.Remove("disabled");
             }
+            Repeater1.DataSource = this.Verwalter.Mannschaften;
+            Repeater1.DataBind();
+
+        }
+
+        protected void ItemBound(object sender, RepeaterItemEventArgs args)
+        {
+            if (args.Item.DataItem != null)
+            {
+                Repeater rp2 = (Repeater)args.Item.FindControl("Repeater2");
+                int index = int.Parse(rp2.ClientID.Split('_').Last());
+                rp2.DataSource = Verwalter.Personen;
+                rp2.DataBind();
+            }
         }
 
         private void LoadMannschaften()
