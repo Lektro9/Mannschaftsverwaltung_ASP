@@ -58,7 +58,6 @@ namespace Mannschaftsverwaltung
                 {
                     Verwalter = (Controller)this.Session[this.Verwalter.ActiveUser.ID.ToString()];
                     this.Verwalter.Personen = Verwalter.getAllPerson(this.Verwalter.ActiveUser);
-                    this.Verwalter.DBStatus = true;
                 }
                 else
                 {
@@ -211,7 +210,7 @@ namespace Mannschaftsverwaltung
         protected void delBtn_Click(object sender, EventArgs e)
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(3));
-            if (this.Verwalter.DBStatus)
+            if (this.Verwalter.DBManager.DBStatus)
             {
                 this.Verwalter.Personen[index - 1].deletePerson();
             }
@@ -262,7 +261,7 @@ namespace Mannschaftsverwaltung
                     {
                         ((HandballSpieler)this.Verwalter.Personen[i - 1]).Position = EinsatzEdit.Text;
                     }
-                    if (this.Verwalter.DBStatus)
+                    if (this.Verwalter.DBManager.DBStatus)
                     {
                         this.Verwalter.Personen[i - 1].editPerson();
                     }

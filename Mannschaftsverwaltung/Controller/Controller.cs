@@ -30,7 +30,6 @@ namespace Mannschaftsverwaltung
         private bool _MannschaftsAnzeige;
         private bool _reverseSort;
         List<Turnier> _turniere;
-        bool _dBStatus;
         List<User> _Nutzer;
         bool _authenticated;
         User _activeUser;
@@ -62,8 +61,6 @@ namespace Mannschaftsverwaltung
         [JsonIgnore]
         public int EditMannIndex { get => _EditMannIndex; set => _EditMannIndex = value; }
         public List<Turnier> Turniere { get => _turniere; set => _turniere = value; }
-        [JsonIgnore]
-        public bool DBStatus { get => _dBStatus; set => _dBStatus = value; }
         public List<User> Nutzer { get => _Nutzer; set => _Nutzer = value; }
         public bool Authenticated { get => _authenticated; set => _authenticated = value; }
         public User ActiveUser { get => _activeUser; set => _activeUser = value; }
@@ -86,7 +83,6 @@ namespace Mannschaftsverwaltung
             MannschaftsAnzeige = false;
             ReverseSort = true;
             Turniere = new List<Turnier>();
-            DBStatus = false;
             Authenticated = false;
             ActiveUser = null;
             DBManager = new DataManager();
@@ -285,7 +281,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             FussballSpieler f = new FussballSpieler(id, name, vorname, geburtstag, position, geschosseneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
             this.Personen.Add(f);
-            if (this.DBStatus)
+            if (this.DBManager.DBStatus)
             {
                 CreatePersonInDB(f.ID);
             }
@@ -296,7 +292,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             HandballSpieler h = new HandballSpieler(id, name, vorname, geburtstag, position, geworfeneTore, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
             this.Personen.Add(h);
-            if (this.DBStatus)
+            if (this.DBManager.DBStatus)
             {
                 CreatePersonInDB(h.ID);
             }
@@ -307,7 +303,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             TennisSpieler t = new TennisSpieler(id, name, vorname, geburtstag, aufschlagGeschw, schlaeger, anzahlJahre, gewSpiele, anzahlVereine, anzahlSpiele);
             this.Personen.Add(t);
-            if (this.DBStatus)
+            if (this.DBManager.DBStatus)
             {
                 CreatePersonInDB(t.ID);
             }
@@ -318,7 +314,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             Trainer t = new Trainer(id, name, vorname, geburtstag, anzahlJahre);
             this.Personen.Add(t);
-            if (this.DBStatus)
+            if (this.DBManager.DBStatus)
             {
                 CreatePersonInDB(t.ID);
             }
@@ -329,7 +325,7 @@ namespace Mannschaftsverwaltung
             int id = generateID();
             Physiotherapeut p = new Physiotherapeut(id, name, vorname, geburtstag);
             this.Personen.Add(p);
-            if (this.DBStatus)
+            if (this.DBManager.DBStatus)
             {
                 CreatePersonInDB(p.ID);
             }
@@ -601,7 +597,7 @@ namespace Mannschaftsverwaltung
         public List<Person> getAllPerson(User activeUser)
         {
             List<Person> retVal = new List<Person>();
-            DBStatus = DBManager.openDBConection();
+            DBManager.openDBConection();
             retVal = DBManager.getAllPerson(activeUser);
             DBManager.closeConnection();
             return retVal;

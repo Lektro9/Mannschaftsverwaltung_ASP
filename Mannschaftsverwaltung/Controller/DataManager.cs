@@ -62,6 +62,7 @@ namespace Mannschaftsverwaltung
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                DBStatus = false;
                 return false;
             }
         }
