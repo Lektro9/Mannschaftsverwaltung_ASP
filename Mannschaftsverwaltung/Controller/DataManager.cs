@@ -116,12 +116,15 @@ namespace Mannschaftsverwaltung
         {
             List<Person> retVal = new List<Person>();
             string FetchAllFussbQuery = String.Format(
-                    @"SELECT person.id, person.vorname, person.name, person.geburtstag, fussballspieler.position, fussballspieler.tore, fussballspieler.anzahlJahre, fussballspieler.gewonneneSpiele, fussballspieler.anzahlVereine, fussballspieler.anzahlSpiele, person.session_id, user.session
+                    @"SELECT person.id, person.vorname, person.name, person.geburtstag, fussballspieler.position, 
+                    fussballspieler.tore, fussballspieler.anzahlJahre, fussballspieler.gewonneneSpiele, 
+                    fussballspieler.anzahlVereine, fussballspieler.anzahlSpiele, person.session_id, 
+                    user.canreadsession 
                     FROM `fussballspieler` 
                     JOIN person 
-                    ON fussballspieler.person_id = person.id
-                    JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
+                    ON fussballspieler.person_id = person.id 
+                    JOIN user 
+                    ON person.session_id={0} ;", activeUser.CanReadSession);
 
             MySqlCommand command = new MySqlCommand(FetchAllFussbQuery, MySqlConnection);
             MySqlDataReader rdr = command.ExecuteReader();
@@ -153,7 +156,7 @@ namespace Mannschaftsverwaltung
                     JOIN person 
                     ON handballspieler.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
+                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
 
             command = new MySqlCommand(FetchAllHandQuery, MySqlConnection);
             rdr = command.ExecuteReader();
@@ -187,7 +190,7 @@ namespace Mannschaftsverwaltung
                     JOIN person 
                     ON tennisspieler.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
+                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
 
             command = new MySqlCommand(FetchAllTennisQuery, MySqlConnection);
             rdr = command.ExecuteReader();
@@ -219,7 +222,7 @@ namespace Mannschaftsverwaltung
                     JOIN person 
                     ON trainer.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
+                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
 
             command = new MySqlCommand(FetchAllTrainQuery, MySqlConnection);
             rdr = command.ExecuteReader();
@@ -246,7 +249,7 @@ namespace Mannschaftsverwaltung
                     JOIN person 
                     ON physiotherapeut.person_id=person.id
                     JOIN user
-                    ON person.session_id={0} where user.session='{1}';", activeUser.ID, activeUser.Login);
+                    ON person.session_id={0} where user.session='{1}';", activeUser.CanReadSession, activeUser.Login);
 
             command = new MySqlCommand(FetchAllPhysioQuery, MySqlConnection);
             rdr = command.ExecuteReader();
@@ -529,7 +532,7 @@ namespace Mannschaftsverwaltung
 
             string SQLStringMann = "SELECT * FROM `mannschaft` WHERE `session_id` = @session";
             MySqlCommand command = new MySqlCommand(SQLStringMann, MySqlConnection);
-            command.Parameters.AddWithValue("@session", activeUser.ID);
+            command.Parameters.AddWithValue("@session", activeUser.CanReadSession);
             executeSQLCommand(command);
             MySqlDataReader rdr = command.ExecuteReader();
             while (rdr.Read())
@@ -588,7 +591,7 @@ namespace Mannschaftsverwaltung
 
             string SQLString = "SELECT * FROM `turnier` WHERE `session_id` = @session ";
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
-            command.Parameters.AddWithValue("@session", activeUser.ID);
+            command.Parameters.AddWithValue("@session", activeUser.CanReadSession);
             executeSQLCommand(command);
             MySqlDataReader rdr = command.ExecuteReader();
             while (rdr.Read())
@@ -694,7 +697,8 @@ namespace Mannschaftsverwaltung
                         Convert.ToInt32(rdr["id"]),
                         rdr["login"].ToString(),
                         rdr["password"].ToString(),
-                        (Role)Enum.Parse(typeof(Role), rdr["role"].ToString())
+                        (Role)Enum.Parse(typeof(Role), rdr["role"].ToString()),
+                        Convert.ToInt32(rdr["canreadsession"])
                         );
                 retVal.Add(u);
             }
