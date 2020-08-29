@@ -51,11 +51,16 @@
                                             <span class="input-group-text"><%# getTeamName(Eval("Team2ID").ToString()) %></span>
                                         </div>
                                     </div>
+                                    <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
+                                        {%>
                                     <asp:Button runat="server" Text="Löschen" OnClick="SpielEntf_Click" class="btn btn-danger" name="del_<%# Container.ItemIndex + 1 %>" />
+                                    <%}%>
                                 </ItemTemplate>
                             </asp:Repeater>
 
                         </div>
+                        <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
+                            {%>
                         <div class="row rowcustom">
 
                             <div class="col-5">
@@ -93,6 +98,8 @@
                                 <asp:Button runat="server" Text="Erstellen" OnClick="SpielErst_Click" class="btn btn-info" />
                             </div>
                         </div>
+
+                        <%}%>
                     </div>
                 </div>
             </div>

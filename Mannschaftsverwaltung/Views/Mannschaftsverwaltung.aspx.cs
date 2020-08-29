@@ -61,7 +61,7 @@ namespace Mannschaftsverwaltung
             {
                 Repeater rp2 = (Repeater)args.Item.FindControl("Repeater2");
                 int index = int.Parse(rp2.ClientID.Split('_').Last());
-                rp2.DataSource = Verwalter.Personen;
+                rp2.DataSource = Verwalter.Mannschaften[index].Personen;
                 rp2.DataBind();
             }
         }

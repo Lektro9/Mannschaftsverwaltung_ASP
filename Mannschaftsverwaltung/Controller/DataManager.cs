@@ -12,6 +12,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Windows;
 
 namespace Mannschaftsverwaltung
 {
@@ -95,10 +96,11 @@ namespace Mannschaftsverwaltung
                 anzahl = command.ExecuteNonQuery();
                 retVal = true;
             }
-            catch (Exception)
+            catch (MySqlException e)
             {
                 MySqlConnection.Close();
                 retVal = false;
+                MessageBox.Show(e.Message);
                 throw;
             }
             return retVal;
@@ -116,7 +118,7 @@ namespace Mannschaftsverwaltung
         {
             List<Person> retVal = new List<Person>();
             string FetchAllFussbQuery = String.Format(
-                    @"SELECT person.id, person.vorname, person.name, person.geburtstag, fussballspieler.position, 
+                    @"SELECT DISTINCT person.id, person.vorname, person.name, person.geburtstag, fussballspieler.position, 
                     fussballspieler.tore, fussballspieler.anzahlJahre, fussballspieler.gewonneneSpiele, 
                     fussballspieler.anzahlVereine, fussballspieler.anzahlSpiele, person.session_id, 
                     user.canreadsession 
@@ -149,7 +151,7 @@ namespace Mannschaftsverwaltung
             rdr.Close();
 
             string FetchAllHandQuery = String.Format(
-                @"SELECT person.id, person.vorname, person.name, person.geburtstag,
+                @"SELECT DISTINCT person.id, person.vorname, person.name, person.geburtstag,
                     handballspieler.position, handballspieler.tore, handballspieler.anzahlJahre, handballspieler.gewonneneSpiele,
                     handballspieler.anzahlVereine, handballspieler.anzahlSpiele, person.session_id, user.canreadsession
                     FROM `handballspieler` 
@@ -181,7 +183,7 @@ namespace Mannschaftsverwaltung
             rdr.Close();
 
             string FetchAllTennisQuery = String.Format(
-                @"SELECT person.id, person.vorname, person.name, person.geburtstag,
+                @"SELECT DISTINCT person.id, person.vorname, person.name, person.geburtstag,
                     tennisspieler.aufschlaggeschwindigkeit , tennisspieler.gewonnenespiele, 
                     tennisspieler.gewonneneSpiele , tennisspieler.schlaeger,
                     tennisspieler.anzahlJahre , tennisspieler.anzahlVereine, tennisspieler.anzahlSpiele,
@@ -215,7 +217,7 @@ namespace Mannschaftsverwaltung
             rdr.Close();
 
             string FetchAllTrainQuery = String.Format(
-                @"SELECT person.id, person.vorname, person.name, person.geburtstag,
+                @"SELECT DISTINCT person.id, person.vorname, person.name, person.geburtstag,
                     trainer.erfahrung, 
                     person.session_id, user.canreadsession
                     FROM `trainer` 
@@ -242,7 +244,7 @@ namespace Mannschaftsverwaltung
             rdr.Close();
 
             string FetchAllPhysioQuery = String.Format(
-                @"SELECT person.id, person.vorname, person.name, person.geburtstag,
+                @"SELECT DISTINCT person.id, person.vorname, person.name, person.geburtstag,
                     physiotherapeut.annerkennungen, 
                     person.session_id, user.canreadsession
                     FROM `physiotherapeut` 

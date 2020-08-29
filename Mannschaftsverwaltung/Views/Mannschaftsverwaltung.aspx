@@ -51,7 +51,8 @@
     </asp:Table>
     <%}%>
 
-   
+   <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.USER)
+        {%>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -78,7 +79,7 @@
 
         </tbody>
     </table>
-
+    <%}%>
     <asp:Button Text="Download Mannschaften als XML" runat="server" OnClick="download_XML_click" CssClass="btn btn-dark mt-2" />
     <script type="text/javascript">
         function SimulateClick(buttonId) {
