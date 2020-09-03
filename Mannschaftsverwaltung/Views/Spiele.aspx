@@ -5,7 +5,8 @@
     <h1 class="mt-2"><%: Page.Title %></h1>
 
     <%--erstellen eines Turnieres--%>
-
+    <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
+        {%>
     <div class="card mt-4">
         <div class="card-header">
             <h3>Turnier erstellen</h3>
@@ -16,11 +17,14 @@
                     <input type="text" id="TurnierNameEing" class="form-control" placeholder="Name des Turnieres" runat="server">
                 </div>
                 <div class="col">
+
                     <asp:Button ID="TurnierErst" runat="server" Text="Erstellen" OnClick="TurnierErst_Click" class="btn btn-success mt-2" />
+
                 </div>
             </div>
         </div>
     </div>
+    <%}%>
 
 
     <!-- Mannschaften auswählen -->
@@ -30,7 +34,10 @@
             <div class="card mt-4">
                 <div class="card-header text-center">
                     <%# Eval("Name") %>
+                    <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
+                        {%>
                     <asp:Button runat="server" type="button" Text="X" class="ml-2 mb-1 close" OnClick="TurEntf_Click" aria-label="Close" name="del_<%# Container.ItemIndex + 1 %>" />
+                    <%}%>
                 </div>
                 <div class="card-body">
                     <div class="container">
@@ -98,7 +105,6 @@
                                 <asp:Button runat="server" Text="Erstellen" OnClick="SpielErst_Click" class="btn btn-info" />
                             </div>
                         </div>
-
                         <%}%>
                     </div>
                 </div>
