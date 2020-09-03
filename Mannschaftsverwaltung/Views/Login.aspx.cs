@@ -54,7 +54,16 @@ namespace Mannschaftsverwaltung
         {
             string username = this.Request.Form["uname1"];
             string password = this.Request.Form["password"];
+            //get User from DB
+            Verwalter.DBManager.openDBConection();
+            if (Verwalter.DBManager.DBStatus)
+            {
+                Verwalter.Nutzer = Verwalter.DBManager.getAllUser();
+                Verwalter.DBManager.closeConnection();
+            }
+            
             this.Verwalter.login(username, password);
+
             Response.Redirect(Request.RawUrl);
         }
 

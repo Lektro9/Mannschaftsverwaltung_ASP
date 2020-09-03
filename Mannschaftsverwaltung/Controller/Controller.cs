@@ -87,11 +87,6 @@ namespace Mannschaftsverwaltung
             ActiveUser = null;
             DBManager = new DataManager();
             Nutzer = new List<User>();
-
-            //get User from DB
-            DBManager.openDBConection();
-            Nutzer = DBManager.getAllUser();
-            DBManager.closeConnection();
         }
         #endregion
 
