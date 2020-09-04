@@ -101,7 +101,7 @@ namespace Mannschaftsverwaltung
                 MySqlConnection.Close();
                 retVal = false;
                 MessageBox.Show(e.Message);
-                //throw;
+                throw;
             }
             return retVal;
         }

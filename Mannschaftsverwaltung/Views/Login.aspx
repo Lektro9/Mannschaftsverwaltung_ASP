@@ -24,6 +24,7 @@
             <% } %>
             <% else
                 { %>
+                <p class="text-monospace">Sie sind eingeloggt! Zum Ausloggen den Knopf "Logout" drücken</p>
                 <asp:Button ID="ButtonLogOut" runat="server" Text="Logout" OnClick="logout_Click" class="btn btn-warning mt-2" />
             <% } %>
 
