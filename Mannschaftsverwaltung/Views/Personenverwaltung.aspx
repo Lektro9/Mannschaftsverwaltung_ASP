@@ -77,67 +77,67 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Name</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="name" type="text" name="name" value="" runat="server" disabled />
+                                    <input class="form-control" id="name" type="text" name="name" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Vorname</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="vorname" type="text" name="vorname" value="" runat="server" disabled />
+                                    <input class="form-control" id="vorname" type="text" name="vorname" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Geburtstag</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="geburtstag" type="date" name="geburtstag" value="" runat="server" disabled />
+                                    <input class="form-control" id="geburtstag" type="date" name="geburtstag" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Position</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="position" type="text" name="position" value="" runat="server" disabled />
+                                    <input class="form-control" id="position" type="text" name="position" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">erzielte Tore</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="geschosseneTore" type="number" name="geschosseneTore" value="" runat="server" disabled />
+                                    <input class="form-control" id="geschosseneTore" type="number" name="geschosseneTore" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Erfahrung in Jahren</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="anzahlJahre" type="number" name="anzahlJahre" value="" runat="server" disabled />
+                                    <input class="form-control" id="anzahlJahre" type="number" name="anzahlJahre" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Spiele gewonnen</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="gewonneneSpiele" type="number" name="gewonneneSpiele" value="" runat="server" disabled />
+                                    <input class="form-control" id="gewonneneSpiele" type="number" name="gewonneneSpiele" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Anzahl der Vereine</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="anzahlVereine" type="number" name="anzahlVereine" value="" runat="server" disabled />
+                                    <input class="form-control" id="anzahlVereine" type="number" name="anzahlVereine" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Anzahl der Spiele</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="anzahlSpiele" type="number" name="anzahlSpiele" value="" runat="server" disabled />
+                                    <input class="form-control" id="anzahlSpiele" type="number" name="anzahlSpiele" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Schläger</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="schlaeger" type="text" name="schlaeger" value="" runat="server" disabled />
+                                    <input class="form-control" id="schlaeger" type="text" name="schlaeger" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Aufschlaggeschwindigkeit:</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" id="aufschlagGeschw" type="number" name="aufschlagGeschw" value="" runat="server" disabled />
+                                    <input class="form-control" id="aufschlagGeschw" type="number" name="aufschlagGeschw" value="" runat="server" disabled required/>
                                 </div>
                             </div>
                             <div class="col-lg-12 d-flex justify-content-center">

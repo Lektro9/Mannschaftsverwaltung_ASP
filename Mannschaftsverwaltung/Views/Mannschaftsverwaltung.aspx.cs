@@ -83,7 +83,7 @@ namespace Mannschaftsverwaltung
 
                     //Spieleranzahl
                     neueZelle = new TableCell();
-                    neueZelle.Text = m.AnzahlSpieler.ToString();
+                    neueZelle.Text = m.getAnzahlSpieler().ToString();
                     neueZelle.CssClass = "text-center";
                     neueZeile.Cells.Add(neueZelle);
 
@@ -143,7 +143,7 @@ namespace Mannschaftsverwaltung
 
                     //Spieleranzahl
                     neueZelle = new TableCell();
-                    neueZelle.Text = m.AnzahlSpieler.ToString();
+                    neueZelle.Text = m.getAnzahlSpieler().ToString();
                     neueZelle.CssClass = "text-center";
                     neueZeile.Cells.Add(neueZelle);
 

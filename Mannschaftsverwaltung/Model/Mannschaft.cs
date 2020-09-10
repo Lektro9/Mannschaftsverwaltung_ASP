@@ -56,7 +56,6 @@ namespace Mannschaftsverwaltung
         {
             Sportart = sportart;
             Personen = personen;
-            pruefeListeAufSpieler();
             ID = id;
             GewSpiele = 0;
             Unentschieden = 0;
@@ -67,7 +66,6 @@ namespace Mannschaftsverwaltung
         public Mannschaft(List<Person> personen) : this()
         {
             Personen = personen;
-            pruefeListeAufSpieler();
         }
 
         public Mannschaft(int id, string name, string sportart, List<Person> personen)
@@ -121,7 +119,6 @@ namespace Mannschaftsverwaltung
         public void fuegePersonHinzu(Person p)
         {
             this.Personen.Add(p);
-            pruefeListeAufSpieler();
         }
 
         public void RemovePerson(int id)
@@ -141,16 +138,17 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        private void pruefeListeAufSpieler()
+        public int getAnzahlSpieler()
         {
-            AnzahlSpieler = 0;
+            int retVal = 0;
             for (int i = 0; i < Personen.Count; i++)
             {
                 if (Personen[i] is Spieler)
                 {
-                    AnzahlSpieler++;
+                    retVal++;
                 }
             }
+            return retVal;
         }
         public string gebeSpielerAus()
         {
