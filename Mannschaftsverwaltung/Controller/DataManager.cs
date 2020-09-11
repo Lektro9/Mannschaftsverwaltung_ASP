@@ -346,45 +346,45 @@ namespace Mannschaftsverwaltung
             {
                 HandballSpieler handballer = (HandballSpieler)person;
                 SQLString = String.Format(
-                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
-                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {13});
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', {11});
 
                 INSERT INTO `handballspieler` (`id`, `person_id`, `position`, `tore`, `anzahlJahre`, `gewonneneSpiele` , `anzahlVereine` , `anzahlSpiele`) 
-                VALUES (NULL, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}');",
-                handballer.ID, handballer.Name, handballer.Vorname, handballer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), null, null, handballer.ID, handballer.Position, handballer.GeworfeneTore, handballer.AnzahlJahre, handballer.GewonneneSpiele, handballer.AnzahlVereine, handballer.AnzahlSpiele, activeUser.ID);
+                VALUES (NULL, '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}');",
+                handballer.ID, handballer.Name, handballer.Vorname, handballer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), handballer.ID, handballer.Position, handballer.GeworfeneTore, handballer.AnzahlJahre, handballer.GewonneneSpiele, handballer.AnzahlVereine, handballer.AnzahlSpiele, activeUser.ID);
                 retVal = true;
             }
             else if (person is TennisSpieler)
             {
                 TennisSpieler ts = (TennisSpieler)person;
                 SQLString = String.Format(
-                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
-                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {13});
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', {11});
 
                 INSERT INTO `tennisspieler` (`id`, `person_id`, `aufschlaggeschwindigkeit`, `gewonnenespiele`, `schlaeger`, `anzahlJahre` , `anzahlVereine` , `anzahlSpiele`) 
-                VALUES (NULL, '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}');", ts.ID, ts.Name, ts.Vorname, ts.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), null, null, ts.ID, ts.Aufschlaggeschwindigkeit, ts.GewonneneSpiele, ts.Schlaeger, ts.AnzahlJahre, ts.AnzahlVereine, ts.AnzahlSpiele, activeUser.ID);
+                VALUES (NULL, '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}');", ts.ID, ts.Name, ts.Vorname, ts.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), ts.ID, ts.Aufschlaggeschwindigkeit, ts.GewonneneSpiele, ts.Schlaeger, ts.AnzahlJahre, ts.AnzahlVereine, ts.AnzahlSpiele, activeUser.ID);
                 retVal = true;
             }
             else if (person is Trainer)
             {
                 Trainer trainer = (Trainer)person;
                 SQLString = String.Format(
-                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
-                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {8});
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', {6});
 
                 INSERT INTO `trainer` (`id`, `person_id`, `erfahrung`) 
-                VALUES (NULL, '{6}', '{7}');", trainer.ID, trainer.Name, trainer.Vorname, trainer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), null, null, trainer.ID, trainer.Erfahrung, activeUser.ID);
+                VALUES (NULL, '{4}', '{5}');", trainer.ID, trainer.Name, trainer.Vorname, trainer.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), trainer.ID, trainer.Erfahrung, activeUser.ID);
                 retVal = true;
             }
             else if (person is Physiotherapeut)
             {
                 Physiotherapeut physio = (Physiotherapeut)person;
                 SQLString = String.Format(
-                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `mannschaft_id`, `turnier_id`, `session_id`) 
-                VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', {8});
+                @"INSERT INTO `person` (`id`, `name`, `vorname`, `geburtstag`, `session_id`) 
+                VALUES ('{0}', '{1}', '{2}', '{3}', {6});
 
                 INSERT INTO `physiotherapeut` (`id`, `person_id`, `annerkennungen`) 
-                VALUES (NULL, '{6}', '{7}');", physio.ID, physio.Name, physio.Vorname, physio.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), null, null, physio.ID, physio.Anerkennungen, activeUser.ID);
+                VALUES (NULL, '{4}', '{5}');", physio.ID, physio.Name, physio.Vorname, physio.Geburtstag.ToString("yyyy-MM-dd HH:mm:ss.fff"), physio.ID, physio.Anerkennungen, activeUser.ID);
                 retVal = true;
             }
 

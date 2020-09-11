@@ -374,7 +374,7 @@ namespace Mannschaftsverwaltung
         {
             this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
             this.Verwalter.sortiereNachMannschaftName();
-            Response.Redirect(Request.RawUrl);
+            LoadMannschaften();
         }
 
         protected void edit_Click(object sender, EventArgs e)
