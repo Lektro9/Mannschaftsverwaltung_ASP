@@ -27,9 +27,6 @@ namespace Mannschaftsverwaltung
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RegisterCustomRoutes(RouteTable.Routes);
-            //Verwalter = new Controller();
-
-            //Verwalter.Personen = Verwalter.getAllPerson();
             
         }
         void RegisterCustomRoutes(RouteCollection routes)

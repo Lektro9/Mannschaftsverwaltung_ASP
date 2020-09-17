@@ -1,9 +1,4 @@
-﻿//Autor:        Kroll
-//Datum:        21.04.2020
-//Dateiname:    Personenverwaltung.aspx.cs
-//Beschreibung: Personen verwalten
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,75 +10,45 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 using System.Globalization;
 
-namespace Mannschaftsverwaltung
-{
-    public partial class _Default : Page
-    {
+namespace Mannschaftsverwaltung {
+    public partial class _Default : Page {
         private Controller _Verwalter;
         private string _auswahl;
-        private TextBox _nameEdit;
-        private TextBox _vornameEdit;
-        private TextBox _geburtsDatEdit;
-        private TextBox _anzahlSpieleEdit;
-        private TextBox _erzielteToreEdit;
-        private TextBox _gewSpieleEdit;
-        private TextBox _anzJahreEdit;
-        private TextBox _anzVereineEdit;
-        private TextBox _einsatzEdit;
 
 
         public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
         public string Auswahl { get => _auswahl; set => _auswahl = value; }
-        public TextBox NameEdit { get => _nameEdit; set => _nameEdit = value; }
-        public TextBox VornameEdit { get => _vornameEdit; set => _vornameEdit = value; }
-        public TextBox GeburtsDatEdit { get => _geburtsDatEdit; set => _geburtsDatEdit = value; }
-        public TextBox AnzahlSpieleEdit { get => _anzahlSpieleEdit; set => _anzahlSpieleEdit = value; }
-        public TextBox ErzielteToreEdit { get => _erzielteToreEdit; set => _erzielteToreEdit = value; }
-        public TextBox GewSpieleEdit { get => _gewSpieleEdit; set => _gewSpieleEdit = value; }
-        public TextBox AnzJahreEdit { get => _anzJahreEdit; set => _anzJahreEdit = value; }
-        public TextBox AnzVereineEdit { get => _anzVereineEdit; set => _anzVereineEdit = value; }
-        public TextBox EinsatzEdit { get => _einsatzEdit; set => _einsatzEdit = value; }
 
-        protected void Page_Init(object sender, EventArgs e)
-        {
+        protected void Page_Init(object sender, EventArgs e) {
 
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (this.Session["Verwalter"] != null)
-            {
+        protected void Page_Load(object sender, EventArgs e) {
+            if (this.Session["Verwalter"] != null) {
                 Verwalter = (Controller)this.Session["Verwalter"];
-                if (this.Verwalter.ActiveUser != null)
-                {
+                if (this.Verwalter.ActiveUser != null) {
                     Verwalter = (Controller)this.Session[this.Verwalter.ActiveUser.ID.ToString()];
                     this.Verwalter.Personen = Verwalter.getAllPerson(this.Verwalter.ActiveUser);
                 }
-                else
-                {
+                else {
                     this.Response.Redirect(@"~\Views\Login.aspx");
                 }
             }
-            else
-            {
+            else {
                 this.Response.Redirect(@"~\Views\Login.aspx");
             }
             LoadPersonen();
 
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
-        {
+        protected void Button2_Click(object sender, EventArgs e) {
             this.Auswahl = RadioButtonList1.SelectedValue;
             int index = RadioButtonList1.SelectedIndex;
             disableAndClearInputs();
-            foreach (ListItem item in RadioButtonList1.Items)
-            {
+            foreach (ListItem item in RadioButtonList1.Items) {
                 item.Attributes.Add("class", "list-group-item list-group-item-action disabled");
             }
-
-            if (Auswahl == "Fussballspieler")
-            {
+            if (Auswahl == "Fussballspieler") {
                 RadioButtonList1.SelectedIndex = index;
                 RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
@@ -97,8 +62,7 @@ namespace Mannschaftsverwaltung
                 anzahlSpiele.Disabled = false;
                 this.Button3.Visible = true;
             }
-            else if (Auswahl == "Handballspieler")
-            {
+            else if (Auswahl == "Handballspieler") {
                 RadioButtonList1.SelectedIndex = index;
                 RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
@@ -112,8 +76,7 @@ namespace Mannschaftsverwaltung
                 anzahlSpiele.Disabled = false;
                 this.Button3.Visible = true;
             }
-            else if (Auswahl == "Tennisspieler")
-            {
+            else if (Auswahl == "Tennisspieler") {
                 RadioButtonList1.SelectedIndex = index;
                 RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
@@ -127,8 +90,7 @@ namespace Mannschaftsverwaltung
                 aufschlagGeschw.Disabled = false;
                 this.Button3.Visible = true;
             }
-            else if (Auswahl == "Trainer")
-            {
+            else if (Auswahl == "Trainer") {
                 RadioButtonList1.SelectedIndex = index;
                 RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
@@ -137,8 +99,7 @@ namespace Mannschaftsverwaltung
                 anzahlJahre.Disabled = false;
                 this.Button3.Visible = true;
             }
-            else if (Auswahl == "Physiotherapeut")
-            {
+            else if (Auswahl == "Physiotherapeut") {
                 RadioButtonList1.SelectedIndex = index;
                 RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
@@ -146,34 +107,27 @@ namespace Mannschaftsverwaltung
                 geburtstag.Disabled = false;
                 this.Button3.Visible = true;
             }
-            else
-            {
+            else {
                 Response.Write("Keine Rolle ausgewählt!");
             }
 
         }
 
-        protected void Button3_Click(object sender, EventArgs e)
-        {
+        protected void Button3_Click(object sender, EventArgs e) {
             this.Auswahl = RadioButtonList1.SelectedValue;
-            if (this.Auswahl == "Fussballspieler")
-            {
+            if (this.Auswahl == "Fussballspieler") {
                 this.Verwalter.AddFussballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
             }
-            else if (this.Auswahl == "Handballspieler")
-            {
+            else if (this.Auswahl == "Handballspieler") {
                 this.Verwalter.AddHandballSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), position.Value, Int32.Parse(geschosseneTore.Value), Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
             }
-            else if (this.Auswahl == "Tennisspieler")
-            {
+            else if (this.Auswahl == "Tennisspieler") {
                 this.Verwalter.AddTennisSpieler(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(aufschlagGeschw.Value), schlaeger.Value, Int32.Parse(anzahlJahre.Value), Int32.Parse(gewonneneSpiele.Value), Int32.Parse(anzahlVereine.Value), Int32.Parse(anzahlSpiele.Value));
             }
-            else if (this.Auswahl == "Trainer")
-            {
+            else if (this.Auswahl == "Trainer") {
                 this.Verwalter.AddTrainer(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(anzahlJahre.Value));
             }
-            else
-            {
+            else {
                 this.Verwalter.AddPhysio(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value));
             }
             enableAllRadioButtons();
@@ -181,21 +135,18 @@ namespace Mannschaftsverwaltung
             Response.Redirect(Request.RawUrl);
         }
 
-        protected void editBtn_Click(object sender, EventArgs e)
-        {
+        protected void editBtn_Click(object sender, EventArgs e) {
             disableAndClearInputs();
-            
+
             this.Verwalter.EditPerson = true;
             this.Verwalter.EditPersonIndex = Int32.Parse(((Button)sender).ID.Substring(5));
 
             Response.Redirect(Request.RawUrl);
         }
 
-        protected void delBtn_Click(object sender, EventArgs e)
-        {
+        protected void delBtn_Click(object sender, EventArgs e) {
             int index = Int32.Parse(((Button)sender).ID.Substring(3));
-            if (this.Verwalter.DBManager.DBStatus)
-            {
+            if (this.Verwalter.DBManager.DBStatus) {
                 this.Verwalter.Personen[index - 1].deletePerson();
             }
             this.Verwalter.Personen.RemoveAt(index - 1);
@@ -231,15 +182,18 @@ namespace Mannschaftsverwaltung
                             ((FussballSpieler)this.Verwalter.Personen[i - 1]).Position = Request.Form[fields["position"]];
                         }
                         else if (this.Verwalter.Personen[i - 1] is HandballSpieler) {
-                            ((HandballSpieler)this.Verwalter.Personen[i - 1]).GeworfeneTore = Int32.Parse(Request.Form[fields["geschosseneToreRequest"]]);
+                            ((HandballSpieler)this.Verwalter.Personen[i - 1]).GeworfeneTore = Int32.Parse(Request.Form[fields["geschosseneTore"]]);
                             ((HandballSpieler)this.Verwalter.Personen[i - 1]).Position = Request.Form[fields["position"]];
                         }
-                        // TennisSpieler stuff missing
+                        else if (this.Verwalter.Personen[i - 1] is TennisSpieler) {
+                            ((TennisSpieler)this.Verwalter.Personen[i - 1]).Schlaeger = Request.Form[fields["schlaeger"]];
+                            ((TennisSpieler)this.Verwalter.Personen[i - 1]).Aufschlaggeschwindigkeit = Int32.Parse(Request.Form[fields["aufschlagGeschw"]]);
+                        }
                     }
                     else if (this.Verwalter.Personen[i - 1] is Trainer) {
                         ((Trainer)this.Verwalter.Personen[i - 1]).Erfahrung = Int32.Parse(Request.Form[fields["anzahlJahre"]]);
                     }
-                    // Physiotherapeut is missing
+                    // Physiotherapeut is missing (same for insert?)
 
                     if (this.Verwalter.DBManager.DBStatus) {
                         this.Verwalter.Personen[i - 1].editPerson();
@@ -253,8 +207,7 @@ namespace Mannschaftsverwaltung
 
         #region Worker
 
-        protected void download_XML_click(object sender, EventArgs e)
-        {
+        protected void download_XML_click(object sender, EventArgs e) {
             Type[] types = new Type[] {
                 typeof(Person),
                 typeof(Spieler),
@@ -275,42 +228,35 @@ namespace Mannschaftsverwaltung
             Response.End();
         }
 
-        protected void orderByName(object sender, EventArgs e)
-        {
+        protected void orderByName(object sender, EventArgs e) {
             this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
             this.Verwalter.sortiereNachName();
             Response.Redirect(Request.RawUrl);
         }
 
-        protected void orderByBirthday(object sender, EventArgs e)
-        {
+        protected void orderByBirthday(object sender, EventArgs e) {
             this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
             this.Verwalter.sortiereNachGeburtstag();
             Response.Redirect(Request.RawUrl);
         }
 
-        protected void orderByGoals(object sender, EventArgs e)
-        {
+        protected void orderByGoals(object sender, EventArgs e) {
             this.Verwalter.ReverseSort = !this.Verwalter.ReverseSort;
             this.Verwalter.sortiereNachSpezEigenschaft();
             Response.Redirect(Request.RawUrl);
         }
 
-        private void LoadPersonen()
-        {
+        private void LoadPersonen() {
             int index = 1;
             int ex_id = 1;
-            foreach (Person person in this.Verwalter.Personen)
-            {
+            foreach (Person person in this.Verwalter.Personen) {
                 TableRow neueZeile = new TableRow();
                 //ID
                 TableCell neueZelle = new TableCell();
-                if (person.ID != -1)
-                {
+                if (person.ID != -1) {
                     neueZelle.Text = person.ID.ToString();
                 }
-                else
-                {
+                else {
                     neueZelle.Text = ex_id.ToString();
                     ex_id++;
                 }
@@ -366,8 +312,7 @@ namespace Mannschaftsverwaltung
                 neueZelle.Text = getRolle(person);
                 neueZeile.Cells.Add(neueZelle);
 
-                if (this.Verwalter.ActiveUser.Rolle == Role.ADMIN)
-                {
+                if (this.Verwalter.ActiveUser.Rolle == Role.ADMIN) {
                     //Edit
                     neueZelle = new TableCell();
                     Button editBtn = new Button();
@@ -393,6 +338,7 @@ namespace Mannschaftsverwaltung
 
                 this.Table1.Rows.Add(neueZeile);
             }
+
             if (this.Verwalter.EditPerson == true) {
                 foreach (Person person in this.Verwalter.Personen) {
                     if (person.ID == this.Verwalter.Personen[this.Verwalter.EditPersonIndex - 1].ID) {
@@ -442,7 +388,7 @@ namespace Mannschaftsverwaltung
                 TableRow neueZeile = new TableRow();
                 TableCell neueEditZelle = new TableCell();
                 neueEditZelle.Text = this.Verwalter.Personen[this.Verwalter.EditPersonIndex - 1].ID.ToString();
-                
+
                 neueZeile.Cells.Add(neueEditZelle);
 
                 neueEditZelle = new TableCell();
@@ -458,8 +404,7 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        public void disableAndClearInputs()
-        {
+        public void disableAndClearInputs() {
             name.Disabled = true;
             name.Value = "";
             vorname.Disabled = true;
@@ -484,82 +429,26 @@ namespace Mannschaftsverwaltung
             aufschlagGeschw.Value = "";
         }
 
-        public void disableAllRadioButtons()
-        {
-            foreach (ListItem radioButton in RadioButtonList1.Items)
-            {
+        public void disableAllRadioButtons() {
+            foreach (ListItem radioButton in RadioButtonList1.Items) {
                 radioButton.Enabled = false;
             }
         }
 
-        public void enableAllRadioButtons()
-        {
-            foreach (ListItem radioButton in RadioButtonList1.Items)
-            {
+        public void enableAllRadioButtons() {
+            foreach (ListItem radioButton in RadioButtonList1.Items) {
                 radioButton.Enabled = true;
             }
         }
 
-        public string getErzielteTore(Person p)
-        {
-            if (p is FussballSpieler)
-            {
+        public string getErzielteTore(Person p) {
+            if (p is FussballSpieler) {
                 return ((FussballSpieler)p).GeschosseneTore.ToString();
             }
-            else if (p is HandballSpieler)
-            {
+            else if (p is HandballSpieler) {
                 return ((HandballSpieler)p).GeworfeneTore.ToString();
             }
-            else
-            {
-                return "";
-            }
-        }
-
-        public string getGewonneneSpiele(Person p)
-        {
-            if (p is Spieler)
-            {
-                return ((Spieler)p).GewonneneSpiele.ToString();
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        public string getAnzahlJahre(Person p)
-        {
-            if (p is Trainer)
-            {
-                return ((Trainer)p).Erfahrung.ToString();
-            }
-            else if (p is Spieler)
-            {
-                return ((Spieler)p).AnzahlJahre.ToString();
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        public string getRolle(Person p)
-        {
-            if (p is FussballSpieler)
-            {
-                return ((FussballSpieler)p).Position;
-            }
-            else if (p is HandballSpieler)
-            {
-                return ((HandballSpieler)p).Position;
-            }
-            else if (p is TennisSpieler)
-            {
-                return ((TennisSpieler)p).Schlaeger + " " + ((TennisSpieler)p).Aufschlaggeschwindigkeit + "km/h";
-            }
-            else
-            {
+            else {
                 return "";
             }
         }
@@ -582,38 +471,65 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        public string getAnzahlSpiele(Person p)
-        {
-            if (p is Spieler)
-            {
+        public string getGewonneneSpiele(Person p) {
+            if (p is Spieler) {
+                return ((Spieler)p).GewonneneSpiele.ToString();
+            }
+            else {
+                return "";
+            }
+        }
+
+        public string getAnzahlJahre(Person p) {
+            if (p is Trainer) {
+                return ((Trainer)p).Erfahrung.ToString();
+            }
+            else if (p is Spieler) {
+                return ((Spieler)p).AnzahlJahre.ToString();
+            }
+            else {
+                return "";
+            }
+        }
+
+        public string getRolle(Person p) {
+            if (p is FussballSpieler) {
+                return ((FussballSpieler)p).Position;
+            }
+            else if (p is HandballSpieler) {
+                return ((HandballSpieler)p).Position;
+            }
+            else if (p is TennisSpieler) {
+                return ((TennisSpieler)p).Schlaeger + " " + ((TennisSpieler)p).Aufschlaggeschwindigkeit + "km/h";
+            }
+            else {
+                return "";
+            }
+        }
+
+        public string getAnzahlSpiele(Person p) {
+            if (p is Spieler) {
                 return ((Spieler)p).AnzahlSpiele.ToString();
             }
-            else
-            {
+            else {
                 return "";
             }
         }
 
-        public string getAnzahlVereine(Person p)
-        {
-            if (p is Spieler)
-            {
+        public string getAnzahlVereine(Person p) {
+            if (p is Spieler) {
                 return ((Spieler)p).AnzahlVereine.ToString();
             }
-            else
-            {
+            else {
                 return "";
             }
         }
 
-        public string getSportart(Person p)
-        {
-            if (p is Spieler)
-            {
+        public string getSportart(Person p) {
+            if (p is Spieler) {
                 return ((Spieler)p).SportArt;
             }
-            else
-            {
+            else {
                 string type = p.GetType().ToString();
                 string[] array = type.Split('.');
                 return array[1];
