@@ -131,6 +131,12 @@
                                     <input class="form-control" id="aufschlagGeschw" type="number" name="aufschlagGeschw" value="" runat="server" disabled required/>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Anerkennungen:</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" id="anerkennungen" type="text" name="anerkennungen" value="" runat="server" disabled required/>
+                                </div>
+                            </div>
                             <div class="col-lg-12 d-flex justify-content-center">
                                 <asp:Button ID="Button3" runat="server" Text="hinzufügen" OnClick="Button3_Click" Visible="False" CssClass="btn btn-success" />
                             </div>
@@ -166,7 +172,7 @@
             <asp:TableHeaderCell>Gewonnene Spiele</asp:TableHeaderCell>
             <asp:TableHeaderCell>Anzahl Jahre</asp:TableHeaderCell>
             <asp:TableHeaderCell>Anzahl Vereine</asp:TableHeaderCell>
-            <asp:TableHeaderCell>Einsatzbereich</asp:TableHeaderCell>
+            <asp:TableHeaderCell>Notizen</asp:TableHeaderCell>
             <asp:TableHeaderCell>Edit</asp:TableHeaderCell>
             <asp:TableHeaderCell>Del</asp:TableHeaderCell>
         </asp:TableHeaderRow>

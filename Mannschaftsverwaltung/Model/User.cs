@@ -57,7 +57,6 @@ namespace Mannschaftsverwaltung
         #endregion
 
         #region Database
-
         #endregion
 
         #region Schnittstellen
