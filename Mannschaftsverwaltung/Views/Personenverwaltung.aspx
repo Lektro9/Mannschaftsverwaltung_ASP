@@ -3,7 +3,6 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <h1 class="mt-2"><%: Page.Title %></h1>
-
     <svg id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" viewBox="0, 0, 400,400">
         <defs>
             <g id="hinata">
@@ -43,13 +42,8 @@
             </g>
         </defs>
     </svg>
-
-
-
     <div class="row align-items-center mt-2">
         <div class="col-lg-5">
-
-
             <asp:RadioButtonList ID="RadioButtonList1" runat="server" CssClass="list-group">
                 <asp:ListItem class="list-group-item list-group-item-action" Value="Fussballspieler"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#gregor" /></svg> Fussballspieler</asp:ListItem>
                 <asp:ListItem class="list-group-item list-group-item-action" Value="Handballspieler"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#hinata" /></svg> Handballspieler</asp:ListItem>
@@ -57,14 +51,11 @@
                 <asp:ListItem class="list-group-item list-group-item-action" Value="Trainer"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#ippocoach" /></svg> Trainer</asp:ListItem>
                 <asp:ListItem class="list-group-item list-group-item-action" Value="Physiotherapeut"><svg width="120" height="30" viewBox="0 0 100 400"><use href="#okabe" /></svg> Physiotherapeut</asp:ListItem>
             </asp:RadioButtonList>
-
-
             <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN) {%>
             <asp:Button ID="Button2" runat="server" Text="auswählen" OnClick="Button2_Click" class="btn btn-success mt-2" />
             <%}%>
         </div>
         <div class="col-lg-7">
-
             <div>
                 <div>
                     <span class="anchor" id="formUserEdit"></span>
@@ -143,7 +134,9 @@
                             <div class="col-lg-12 d-flex justify-content-center">
                                 <asp:Button ID="Button3" runat="server" Text="hinzufügen" OnClick="Button3_Click" Visible="False" CssClass="btn btn-success" />
                             </div>
-
+                            <div class="col-lg-6 d-flex justify-content-center">
+                                <asp:Button ID="saveEdit" runat="server" Text="Speichern" Visible="False" CssClass="btn btn-info" />
+                            </div>
                         </div>
                     </div>
                     <!-- /form user info -->
