@@ -497,6 +497,22 @@ namespace Mannschaftsverwaltung
             this.Personen = mergedPersonen;
         }
 
+        public bool isMannschaftInGame(Mannschaft m)
+        {
+            bool retVal = false;
+            foreach (Turnier turnier in Turniere)
+            {
+                foreach (Spiel spiel in turnier.Spiele)
+                {
+                    if (spiel.Team1ID == m.ID || spiel.Team2ID == m.ID)
+                    {
+                        retVal = true;
+                    }
+                }
+            }
+            return retVal;
+        }
+
         public void deleteMannFromDB(Mannschaft m)
         {
             DBManager.openDBConection();
