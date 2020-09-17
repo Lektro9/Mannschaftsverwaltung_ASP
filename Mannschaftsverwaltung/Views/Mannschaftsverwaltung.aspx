@@ -2,16 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-
-    <div class="toast" id="myToast">
-        <div class="toast-header">
-            Toast Header
-        </div>
-        <div class="toast-body">
-            Some text inside the toast body
-        </div>
-    </div>
-
     <h1 class="mt-2"><%: Page.Title %></h1>
     <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
         {%>

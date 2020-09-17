@@ -34,6 +34,7 @@ namespace Mannschaftsverwaltung
         bool _authenticated;
         User _activeUser;
         DataManager _dBManager;
+        private int _editGameID;
 
         #endregion
 
@@ -65,6 +66,7 @@ namespace Mannschaftsverwaltung
         public bool Authenticated { get => _authenticated; set => _authenticated = value; }
         public User ActiveUser { get => _activeUser; set => _activeUser = value; }
         public DataManager DBManager { get => _dBManager; set => _dBManager = value; }
+        public int EditGameID { get => _editGameID; set => _editGameID = value; }
         #endregion
 
         #region Konstruktoren
@@ -87,6 +89,7 @@ namespace Mannschaftsverwaltung
             ActiveUser = null;
             DBManager = new DataManager();
             Nutzer = new List<User>();
+            EditGameID = -1;
         }
         #endregion
 
@@ -139,6 +142,28 @@ namespace Mannschaftsverwaltung
             DBManager.openDBConection();
             DBManager.createSpiel(this.Turniere[TurnierIndex].ID, s);
             DBManager.closeConnection();
+        }
+
+        public void editGame(int team1id, int team2id, int team1Punkte, int team2Punkte)
+        {
+            this.Turniere.ForEach(turnier =>
+            {
+                foreach (Spiel spiel in turnier.Spiele)
+                {
+                    if (spiel.ID == this.EditGameID)
+                    {
+                        spiel.Team1ID = team1id;
+                        spiel.Team2ID = team2id;
+                        spiel.Team1Punkte = team1Punkte;
+                        spiel.Team2Punkte = team2Punkte;
+                        addMannschaftsStats(spiel);
+
+                        DBManager.openDBConection();
+                        DBManager.updateSpiel(spiel);
+                        DBManager.closeConnection();
+                    }
+                }
+            });
         }
 
         public void deleteGame(int TurnierIndex, Spiel s)

@@ -67,12 +67,39 @@ namespace Mannschaftsverwaltung
             }
         }
 
+        protected void SpielBearbeitet_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int index = int.Parse(button.ClientID.Split('_').Last());
+            string team1ids = this.Request.Form["Select1_" + (index + 1)];
+            string team2ids = this.Request.Form["Select2_" + (index + 1)];
+            string team1id = team1ids.Split(',')[0];
+            string team2id = team2ids.Split(',')[0];
+            string team1punkte = this.Request.Form["team1goals_" + (index + 1)].Split(',')[0];
+            string team2punkte = this.Request.Form["team2goals_" + (index + 1)].Split(',')[0];
+            if (team1id != null && team2id != null && team1punkte != null && team2punkte != null)
+            {
+                this.Verwalter.editGame(int.Parse(team1id), int.Parse(team2id), int.Parse(team1punkte), int.Parse(team2punkte));
+                this.Verwalter.EditGameID = -1;
+                Response.Redirect(Request.RawUrl);
+            }
+        }
+
         protected void SpielEntf_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             int TurnierIndex = int.Parse(button.ClientID.Split('_')[1]);
             int SpielIndex = int.Parse(button.ClientID.Split('_').Last());
             this.Verwalter.deleteGame(TurnierIndex, this.Verwalter.Turniere[TurnierIndex].Spiele[SpielIndex]);
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void SpielEdit_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int TurnierIndex = int.Parse(button.ClientID.Split('_')[1]);
+            int SpielIndex = int.Parse(button.ClientID.Split('_').Last());
+            this.Verwalter.EditGameID = this.Verwalter.Turniere[TurnierIndex].Spiele[SpielIndex].ID;
             Response.Redirect(Request.RawUrl);
         }
 
@@ -85,7 +112,7 @@ namespace Mannschaftsverwaltung
             Response.Redirect(Request.RawUrl);
         }
 
-        
+
 
         protected void ItemBound(object sender, RepeaterItemEventArgs args)
         {
@@ -104,6 +131,22 @@ namespace Mannschaftsverwaltung
             }
         }
 
+        protected void ItemBoundOnRepeater2(object sender, RepeaterItemEventArgs args)
+        {
+            if (args.Item.DataItem != null)
+            {
+                Repeater rp5 = (Repeater)args.Item.FindControl("Repeater5");
+                Repeater rp6 = (Repeater)args.Item.FindControl("Repeater6");
+                //int index = int.Parse(rp2.ClientID.Split('_').Last());
+                //rp5.DataSource = this.Verwalter.Turniere[index].Spiele;
+                //rp5.DataBind();
+                rp5.DataSource = this.Verwalter.Mannschaften;
+                rp5.DataBind();
+                rp6.DataSource = this.Verwalter.Mannschaften;
+                rp6.DataBind();
+            }
+        }
+
         protected string getTeamName(string ID)
         {
             string retVal = "";
@@ -117,6 +160,16 @@ namespace Mannschaftsverwaltung
                 }
             }
 
+            return retVal;
+        }
+
+        protected bool isGameEdit(string gameID)
+        {
+            bool retVal = false;
+            if (gameID == this.Verwalter.EditGameID.ToString())
+            {
+                retVal = true;
+            }
             return retVal;
         }
     }
