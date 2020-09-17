@@ -45,6 +45,7 @@ namespace Mannschaftsverwaltung
             this.Verwalter.Personen = this.Verwalter.getAllPerson(Verwalter.ActiveUser);
             this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
             LoadMannschaften();
+            Verwalter.getAllTurniereFromDB();
             if (this.Verwalter.EditMannschaft)
             {
                 LoadEditMannschaft();
@@ -424,8 +425,12 @@ namespace Mannschaftsverwaltung
         {
             int index = Int32.Parse(((Button)sender).ID.Substring(10));
             //this.Verwalter.DeleteFromDB(this.Verwalter.Mannschaften[index - 1].ID);
-            this.Verwalter.deleteMannFromDB(this.Verwalter.Mannschaften[index - 1]);
-            this.Verwalter.Mannschaften.RemoveAt(index - 1);
+            // check if Mannschaft is used in tournament game
+            if (!this.Verwalter.isMannschaftInGame(this.Verwalter.Mannschaften[index - 1]))
+            {
+                this.Verwalter.deleteMannFromDB(this.Verwalter.Mannschaften[index - 1]);
+                this.Verwalter.Mannschaften.RemoveAt(index - 1);
+            }
             Response.Redirect(Request.RawUrl);
         }
 

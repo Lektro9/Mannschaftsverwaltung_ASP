@@ -35,15 +35,15 @@ namespace Mannschaftsverwaltung
         {
             if (this is FussballSpieler)
             {
-                SportArt = "Fusball";
+                SportArt = "FussballSpieler";
             }
             else if (this is HandballSpieler)
             {
-                SportArt = "Handball";
+                SportArt = "HandballSpieler";
             }
             else if (this is TennisSpieler)
             {
-                SportArt = "Tennis";
+                SportArt = "TennisSpieler";
             }
             else
             {
@@ -55,7 +55,7 @@ namespace Mannschaftsverwaltung
         {
             if (this is FussballSpieler)
             {
-                SportArt = "FusballSpieler";
+                SportArt = "FussballSpieler";
             }
             else if (this is HandballSpieler)
             {
