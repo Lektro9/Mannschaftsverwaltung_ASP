@@ -13,6 +13,15 @@ namespace Mannschaftsverwaltung {
     public partial class Spiele {
         
         /// <summary>
+        /// ListBox1-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBox1;
+        
+        /// <summary>
         /// TurnierNameEing-Steuerelement
         /// </summary>
         /// <remarks>
