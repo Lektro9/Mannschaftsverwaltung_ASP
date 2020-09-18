@@ -130,6 +130,15 @@ namespace Mannschaftsverwaltung {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl aufschlagGeschw;
         
         /// <summary>
+        /// anerkennungen-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText anerkennungen;
+        
+        /// <summary>
         /// Button3-Steuerelement
         /// </summary>
         /// <remarks>
@@ -137,6 +146,15 @@ namespace Mannschaftsverwaltung {
         /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button3;
+        
+        /// <summary>
+        /// saveEdit-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button saveEdit;
         
         /// <summary>
         /// Table1-Steuerelement

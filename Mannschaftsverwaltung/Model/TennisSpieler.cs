@@ -19,8 +19,6 @@ namespace Mannschaftsverwaltung
         #region Eigenschaften
         string _schlaeger; //welcher Schläger nutzt der Tennisspieler?
         int _aufschlaggeschwindigkeit; //Durchschnittl. Aufschlaggeschw. in km/h
-
-
         #endregion
 
         #region Accessoren/Modifier
@@ -50,6 +48,7 @@ namespace Mannschaftsverwaltung
             this.Schlaeger = s;
             return retVal;
         }
+
         public override string spielen()
         {
             string retVal = "Der Tennisspieler spielt.";

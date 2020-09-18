@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Mannschaftsverwaltung.Login" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuex"></script>
     <h1 class="mt-2"><%: Page.Title %></h1>
     <!-- form card login -->
     <div class="card rounded shadow shadow-sm">
@@ -33,20 +31,4 @@
         <!--/card-block-->
     </div>
     <!-- /form card login -->
-    <h1>Vue Demo #1</h1>
-    <div id="vapp">
-        <p>Hello World.  [[ timesClicked ]]</p>
-        <div v-on:click="timesClicked += 1">Click me</div>
-    </div>
-
-    <script type="text/javascript"> 
-        const vueApp = new Vue({
-            el: '#vapp',
-            delimiters: ['[[',']]'],
-            data: {
-                timesClicked: 0
-            },
-        });
-    </script>
-
 </asp:Content>

@@ -340,10 +340,10 @@ namespace Mannschaftsverwaltung
             }
         }
 
-        public void AddPhysio(string name, string vorname, DateTime geburtstag)
+        public void AddPhysio(string name, string vorname, DateTime geburtstag, string annerkennung)
         {
             int id = generateID();
-            Physiotherapeut p = new Physiotherapeut(id, name, vorname, geburtstag);
+            Physiotherapeut p = new Physiotherapeut(id, name, vorname, geburtstag, annerkennung);
             this.Personen.Add(p);
             if (this.DBManager.DBStatus)
             {

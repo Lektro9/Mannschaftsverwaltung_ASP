@@ -112,8 +112,6 @@ namespace Mannschaftsverwaltung
             Response.Redirect(Request.RawUrl);
         }
 
-
-
         protected void ItemBound(object sender, RepeaterItemEventArgs args)
         {
             if (args.Item.DataItem != null)

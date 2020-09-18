@@ -15,7 +15,6 @@ namespace Mannschaftsverwaltung {
         private Controller _Verwalter;
         private string _auswahl;
 
-
         public Controller Verwalter { get => _Verwalter; set => _Verwalter = value; }
         public string Auswahl { get => _auswahl; set => _auswahl = value; }
 
@@ -45,66 +44,43 @@ namespace Mannschaftsverwaltung {
             this.Auswahl = RadioButtonList1.SelectedValue;
             int index = RadioButtonList1.SelectedIndex;
             disableAndClearInputs();
+
             foreach (ListItem item in RadioButtonList1.Items) {
                 item.Attributes.Add("class", "list-group-item list-group-item-action disabled");
             }
-            if (Auswahl == "Fussballspieler") {
+
+            if(Auswahl == "Fussballspieler" || Auswahl == "Handballspieler" || Auswahl == "Tennisspieler" || Auswahl == "Trainer" || Auswahl == "Physiotherapeut") {
                 RadioButtonList1.SelectedIndex = index;
                 RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
                 name.Disabled = false;
                 vorname.Disabled = false;
                 geburtstag.Disabled = false;
-                position.Disabled = false;
-                geschosseneTore.Disabled = false;
-                anzahlJahre.Disabled = false;
-                gewonneneSpiele.Disabled = false;
-                anzahlVereine.Disabled = false;
-                anzahlSpiele.Disabled = false;
-                this.Button3.Visible = true;
-            }
-            else if (Auswahl == "Handballspieler") {
-                RadioButtonList1.SelectedIndex = index;
-                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
-                name.Disabled = false;
-                vorname.Disabled = false;
-                geburtstag.Disabled = false;
-                position.Disabled = false;
-                geschosseneTore.Disabled = false;
-                anzahlJahre.Disabled = false;
-                gewonneneSpiele.Disabled = false;
-                anzahlVereine.Disabled = false;
-                anzahlSpiele.Disabled = false;
-                this.Button3.Visible = true;
-            }
-            else if (Auswahl == "Tennisspieler") {
-                RadioButtonList1.SelectedIndex = index;
-                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
-                name.Disabled = false;
-                vorname.Disabled = false;
-                geburtstag.Disabled = false;
-                anzahlJahre.Disabled = false;
-                gewonneneSpiele.Disabled = false;
-                anzahlVereine.Disabled = false;
-                anzahlSpiele.Disabled = false;
-                schlaeger.Disabled = false;
-                aufschlagGeschw.Disabled = false;
-                this.Button3.Visible = true;
-            }
-            else if (Auswahl == "Trainer") {
-                RadioButtonList1.SelectedIndex = index;
-                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
-                name.Disabled = false;
-                vorname.Disabled = false;
-                geburtstag.Disabled = false;
-                anzahlJahre.Disabled = false;
-                this.Button3.Visible = true;
-            }
-            else if (Auswahl == "Physiotherapeut") {
-                RadioButtonList1.SelectedIndex = index;
-                RadioButtonList1.Items[RadioButtonList1.SelectedIndex].Attributes.Add("class", "list-group-item list-group-item-action active");
-                name.Disabled = false;
-                vorname.Disabled = false;
-                geburtstag.Disabled = false;
+
+                if(Auswahl == "Fussballspieler" || Auswahl == "Handballspieler" || Auswahl == "Tennisspieler") {
+                    anzahlJahre.Disabled = false;
+                    gewonneneSpiele.Disabled = false;
+                    anzahlVereine.Disabled = false;
+                    anzahlSpiele.Disabled = false;
+
+                    if(Auswahl == "Fussballspieler" || Auswahl == "Handballspieler") {
+                        position.Disabled = false;
+                        geschosseneTore.Disabled = false;
+                    }
+
+                    if(Auswahl == "Tennisspieler") {
+                        schlaeger.Disabled = false;
+                        aufschlagGeschw.Disabled = false;
+                    }
+                }
+
+                if(Auswahl == "Trainer") {
+                    anzahlJahre.Disabled = false;
+                }
+
+                if (Auswahl == "Physiotherapeut") {
+                    anerkennungen.Disabled = false;
+                }
+
                 this.Button3.Visible = true;
             }
             else {
@@ -127,8 +103,8 @@ namespace Mannschaftsverwaltung {
             else if (this.Auswahl == "Trainer") {
                 this.Verwalter.AddTrainer(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), Int32.Parse(anzahlJahre.Value));
             }
-            else {
-                this.Verwalter.AddPhysio(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value));
+            else if (this.Auswahl == "Physiotherapeut") {
+                this.Verwalter.AddPhysio(name.Value, vorname.Value, DateTime.Parse(geburtstag.Value), anerkennungen.Value); // check
             }
             enableAllRadioButtons();
             disableAndClearInputs();
@@ -193,7 +169,9 @@ namespace Mannschaftsverwaltung {
                     else if (this.Verwalter.Personen[i - 1] is Trainer) {
                         ((Trainer)this.Verwalter.Personen[i - 1]).Erfahrung = Int32.Parse(Request.Form[fields["anzahlJahre"]]);
                     }
-                    // Physiotherapeut is missing (same for insert?)
+                    else if (this.Verwalter.Personen[i - 1] is Physiotherapeut) {
+                        ((Physiotherapeut)this.Verwalter.Personen[i - 1]).Anerkennungen = Request.Form[fields["anerkennungen"]];
+                    }
 
                     if (this.Verwalter.DBManager.DBStatus) {
                         this.Verwalter.Personen[i - 1].editPerson();
@@ -251,7 +229,7 @@ namespace Mannschaftsverwaltung {
             int ex_id = 1;
             foreach (Person person in this.Verwalter.Personen) {
                 TableRow neueZeile = new TableRow();
-                //ID
+
                 TableCell neueZelle = new TableCell();
                 if (person.ID != -1) {
                     neueZelle.Text = person.ID.ToString();
@@ -263,61 +241,72 @@ namespace Mannschaftsverwaltung {
                 neueZeile.Cells.Add(neueZelle);
 
                 //Name
-                neueZelle = new TableCell();
-                neueZelle.Text = person.Name;
+                neueZelle = new TableCell {
+                    Text = person.Name
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Vorname
-                neueZelle = new TableCell();
-                neueZelle.Text = person.Vorname;
+                neueZelle = new TableCell {
+                    Text = person.Vorname
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Geburtsdatum
-                neueZelle = new TableCell();
-                neueZelle.Text = person.Geburtstag.ToString("dd.MM.yyyy");
+                neueZelle = new TableCell {
+                    Text = person.Geburtstag.ToString("dd.MM.yyyy")
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //SportArt
-                neueZelle = new TableCell();
-                neueZelle.Text = getSportart(person);
+                neueZelle = new TableCell {
+                    Text = getSportart(person)
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Anzahl Spiele
-                neueZelle = new TableCell();
-                neueZelle.Text = getAnzahlSpiele(person);
+                neueZelle = new TableCell {
+                    Text = getAnzahlSpiele(person)
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Erziele Tore
-                neueZelle = new TableCell();
-                neueZelle.Text = getErzielteTore(person);
+                neueZelle = new TableCell {
+                    Text = getErzielteTore(person)
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Gewonnene Spiele
-                neueZelle = new TableCell();
-                neueZelle.Text = getGewonneneSpiele(person);
+                neueZelle = new TableCell {
+                    Text = getGewonneneSpiele(person)
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Anzahl Jahre
-                neueZelle = new TableCell();
-                neueZelle.Text = getAnzahlJahre(person);
+                neueZelle = new TableCell {
+                    Text = getAnzahlJahre(person)
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Anzahl Vereine
-                neueZelle = new TableCell();
-                neueZelle.Text = getAnzahlVereine(person);
+                neueZelle = new TableCell {
+                    Text = getAnzahlVereine(person)
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 //Anzahl Vereine
-                neueZelle = new TableCell();
-                neueZelle.Text = getRolle(person);
+                neueZelle = new TableCell {
+                    Text = getRolle(person)
+                };
                 neueZeile.Cells.Add(neueZelle);
 
                 if (this.Verwalter.ActiveUser.Rolle == Role.ADMIN) {
                     //Edit
                     neueZelle = new TableCell();
-                    Button editBtn = new Button();
-                    editBtn.ID = "bearb" + index;
-                    editBtn.Text = "edit";
+                    Button editBtn = new Button {
+                        ID = "bearb" + index,
+                        Text = "edit"
+                    };
                     editBtn.Click += editBtn_Click;
                     editBtn.CssClass = "btn btn-info";
                     neueZelle.Controls.Add(editBtn);
@@ -325,9 +314,10 @@ namespace Mannschaftsverwaltung {
 
                     //Del
                     neueZelle = new TableCell();
-                    Button delBtn = new Button();
-                    delBtn.ID = "del" + index;
-                    delBtn.Text = "Del";
+                    Button delBtn = new Button {
+                        ID = "del" + index,
+                        Text = "Del"
+                    };
                     delBtn.Click += delBtn_Click;
                     delBtn.CssClass = "btn btn-danger";
                     neueZelle.Controls.Add(delBtn);
@@ -381,26 +371,17 @@ namespace Mannschaftsverwaltung {
 
                             anzahlJahre.Disabled = false;
                         }
-                        else if (getSportart(person) == "Physiotherapeut") { }
+                        else if (getSportart(person) == "Physiotherapeut") {
+                            anerkennungen.Attributes["value"] = getRolle(person);
+
+                            anerkennungen.Disabled = false;
+                        }
                     }
                 }
 
-                TableRow neueZeile = new TableRow();
-                TableCell neueEditZelle = new TableCell();
-                neueEditZelle.Text = this.Verwalter.Personen[this.Verwalter.EditPersonIndex - 1].ID.ToString();
-
-                neueZeile.Cells.Add(neueEditZelle);
-
-                neueEditZelle = new TableCell();
-                Button accBtn = new Button();
-                accBtn.ID = "acc" + this.Verwalter.EditPersonIndex;
-                accBtn.Text = "Speichern";
-                accBtn.Click += accBtn_Click;
-                accBtn.CssClass = "btn-info";
-                neueEditZelle.Controls.Add(accBtn);
-                neueZeile.Cells.Add(neueEditZelle);
-
-                this.Table1.Rows.Add(neueZeile);
+                this.saveEdit.Click += accBtn_Click;
+                this.saveEdit.Visible = true;
+                this.saveEdit.ID = "acc" + this.Verwalter.EditPersonIndex;
             }
         }
 
@@ -427,6 +408,8 @@ namespace Mannschaftsverwaltung {
             schlaeger.Value = "";
             aufschlagGeschw.Disabled = true;
             aufschlagGeschw.Value = "";
+            anerkennungen.Disabled = true;
+            anerkennungen.Value = "";
         }
 
         public void disableAllRadioButtons() {
@@ -501,6 +484,9 @@ namespace Mannschaftsverwaltung {
             }
             else if (p is TennisSpieler) {
                 return ((TennisSpieler)p).Schlaeger + " " + ((TennisSpieler)p).Aufschlaggeschwindigkeit + "km/h";
+            }
+            else if (p is Physiotherapeut) {
+                return ((Physiotherapeut)p).Anerkennungen.ToString();
             }
             else {
                 return "";
