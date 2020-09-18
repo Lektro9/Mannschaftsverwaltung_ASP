@@ -584,6 +584,7 @@ namespace Mannschaftsverwaltung
 
             return retVal;
         }
+
         #endregion
 
         #region Worker (Turniere und Spiele)
@@ -610,7 +611,34 @@ namespace Mannschaftsverwaltung
             foreach (Turnier t in retVal)
             {
                 t.Spiele = getAllSpiele(t);
+                t.Mannschaften = getTurnierMannschaften(t);
             }
+
+            return retVal;
+        }
+
+        private List<Mannschaft> getTurnierMannschaften(Turnier t)
+        {
+            List<Mannschaft> retVal = new List<Mannschaft>();
+
+            string SQLString = String.Format(@"SELECT teamID, turnierID, name, sportart, session_id FROM `turnier_mannschaften` 
+                                                JOIN mannschaft
+                                                ON turnier_mannschaften.teamID = mannschaft.id
+                                                where `turnierID` = @turnierID");
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@turnierID", t.ID);
+            executeSQLCommand(command);
+            MySqlDataReader rdr = command.ExecuteReader();
+            while (rdr.Read())
+            {
+                Mannschaft m = new Mannschaft(
+                    Convert.ToInt32(rdr.GetValue(0)),
+                    rdr.GetValue(3).ToString(),
+                    rdr.GetValue(2).ToString()
+                    );
+                retVal.Add(m);
+            }
+            rdr.Close();
 
             return retVal;
         }

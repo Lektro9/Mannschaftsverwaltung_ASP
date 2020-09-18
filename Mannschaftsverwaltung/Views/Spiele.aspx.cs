@@ -30,6 +30,7 @@ namespace Mannschaftsverwaltung
                     this.Verwalter.Personen = this.Verwalter.getAllPerson(Verwalter.ActiveUser);
                     this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
                     Verwalter.getAllTurniereFromDB();
+                    Console.WriteLine("BP");
                 }
                 else
                 {
