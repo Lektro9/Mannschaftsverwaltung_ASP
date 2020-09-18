@@ -2,6 +2,24 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <% if (this.Verwalter.IsError)
+        { %>
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 0px;">
+        <div class="toast position-absolute" style="position: absolute; top: 25px; right: 10%; z-index: 1;" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-danger">Etwas ist schief gelaufen!</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <%= this.Verwalter.ErrorMsg %>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+
     <h1 class="mt-2"><%: Page.Title %></h1>
     <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
         {%>

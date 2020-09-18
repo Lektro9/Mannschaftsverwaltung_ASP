@@ -2,6 +2,24 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+
+    <% if (this.Verwalter.IsError)
+        { %>
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 0px;">
+        <div class="toast position-absolute" style="position: absolute; top: 25px; right: 10%; z-index: 1;" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-danger">Etwas ist schief gelaufen!</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <%= this.Verwalter.ErrorMsg %>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
     <h1 class="mt-2"><%: Page.Title %></h1>
 
     <%--erstellen eines Turnieres--%>
@@ -45,7 +63,7 @@
 
                             <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="ItemBoundOnRepeater2">
                                 <ItemTemplate>
-                                    <p runat="server" Visible='<%# !isGameEdit(Eval("ID").ToString()) %>'>
+                                    <p runat="server" visible='<%# !isGameEdit(Eval("ID").ToString()) %>'>
                                         <div class="col-5">
                                             <div class="input-group-prepend d-flex justify-content-between">
                                                 <span class="input-group-text"><%# getTeamName(Eval("Team1ID").ToString()) %></span>
@@ -66,27 +84,27 @@
                                         <%}%>
                                     </p>
 
-                                    <p runat="server" Visible='<%# isGameEdit(Eval("ID").ToString()) %>'>
+                                    <p runat="server" visible='<%# isGameEdit(Eval("ID").ToString()) %>'>
                                         <div class="col-5">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <label class="input-group-text" for="inputGroupSelect01">Team 1</label>
                                                 </div>
-                                                <select class="custom-select" data-width="200px" name="Select1_<%# Container.ItemIndex + 1 %>" id="Select1_<%# Container.ItemIndex + 1 %>">
+                                                <select class="custom-select" data-width="200px" name="EditSelect1_<%# Container.ItemIndex + 1 %>" id="EditSelect1_<%# Container.ItemIndex + 1 %>">
                                                     <asp:Repeater ID="Repeater5" runat="server">
                                                         <ItemTemplate>
                                                             <option value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
                                                         </ItemTemplate>
                                                     </asp:Repeater>
                                                 </select>
-                                                <input type="number" class="form-control rightalign" name="team1goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte" value="<%# Eval("Team1Punkte") %>">
+                                                <input type="number" class="form-control rightalign" name="EditTeam1goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte" value="<%# Eval("Team1Punkte") %>">
                                             </div>
                                         </div>
 
                                         <div class="col-5 justify-content-end">
                                             <div class="input-group">
-                                                <input type="number" class="form-control" name="team2goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte" value="<%# Eval("Team2Punkte") %>">
-                                                <select class="custom-select" name="Select2_<%# Container.ItemIndex + 1 %>" id="Select2_<%# Container.ItemIndex + 1 %>">
+                                                <input type="number" class="form-control" name="EditTeam2goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte" value="<%# Eval("Team2Punkte") %>">
+                                                <select class="custom-select" name="EditSelect2_<%# Container.ItemIndex + 1 %>" id="EditSelect2_<%# Container.ItemIndex + 1 %>">
                                                     <asp:Repeater ID="Repeater6" runat="server">
                                                         <ItemTemplate>
                                                             <option value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
@@ -124,13 +142,13 @@
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </select>
-                                    <input type="number" class="form-control rightalign" name="team1goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte">
+                                    <input type="number" class="form-control rightalign" name="team1goals_<%# Container.ItemIndex + 1 %>" placeholder="Punkte">
                                 </div>
                             </div>
 
                             <div class="col-5 justify-content-end">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="team2goals_<%# Container.ItemIndex + 1 %>" id="example1" placeholder="Punkte">
+                                    <input type="number" class="form-control" name="team2goals_<%# Container.ItemIndex + 1 %>" placeholder="Punkte">
                                     <select class="custom-select" name="Select2_<%# Container.ItemIndex + 1 %>" id="Select2_<%# Container.ItemIndex + 1 %>">
                                         <asp:Repeater ID="Repeater4" runat="server">
                                             <ItemTemplate>

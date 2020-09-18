@@ -35,6 +35,8 @@ namespace Mannschaftsverwaltung
         User _activeUser;
         DataManager _dBManager;
         private int _editGameID;
+        private bool _isError;
+        private string _errorMsg;
 
         #endregion
 
@@ -67,6 +69,8 @@ namespace Mannschaftsverwaltung
         public User ActiveUser { get => _activeUser; set => _activeUser = value; }
         public DataManager DBManager { get => _dBManager; set => _dBManager = value; }
         public int EditGameID { get => _editGameID; set => _editGameID = value; }
+        public bool IsError { get => _isError; set => _isError = value; }
+        public string ErrorMsg { get => _errorMsg; set => _errorMsg = value; }
         #endregion
 
         #region Konstruktoren
@@ -90,6 +94,8 @@ namespace Mannschaftsverwaltung
             DBManager = new DataManager();
             Nutzer = new List<User>();
             EditGameID = -1;
+            IsError = false;
+            ErrorMsg = "";
         }
         #endregion
 

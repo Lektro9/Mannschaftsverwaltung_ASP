@@ -25,6 +25,8 @@ namespace Mannschaftsverwaltung
             else
             {
             }
+            this.Verwalter.IsError = false;
+            this.Verwalter.ErrorMsg = "";
         }
     }
 }

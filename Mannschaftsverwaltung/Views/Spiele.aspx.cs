@@ -60,24 +60,28 @@ namespace Mannschaftsverwaltung
             string team2id = this.Request.Form["Select2_" + (index + 1)];
             string team1punkte = this.Request.Form["team1goals_" + (index + 1)];
             string team2punkte = this.Request.Form["team2goals_" + (index + 1)];
-            if (team1id != null && team2id != null && team1punkte != null && team2punkte != null)
+            if (!String.IsNullOrEmpty(team1id) && !String.IsNullOrEmpty(team2id) && !String.IsNullOrEmpty(team1punkte) && !String.IsNullOrEmpty(team2punkte))
             {
                 this.Verwalter.createGame(index, int.Parse(team1id), int.Parse(team2id), int.Parse(team1punkte), int.Parse(team2punkte));
                 Response.Redirect(Request.RawUrl);
+            }
+            else
+            {
+                this.Verwalter.IsError = true;
+                this.Verwalter.ErrorMsg = "Falsche Eingabe, bitte prüfen.";
             }
         }
 
         protected void SpielBearbeitet_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
+            Console.WriteLine(this.Request.Form);
             int index = int.Parse(button.ClientID.Split('_').Last());
-            string team1ids = this.Request.Form["Select1_" + (index + 1)];
-            string team2ids = this.Request.Form["Select2_" + (index + 1)];
-            string team1id = team1ids.Split(',')[0];
-            string team2id = team2ids.Split(',')[0];
-            string team1punkte = this.Request.Form["team1goals_" + (index + 1)].Split(',')[0];
-            string team2punkte = this.Request.Form["team2goals_" + (index + 1)].Split(',')[0];
-            if (team1id != null && team2id != null && team1punkte != null && team2punkte != null)
+            string team1id = this.Request.Form["EditSelect1_" + (index + 1)];
+            string team2id = this.Request.Form["EditSelect2_" + (index + 1)];
+            string team1punkte = this.Request.Form["EditTeam1goals_" + (index + 1)];
+            string team2punkte = this.Request.Form["EditTeam2goals_" + (index + 1)];
+            if (!String.IsNullOrEmpty(team1id) && !String.IsNullOrEmpty(team2id) && !String.IsNullOrEmpty(team1punkte) && !String.IsNullOrEmpty(team2punkte))
             {
                 this.Verwalter.editGame(int.Parse(team1id), int.Parse(team2id), int.Parse(team1punkte), int.Parse(team2punkte));
                 this.Verwalter.EditGameID = -1;
