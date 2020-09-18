@@ -51,7 +51,7 @@
     </asp:Table>
     <%}%>
 
-   <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.USER)
+    <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.USER)
         {%>
     <table class="table table-hover">
         <thead>

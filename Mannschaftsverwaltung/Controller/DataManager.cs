@@ -653,6 +653,18 @@ namespace Mannschaftsverwaltung
             executeSQLCommand(command);
         }
 
+        public void updateSpiel(Spiel s)
+        {
+            string SQLString = @"UPDATE `spiel` SET `team1ID` = @team1ID, `team2ID` = @team2ID, `team1Punkte` = @team1Punkte, `team2Punkte` = @team2Punkte WHERE `spiel`.`id` = @spielID;";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@team1ID", s.Team1ID);
+            command.Parameters.AddWithValue("@team2ID", s.Team2ID);
+            command.Parameters.AddWithValue("@team1Punkte", s.Team1Punkte);
+            command.Parameters.AddWithValue("@team2Punkte", s.Team2Punkte);
+            command.Parameters.AddWithValue("@spielID", s.ID);
+            executeSQLCommand(command);
+        }
+
         public void deleteSpiel(Spiel s)
         {
             string SQLString = @"DELETE FROM `spiel` WHERE `spiel`.`id` = @spielID";

@@ -431,7 +431,7 @@ namespace Mannschaftsverwaltung
                 this.Verwalter.deleteMannFromDB(this.Verwalter.Mannschaften[index - 1]);
                 this.Verwalter.Mannschaften.RemoveAt(index - 1);
             }
-            Response.Redirect(Request.RawUrl);
+            Response.Write("<script>alert('Es müssen erst alle Spiele der Mannschaft gelöscht werden, bevor die Mannschaft gelöscht werden kann.');</script>");
         }
 
         protected void acc_Click(object sender, EventArgs e)
