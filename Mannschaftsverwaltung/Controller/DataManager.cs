@@ -633,8 +633,8 @@ namespace Mannschaftsverwaltung
             {
                 Mannschaft m = new Mannschaft(
                     Convert.ToInt32(rdr.GetValue(0)),
-                    rdr.GetValue(3).ToString(),
-                    rdr.GetValue(2).ToString()
+                    rdr.GetValue(2).ToString(),
+                    rdr.GetValue(3).ToString()
                     );
                 retVal.Add(m);
             }
@@ -701,27 +701,52 @@ namespace Mannschaftsverwaltung
             executeSQLCommand(command);
         }
 
-        public void deleteTurnier(int turnierID, List<Spiel> spiele)
+        public void deleteTurnier(Turnier turnier)
         {
-            foreach (Spiel s in spiele)
+            foreach (Spiel s in turnier.Spiele)
             {
                 deleteSpiel(s);
             }
+
+            deleteMannschaftenInTurnier(turnier);
+
             string SQLString = @"DELETE FROM `turnier` WHERE `turnier`.`id` = @turnierID";
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
-            command.Parameters.AddWithValue("@turnierID", turnierID);
+            command.Parameters.AddWithValue("@turnierID", turnier.ID);
+            executeSQLCommand(command);
+        }
+
+        public void deleteMannschaftenInTurnier(Turnier turnier)
+        {
+            string SQLString = @"DELETE FROM `turnier_mannschaften` WHERE `turnier_mannschaften`.`turnierID` = turnierID;";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@turnierID", turnier.ID);
             executeSQLCommand(command);
         }
 
         public void createTurnier(Turnier t, User activeUser)
         {
-            string SQLString = @"INSERT INTO `turnier` (`id`, `name`, `turnierstatus`, `session_id`) VALUES (NULL, @turnierName, @turnierStatus, @session);";
+            string SQLString = @"INSERT INTO `turnier` (`id`, `name`, `turnierstatus`, `session_id`) VALUES (@turnierID, @turnierName, @turnierStatus, @session);";
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@turnierID", t.ID);
             command.Parameters.AddWithValue("@turnierName", t.Name);
             command.Parameters.AddWithValue("@turnierStatus", (int)t.Status);
             command.Parameters.AddWithValue("@session", activeUser.ID);
             executeSQLCommand(command);
         }
+
+        public void createTurnierMannschaften(int turnierID, List<Mannschaft> selectedMannschaften)
+        {
+            foreach (Mannschaft mannschaft in selectedMannschaften)
+            {
+                string SQLString = @"INSERT INTO `turnier_mannschaften` (`id`, `teamID`, `turnierID`) VALUES (NULL, @teamID, @turnierID);";
+                MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+                command.Parameters.AddWithValue("@teamID", mannschaft.ID);
+                command.Parameters.AddWithValue("@turnierID", turnierID);
+                executeSQLCommand(command);
+            }
+        }
+        
         #endregion
 
         #region Worker (Userverwaltung)

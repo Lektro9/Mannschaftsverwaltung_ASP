@@ -120,7 +120,7 @@ namespace Mannschaftsverwaltung
         public void removeTurnier(int turnierIndex)
         {
             DBManager.openDBConection();
-            DBManager.deleteTurnier(this.Turniere[turnierIndex].ID, this.Turniere[turnierIndex].Spiele);
+            DBManager.deleteTurnier(this.Turniere[turnierIndex]);
             DBManager.closeConnection();
             foreach (Spiel s in this.Turniere[turnierIndex].Spiele)
             {
@@ -293,12 +293,17 @@ namespace Mannschaftsverwaltung
             return EditMann;
         }
 
-        public void TurnierHinzuf(string turnierName)
+        public void TurnierHinzuf(string turnierName, List<Mannschaft> selectedMannschaften)
         {
             Turnier t = new Turnier(generateID(), turnierName);
             DBManager.openDBConection();
             DBManager.createTurnier(t, ActiveUser);
             DBManager.closeConnection();
+
+            DBManager.openDBConection();
+            DBManager.createTurnierMannschaften(t.ID, selectedMannschaften);
+            DBManager.closeConnection();
+
             this.Turniere.Add(t);
         }
 

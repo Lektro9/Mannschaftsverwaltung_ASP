@@ -35,19 +35,14 @@
                     <h3>Mögliche Teams:</h3>
                     <asp:ListBox ID="ListBox1" runat="server" SelectionMode="Multiple" Width="400px" Height="200px" CssClass="form-control"></asp:ListBox>
                 </div>
-                <div class="col-7">
+                <div class="col-7 pt-5">
                     <input type="text" id="TurnierNameEing" class="form-control" placeholder="Name des Turnieres" runat="server">
-                </div>
-                <div class="col">
-
-                    <asp:Button ID="TurnierErst" runat="server" Text="Erstellen" OnClick="TurnierErst_Click" class="btn btn-success mt-2" />
-
+                    <asp:Button ID="TurnierErst" runat="server" Text="Erstellen" OnClick="TurnierErst_Click" class="btn btn-success mt-5" />
                 </div>
             </div>
         </div>
     </div>
     <%}%>
-
 
     <!-- Mannschaften auswählen -->
     <asp:Repeater ID="Repeater1" runat="server" OnItemDataBound="ItemBound">

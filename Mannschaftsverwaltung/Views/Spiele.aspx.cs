@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -30,6 +31,7 @@ namespace Mannschaftsverwaltung
                     this.Verwalter.Personen = this.Verwalter.getAllPerson(Verwalter.ActiveUser);
                     this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
                     Verwalter.getAllTurniereFromDB();
+                    loadMannschaften();
                 }
                 else
                 {
@@ -46,9 +48,29 @@ namespace Mannschaftsverwaltung
 
         protected void TurnierErst_Click(object sender, EventArgs e)
         {
+            List<Mannschaft> selectedMannschaften = new List<Mannschaft>();
+            foreach (ListItem item in this.ListBox1.Items)
+            {
+                if (item.Selected)
+                {
+                    Match m = Regex.Match(item.ToString(), @"^\(([0-9]+)\)");
+                    int MannschaftID = Int32.Parse(m.Groups[1].ToString());
+                    foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
+                    {
+                        if (mannschaft.ID == MannschaftID)
+                        {
+                            selectedMannschaften.Add(mannschaft);
+                        }
+                    }
+                }
+            }
+            this.ListBox1.Items.Clear();
+
             string TurnierName = this.Request.Form["ctl00$MainContent$TurnierNameEing"];
-            this.Verwalter.TurnierHinzuf(TurnierName);
+            this.Verwalter.TurnierHinzuf(TurnierName, selectedMannschaften);
             this.TurnierNameEing.Value = "";
+            
+
             Response.Redirect(Request.RawUrl);
         }
 
@@ -126,26 +148,47 @@ namespace Mannschaftsverwaltung
                 int index = int.Parse(rp2.ClientID.Split('_').Last());
                 rp2.DataSource = this.Verwalter.Turniere[index].Spiele;
                 rp2.DataBind();
-                rp3.DataSource = this.Verwalter.Mannschaften;
+                rp3.DataSource = this.Verwalter.Turniere[index].Mannschaften;
                 rp3.DataBind();
-                rp4.DataSource = this.Verwalter.Mannschaften;
+                rp4.DataSource = this.Verwalter.Turniere[index].Mannschaften;
                 rp4.DataBind();
             }
         }
 
         protected void ItemBoundOnRepeater2(object sender, RepeaterItemEventArgs args)
         {
-            if (args.Item.DataItem != null)
+            Repeater button = sender as Repeater;
+            if (button != null)
             {
-                Repeater rp5 = (Repeater)args.Item.FindControl("Repeater5");
-                Repeater rp6 = (Repeater)args.Item.FindControl("Repeater6");
-                //int index = int.Parse(rp2.ClientID.Split('_').Last());
-                //rp5.DataSource = this.Verwalter.Turniere[index].Spiele;
-                //rp5.DataBind();
-                rp5.DataSource = this.Verwalter.Mannschaften;
-                rp5.DataBind();
-                rp6.DataSource = this.Verwalter.Mannschaften;
-                rp6.DataBind();
+                int index = int.Parse(button.ClientID.Split('_').Last());
+                if (args.Item.DataItem != null)
+                {
+                    Repeater rp5 = (Repeater)args.Item.FindControl("Repeater5");
+                    Repeater rp6 = (Repeater)args.Item.FindControl("Repeater6");
+                    rp5.DataSource = this.Verwalter.Turniere[index].Mannschaften;
+                    rp5.DataBind();
+                    rp6.DataSource = this.Verwalter.Turniere[index].Mannschaften;
+                    rp6.DataBind();
+                }
+            }
+            //if (args.Item.DataItem != null)
+            //{
+            //    Repeater rp5 = (Repeater)args.Item.FindControl("Repeater5");
+            //    Repeater rp6 = (Repeater)args.Item.FindControl("Repeater6");
+            //    rp5.DataSource = this.Verwalter.Mannschaften;
+            //    rp5.DataBind();
+            //    rp6.DataSource = this.Verwalter.Mannschaften;
+            //    rp6.DataBind();
+            //}
+        }
+
+        protected void loadMannschaften()
+        {
+            foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
+            {
+                ListItem item = new ListItem();
+                item.Text = "(" + mannschaft.ID + ") -" + mannschaft.Sportart + "- " + mannschaft.Name;
+                this.ListBox1.Items.Add(item);
             }
         }
 
