@@ -133,7 +133,6 @@ namespace Mannschaftsverwaltung
         {
             Button button = (Button)sender;
             int TurnierIndex = int.Parse(button.ClientID.Split('_')[1]);
-            //this.Verwalter.deleteGame(TurnierIndex, this.Verwalter.Turniere[TurnierIndex].Spiele[SpielIndex]);
             this.Verwalter.removeTurnier(TurnierIndex);
             Response.Redirect(Request.RawUrl);
         }
@@ -184,11 +183,14 @@ namespace Mannschaftsverwaltung
 
         protected void loadMannschaften()
         {
-            foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
+            if (ListBox1.Items.Count == 0)
             {
-                ListItem item = new ListItem();
-                item.Text = "(" + mannschaft.ID + ") -" + mannschaft.Sportart + "- " + mannschaft.Name;
-                this.ListBox1.Items.Add(item);
+                foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
+                {
+                    ListItem item = new ListItem();
+                    item.Text = "(" + mannschaft.ID + ") -" + mannschaft.Sportart + "- " + mannschaft.Name;
+                    this.ListBox1.Items.Add(item);
+                }
             }
         }
 

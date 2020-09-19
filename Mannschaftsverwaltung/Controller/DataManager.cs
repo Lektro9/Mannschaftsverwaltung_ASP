@@ -718,7 +718,7 @@ namespace Mannschaftsverwaltung
 
         public void deleteMannschaftenInTurnier(Turnier turnier)
         {
-            string SQLString = @"DELETE FROM `turnier_mannschaften` WHERE `turnier_mannschaften`.`turnierID` = turnierID;";
+            string SQLString = @"DELETE FROM `turnier_mannschaften` WHERE `turnier_mannschaften`.`turnierID` = @turnierID;";
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
             command.Parameters.AddWithValue("@turnierID", turnier.ID);
             executeSQLCommand(command);
