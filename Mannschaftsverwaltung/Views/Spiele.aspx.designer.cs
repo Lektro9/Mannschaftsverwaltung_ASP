@@ -24,6 +24,15 @@ namespace Mannschaftsverwaltung
         protected global::System.Web.UI.WebControls.ListBox ListBox1;
 
         /// <summary>
+        /// ListBox2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBox2;
+
+        /// <summary>
         /// TurnierNameEing control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace Mannschaftsverwaltung
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button TurnierErst;
+
+        /// <summary>
+        /// TurnierEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TurnierEdit;
 
         /// <summary>
         /// Repeater1 control.

@@ -708,7 +708,7 @@ namespace Mannschaftsverwaltung
                 deleteSpiel(s);
             }
 
-            deleteMannschaftenInTurnier(turnier);
+            deleteAllMannschaftenInTurnier(turnier);
 
             string SQLString = @"DELETE FROM `turnier` WHERE `turnier`.`id` = @turnierID";
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
@@ -716,11 +716,20 @@ namespace Mannschaftsverwaltung
             executeSQLCommand(command);
         }
 
-        public void deleteMannschaftenInTurnier(Turnier turnier)
+        public void deleteAllMannschaftenInTurnier(Turnier turnier)
         {
             string SQLString = @"DELETE FROM `turnier_mannschaften` WHERE `turnier_mannschaften`.`turnierID` = @turnierID;";
             MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
             command.Parameters.AddWithValue("@turnierID", turnier.ID);
+            executeSQLCommand(command);
+        }
+
+        public void deleteMannschaftFromTurnier(int turnierID, int mannschaftID)
+        {
+            string SQLString = @"DELETE FROM `turnier_mannschaften` WHERE `turnier_mannschaften`.`turnierID` = @turnierID AND `turnier_mannschaften`.`teamID` = @teamID;";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@teamID", mannschaftID);
+            command.Parameters.AddWithValue("@turnierID", turnierID);
             executeSQLCommand(command);
         }
 
@@ -735,6 +744,8 @@ namespace Mannschaftsverwaltung
             executeSQLCommand(command);
         }
 
+
+
         public void createTurnierMannschaften(int turnierID, List<Mannschaft> selectedMannschaften)
         {
             foreach (Mannschaft mannschaft in selectedMannschaften)
@@ -746,7 +757,16 @@ namespace Mannschaftsverwaltung
                 executeSQLCommand(command);
             }
         }
-        
+
+        public void updateTurnier(int turnierID, string turnierName)
+        {
+            string SQLString = @"UPDATE `turnier` SET `name` = @turnierName WHERE `turnier`.`id` = @turnierID;";
+            MySqlCommand command = new MySqlCommand(SQLString, MySqlConnection);
+            command.Parameters.AddWithValue("@turnierName", turnierName);
+            command.Parameters.AddWithValue("@turnierID", turnierID);
+            executeSQLCommand(command);
+        }
+
         #endregion
 
         #region Worker (Userverwaltung)

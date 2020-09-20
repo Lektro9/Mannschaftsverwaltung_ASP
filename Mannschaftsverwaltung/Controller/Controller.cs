@@ -37,6 +37,8 @@ namespace Mannschaftsverwaltung
         private int _editGameID;
         private bool _isError;
         private string _errorMsg;
+        private bool _isTurnierEdit;
+        private int _editTurnierID;
 
         #endregion
 
@@ -71,6 +73,8 @@ namespace Mannschaftsverwaltung
         public int EditGameID { get => _editGameID; set => _editGameID = value; }
         public bool IsError { get => _isError; set => _isError = value; }
         public string ErrorMsg { get => _errorMsg; set => _errorMsg = value; }
+        public bool IsTurnierEdit { get => _isTurnierEdit; set => _isTurnierEdit = value; }
+        public int EditTurnierID { get => _editTurnierID; set => _editTurnierID = value; }
         #endregion
 
         #region Konstruktoren
@@ -96,6 +100,8 @@ namespace Mannschaftsverwaltung
             EditGameID = -1;
             IsError = false;
             ErrorMsg = "";
+            IsTurnierEdit = false;
+            EditTurnierID = -1;
         }
         #endregion
 
@@ -305,6 +311,30 @@ namespace Mannschaftsverwaltung
             DBManager.closeConnection();
 
             this.Turniere.Add(t);
+        }
+
+        public void deleteMannschaftFromTurnier(int turnierID, List<Mannschaft> selectedMannschaften)
+        {
+            foreach (Mannschaft mannschaft in selectedMannschaften)
+            {
+                DBManager.openDBConection();
+                DBManager.deleteMannschaftFromTurnier(turnierID, mannschaft.ID);
+                DBManager.closeConnection();
+            }
+        }
+
+        public void EditTurnierName(string turnierName)
+        {
+            DBManager.openDBConection();
+            DBManager.updateTurnier(EditTurnierID, turnierName);
+            DBManager.closeConnection();
+        }
+
+        public void TurnierEdit(int turnierID, List<Mannschaft> selectedMannschaften)
+        {
+            DBManager.openDBConection();
+            DBManager.createTurnierMannschaften(turnierID, selectedMannschaften);
+            DBManager.closeConnection();
         }
 
         public void AddFussballSpieler(string name, string vorname, DateTime geburtstag, string position, int geschosseneTore, int anzahlJahre, int gewSpiele, int anzahlVereine, int anzahlSpiele)

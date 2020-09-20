@@ -32,6 +32,10 @@ namespace Mannschaftsverwaltung
                     this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
                     Verwalter.getAllTurniereFromDB();
                     loadMannschaften();
+                    if (this.Verwalter.IsTurnierEdit)
+                    {
+                        LoadEditTurnier();
+                    }
                 }
                 else
                 {
@@ -44,6 +48,31 @@ namespace Mannschaftsverwaltung
             }
             Repeater1.DataSource = this.Verwalter.Turniere;
             Repeater1.DataBind();
+        }
+
+        protected void LoadEditTurnier()
+        {
+            Turnier editTurnier = this.Verwalter.Turniere.Find(t => t.ID == this.Verwalter.EditTurnierID);
+            this.TurnierNameEing.Value = editTurnier.Name;
+            foreach (Mannschaft mannschaft in editTurnier.Mannschaften)
+            {
+                ListItem item = new ListItem();
+                item.Text = "(" + mannschaft.ID + ") -" + mannschaft.Sportart + "- " + mannschaft.Name;
+                this.ListBox2.Items.Add(item);
+            }
+
+            
+
+            foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
+            {
+                if (editTurnier.Mannschaften.Find(m => m.ID == mannschaft.ID) != null)
+                {
+                    ListItem item = new ListItem();
+                    item.Text = "(" + mannschaft.ID + ") -" + mannschaft.Sportart + "- " + mannschaft.Name;
+                    this.ListBox1.Items.Remove(item);
+                }
+            }
+
         }
 
         protected void TurnierErst_Click(object sender, EventArgs e)
@@ -71,6 +100,59 @@ namespace Mannschaftsverwaltung
             this.TurnierNameEing.Value = "";
             
 
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void TurnierEdit_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int index = int.Parse(button.ClientID.Split('_').Last());
+
+            this.Verwalter.EditTurnierID = this.Verwalter.Turniere[index].ID;
+            this.Verwalter.IsTurnierEdit = true;
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void TurnierEditAcc_Click(object sender, EventArgs e)
+        {
+            List<Mannschaft> selectedMannschaften = new List<Mannschaft>();
+            foreach (ListItem item in this.ListBox1.Items)
+            {
+                if (item.Selected)
+                {
+                    Match m = Regex.Match(item.ToString(), @"^\(([0-9]+)\)");
+                    int MannschaftID = Int32.Parse(m.Groups[1].ToString());
+                    foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
+                    {
+                        if (mannschaft.ID == MannschaftID)
+                        {
+                            selectedMannschaften.Add(mannschaft);
+                        }
+                    }
+                }
+            }
+            List<Mannschaft> MannschaftenToRemove = new List<Mannschaft>();
+            foreach (ListItem item in this.ListBox2.Items)
+            {
+                if (item.Selected)
+                {
+                    Match m = Regex.Match(item.ToString(), @"^\(([0-9]+)\)");
+                    int MannschaftID = Int32.Parse(m.Groups[1].ToString());
+                    foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
+                    {
+                        if (mannschaft.ID == MannschaftID)
+                        {
+                            MannschaftenToRemove.Add(mannschaft);
+                        }
+                    }
+                }
+            }
+            string TurnierName = this.Request.Form["ctl00$MainContent$TurnierNameEing"];
+            this.Verwalter.EditTurnierName(TurnierName);
+            this.Verwalter.deleteMannschaftFromTurnier(this.Verwalter.EditTurnierID, MannschaftenToRemove);
+            this.Verwalter.TurnierEdit(Verwalter.EditTurnierID, selectedMannschaften);
+            this.Verwalter.EditTurnierID = -1;
+            this.Verwalter.IsTurnierEdit = false;
             Response.Redirect(Request.RawUrl);
         }
 

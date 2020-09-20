@@ -35,9 +35,21 @@
                     <h3>Mögliche Teams:</h3>
                     <asp:ListBox ID="ListBox1" runat="server" SelectionMode="Multiple" Width="400px" Height="200px" CssClass="form-control"></asp:ListBox>
                 </div>
-                <div class="col-7 pt-5">
-                    <input type="text" id="TurnierNameEing" class="form-control" placeholder="Name des Turnieres" runat="server">
+                <% if (this.Verwalter.IsTurnierEdit)
+                    { %>
+                <div class="col-md-4">
+                    <h3 runat="server">Teams in Turnier:</h3>
+                    <asp:ListBox ID="ListBox2" runat="server" SelectionMode="Multiple" Width="400px" Height="200px" CssClass="form-control"></asp:ListBox>
+                </div>
+                <% } %>
+                <div class="col-4 pt-5">
+                    <input type="text" id="TurnierNameEing" class="form-control" placeholder="Name des Turnieres" runat="server" name="TurnierNameEing">
+                    <% if (!this.Verwalter.IsTurnierEdit)
+                        { %>
                     <asp:Button ID="TurnierErst" runat="server" Text="Erstellen" OnClick="TurnierErst_Click" class="btn btn-success mt-5" />
+                    <% } else {%>
+                    <asp:Button ID="TurnierEdit" runat="server" Text="Akzeptieren" OnClick="TurnierEditAcc_Click" class="btn btn-success mt-5" />
+                    <% }%>
                 </div>
             </div>
         </div>
@@ -53,6 +65,7 @@
                     <%# Eval("Name") %>
                     <% if (this.Verwalter.ActiveUser.Rolle == Mannschaftsverwaltung.Role.ADMIN)
                         {%>
+                    <asp:Button runat="server" type="button" Text="Bearbeiten" class="ml-2 mb-1" OnClick="TurnierEdit_Click" aria-label="Close" name="edit_<%# Container.ItemIndex + 1 %>" />
                     <asp:Button runat="server" type="button" Text="X" class="ml-2 mb-1 close" OnClick="TurEntf_Click" aria-label="Close" name="del_<%# Container.ItemIndex + 1 %>" />
                     <%}%>
                 </div>
