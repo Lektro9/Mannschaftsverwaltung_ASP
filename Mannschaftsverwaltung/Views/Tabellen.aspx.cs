@@ -28,6 +28,7 @@ namespace Mannschaftsverwaltung
                 {
                     Verwalter = (Controller)this.Session[this.Verwalter.ActiveUser.ID.ToString()];
                     this.Verwalter.Mannschaften = this.Verwalter.getAllMannschaften();
+                    Verwalter.getAllTurniereFromDB();
                 }
                 else
                 {
@@ -40,6 +41,58 @@ namespace Mannschaftsverwaltung
             }
             Repeater1.DataSource = this.Verwalter.Mannschaften;
             Repeater1.DataBind();
+            Repeater2.DataSource = this.Verwalter.Turniere;
+            Repeater2.DataBind();
+        }
+
+        protected void ItemBound(object sender, RepeaterItemEventArgs args)
+        {
+            if (args.Item.DataItem != null)
+            {
+                Repeater rp3 = (Repeater)args.Item.FindControl("Repeater3");
+                int index = int.Parse(rp3.ClientID.Split('_').Last());
+                rp3.DataSource = this.Verwalter.Turniere[index].Mannschaften;
+                rp3.DataBind();
+            }
+        }
+
+        protected string getGewSpiele(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
+            {
+                if (spiel.getWinnerID().ToString() == teamID)
+                {
+                    retVal += 1;
+                }
+            }
+            return retVal.ToString();
+        }
+
+        protected string getUnentschieden(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
+            {
+                if (spiel.getWinnerID() == -1 && spiel.getLoserID() == -1)
+                {
+                    retVal += 1;
+                }
+            }
+            return retVal.ToString();
+        }
+
+        protected string getVerlSpiele(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
+            {
+                if (spiel.getLoserID().ToString() == teamID)
+                {
+                    retVal += 1;
+                }
+            }
+            return retVal.ToString();
         }
     }
 }
