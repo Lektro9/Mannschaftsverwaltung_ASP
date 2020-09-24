@@ -169,14 +169,14 @@ namespace Mannschaftsverwaltung
 
         protected List<Mannschaft> sortAfterPoints(List<Mannschaft> mannschaften, int turnierIndex)
         {
-            List<Mannschaft> retVal = new List<Mannschaft>();
+            List<Mannschaft> retVal = mannschaften;
             bool fertig = false;
             while (fertig == false)
             {
                 fertig = true;
                 for (int i = 0; i < mannschaften.Count - 1; i++)
                 {
-                    if (Convert.ToInt32(getPunkte(mannschaften[i].ID.ToString(), turnierIndex)) > Convert.ToInt32(getPunkte(mannschaften[i + 1].ID.ToString(), turnierIndex)))
+                    if (Convert.ToInt32(getPunkte(mannschaften[i].ID.ToString(), turnierIndex)) < Convert.ToInt32(getPunkte(mannschaften[i + 1].ID.ToString(), turnierIndex)))
                     {
                         Mannschaft temp = mannschaften[i];
                         mannschaften[i] = mannschaften[i + 1];
