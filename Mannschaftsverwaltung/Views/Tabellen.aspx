@@ -11,9 +11,14 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Gew. Spiele</th>
+                        <th scope="col">Spiele ges.</th>
+                        <th scope="col">Siege</th>
                         <th scope="col">Unentschieden</th>
-                        <th scope="col">Verl. Spiele</th>
+                        <th scope="col">Niederlagen</th>
+                        <th scope="col">Tore</th>
+                        <th scope="col">Gegentore</th>
+                        <th scope="col">Tordifferenz</th>
+                        <th scope="col">Punkte</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,10 +27,14 @@
                             <tr>
 
                                 <th scope="row"><%# Eval("Name") %></th>
+                                <td><%# getSpieleAnzahl(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
                                 <td><%# getGewSpiele(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
                                 <td><%# getUnentschieden(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
                                 <td><%# getVerlSpiele(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-
+                                <td><%# getAllTore(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                <td><%# getGegenTore(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                <td><%# getTorDifferenz(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                <td><%# getPunkte(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>

@@ -51,7 +51,8 @@ namespace Mannschaftsverwaltung
             {
                 Repeater rp3 = (Repeater)args.Item.FindControl("Repeater3");
                 int index = int.Parse(rp3.ClientID.Split('_').Last());
-                rp3.DataSource = this.Verwalter.Turniere[index].Mannschaften;
+                List<Mannschaft> mannschaften = this.Verwalter.Turniere[index].Mannschaften.ToList();
+                rp3.DataSource = sortAfterPoints(mannschaften, index);
                 rp3.DataBind();
             }
         }
@@ -93,6 +94,98 @@ namespace Mannschaftsverwaltung
                 }
             }
             return retVal.ToString();
+        }
+
+        protected string getSpieleAnzahl(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
+            {
+                if (spiel.Team1ID.ToString() == teamID || spiel.Team2ID.ToString() == teamID)
+                {
+                    retVal += 1;
+                }
+            }
+            return retVal.ToString();
+        }
+
+        protected string getAllTore(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
+            {
+                if (spiel.Team1ID.ToString() == teamID)
+                {
+                    retVal += spiel.Team1Punkte;
+                }
+                else if (spiel.Team2ID.ToString() == teamID)
+                {
+                    retVal += spiel.Team2Punkte;
+                }
+            }
+            return retVal.ToString();
+        }
+
+        protected string getGegenTore(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
+            {
+                if (spiel.Team1ID.ToString() == teamID)
+                {
+                    retVal += spiel.Team2Punkte;
+                }
+                else if (spiel.Team2ID.ToString() == teamID)
+                {
+                    retVal += spiel.Team1Punkte;
+                }
+            }
+            return retVal.ToString();
+        }
+
+        protected string getTorDifferenz(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            retVal = Convert.ToInt32(getAllTore(teamID, turnierIndex)) - Convert.ToInt32(getGegenTore(teamID, turnierIndex));
+            return retVal.ToString();
+        }
+
+        protected string getPunkte(string teamID, int turnierIndex)
+        {
+            int retVal = 0;
+            foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
+            {
+                if (spiel.getWinnerID().ToString() == teamID)
+                {
+                    retVal += 3;
+                }
+                else if ((spiel.Team1ID.ToString() == teamID || spiel.Team2ID.ToString() == teamID) && (spiel.getWinnerID() == -1 && spiel.getLoserID() == -1))
+                {
+                    retVal += 1;
+                }
+            }
+            return retVal.ToString();
+        }
+
+        protected List<Mannschaft> sortAfterPoints(List<Mannschaft> mannschaften, int turnierIndex)
+        {
+            List<Mannschaft> retVal = new List<Mannschaft>();
+            bool fertig = false;
+            while (fertig == false)
+            {
+                fertig = true;
+                for (int i = 0; i < mannschaften.Count - 1; i++)
+                {
+                    if (Convert.ToInt32(getPunkte(mannschaften[i].ID.ToString(), turnierIndex)) > Convert.ToInt32(getPunkte(mannschaften[i + 1].ID.ToString(), turnierIndex)))
+                    {
+                        Mannschaft temp = mannschaften[i];
+                        mannschaften[i] = mannschaften[i + 1];
+                        mannschaften[i + 1] = temp;
+                        fertig = false;
+                    }
+                }
+            }
+            return retVal;
         }
     }
 }

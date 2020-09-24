@@ -423,7 +423,6 @@ namespace Mannschaftsverwaltung
                             fertig = false;
                         }
                     }
-
                 }
             }
             this.Personen = retVal;
