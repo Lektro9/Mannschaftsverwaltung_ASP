@@ -194,12 +194,15 @@ namespace Mannschaftsverwaltung
                 fertig = true;
                 for (int i = 0; i < mannschaften.Count - 1; i++)
                 {
-                    if (Convert.ToInt32(getPunkte(mannschaften[i].ID.ToString(), turnierIndex)) < Convert.ToInt32(getPunkte(mannschaften[i + 1].ID.ToString(), turnierIndex)))
+                    if (Convert.ToInt32(getPunkte(mannschaften[i].ID.ToString(), turnierIndex)) <= Convert.ToInt32(getPunkte(mannschaften[i + 1].ID.ToString(), turnierIndex)))
                     {
-                        Mannschaft temp = mannschaften[i];
-                        mannschaften[i] = mannschaften[i + 1];
-                        mannschaften[i + 1] = temp;
-                        fertig = false;
+                        if (Convert.ToInt32(getTorDifferenz(mannschaften[i].ID.ToString(), turnierIndex)) < Convert.ToInt32(getTorDifferenz(mannschaften[i + 1].ID.ToString(), turnierIndex)))
+                        {
+                            Mannschaft temp = mannschaften[i];
+                            mannschaften[i] = mannschaften[i + 1];
+                            mannschaften[i + 1] = temp;
+                            fertig = false;
+                        }
                     }
                 }
             }

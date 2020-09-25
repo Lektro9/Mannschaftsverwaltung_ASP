@@ -1,0 +1,198 @@
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'FCBayern', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Schalke04', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Kickers', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Kickers2006', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Die Teufel', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Cornwall Snakes', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Blue Snakes', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Bold Rabbits', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Modest Foxes', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Dubai Green Jackets', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Green Donkeys', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Considerate Horses', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Considerate Dodgers', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Canada Pink Legs', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Splendid Mice', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Malicious Goldfish', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'London Toads', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Understanding Lizards', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Ruthless Moths', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+PS C:\Users\lars.k> & "C:/Program Files/Python37/python.exe" //bk174518/lars.k/Dokumente/test.py
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'FCBayern', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Schalke04', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Kickers', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Kickers2006', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Die Teufel', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Cornwall Snakes', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Blue Snakes', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Bold Rabbits', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Modest Foxes', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Dubai Green Jackets', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Green Donkeys', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Considerate Horses', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Considerate Dodgers', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Canada Pink Legs', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Splendid Mice', 'Tennis', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Malicious Goldfish', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Remarkable Angels', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'London Toads', 'Fussball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Understanding Lizards', 'Handball', '1', '0', '0', '0', '0', '0');
+
+
+INSERT INTO `mannschaft` (`id`, `name`, `sportart`,
+`session_id`, `Unentschieden`, `GewSpiele`, `VerlSpiele`, `ErzielteTore`, `GegnerischeTore`)
+VALUES (NULL, 'Ruthless Moths', 'Fussball', '1', '0', '0', '0', '0', '0');
