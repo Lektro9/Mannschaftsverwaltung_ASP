@@ -179,7 +179,6 @@ namespace Mannschaftsverwaltung
         protected void SpielBearbeitet_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            Console.WriteLine(this.Request.Form);
             int index = int.Parse(button.ClientID.Split('_').Last());
             string team1id = this.Request.Form["EditSelect1_" + (index + 1)];
             string team2id = this.Request.Form["EditSelect2_" + (index + 1)];

@@ -75,7 +75,7 @@ namespace Mannschaftsverwaltung
             int retVal = 0;
             foreach (Spiel spiel in this.Verwalter.Turniere[turnierIndex].Spiele)
             {
-                if (spiel.getWinnerID() == -1 && spiel.getLoserID() == -1)
+                if ((spiel.Team1ID.ToString() == teamID || spiel.Team2ID.ToString() == teamID) && (spiel.getWinnerID() == -1 && spiel.getLoserID() == -1))
                 {
                     retVal += 1;
                 }
@@ -163,6 +163,24 @@ namespace Mannschaftsverwaltung
                 {
                     retVal += 1;
                 }
+            }
+            return retVal.ToString();
+        }
+
+        protected string getPlacement(int trIndex)
+        {
+            string retVal = "";
+            if (trIndex == 0)
+            {
+                retVal = "table-warning";
+            }
+            else if (trIndex == 1)
+            {
+                retVal = "table-secondary";
+            }
+            else if (trIndex == 2)
+            {
+                retVal = "table-danger";
             }
             return retVal.ToString();
         }

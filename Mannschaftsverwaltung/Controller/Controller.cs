@@ -164,6 +164,7 @@ namespace Mannschaftsverwaltung
                 {
                     if (spiel.ID == this.EditGameID)
                     {
+                        removeMannschaftsStats(spiel);
                         spiel.Team1ID = team1id;
                         spiel.Team2ID = team2id;
                         spiel.Team1Punkte = team1Punkte;
