@@ -10,7 +10,7 @@
                 <h2><%# Eval("Name") %></h2>
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
+                        <th scope="col">Verein</th>
                         <th scope="col">Sp</th>
                         <th scope="col">S</th>
                         <th scope="col">U</th>
@@ -25,7 +25,7 @@
                     <asp:Repeater ID="Repeater3" runat="server">
                         <ItemTemplate>
                             <tr class="<%# getPlacement(Container.ItemIndex) %>">
-                                <th scope="row"><%# Eval("Name") %></th>
+                                <th scope="row"><%# Container.ItemIndex + 1 %> <%# Eval("Name") %></th>
                                 <td><%# getSpieleAnzahl(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
                                 <td><%# getGewSpiele(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
                                 <td><%# getUnentschieden(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
