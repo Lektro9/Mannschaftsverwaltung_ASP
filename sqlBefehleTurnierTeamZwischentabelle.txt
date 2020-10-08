@@ -1,7 +1,0 @@
-INSERT INTO `turnier_mannschaften` (`id`, `teamID`, `turnierID`) VALUES (NULL, '79428', '7');
-
-SELECT teamID, turnierID, name, sportart, session_id FROM `turnier_mannschaften` 
-JOIN mannschaft
-ON turnier_mannschaften.teamID = mannschaft.id
-where `turnierID` = 7
-AND mannschaft.session_id = 1
