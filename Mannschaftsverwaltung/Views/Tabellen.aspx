@@ -6,7 +6,7 @@
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#turnier_0" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
@@ -24,39 +24,41 @@
     <div class="tab-content" id="pills-tabContent">
         <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="ItemBound">
             <ItemTemplate>
-                <table class="table table-hover table-sm">
-                    <h2><%# Eval("Name") %></h2>
-                    <thead>
-                        <tr>
-                            <th scope="col">Verein</th>
-                            <th scope="col">Sp</th>
-                            <th scope="col">S</th>
-                            <th scope="col">U</th>
-                            <th scope="col">N</th>
-                            <th scope="col">T</th>
-                            <th scope="col">GT</th>
-                            <th scope="col">TD</th>
-                            <th scope="col">Pkte</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <asp:Repeater ID="Repeater3" runat="server">
-                            <ItemTemplate>
-                                <tr class="<%# getPlacement(Container.ItemIndex) %>">
-                                    <th scope="row"><%# Container.ItemIndex + 1 %> <%# Eval("Name") %></th>
-                                    <td><%# getSpieleAnzahl(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                    <td><%# getGewSpiele(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                    <td><%# getUnentschieden(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                    <td><%# getVerlSpiele(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                    <td><%# getAllTore(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                    <td><%# getGegenTore(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                    <td><%# getTorDifferenz(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                    <td><%# getPunkte(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
-                                </tr>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </tbody>
-                </table>
+                <div class="tab-pane fade show" id="turnier_<%# Container.ItemIndex %>" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <table class="table table-hover table-sm">
+                        <h2><%# Eval("Name") %></h2>
+                        <thead>
+                            <tr>
+                                <th scope="col">Verein</th>
+                                <th scope="col">Sp</th>
+                                <th scope="col">S</th>
+                                <th scope="col">U</th>
+                                <th scope="col">N</th>
+                                <th scope="col">T</th>
+                                <th scope="col">GT</th>
+                                <th scope="col">TD</th>
+                                <th scope="col">Pkte</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <asp:Repeater ID="Repeater3" runat="server">
+                                <ItemTemplate>
+                                    <tr class="<%# getPlacement(Container.ItemIndex) %>">
+                                        <th scope="row"><%# Container.ItemIndex + 1 %> <%# Eval("Name") %></th>
+                                        <td><%# getSpieleAnzahl(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                        <td><%# getGewSpiele(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                        <td><%# getUnentschieden(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                        <td><%# getVerlSpiele(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                        <td><%# getAllTore(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                        <td><%# getGegenTore(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                        <td><%# getTorDifferenz(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                        <td><%# getPunkte(Eval("ID").ToString(), ((RepeaterItem)Container.Parent.Parent).ItemIndex) %></td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </tbody>
+                    </table>
+                </div>
             </ItemTemplate>
         </asp:Repeater>
     </div>
