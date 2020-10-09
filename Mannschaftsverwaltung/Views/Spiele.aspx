@@ -47,7 +47,9 @@
                     <% if (!this.Verwalter.IsTurnierEdit)
                         { %>
                     <asp:Button ID="TurnierErst" runat="server" Text="Erstellen" OnClick="TurnierErst_Click" class="btn btn-success mt-5" />
-                    <% } else {%>
+                    <% }
+                    else
+                    {%>
                     <asp:Button ID="TurnierEdit" runat="server" Text="Akzeptieren" OnClick="TurnierEditAcc_Click" class="btn btn-success mt-5" />
                     <% }%>
                 </div>
@@ -105,7 +107,7 @@
                                                 <select class="custom-select" data-width="200px" name="EditSelect1_<%# Container.ItemIndex + 1 %>" id="EditSelect1_<%# Container.ItemIndex + 1 %>">
                                                     <asp:Repeater ID="Repeater5" runat="server">
                                                         <ItemTemplate>
-                                                            <option value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
+                                                            <option <%# isTeam1ID(Eval("ID").ToString()) %> value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
                                                         </ItemTemplate>
                                                     </asp:Repeater>
                                                 </select>
@@ -184,5 +186,14 @@
 
         </ItemTemplate>
     </asp:Repeater>
+
+    <select>
+        <option value="" disabled hidden>Choose here</option>
+        <option value="1" selected="true" >One</option>
+        <option value="2">Two</option>
+        <option value="3" selected="false">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+    </select>
 
 </asp:Content>

@@ -61,7 +61,7 @@ namespace Mannschaftsverwaltung
                 this.ListBox2.Items.Add(item);
             }
 
-            
+
 
             foreach (Mannschaft mannschaft in this.Verwalter.Mannschaften)
             {
@@ -98,7 +98,7 @@ namespace Mannschaftsverwaltung
             string TurnierName = this.Request.Form["ctl00$MainContent$TurnierNameEing"];
             this.Verwalter.TurnierHinzuf(TurnierName, selectedMannschaften);
             this.TurnierNameEing.Value = "";
-            
+
 
             Response.Redirect(Request.RawUrl);
         }
@@ -297,6 +297,21 @@ namespace Mannschaftsverwaltung
             if (gameID == this.Verwalter.EditGameID.ToString())
             {
                 retVal = true;
+            }
+            return retVal;
+        }
+
+        protected string isTeam1ID(string t1id)
+        {
+            string retVal = "";
+            Spiel editGame = null;
+            foreach (Turnier turnier in this.Verwalter.Turniere)
+            {
+                editGame = turnier.Spiele.Find(s => s.ID == this.Verwalter.EditGameID);
+            }
+            if (this.Verwalter.EditGameID != -1 && Convert.ToInt32(t1id) == editGame.Team1ID)
+            {
+                retVal = "selected";
             }
             return retVal;
         }
