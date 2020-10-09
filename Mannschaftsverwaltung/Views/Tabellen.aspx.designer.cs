@@ -13,6 +13,15 @@ namespace Mannschaftsverwaltung {
     public partial class Tabellen {
         
         /// <summary>
+        /// Repeater4-Steuerelement
+        /// </summary>
+        /// <remarks>
+        /// Automatisch generiertes Feld
+        /// Zum Ändern Felddeklaration aus der Designerdatei in eine Code-Behind-Datei verschieben.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater Repeater4;
+        
+        /// <summary>
         /// Repeater2-Steuerelement
         /// </summary>
         /// <remarks>

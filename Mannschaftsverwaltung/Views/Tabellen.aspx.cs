@@ -43,6 +43,8 @@ namespace Mannschaftsverwaltung
             Repeater1.DataBind();
             Repeater2.DataSource = this.Verwalter.Turniere;
             Repeater2.DataBind();
+            Repeater4.DataSource = this.Verwalter.Turniere;
+            Repeater4.DataBind();
         }
 
         protected void ItemBound(object sender, RepeaterItemEventArgs args)
