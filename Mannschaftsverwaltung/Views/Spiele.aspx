@@ -39,7 +39,8 @@
                     { %>
                 <div class="col-md-4">
                     <h3 runat="server">Teams in Turnier:</h3>
-                    <asp:ListBox ID="ListBox2" runat="server" SelectionMode="Multiple" Width="400px" Height="200px" CssClass="form-control"></asp:ListBox>
+                    <asp:ListBox ID="ListBox2" runat="server" SelectionMode="Multiple" Width="400px" Height="200px" CssClass="form-control" data-toggle="tooltip" data-placement="top" title="Teams auswählen, die entfernt werden sollen"></asp:ListBox>
+                    <div>Teams auswählen, die entfernt werden sollen.</div>
                 </div>
                 <% } %>
                 <div class="col-4 pt-5">
@@ -48,8 +49,8 @@
                         { %>
                     <asp:Button ID="TurnierErst" runat="server" Text="Erstellen" OnClick="TurnierErst_Click" class="btn btn-success mt-5" />
                     <% }
-                    else
-                    {%>
+                        else
+                        {%>
                     <asp:Button ID="TurnierEdit" runat="server" Text="Akzeptieren" OnClick="TurnierEditAcc_Click" class="btn btn-success mt-5" />
                     <% }%>
                 </div>
@@ -121,7 +122,7 @@
                                                 <select class="custom-select" name="EditSelect2_<%# Container.ItemIndex + 1 %>" id="EditSelect2_<%# Container.ItemIndex + 1 %>">
                                                     <asp:Repeater ID="Repeater6" runat="server">
                                                         <ItemTemplate>
-                                                            <option value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
+                                                            <option <%# isTeam2ID(Eval("ID").ToString()) %> value="<%# Eval("ID") %>"><%# Eval("Name") %></option>
                                                         </ItemTemplate>
                                                     </asp:Repeater>
                                                 </select>
@@ -187,13 +188,10 @@
         </ItemTemplate>
     </asp:Repeater>
 
-    <select>
-        <option value="" disabled hidden>Choose here</option>
-        <option value="1" selected="true" >One</option>
-        <option value="2">Two</option>
-        <option value="3" selected="false">Three</option>
-        <option value="4">Four</option>
-        <option value="5">Five</option>
-    </select>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 
 </asp:Content>

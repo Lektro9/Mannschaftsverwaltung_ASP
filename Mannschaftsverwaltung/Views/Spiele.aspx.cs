@@ -149,11 +149,22 @@ namespace Mannschaftsverwaltung
             }
             string TurnierName = this.Request.Form["ctl00$MainContent$TurnierNameEing"];
             this.Verwalter.EditTurnierName(TurnierName);
-            this.Verwalter.deleteMannschaftFromTurnier(this.Verwalter.EditTurnierID, MannschaftenToRemove);
-            this.Verwalter.TurnierEdit(Verwalter.EditTurnierID, selectedMannschaften);
-            this.Verwalter.EditTurnierID = -1;
-            this.Verwalter.IsTurnierEdit = false;
-            Response.Redirect(Request.RawUrl);
+            if (!this.Verwalter.deleteMannschaftFromTurnier(this.Verwalter.EditTurnierID, MannschaftenToRemove) && MannschaftenToRemove.Count > 0)
+            {
+                this.Verwalter.IsError = true;
+                this.Verwalter.ErrorMsg = "Team/s ist/sind noch in Spielen eingetragen, bitte solche erst entfernen.";
+                this.Verwalter.TurnierEdit(Verwalter.EditTurnierID, selectedMannschaften);
+                this.Verwalter.EditTurnierID = -1;
+                this.Verwalter.IsTurnierEdit = false;
+            }
+            else
+            {
+                this.Verwalter.IsError = false;
+                this.Verwalter.TurnierEdit(Verwalter.EditTurnierID, selectedMannschaften);
+                this.Verwalter.EditTurnierID = -1;
+                this.Verwalter.IsTurnierEdit = false;
+                Response.Redirect(Request.RawUrl);
+            }
         }
 
         protected void SpielErst_Click(object sender, EventArgs e)
@@ -301,17 +312,54 @@ namespace Mannschaftsverwaltung
             return retVal;
         }
 
-        protected string isTeam1ID(string t1id)
+        protected string isTeam1ID(string team1ID)
         {
             string retVal = "";
-            Spiel editGame = null;
-            foreach (Turnier turnier in this.Verwalter.Turniere)
+            if (this.Verwalter.EditGameID != -1)
             {
-                editGame = turnier.Spiele.Find(s => s.ID == this.Verwalter.EditGameID);
+
+                Spiel editGame = null;
+                foreach (Turnier turnier in this.Verwalter.Turniere)
+                {
+                    foreach (Spiel spiel in turnier.Spiele)
+                    {
+                        if (spiel.ID == this.Verwalter.EditGameID)
+                        {
+                            editGame = spiel;
+                            break;
+                        }
+                    }
+                }
+                if (Convert.ToInt32(team1ID) == editGame.Team1ID)
+                {
+                    retVal = "selected";
+                }
             }
-            if (this.Verwalter.EditGameID != -1 && Convert.ToInt32(t1id) == editGame.Team1ID)
+            return retVal;
+        }
+
+        protected string isTeam2ID(string team2ID)
+        {
+            string retVal = "";
+            if (this.Verwalter.EditGameID != -1)
             {
-                retVal = "selected";
+
+                Spiel editGame = null;
+                foreach (Turnier turnier in this.Verwalter.Turniere)
+                {
+                    foreach (Spiel spiel in turnier.Spiele)
+                    {
+                        if (spiel.ID == this.Verwalter.EditGameID)
+                        {
+                            editGame = spiel;
+                            break;
+                        }
+                    }
+                }
+                if (Convert.ToInt32(team2ID) == editGame.Team2ID)
+                {
+                    retVal = "selected";
+                }
             }
             return retVal;
         }

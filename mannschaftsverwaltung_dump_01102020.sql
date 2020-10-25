@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `mannschaftsverwaltung`
 --
+CREATE DATABASE `mannschaftsverwaltung`;
+
+USE `mannschaftsverwaltung`;
 
 -- --------------------------------------------------------
 

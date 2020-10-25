@@ -106,17 +106,20 @@ namespace Mannschaftsverwaltung
         #endregion
 
         #region Worker
-        public void login(string username, string password)
+        public bool login(string username, string password)
         {
+            bool retVal = false;
             foreach (User user in Nutzer)
             {
                 this.Authenticated = user.auth(username, password);
                 if (this.Authenticated)
                 {
-                    this.ActiveUser = this.Authenticated ? user : null;
+                    this.ActiveUser = user;
+                    retVal = this.Authenticated;
                     break;
                 }
             }
+            return retVal;
         }
         public static int generateID()
         {
@@ -314,14 +317,26 @@ namespace Mannschaftsverwaltung
             this.Turniere.Add(t);
         }
 
-        public void deleteMannschaftFromTurnier(int turnierID, List<Mannschaft> selectedMannschaften)
+        public bool deleteMannschaftFromTurnier(int turnierID, List<Mannschaft> selectedMannschaften)
         {
+            bool retVal = true;
+            Turnier turnier = this.Turniere.Find(t => t.ID == turnierID);
             foreach (Mannschaft mannschaft in selectedMannschaften)
             {
+                foreach (Spiel spiel in turnier.Spiele)
+                {
+                    if (mannschaft.ID == spiel.Team1ID || mannschaft.ID == spiel.Team2ID)
+                    {
+                        retVal = false;
+                        return retVal;
+                    }
+                }
                 DBManager.openDBConection();
                 DBManager.deleteMannschaftFromTurnier(turnierID, mannschaft.ID);
                 DBManager.closeConnection();
             }
+
+            return retVal;
         }
 
         public void EditTurnierName(string turnierName)

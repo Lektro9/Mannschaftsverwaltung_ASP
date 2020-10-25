@@ -62,10 +62,15 @@ namespace Mannschaftsverwaltung
                 Verwalter.Nutzer = Verwalter.DBManager.getAllUser();
                 Verwalter.DBManager.closeConnection();
             }
-
-            this.Verwalter.login(username, password);
-
-            Response.Redirect(Request.RawUrl);
+            if(this.Verwalter.login(username, password))
+            {
+                Response.Redirect(Request.RawUrl);
+            }
+            else
+            {
+                this.Verwalter.IsError = true;
+                this.Verwalter.ErrorMsg = "Falsche Logindaten.";
+            }
         }
 
         protected void logout_Click(object sender, EventArgs e)
